@@ -1,0 +1,12 @@
+.KeyboardFull {
+    flex-shrink: 0;
+    align-self: center;
+    max-width: max-content;
+    width: 100%;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.KeyboardFull .line {
+    display: flex;
+}

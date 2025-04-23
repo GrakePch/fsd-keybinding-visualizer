@@ -1,0 +1,2591 @@
+{
+    "LocalizedKeys": {
+        "device": [
+            {
+                "_name": "keyboard",
+                "Key": [
+                    {
+                        "_name": "a",
+                        "_localizationString": "@input_key_keyboard_a",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "b",
+                        "_localizationString": "@input_key_keyboard_b",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "c",
+                        "_localizationString": "@input_key_keyboard_c",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "d",
+                        "_localizationString": "@input_key_keyboard_d",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "e",
+                        "_localizationString": "@input_key_keyboard_e",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f",
+                        "_localizationString": "@input_key_keyboard_f",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "g",
+                        "_localizationString": "@input_key_keyboard_g",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "h",
+                        "_localizationString": "@input_key_keyboard_h",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "i",
+                        "_localizationString": "@input_key_keyboard_i",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "j",
+                        "_localizationString": "@input_key_keyboard_j",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "k",
+                        "_localizationString": "@input_key_keyboard_k",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "l",
+                        "_localizationString": "@input_key_keyboard_l",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "m",
+                        "_localizationString": "@input_key_keyboard_m",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "n",
+                        "_localizationString": "@input_key_keyboard_n",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "o",
+                        "_localizationString": "@input_key_keyboard_o",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "p",
+                        "_localizationString": "@input_key_keyboard_p",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "q",
+                        "_localizationString": "@input_key_keyboard_q",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "r",
+                        "_localizationString": "@input_key_keyboard_r",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "s",
+                        "_localizationString": "@input_key_keyboard_s",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "t",
+                        "_localizationString": "@input_key_keyboard_t",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "u",
+                        "_localizationString": "@input_key_keyboard_u",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "v",
+                        "_localizationString": "@input_key_keyboard_v",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "w",
+                        "_localizationString": "@input_key_keyboard_w",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "x",
+                        "_localizationString": "@input_key_keyboard_x",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "y",
+                        "_localizationString": "@input_key_keyboard_y",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "z",
+                        "_localizationString": "@input_key_keyboard_z",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f1",
+                        "_localizationString": "@input_key_keyboard_f1",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f2",
+                        "_localizationString": "@input_key_keyboard_f2",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f3",
+                        "_localizationString": "@input_key_keyboard_f3",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f4",
+                        "_localizationString": "@input_key_keyboard_f4",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f5",
+                        "_localizationString": "@input_key_keyboard_f5",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f6",
+                        "_localizationString": "@input_key_keyboard_f6",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f7",
+                        "_localizationString": "@input_key_keyboard_f7",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f8",
+                        "_localizationString": "@input_key_keyboard_f8",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f9",
+                        "_localizationString": "@input_key_keyboard_f9",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f10",
+                        "_localizationString": "@input_key_keyboard_f10",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f11",
+                        "_localizationString": "@input_key_keyboard_f11",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "f12",
+                        "_localizationString": "@input_key_keyboard_f12",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "numlock",
+                        "_localizationString": "@input_key_keyboard_numlock",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_divide",
+                        "_localizationString": "@input_key_keyboard_numpadDivide",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_multiply",
+                        "_localizationString": "@input_key_keyboard_numpadMultiply",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_subtract",
+                        "_localizationString": "@input_key_keyboard_numpadSubtract",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_add",
+                        "_localizationString": "@input_key_keyboard_numpadAdd",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_period",
+                        "_localizationString": "@input_key_keyboard_numpadPeriod",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_enter",
+                        "_localizationString": "@input_key_keyboard_numpadEnter",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_0",
+                        "_localizationString": "@input_key_keyboard_numpad0",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_1",
+                        "_localizationString": "@input_key_keyboard_numpad1",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_2",
+                        "_localizationString": "@input_key_keyboard_numpad2",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_3",
+                        "_localizationString": "@input_key_keyboard_numpad3",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_4",
+                        "_localizationString": "@input_key_keyboard_numpad4",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_5",
+                        "_localizationString": "@input_key_keyboard_numpad5",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_6",
+                        "_localizationString": "@input_key_keyboard_numpad6",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_7",
+                        "_localizationString": "@input_key_keyboard_numpad7",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_8",
+                        "_localizationString": "@input_key_keyboard_numpad8",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "np_9",
+                        "_localizationString": "@input_key_keyboard_numpad9",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "lalt",
+                        "_localizationString": "@input_key_keyboard_leftAlt",
+                        "_shortLocString": "@input_key_keyboard_leftAlt_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "ralt",
+                        "_localizationString": "@input_key_keyboard_rightAlt",
+                        "_shortLocString": "@input_key_keyboard_rightAlt_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "lshift",
+                        "_localizationString": "@input_key_keyboard_leftShift",
+                        "_shortLocString": "@input_key_keyboard_leftShift_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "rshift",
+                        "_localizationString": "@input_key_keyboard_rightShift",
+                        "_shortLocString": "@input_key_keyboard_rightShift_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "lctrl",
+                        "_localizationString": "@input_key_keyboard_leftCtrl",
+                        "_shortLocString": "@input_key_keyboard_leftCtrl_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "rctrl",
+                        "_localizationString": "@input_key_keyboard_rightCtrl",
+                        "_shortLocString": "@input_key_keyboard_rightCtrl_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "insert",
+                        "_localizationString": "@input_key_keyboard_insert",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "home",
+                        "_localizationString": "@input_key_keyboard_home",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "delete",
+                        "_localizationString": "@input_key_keyboard_delete",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "end",
+                        "_localizationString": "@input_key_keyboard_end",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "pgup",
+                        "_localizationString": "@input_key_keyboard_pgup",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "pgdn",
+                        "_localizationString": "@input_key_keyboard_pgdn",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "print",
+                        "_localizationString": "@input_key_keyboard_print",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "scrolllock",
+                        "_localizationString": "@input_key_keyboard_scrolllock",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "pause",
+                        "_localizationString": "@input_key_keyboard_pause",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "up",
+                        "_localizationString": "@input_key_keyboard_arrowUp",
+                        "_shortLocString": "",
+                        "_iconName": "Keyboard_arrowUp"
+                    },
+                    {
+                        "_name": "down",
+                        "_localizationString": "@input_key_keyboard_arrowDown",
+                        "_shortLocString": "",
+                        "_iconName": "Keyboard_arrowDown"
+                    },
+                    {
+                        "_name": "left",
+                        "_localizationString": "@input_key_keyboard_arrowLeft",
+                        "_shortLocString": "",
+                        "_iconName": "Keyboard_arrowLeft"
+                    },
+                    {
+                        "_name": "right",
+                        "_localizationString": "@input_key_keyboard_arrowRight",
+                        "_shortLocString": "",
+                        "_iconName": "Keyboard_arrowRight"
+                    },
+                    {
+                        "_name": "escape",
+                        "_localizationString": "@input_key_keyboard_escape",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "minus",
+                        "_localizationString": "@cc_minus",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "underline",
+                        "_localizationString": "@cc_underline",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "equals",
+                        "_localizationString": "@cc_equals",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "semicolon",
+                        "_localizationString": "@cc_semicolon",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "apostrophe",
+                        "_localizationString": "@cc_apostrophe",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "backspace",
+                        "_localizationString": "@input_key_keyboard_backspace",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "tab",
+                        "_localizationString": "@input_key_keyboard_tab",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "lbracket",
+                        "_localizationString": "@cc_lbracket",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "rbracket",
+                        "_localizationString": "@cc_rbracket",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "enter",
+                        "_localizationString": "@input_key_keyboard_enter",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "capslock",
+                        "_localizationString": "@input_key_keyboard_capslock",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "colon",
+                        "_localizationString": "@cc_colon",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "backslash",
+                        "_localizationString": "@cc_backslash",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "comma",
+                        "_localizationString": "@cc_comma",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "period",
+                        "_localizationString": "@cc_period",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "slash",
+                        "_localizationString": "@cc_slash",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "space",
+                        "_localizationString": "@input_key_keyboard_space",
+                        "_shortLocString": "@input_key_keyboard_space_short",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "oem_102",
+                        "_localizationString": "@cc_oem_102",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse1",
+                        "_localizationString": "@input_key_mouse_button1",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Left_Click"
+                    },
+                    {
+                        "_name": "mouse2",
+                        "_localizationString": "@input_key_mouse_button2",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Right_Click"
+                    },
+                    {
+                        "_name": "mouse1_2",
+                        "_localizationString": "@input_key_mouse_button12",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Left_Right_Click"
+                    },
+                    {
+                        "_name": "maxis_z",
+                        "_localizationString": "@input_key_mouse_zAxis",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    }
+                ]
+            },
+            {
+                "_name": "mouse",
+                "Key": [
+                    {
+                        "_name": "maxis_x",
+                        "_localizationString": "@input_key_mouse_xAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_xaxis"
+                    },
+                    {
+                        "_name": "maxis_y",
+                        "_localizationString": "@input_key_mouse_yAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_yaxis"
+                    },
+                    {
+                        "_name": "maxis_z",
+                        "_localizationString": "@input_key_mouse_zAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_zaxis"
+                    },
+                    {
+                        "_name": "maxis_xy",
+                        "_localizationString": "@input_key_mouse_xyAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_xyaxis"
+                    },
+                    {
+                        "_name": "mouse1",
+                        "_localizationString": "@input_key_mouse_button1",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Left_Click"
+                    },
+                    {
+                        "_name": "mouse2",
+                        "_localizationString": "@input_key_mouse_button2",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Right_Click"
+                    },
+                    {
+                        "_name": "mouse3",
+                        "_localizationString": "@input_key_mouse_button3",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Wheel"
+                    },
+                    {
+                        "_name": "mouse4",
+                        "_localizationString": "@input_key_mouse_button4",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse5",
+                        "_localizationString": "@input_key_mouse_button5",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse6",
+                        "_localizationString": "@input_key_mouse_button6",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse7",
+                        "_localizationString": "@input_key_mouse_button7",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse8",
+                        "_localizationString": "@input_key_mouse_button8",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse9",
+                        "_localizationString": "@input_key_mouse_button9",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse10",
+                        "_localizationString": "@input_key_mouse_button10",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse1_2",
+                        "_localizationString": "@input_key_mouse_button12",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Left_Right_Click"
+                    },
+                    {
+                        "_name": "mwheel_up",
+                        "_localizationString": "@input_key_mouse_wheelUp",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Wheel_Up"
+                    },
+                    {
+                        "_name": "mwheel_down",
+                        "_localizationString": "@input_key_mouse_wheelDown",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Wheel_Down"
+                    }
+                ]
+            },
+            {
+                "_name": "control_pad",
+                "Key": [
+                    {
+                        "_name": "dpad_up",
+                        "_localizationString": "@input_key_controlPad_dpadUp",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Up"
+                    },
+                    {
+                        "_name": "dpad_down",
+                        "_localizationString": "@input_key_controlPad_dpadDown",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Down"
+                    },
+                    {
+                        "_name": "dpad_left",
+                        "_localizationString": "@input_key_controlPad_dpadLeft",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Left"
+                    },
+                    {
+                        "_name": "dpad_right",
+                        "_localizationString": "@input_key_controlPad_dpadRight",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Right"
+                    },
+                    {
+                        "_name": "start",
+                        "_localizationString": "@input_key_controlPad_start",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Start"
+                    },
+                    {
+                        "_name": "back",
+                        "_localizationString": "@input_key_controlPad_back",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Select"
+                    },
+                    {
+                        "_name": "thumbl",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftButton",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick"
+                    },
+                    {
+                        "_name": "thumblx",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftXAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick_xaxis"
+                    },
+                    {
+                        "_name": "thumbly",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftYAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick_yaxis"
+                    },
+                    {
+                        "_name": "thumblxy",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftXYAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick_xyaxis"
+                    },
+                    {
+                        "_name": "thumbl_up",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftUp",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick"
+                    },
+                    {
+                        "_name": "thumbl_down",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftDown",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick"
+                    },
+                    {
+                        "_name": "thumbl_left",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftLeft",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick"
+                    },
+                    {
+                        "_name": "thumbl_right",
+                        "_localizationString": "@input_key_controlPad_thumbstickLeftRight",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LeftStick"
+                    },
+                    {
+                        "_name": "thumbr",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightButton",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick"
+                    },
+                    {
+                        "_name": "thumbrx",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightXAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick_xaxis"
+                    },
+                    {
+                        "_name": "thumbry",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightYAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick_yaxis"
+                    },
+                    {
+                        "_name": "thumbrxy",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightXYAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick_xyaxis"
+                    },
+                    {
+                        "_name": "thumbr_up",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightUp",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick"
+                    },
+                    {
+                        "_name": "thumbr_down",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightDown",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick"
+                    },
+                    {
+                        "_name": "thumbr_left",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightLeft",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick"
+                    },
+                    {
+                        "_name": "thumbr_right",
+                        "_localizationString": "@input_key_controlPad_thumbstickRightRight",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RightStick"
+                    },
+                    {
+                        "_name": "a",
+                        "_localizationString": "@input_key_controlPad_a",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_A"
+                    },
+                    {
+                        "_name": "b",
+                        "_localizationString": "@input_key_controlPad_b",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_B"
+                    },
+                    {
+                        "_name": "x",
+                        "_localizationString": "@input_key_controlPad_x",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_X"
+                    },
+                    {
+                        "_name": "y",
+                        "_localizationString": "@input_key_controlPad_y",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_Y"
+                    },
+                    {
+                        "_name": "shoulderr",
+                        "_localizationString": "@input_key_controlPad_shoulderRight",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RB"
+                    },
+                    {
+                        "_name": "shoulderl",
+                        "_localizationString": "@input_key_controlPad_shoulderLeft",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LB"
+                    },
+                    {
+                        "_name": "triggerl",
+                        "_localizationString": "@input_key_controlPad_triggerLeft",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_LT"
+                    },
+                    {
+                        "_name": "triggerr",
+                        "_localizationString": "@input_key_controlPad_triggerRight",
+                        "_shortLocString": "",
+                        "_iconName": "Joypad_RT"
+                    },
+                    {
+                        "_name": "triggerl_btn",
+                        "_localizationString": "@input_key_controlPad_triggerLeftButton",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "triggerr_btn",
+                        "_localizationString": "@input_key_controlPad_triggerRightButton",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "triggerl_r_btn",
+                        "_localizationString": "@input_key_controlPad_triggerLeftRightButton",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    }
+                ]
+            },
+            {
+                "_name": "joystick1",
+                "Key": [
+                    {
+                        "_name": "x",
+                        "_localizationString": "@input_key_joystick1_xAxis",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "y",
+                        "_localizationString": "@input_key_joystick1_yAxis",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "z",
+                        "_localizationString": "@input_key_joystick1_zAxis",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "throttlez",
+                        "_localizationString": "@input_key_joystick1_throttleAxis",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "xy",
+                        "_localizationString": "@input_key_joystick1_xyAxis",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "rotx",
+                        "_localizationString": "@input_key_joystick1_xRotation",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "roty",
+                        "_localizationString": "@input_key_joystick1_yRotation",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "rotz",
+                        "_localizationString": "@input_key_joystick1_zRotation",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "slider1",
+                        "_localizationString": "@input_key_joystick1_slider1",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "slider2",
+                        "_localizationString": "@input_key_joystick1_slider2",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "button1",
+                        "_localizationString": "@input_key_joystick1_button1",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_1"
+                    },
+                    {
+                        "_name": "button2",
+                        "_localizationString": "@input_key_joystick1_button2",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_2"
+                    },
+                    {
+                        "_name": "button3",
+                        "_localizationString": "@input_key_joystick1_button3",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_3"
+                    },
+                    {
+                        "_name": "button4",
+                        "_localizationString": "@input_key_joystick1_button4",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_4"
+                    },
+                    {
+                        "_name": "button5",
+                        "_localizationString": "@input_key_joystick1_button5",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_5"
+                    },
+                    {
+                        "_name": "button6",
+                        "_localizationString": "@input_key_joystick1_button6",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_6"
+                    },
+                    {
+                        "_name": "button7",
+                        "_localizationString": "@input_key_joystick1_button7",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_7"
+                    },
+                    {
+                        "_name": "button8",
+                        "_localizationString": "@input_key_joystick1_button8",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_8"
+                    },
+                    {
+                        "_name": "button9",
+                        "_localizationString": "@input_key_joystick1_button9",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_9"
+                    },
+                    {
+                        "_name": "button10",
+                        "_localizationString": "@input_key_joystick1_button10",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_10"
+                    },
+                    {
+                        "_name": "button11",
+                        "_localizationString": "@input_key_joystick1_button11",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_11"
+                    },
+                    {
+                        "_name": "button12",
+                        "_localizationString": "@input_key_joystick1_button12",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_12"
+                    },
+                    {
+                        "_name": "button13",
+                        "_localizationString": "@input_key_joystick1_button13",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_13"
+                    },
+                    {
+                        "_name": "button14",
+                        "_localizationString": "@input_key_joystick1_button14",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_14"
+                    },
+                    {
+                        "_name": "button15",
+                        "_localizationString": "@input_key_joystick1_button15",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_15"
+                    },
+                    {
+                        "_name": "button16",
+                        "_localizationString": "@input_key_joystick1_button16",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_16"
+                    },
+                    {
+                        "_name": "button17",
+                        "_localizationString": "@input_key_joystick1_button17",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_17"
+                    },
+                    {
+                        "_name": "button18",
+                        "_localizationString": "@input_key_joystick1_button18",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_18"
+                    },
+                    {
+                        "_name": "button19",
+                        "_localizationString": "@input_key_joystick1_button19",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_19"
+                    },
+                    {
+                        "_name": "button20",
+                        "_localizationString": "@input_key_joystick1_button20",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_20"
+                    },
+                    {
+                        "_name": "button21",
+                        "_localizationString": "@input_key_joystick1_button21",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_21"
+                    },
+                    {
+                        "_name": "button22",
+                        "_localizationString": "@input_key_joystick1_button22",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_22"
+                    },
+                    {
+                        "_name": "button23",
+                        "_localizationString": "@input_key_joystick1_button23",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_23"
+                    },
+                    {
+                        "_name": "button24",
+                        "_localizationString": "@input_key_joystick1_button24",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_24"
+                    },
+                    {
+                        "_name": "button25",
+                        "_localizationString": "@input_key_joystick1_button25",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_25"
+                    },
+                    {
+                        "_name": "button26",
+                        "_localizationString": "@input_key_joystick1_button26",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_26"
+                    },
+                    {
+                        "_name": "button27",
+                        "_localizationString": "@input_key_joystick1_button27",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_27"
+                    },
+                    {
+                        "_name": "button28",
+                        "_localizationString": "@input_key_joystick1_button28",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_28"
+                    },
+                    {
+                        "_name": "button29",
+                        "_localizationString": "@input_key_joystick1_button29",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_29"
+                    },
+                    {
+                        "_name": "button30",
+                        "_localizationString": "@input_key_joystick1_button30",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_30"
+                    },
+                    {
+                        "_name": "button31",
+                        "_localizationString": "@input_key_joystick1_button31",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_31"
+                    },
+                    {
+                        "_name": "button32",
+                        "_localizationString": "@input_key_joystick1_button32",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_32"
+                    },
+                    {
+                        "_name": "button33",
+                        "_localizationString": "@input_key_joystick1_button33",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_33"
+                    },
+                    {
+                        "_name": "button34",
+                        "_localizationString": "@input_key_joystick1_button34",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_34"
+                    },
+                    {
+                        "_name": "button35",
+                        "_localizationString": "@input_key_joystick1_button35",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_35"
+                    },
+                    {
+                        "_name": "button36",
+                        "_localizationString": "@input_key_joystick1_button36",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_36"
+                    },
+                    {
+                        "_name": "button37",
+                        "_localizationString": "@input_key_joystick1_button37",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_37"
+                    },
+                    {
+                        "_name": "button38",
+                        "_localizationString": "@input_key_joystick1_button38",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_38"
+                    },
+                    {
+                        "_name": "button39",
+                        "_localizationString": "@input_key_joystick1_button39",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_39"
+                    },
+                    {
+                        "_name": "button40",
+                        "_localizationString": "@input_key_joystick1_button40",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_40"
+                    },
+                    {
+                        "_name": "button41",
+                        "_localizationString": "@input_key_joystick1_button41",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_41"
+                    },
+                    {
+                        "_name": "button42",
+                        "_localizationString": "@input_key_joystick1_button42",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_42"
+                    },
+                    {
+                        "_name": "button43",
+                        "_localizationString": "@input_key_joystick1_button43",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_43"
+                    },
+                    {
+                        "_name": "button44",
+                        "_localizationString": "@input_key_joystick1_button44",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_44"
+                    },
+                    {
+                        "_name": "button45",
+                        "_localizationString": "@input_key_joystick1_button45",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_45"
+                    },
+                    {
+                        "_name": "button46",
+                        "_localizationString": "@input_key_joystick1_button46",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_46"
+                    },
+                    {
+                        "_name": "button47",
+                        "_localizationString": "@input_key_joystick1_button47",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_47"
+                    },
+                    {
+                        "_name": "button48",
+                        "_localizationString": "@input_key_joystick1_button48",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_48"
+                    },
+                    {
+                        "_name": "button49",
+                        "_localizationString": "@input_key_joystick1_button49",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_49"
+                    },
+                    {
+                        "_name": "button50",
+                        "_localizationString": "@input_key_joystick1_button50",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_50"
+                    },
+                    {
+                        "_name": "hat1_up",
+                        "_localizationString": "@input_key_joystick1_hat1Up",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat1_down",
+                        "_localizationString": "@input_key_joystick1_hat1Down",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat1_left",
+                        "_localizationString": "@input_key_joystick1_hat1Left",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat1_right",
+                        "_localizationString": "@input_key_joystick1_hat1Right",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat2_up",
+                        "_localizationString": "@input_key_joystick1_hat2Up",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat2_down",
+                        "_localizationString": "@input_key_joystick1_hat2Down",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat2_left",
+                        "_localizationString": "@input_key_joystick1_hat2Left",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat2_right",
+                        "_localizationString": "@input_key_joystick1_hat2Right",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "at3_up",
+                        "_localizationString": "@input_key_joystick1_hat3Up",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat3_down",
+                        "_localizationString": "@input_key_joystick1_hat3Down",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat3_left",
+                        "_localizationString": "@input_key_joystick1_hat3Left",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat3_right",
+                        "_localizationString": "@input_key_joystick1_hat3Right",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat4_up",
+                        "_localizationString": "@input_key_joystick1_hat4Up",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat4_down",
+                        "_localizationString": "@input_key_joystick1_hat4Down",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat4_left",
+                        "_localizationString": "@input_key_joystick1_hat4Left",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "hat4_right",
+                        "_localizationString": "@input_key_joystick1_hat4Right",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    }
+                ]
+            },
+            {
+                "_name": "joystick2",
+                "Key": [
+                    {
+                        "_name": "x",
+                        "_localizationString": "@input_key_joystick2_xAxis"
+                    },
+                    {
+                        "_name": "y",
+                        "_localizationString": "@input_key_joystick2_yAxis"
+                    },
+                    {
+                        "_name": "z",
+                        "_localizationString": "@input_key_joystick2_zAxis"
+                    },
+                    {
+                        "_name": "throttlez",
+                        "_localizationString": "@input_key_joystick2_throttleAxis"
+                    },
+                    {
+                        "_name": "xy",
+                        "_localizationString": "@input_key_joystick2_xyAxis"
+                    },
+                    {
+                        "_name": "rotx",
+                        "_localizationString": "@input_key_joystick2_xRotation"
+                    },
+                    {
+                        "_name": "roty",
+                        "_localizationString": "@input_key_joystick2_yRotation"
+                    },
+                    {
+                        "_name": "rotz",
+                        "_localizationString": "@input_key_joystick2_zRotation"
+                    },
+                    {
+                        "_name": "slider1",
+                        "_localizationString": "@input_key_joystick2_slider1"
+                    },
+                    {
+                        "_name": "slider2",
+                        "_localizationString": "@input_key_joystick2_slider2"
+                    },
+                    {
+                        "_name": "button1",
+                        "_localizationString": "@input_key_joystick2_button1",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_1"
+                    },
+                    {
+                        "_name": "button2",
+                        "_localizationString": "@input_key_joystick2_button2",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_2"
+                    },
+                    {
+                        "_name": "button3",
+                        "_localizationString": "@input_key_joystick2_button3",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_3"
+                    },
+                    {
+                        "_name": "button4",
+                        "_localizationString": "@input_key_joystick2_button4",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_4"
+                    },
+                    {
+                        "_name": "button5",
+                        "_localizationString": "@input_key_joystick2_button5",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_5"
+                    },
+                    {
+                        "_name": "button6",
+                        "_localizationString": "@input_key_joystick2_button6",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_6"
+                    },
+                    {
+                        "_name": "button7",
+                        "_localizationString": "@input_key_joystick2_button7",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_7"
+                    },
+                    {
+                        "_name": "button8",
+                        "_localizationString": "@input_key_joystick2_button8",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_8"
+                    },
+                    {
+                        "_name": "button9",
+                        "_localizationString": "@input_key_joystick2_button9",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_9"
+                    },
+                    {
+                        "_name": "button10",
+                        "_localizationString": "@input_key_joystick2_button10",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_10"
+                    },
+                    {
+                        "_name": "button11",
+                        "_localizationString": "@input_key_joystick2_button11",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_11"
+                    },
+                    {
+                        "_name": "button12",
+                        "_localizationString": "@input_key_joystick2_button12",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_12"
+                    },
+                    {
+                        "_name": "button13",
+                        "_localizationString": "@input_key_joystick2_button13",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_13"
+                    },
+                    {
+                        "_name": "button14",
+                        "_localizationString": "@input_key_joystick2_button14",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_14"
+                    },
+                    {
+                        "_name": "button15",
+                        "_localizationString": "@input_key_joystick2_button15",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_15"
+                    },
+                    {
+                        "_name": "button16",
+                        "_localizationString": "@input_key_joystick2_button16",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_16"
+                    },
+                    {
+                        "_name": "button17",
+                        "_localizationString": "@input_key_joystick2_button17",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_17"
+                    },
+                    {
+                        "_name": "button18",
+                        "_localizationString": "@input_key_joystick2_button18",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_18"
+                    },
+                    {
+                        "_name": "button19",
+                        "_localizationString": "@input_key_joystick2_button19",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_19"
+                    },
+                    {
+                        "_name": "button20",
+                        "_localizationString": "@input_key_joystick2_button20",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_20"
+                    },
+                    {
+                        "_name": "button21",
+                        "_localizationString": "@input_key_joystick2_button21",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_21"
+                    },
+                    {
+                        "_name": "button22",
+                        "_localizationString": "@input_key_joystick2_button22",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_22"
+                    },
+                    {
+                        "_name": "button23",
+                        "_localizationString": "@input_key_joystick2_button23",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_23"
+                    },
+                    {
+                        "_name": "button24",
+                        "_localizationString": "@input_key_joystick2_button24",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_24"
+                    },
+                    {
+                        "_name": "button25",
+                        "_localizationString": "@input_key_joystick2_button25",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_25"
+                    },
+                    {
+                        "_name": "button26",
+                        "_localizationString": "@input_key_joystick2_button26",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_26"
+                    },
+                    {
+                        "_name": "button27",
+                        "_localizationString": "@input_key_joystick2_button27",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_27"
+                    },
+                    {
+                        "_name": "button28",
+                        "_localizationString": "@input_key_joystick2_button28",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_28"
+                    },
+                    {
+                        "_name": "button29",
+                        "_localizationString": "@input_key_joystick2_button29",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_29"
+                    },
+                    {
+                        "_name": "button30",
+                        "_localizationString": "@input_key_joystick2_button30",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_30"
+                    },
+                    {
+                        "_name": "button31",
+                        "_localizationString": "@input_key_joystick2_button31",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_31"
+                    },
+                    {
+                        "_name": "button32",
+                        "_localizationString": "@input_key_joystick2_button32",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_32"
+                    },
+                    {
+                        "_name": "button33",
+                        "_localizationString": "@input_key_joystick2_button33",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_33"
+                    },
+                    {
+                        "_name": "button34",
+                        "_localizationString": "@input_key_joystick2_button34",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_34"
+                    },
+                    {
+                        "_name": "button35",
+                        "_localizationString": "@input_key_joystick2_button35",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_35"
+                    },
+                    {
+                        "_name": "button36",
+                        "_localizationString": "@input_key_joystick2_button36",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_36"
+                    },
+                    {
+                        "_name": "button37",
+                        "_localizationString": "@input_key_joystick2_button37",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_37"
+                    },
+                    {
+                        "_name": "button38",
+                        "_localizationString": "@input_key_joystick2_button38",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_38"
+                    },
+                    {
+                        "_name": "button39",
+                        "_localizationString": "@input_key_joystick2_button39",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_39"
+                    },
+                    {
+                        "_name": "button40",
+                        "_localizationString": "@input_key_joystick2_button40",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_40"
+                    },
+                    {
+                        "_name": "button41",
+                        "_localizationString": "@input_key_joystick2_button41",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_41"
+                    },
+                    {
+                        "_name": "button42",
+                        "_localizationString": "@input_key_joystick2_button42",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_42"
+                    },
+                    {
+                        "_name": "button43",
+                        "_localizationString": "@input_key_joystick2_button43",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_43"
+                    },
+                    {
+                        "_name": "button44",
+                        "_localizationString": "@input_key_joystick2_button44",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_44"
+                    },
+                    {
+                        "_name": "button45",
+                        "_localizationString": "@input_key_joystick2_button45",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_45"
+                    },
+                    {
+                        "_name": "button46",
+                        "_localizationString": "@input_key_joystick2_button46",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_46"
+                    },
+                    {
+                        "_name": "button47",
+                        "_localizationString": "@input_key_joystick2_button47",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_47"
+                    },
+                    {
+                        "_name": "button48",
+                        "_localizationString": "@input_key_joystick2_button48",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_48"
+                    },
+                    {
+                        "_name": "button49",
+                        "_localizationString": "@input_key_joystick2_button49",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_49"
+                    },
+                    {
+                        "_name": "button50",
+                        "_localizationString": "@input_key_joystick2_button50",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_50"
+                    },
+                    {
+                        "_name": "hat1_up",
+                        "_localizationString": "@input_key_joystick2_hat1Up"
+                    },
+                    {
+                        "_name": "hat1_down",
+                        "_localizationString": "@input_key_joystick2_hat1Down"
+                    },
+                    {
+                        "_name": "hat1_left",
+                        "_localizationString": "@input_key_joystick2_hat1Left"
+                    },
+                    {
+                        "_name": "hat1_right",
+                        "_localizationString": "@input_key_joystick2_hat1Right"
+                    },
+                    {
+                        "_name": "hat2_up",
+                        "_localizationString": "@input_key_joystick2_hat2Up"
+                    },
+                    {
+                        "_name": "hat2_down",
+                        "_localizationString": "@input_key_joystick2_hat2Down"
+                    },
+                    {
+                        "_name": "hat2_left",
+                        "_localizationString": "@input_key_joystick2_hat2Left"
+                    },
+                    {
+                        "_name": "hat2_right",
+                        "_localizationString": "@input_key_joystick2_hat2Right"
+                    },
+                    {
+                        "_name": "hat3_up",
+                        "_localizationString": "@input_key_joystick2_hat3Up"
+                    },
+                    {
+                        "_name": "hat3_down",
+                        "_localizationString": "@input_key_joystick2_hat3Down"
+                    },
+                    {
+                        "_name": "hat3_left",
+                        "_localizationString": "@input_key_joystick3_hat3Left"
+                    },
+                    {
+                        "_name": "hat3_right",
+                        "_localizationString": "@input_key_joystick2_hat3Right"
+                    },
+                    {
+                        "_name": "hat4_up",
+                        "_localizationString": "@input_key_joystick2_hat4Up"
+                    },
+                    {
+                        "_name": "hat4_down",
+                        "_localizationString": "@input_key_joystick2_hat4Down"
+                    },
+                    {
+                        "_name": "hat4_left",
+                        "_localizationString": "@input_key_joystick2_hat4Left"
+                    },
+                    {
+                        "_name": "hat4_right",
+                        "_localizationString": "@input_key_joystick2_hat4Right"
+                    }
+                ]
+            },
+            {
+                "_name": "joystick3",
+                "Key": [
+                    {
+                        "_name": "x",
+                        "_localizationString": "@input_key_joystick3_xAxis"
+                    },
+                    {
+                        "_name": "y",
+                        "_localizationString": "@input_key_joystick3_yAxis"
+                    },
+                    {
+                        "_name": "z",
+                        "_localizationString": "@input_key_joystick3_zAxis"
+                    },
+                    {
+                        "_name": "throttlez",
+                        "_localizationString": "@input_key_joystick3_throttleAxis"
+                    },
+                    {
+                        "_name": "xy",
+                        "_localizationString": "@input_key_joystick3_xyAxis"
+                    },
+                    {
+                        "_name": "rotx",
+                        "_localizationString": "@input_key_joystick3_xRotation"
+                    },
+                    {
+                        "_name": "roty",
+                        "_localizationString": "@input_key_joystick3_yRotation"
+                    },
+                    {
+                        "_name": "rotz",
+                        "_localizationString": "@input_key_joystick3_zRotation"
+                    },
+                    {
+                        "_name": "slider1",
+                        "_localizationString": "@input_key_joystick3_slider1"
+                    },
+                    {
+                        "_name": "slider2",
+                        "_localizationString": "@input_key_joystick3_slider2"
+                    },
+                    {
+                        "_name": "button1",
+                        "_localizationString": "@input_key_joystick3_button1",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_1"
+                    },
+                    {
+                        "_name": "button2",
+                        "_localizationString": "@input_key_joystick3_button2",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_2"
+                    },
+                    {
+                        "_name": "button3",
+                        "_localizationString": "@input_key_joystick3_button3",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_3"
+                    },
+                    {
+                        "_name": "button4",
+                        "_localizationString": "@input_key_joystick3_button4",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_4"
+                    },
+                    {
+                        "_name": "button5",
+                        "_localizationString": "@input_key_joystick3_button5",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_5"
+                    },
+                    {
+                        "_name": "button6",
+                        "_localizationString": "@input_key_joystick3_button6",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_6"
+                    },
+                    {
+                        "_name": "button7",
+                        "_localizationString": "@input_key_joystick3_button7",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_7"
+                    },
+                    {
+                        "_name": "button8",
+                        "_localizationString": "@input_key_joystick3_button8",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_8"
+                    },
+                    {
+                        "_name": "button9",
+                        "_localizationString": "@input_key_joystick3_button9",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_9"
+                    },
+                    {
+                        "_name": "button10",
+                        "_localizationString": "@input_key_joystick3_button10",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_10"
+                    },
+                    {
+                        "_name": "button11",
+                        "_localizationString": "@input_key_joystick3_button11",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_11"
+                    },
+                    {
+                        "_name": "button12",
+                        "_localizationString": "@input_key_joystick3_button12",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_12"
+                    },
+                    {
+                        "_name": "button13",
+                        "_localizationString": "@input_key_joystick3_button13",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_13"
+                    },
+                    {
+                        "_name": "button14",
+                        "_localizationString": "@input_key_joystick3_button14",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_14"
+                    },
+                    {
+                        "_name": "button15",
+                        "_localizationString": "@input_key_joystick3_button15",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_15"
+                    },
+                    {
+                        "_name": "button16",
+                        "_localizationString": "@input_key_joystick3_button16",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_16"
+                    },
+                    {
+                        "_name": "button17",
+                        "_localizationString": "@input_key_joystick3_button17",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_17"
+                    },
+                    {
+                        "_name": "button18",
+                        "_localizationString": "@input_key_joystick3_button18",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_18"
+                    },
+                    {
+                        "_name": "button19",
+                        "_localizationString": "@input_key_joystick3_button19",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_19"
+                    },
+                    {
+                        "_name": "button20",
+                        "_localizationString": "@input_key_joystick3_button20",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_20"
+                    },
+                    {
+                        "_name": "button21",
+                        "_localizationString": "@input_key_joystick3_button21",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_21"
+                    },
+                    {
+                        "_name": "button22",
+                        "_localizationString": "@input_key_joystick3_button22",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_22"
+                    },
+                    {
+                        "_name": "button23",
+                        "_localizationString": "@input_key_joystick3_button23",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_23"
+                    },
+                    {
+                        "_name": "button24",
+                        "_localizationString": "@input_key_joystick3_button24",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_24"
+                    },
+                    {
+                        "_name": "button25",
+                        "_localizationString": "@input_key_joystick3_button25",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_25"
+                    },
+                    {
+                        "_name": "button26",
+                        "_localizationString": "@input_key_joystick3_button26",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_26"
+                    },
+                    {
+                        "_name": "button27",
+                        "_localizationString": "@input_key_joystick3_button27",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_27"
+                    },
+                    {
+                        "_name": "button28",
+                        "_localizationString": "@input_key_joystick3_button28",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_28"
+                    },
+                    {
+                        "_name": "button29",
+                        "_localizationString": "@input_key_joystick3_button29",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_29"
+                    },
+                    {
+                        "_name": "button30",
+                        "_localizationString": "@input_key_joystick3_button30",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_30"
+                    },
+                    {
+                        "_name": "button31",
+                        "_localizationString": "@input_key_joystick3_button31",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_31"
+                    },
+                    {
+                        "_name": "button32",
+                        "_localizationString": "@input_key_joystick3_button32",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_32"
+                    },
+                    {
+                        "_name": "button33",
+                        "_localizationString": "@input_key_joystick3_button33",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_33"
+                    },
+                    {
+                        "_name": "button34",
+                        "_localizationString": "@input_key_joystick3_button34",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_34"
+                    },
+                    {
+                        "_name": "button35",
+                        "_localizationString": "@input_key_joystick3_button35",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_35"
+                    },
+                    {
+                        "_name": "button36",
+                        "_localizationString": "@input_key_joystick3_button36",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_36"
+                    },
+                    {
+                        "_name": "button37",
+                        "_localizationString": "@input_key_joystick3_button37",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_37"
+                    },
+                    {
+                        "_name": "button38",
+                        "_localizationString": "@input_key_joystick3_button38",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_38"
+                    },
+                    {
+                        "_name": "button39",
+                        "_localizationString": "@input_key_joystick3_button39",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_39"
+                    },
+                    {
+                        "_name": "button40",
+                        "_localizationString": "@input_key_joystick3_button40",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_40"
+                    },
+                    {
+                        "_name": "button41",
+                        "_localizationString": "@input_key_joystick3_button41",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_41"
+                    },
+                    {
+                        "_name": "button42",
+                        "_localizationString": "@input_key_joystick3_button42",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_42"
+                    },
+                    {
+                        "_name": "button43",
+                        "_localizationString": "@input_key_joystick3_button43",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_43"
+                    },
+                    {
+                        "_name": "button44",
+                        "_localizationString": "@input_key_joystick3_button44",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_44"
+                    },
+                    {
+                        "_name": "button45",
+                        "_localizationString": "@input_key_joystick3_button45",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_45"
+                    },
+                    {
+                        "_name": "button46",
+                        "_localizationString": "@input_key_joystick3_button46",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_46"
+                    },
+                    {
+                        "_name": "button47",
+                        "_localizationString": "@input_key_joystick3_button47",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_47"
+                    },
+                    {
+                        "_name": "button48",
+                        "_localizationString": "@input_key_joystick3_button48",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_48"
+                    },
+                    {
+                        "_name": "button49",
+                        "_localizationString": "@input_key_joystick3_button49",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_49"
+                    },
+                    {
+                        "_name": "button50",
+                        "_localizationString": "@input_key_joystick3_button50",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_50"
+                    },
+                    {
+                        "_name": "hat1_up",
+                        "_localizationString": "@input_key_joystick3_hat1Up"
+                    },
+                    {
+                        "_name": "hat1_down",
+                        "_localizationString": "@input_key_joystick3_hat1Down"
+                    },
+                    {
+                        "_name": "hat1_left",
+                        "_localizationString": "@input_key_joystick3_hat1Left"
+                    },
+                    {
+                        "_name": "hat1_right",
+                        "_localizationString": "@input_key_joystick3_hat1Right"
+                    },
+                    {
+                        "_name": "hat2_up",
+                        "_localizationString": "@input_key_joystick3_hat2Up"
+                    },
+                    {
+                        "_name": "hat2_down",
+                        "_localizationString": "@input_key_joystick3_hat2Down"
+                    },
+                    {
+                        "_name": "hat2_left",
+                        "_localizationString": "@input_key_joystick3_hat2Left"
+                    },
+                    {
+                        "_name": "hat2_right",
+                        "_localizationString": "@input_key_joystick3_hat2Right"
+                    },
+                    {
+                        "_name": "hat3_up",
+                        "_localizationString": "@input_key_joystick3_hat3Up"
+                    },
+                    {
+                        "_name": "hat3_down",
+                        "_localizationString": "@input_key_joystick3_hat3Down"
+                    },
+                    {
+                        "_name": "hat3_left",
+                        "_localizationString": "@input_key_joystick3_hat3Left"
+                    },
+                    {
+                        "_name": "hat3_right",
+                        "_localizationString": "@input_key_joystick3_hat3Right"
+                    },
+                    {
+                        "_name": "hat4_up",
+                        "_localizationString": "@input_key_joystick3_hat4Up"
+                    },
+                    {
+                        "_name": "hat4_down",
+                        "_localizationString": "@input_key_joystick3_hat4Down"
+                    },
+                    {
+                        "_name": "hat4_left",
+                        "_localizationString": "@input_key_joystick3_hat4Left"
+                    },
+                    {
+                        "_name": "hat4_right",
+                        "_localizationString": "@input_key_joystick3_hat4Right"
+                    }
+                ]
+            },
+            {
+                "_name": "joystick4",
+                "Key": [
+                    {
+                        "_name": "x",
+                        "_localizationString": "@input_key_joystick4_xAxis"
+                    },
+                    {
+                        "_name": "y",
+                        "_localizationString": "@input_key_joystick4_yAxis"
+                    },
+                    {
+                        "_name": "z",
+                        "_localizationString": "@input_key_joystick4_zAxis"
+                    },
+                    {
+                        "_name": "throttlez",
+                        "_localizationString": "@input_key_joystick4_throttleAxis"
+                    },
+                    {
+                        "_name": "xy",
+                        "_localizationString": "@input_key_joystick4_xyAxis"
+                    },
+                    {
+                        "_name": "rotx",
+                        "_localizationString": "@input_key_joystick4_xRotation"
+                    },
+                    {
+                        "_name": "roty",
+                        "_localizationString": "@input_key_joystick4_yRotation"
+                    },
+                    {
+                        "_name": "rotz",
+                        "_localizationString": "@input_key_joystick4_zRotation"
+                    },
+                    {
+                        "_name": "slider1",
+                        "_localizationString": "@input_key_joystick4_slider1"
+                    },
+                    {
+                        "_name": "slider2",
+                        "_localizationString": "@input_key_joystick4_slider2"
+                    },
+                    {
+                        "_name": "button1",
+                        "_localizationString": "@input_key_joystick4_button1",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_1"
+                    },
+                    {
+                        "_name": "button2",
+                        "_localizationString": "@input_key_joystick4_button2",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_2"
+                    },
+                    {
+                        "_name": "button3",
+                        "_localizationString": "@input_key_joystick4_button3",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_3"
+                    },
+                    {
+                        "_name": "button4",
+                        "_localizationString": "@input_key_joystick4_button4",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_4"
+                    },
+                    {
+                        "_name": "button5",
+                        "_localizationString": "@input_key_joystick4_button5",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_5"
+                    },
+                    {
+                        "_name": "button6",
+                        "_localizationString": "@input_key_joystick4_button6",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_6"
+                    },
+                    {
+                        "_name": "button7",
+                        "_localizationString": "@input_key_joystick4_button7",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_7"
+                    },
+                    {
+                        "_name": "button8",
+                        "_localizationString": "@input_key_joystick4_button8",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_8"
+                    },
+                    {
+                        "_name": "button9",
+                        "_localizationString": "@input_key_joystick4_button9",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_9"
+                    },
+                    {
+                        "_name": "button10",
+                        "_localizationString": "@input_key_joystick4_button10",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_10"
+                    },
+                    {
+                        "_name": "button11",
+                        "_localizationString": "@input_key_joystick4_button11",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_11"
+                    },
+                    {
+                        "_name": "button12",
+                        "_localizationString": "@input_key_joystick4_button12",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_12"
+                    },
+                    {
+                        "_name": "button13",
+                        "_localizationString": "@input_key_joystick4_button13",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_13"
+                    },
+                    {
+                        "_name": "button14",
+                        "_localizationString": "@input_key_joystick4_button14",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_14"
+                    },
+                    {
+                        "_name": "button15",
+                        "_localizationString": "@input_key_joystick4_button15",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_15"
+                    },
+                    {
+                        "_name": "button16",
+                        "_localizationString": "@input_key_joystick4_button16",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_16"
+                    },
+                    {
+                        "_name": "button17",
+                        "_localizationString": "@input_key_joystick4_button17",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_17"
+                    },
+                    {
+                        "_name": "button18",
+                        "_localizationString": "@input_key_joystick4_button18",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_18"
+                    },
+                    {
+                        "_name": "button19",
+                        "_localizationString": "@input_key_joystick4_button19",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_19"
+                    },
+                    {
+                        "_name": "button20",
+                        "_localizationString": "@input_key_joystick4_button20",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_20"
+                    },
+                    {
+                        "_name": "button21",
+                        "_localizationString": "@input_key_joystick4_button21",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_21"
+                    },
+                    {
+                        "_name": "button22",
+                        "_localizationString": "@input_key_joystick4_button22",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_22"
+                    },
+                    {
+                        "_name": "button23",
+                        "_localizationString": "@input_key_joystick4_button23",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_23"
+                    },
+                    {
+                        "_name": "button24",
+                        "_localizationString": "@input_key_joystick4_button24",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_24"
+                    },
+                    {
+                        "_name": "button25",
+                        "_localizationString": "@input_key_joystick4_button25",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_25"
+                    },
+                    {
+                        "_name": "button26",
+                        "_localizationString": "@input_key_joystick4_button26",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_26"
+                    },
+                    {
+                        "_name": "button27",
+                        "_localizationString": "@input_key_joystick4_button27",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_27"
+                    },
+                    {
+                        "_name": "button28",
+                        "_localizationString": "@input_key_joystick4_button28",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_28"
+                    },
+                    {
+                        "_name": "button29",
+                        "_localizationString": "@input_key_joystick4_button29",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_29"
+                    },
+                    {
+                        "_name": "button30",
+                        "_localizationString": "@input_key_joystick4_button30",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_30"
+                    },
+                    {
+                        "_name": "button31",
+                        "_localizationString": "@input_key_joystick4_button31",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_31"
+                    },
+                    {
+                        "_name": "button32",
+                        "_localizationString": "@input_key_joystick4_button32",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_32"
+                    },
+                    {
+                        "_name": "button33",
+                        "_localizationString": "@input_key_joystick4_button33",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_33"
+                    },
+                    {
+                        "_name": "button34",
+                        "_localizationString": "@input_key_joystick4_button34",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_34"
+                    },
+                    {
+                        "_name": "button35",
+                        "_localizationString": "@input_key_joystick4_button35",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_35"
+                    },
+                    {
+                        "_name": "button36",
+                        "_localizationString": "@input_key_joystick4_button36",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_36"
+                    },
+                    {
+                        "_name": "button37",
+                        "_localizationString": "@input_key_joystick4_button37",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_37"
+                    },
+                    {
+                        "_name": "button38",
+                        "_localizationString": "@input_key_joystick4_button38",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_38"
+                    },
+                    {
+                        "_name": "button39",
+                        "_localizationString": "@input_key_joystick4_button39",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_39"
+                    },
+                    {
+                        "_name": "button40",
+                        "_localizationString": "@input_key_joystick4_button40",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_40"
+                    },
+                    {
+                        "_name": "button41",
+                        "_localizationString": "@input_key_joystick4_button41",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_41"
+                    },
+                    {
+                        "_name": "button42",
+                        "_localizationString": "@input_key_joystick4_button42",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_42"
+                    },
+                    {
+                        "_name": "button43",
+                        "_localizationString": "@input_key_joystick4_button43",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_43"
+                    },
+                    {
+                        "_name": "button44",
+                        "_localizationString": "@input_key_joystick4_button44",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_44"
+                    },
+                    {
+                        "_name": "button45",
+                        "_localizationString": "@input_key_joystick4_button45",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_45"
+                    },
+                    {
+                        "_name": "button46",
+                        "_localizationString": "@input_key_joystick4_button46",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_46"
+                    },
+                    {
+                        "_name": "button47",
+                        "_localizationString": "@input_key_joystick4_button47",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_47"
+                    },
+                    {
+                        "_name": "button48",
+                        "_localizationString": "@input_key_joystick4_button48",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_48"
+                    },
+                    {
+                        "_name": "button49",
+                        "_localizationString": "@input_key_joystick4_button49",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_49"
+                    },
+                    {
+                        "_name": "button50",
+                        "_localizationString": "@input_key_joystick4_button50",
+                        "_shortLocString": "",
+                        "_iconName": "Joystick_50"
+                    },
+                    {
+                        "_name": "hat1_up",
+                        "_localizationString": "@input_key_joystick4_hat1Up"
+                    },
+                    {
+                        "_name": "hat1_down",
+                        "_localizationString": "@input_key_joystick4_hat1Down"
+                    },
+                    {
+                        "_name": "hat1_left",
+                        "_localizationString": "@input_key_joystick4_hat1Left"
+                    },
+                    {
+                        "_name": "hat1_right",
+                        "_localizationString": "@input_key_joystick4_hat1Right"
+                    },
+                    {
+                        "_name": "hat2_up",
+                        "_localizationString": "@input_key_joystick4_hat2Up"
+                    },
+                    {
+                        "_name": "hat2_down",
+                        "_localizationString": "@input_key_joystick4_hat2Down"
+                    },
+                    {
+                        "_name": "hat2_left",
+                        "_localizationString": "@input_key_joystick4_hat2Left"
+                    },
+                    {
+                        "_name": "hat2_right",
+                        "_localizationString": "@input_key_joystick4_hat2Right"
+                    },
+                    {
+                        "_name": "hat3_up",
+                        "_localizationString": "@input_key_joystick4_hat3Up"
+                    },
+                    {
+                        "_name": "hat3_down",
+                        "_localizationString": "@input_key_joystick4_hat3Down"
+                    },
+                    {
+                        "_name": "hat3_left",
+                        "_localizationString": "@input_key_joystick3_hat3Left"
+                    },
+                    {
+                        "_name": "hat3_right",
+                        "_localizationString": "@input_key_joystick4_hat3Right"
+                    },
+                    {
+                        "_name": "hat4_up",
+                        "_localizationString": "@input_key_joystick4_hat4Up"
+                    },
+                    {
+                        "_name": "hat4_down",
+                        "_localizationString": "@input_key_joystick4_hat4Down"
+                    },
+                    {
+                        "_name": "hat4_left",
+                        "_localizationString": "@input_key_joystick4_hat4Left"
+                    },
+                    {
+                        "_name": "hat4_right",
+                        "_localizationString": "@input_key_joystick4_hat4Right"
+                    }
+                ]
+            }
+        ]
+    }
+}

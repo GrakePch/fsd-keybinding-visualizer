@@ -1,0 +1,162 @@
+@font-face {
+  font-family: 'Barlow';
+  src: url('./fonts/Barlow-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('./fonts/Barlow-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('./fonts/Barlow-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('./fonts/Barlow-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('./fonts/Barlow-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DMSans';
+  src: url('./fonts/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-style: normal;
+}
+
+:root {
+  font-size: 16px;
+  font-family: var(--font-slim);
+  line-height: 1;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --font-geom: "DMSans", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-slim: "Barlow", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --color-bg: #242424;
+  --color-bg-0-5: #303030;
+  --color-bg-1: #353535;
+  --color-bg-2: #464646;
+  --color-text: #dcdcdc;
+  --color-text-1: #bababa;
+  --color-text-2: #989898;
+  --color-lalt: #f79723;
+  --color-ralt: #e6077e;
+  --color-lshift: #ee3b3c;
+  --color-rshift: #ff8ba0;
+  --color-lctrl: #3fbc3f;
+  --color-rctrl: #3fbc9c;
+
+  --acrylic-edge: inset 0 0 .2rem 0 #ffffff20;
+  --shadow-1: 0 0.50rem 0.75rem 0 #00000020;
+  --shadow-2: 0 0.75rem 1.00rem 0 #00000040;
+  --shadow-3: 0 1.00rem 2.00rem 0 #00000040;
+}
+
+::-webkit-scrollbar {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00000040;
+  border-radius: 100rem;
+  border: 4px solid var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00000080;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+  text-decoration: underline;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-bg-1);
+  transition: background-color .2s, color .2s, box-shadow .2s;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--color-bg-2);
+}
+
+button:focus,
+button:focus-visible {
+  /* outline: 4px auto -webkit-focus-ring-color; */
+}
+
+button:disabled {
+  cursor: default;
+  background-color: var(--color-bg);
+  outline: var(--color-bg-1) 1px solid;
+}
+
+button:disabled>* {
+  opacity: .5;
+}
+
+@media screen and (max-width: 719px) {
+  :root {
+    font-size: 14px;
+  }
+}

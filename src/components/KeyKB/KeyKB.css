@@ -1,0 +1,129 @@
+.KeyKB {
+    flex-shrink: 0;
+}
+
+.KeyKB .cap {
+    padding: .25rem;
+    border-radius: .25rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: break-word;
+    background-color: var(--color-bg-1);
+    outline: 2px solid transparent;
+    cursor: pointer;
+}
+
+.KeyKB .cap.lalt {
+    outline-color: var(--color-lalt);
+}
+.KeyKB .cap.ralt {
+    outline-color: var(--color-ralt);
+}
+.KeyKB .cap.lshift {
+    outline-color: var(--color-lshift);
+}
+.KeyKB .cap.rshift {
+    outline-color: var(--color-rshift);
+}
+.KeyKB .cap.lctrl {
+    outline-color: var(--color-lctrl);
+}
+.KeyKB .cap.rctrl {
+    outline-color: var(--color-rctrl);
+}
+
+.KeyKB .cap.hover {
+    background-color: var(--color-bg-2);
+}
+
+.KeyKB .cap.highlighted {
+    color: var(--color-bg);
+    background-color: var(--color-text);
+}
+
+.KeyKB .cap.lalt.highlighted {
+    background-color: var(--color-lalt);
+}
+.KeyKB .cap.ralt.highlighted {
+    background-color: var(--color-ralt);
+}
+.KeyKB .cap.lshift.highlighted {
+    background-color: var(--color-lshift);
+}
+.KeyKB .cap.rshift.highlighted {
+    background-color: var(--color-rshift);
+}
+.KeyKB .cap.lctrl.highlighted {
+    background-color: var(--color-lctrl);
+}
+.KeyKB .cap.rctrl.highlighted {
+    background-color: var(--color-rctrl);
+}
+
+.KeyKB .key-label {
+    position: absolute;
+    top: .25rem;
+    left: .25rem;
+}
+
+.KeyKB .cap svg.lalt {
+    color: var(--color-lalt);
+}
+
+.KeyKB .cap svg.ralt {
+    color: var(--color-ralt);
+}
+
+.KeyKB .cap svg.lshift {
+    color: var(--color-lshift);
+}
+
+.KeyKB .cap svg.rshift {
+    color: var(--color-rshift);
+}
+
+.KeyKB .cap svg.lctrl {
+    color: var(--color-lctrl);
+}
+
+.KeyKB .cap svg.rctrl {
+    color: var(--color-rctrl);
+}
+
+.KeyKB .action-label {
+    font-size: .65rem;
+    border: 1px solid var(--color-text-2);
+    max-width: 100%;
+}
+
+.KeyKB .action-label.lalt {
+    color: var(--color-lalt);
+    border-color: var(--color-lalt);
+}
+
+.KeyKB .action-label.ralt {
+    color: var(--color-ralt);
+    border-color: var(--color-ralt);
+}
+
+.KeyKB .action-label.lshift {
+    color: var(--color-lshift);
+    border-color: var(--color-lshift);
+}
+
+.KeyKB .action-label.rshift {
+    color: var(--color-rshift);
+    border-color: var(--color-rshift);
+}
+
+.KeyKB .action-label.lctrl {
+    color: var(--color-lctrl);
+    border-color: var(--color-lctrl);
+}
+
+.KeyKB .action-label.rctrl {
+    color: var(--color-rctrl);
+    border-color: var(--color-rctrl);
+}
