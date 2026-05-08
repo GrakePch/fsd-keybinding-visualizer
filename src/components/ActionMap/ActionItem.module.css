@@ -1,4 +1,5 @@
 .action {
+  position: relative;
   list-style-type: none;
   display: flex;
   gap: .5rem;
@@ -12,10 +13,35 @@
   padding: .125rem 0;
   border-top: 1px solid #80808080;
   background-color: var(--color-bg-0-5);
+  isolation: isolate;
 }
 
 .action:hover {
   background-color: var(--color-bg-2);
+}
+
+.action::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 0;
+  background-color: color-mix(in srgb, var(--color-bg-2) 76%, white 24%);
+  pointer-events: none;
+}
+
+.recording,
+.recording:hover {
+  background-color: var(--color-bg-0-5);
+}
+
+.recording::before {
+  animation: recordingProgress 3s linear forwards;
+}
+
+.action > * {
+  position: relative;
+  z-index: 1;
 }
 
 .icon {
@@ -32,6 +58,7 @@
 
 .buttons {
   display: flex;
+  gap: .25rem;
   flex-shrink: 0;
   visibility: hidden;
 }
@@ -40,14 +67,29 @@
   visibility: visible;
 }
 
+.recording .buttons,
+.recording:hover .buttons {
+  visibility: hidden;
+}
+
+.recordingHint {
+  flex-shrink: 0;
+  color: var(--color-text);
+  font-size: .8rem;
+  line-height: 1.5rem;
+  white-space: nowrap;
+}
+
 .actionButton {
   display: flex;
   align-items: center;
+  gap: .125rem;
   height: 1.5rem;
   font-size: .8rem;
   padding: .25rem .375rem;
   background: transparent;
-  border-radius: .5rem;
+  border-radius: .25rem;
+  white-space: nowrap;
 }
 
 .actionButton:hover {
@@ -71,26 +113,6 @@
   background-color: hsla(200, 70%, 70%, .22);
 }
 
-.cancelButton {
-  color: hsl(0, 0%, 72%);
-}
-
-.cancelButton:hover {
-  background-color: hsla(0, 0%, 72%, .18);
-}
-
-.multiTapCheckbox {
-  flex-shrink: 0;
-}
-
-.multiTapLabel {
-  flex-shrink: 0;
-  font-size: .8rem;
-  line-height: 1;
-  align-self: center;
-  white-space: nowrap;
-}
-
 .kbms {
   flex: 0 0 auto;
   min-width: 6rem;
@@ -98,10 +120,6 @@
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.modifierSelect {
-  max-width: 100%;
 }
 
 .kbm {
@@ -140,4 +158,14 @@
 .rshift {
   color: color-mix(in srgb, var(--color-rshift) 72%, var(--color-text));
   background-color: color-mix(in srgb, var(--color-rshift) 24%, transparent);
+}
+
+@keyframes recordingProgress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
