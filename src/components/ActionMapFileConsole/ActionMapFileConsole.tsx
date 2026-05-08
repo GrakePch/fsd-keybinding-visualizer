@@ -30,6 +30,7 @@ type WindowWithDirectoryPicker = Window & {
 
 const ACTIONMAP_PATH_PARTS = ["USER", "Client", "0", "Profiles", "default", "actionmaps.xml"];
 const LOCAL_PATH_UNSUPPORTED = "当前浏览器不支持本地路径读写，请使用 Chromium 系浏览器。";
+const IMPORT_LOCAL_PATH_HINT = "若读取本地路径，请选择游戏目录下的 LIVE / PTU 文件夹";
 
 const ActionMapFileConsole = () => {
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
@@ -52,6 +53,7 @@ const ActionMapFileConsole = () => {
     if (source === "upload" && loadedFileName) return `已加载文件：${loadedFileName}`;
     return "未加载 actionmap.xml";
   }, [loadedFileName, localPathLabel, source]);
+  const consoleLabel = mode === "import" ? IMPORT_LOCAL_PATH_HINT : loadedLabel;
 
   const loadActionmapXml = (xmlString: string) => {
     const parser = new DOMParser();
@@ -156,8 +158,8 @@ const ActionMapFileConsole = () => {
   return (
     <section className="ActionMapFileConsole" aria-label="Action map file console">
       <input className="actionmap-file-input" ref={fileInputRef} type="file" accept=".xml" onChange={handleUploadFileSelect} />
-      <p className="actionmap-file-source" title={loadedLabel}>
-        {loadedLabel}
+      <p className="actionmap-file-source" title={consoleLabel}>
+        {consoleLabel}
       </p>
       <div className="actionmap-file-controls">
         {mode === "idle" && (
