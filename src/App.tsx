@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { actionMapCategories } from "./utils/actionMapCategories";
 import defaultProfile from "./data/defaultProfile.json";
 import { initDefaultActionGroups } from "./utils/utils";
-import { keyCodeToCigInput } from "./utils/keyCodes";
+import { codesNonBindable, keyCodeToCigInput } from "./utils/keyCodes";
 
 const getActionMapWidthBounds = () => {
   const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
@@ -72,6 +72,7 @@ function App() {
       event.preventDefault();
       console.log(event);
       if (actionRebinding[1] === "") return;
+      if (codesNonBindable.has(event.code)) return;
       if (!keyCodeToCigInput[event.code]) return;
       setActionBindingDraft((draft) =>
         draft

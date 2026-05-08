@@ -1,4 +1,4 @@
-export const codesNonBindable = new Set(["Escape", "MetaLeft", "MetaRight"]);
+export const codesNonBindable = new Set(["Escape", "MetaLeft", "MetaRight", "PrintScreen"]);
 
 export const cigInputNonBinable = new Set(["escape", "win", "fn", "print"]);
 
@@ -147,12 +147,16 @@ export const keyCodeToCigInput: Record<string, string> = {
   Comma: "comma",
   Period: "period",
   Slash: "slash",
+  Space: "space",
 
+  Insert: "insert",
   Delete: "delete",
   Home: "home",
   End: "end",
   PageUp: "pgup",
   PageDown: "pgdn",
+  ScrollLock: "scrolllock",
+  Pause: "pause",
 
   ArrowUp: "up",
   ArrowDown: "down",
