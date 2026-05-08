@@ -2,7 +2,7 @@ import "./ActionMap.css";
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiChevronRight, mdiContentSave, mdiPencil, mdiRestore, mdiTrashCanOutline } from "@mdi/js";
-import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding } from "../../contexts";
+import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding, CTXLanguage, type AppLanguage } from "../../contexts";
 import { actionMapCategories, actionMapCategoriesMap, filterOurHidden } from "../../utils/actionMapCategories";
 import { useSearchParams } from "react-router-dom";
 import { Action, ActionGroup } from "../../interfaces";
@@ -39,6 +39,7 @@ const ActionMap = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const orderInfo = useContext(CTXOrderInfo);
   const [combinedActionGroups] = useContext(CTXCombinedActionGroups);
+  const [language] = useContext(CTXLanguage);
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const [listViewport, setListViewport] = useState({ scrollTop: 0, height: 0 });
   const [remSize, setRemSize] = useState(getRootRemSize);
@@ -149,9 +150,10 @@ const ActionMap = () => {
                   onToggle={() => {
                     setExpandedGroups((groups) => ({ ...groups, [row.group.name]: !(groups[row.group.name] ?? true) }));
                   }}
+                  language={language}
                 />
               ) : (
-                <ActionItem action={row.action} />
+                <ActionItem action={row.action} language={language} />
               )}
             </div>
           ))}
@@ -161,12 +163,12 @@ const ActionMap = () => {
   );
 };
 
-const ActionGroupHeader = ({ group, isExpanded, onToggle }: { group: ActionGroup; isExpanded: boolean; onToggle: () => void }) => {
+const ActionGroupHeader = ({ group, isExpanded, onToggle, language }: { group: ActionGroup; isExpanded: boolean; onToggle: () => void; language: AppLanguage }) => {
   return (
     <div className="ActionGroup">
       <p className="name" onClick={onToggle}>
         <Icon path={mdiChevronRight} rotate={isExpanded ? 90 : 0} size="1.5rem" />
-        <span>{i18nUI(group.UILabel) || group.name}</span>
+        <span>{i18nUI(group.UILabel, language) || group.name}</span>
       </p>
     </div>
   );
@@ -174,7 +176,7 @@ const ActionGroupHeader = ({ group, isExpanded, onToggle }: { group: ActionGroup
 
 const getKbmSpanClassName = (key: string) => (modifiers.includes(key) ? key : undefined);
 
-const ActionItem = ({ action }: { action: Action }) => {
+const ActionItem = ({ action, language }: { action: Action; language: AppLanguage }) => {
   const [, setKeysHovering] = useContext(CTXKeysHovering);
   const [actionRebinding, setActionRebinding] = useContext(CTXActionRebinding);
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
@@ -188,7 +190,7 @@ const ActionItem = ({ action }: { action: Action }) => {
   return (
     <div className="Action" onMouseEnter={() => setKeysHovering([action.kbm.modifier, action.kbm.key])} onMouseLeave={() => setKeysHovering([])}>
       <Icon path={actionIcon(action._group, action.name) || ""} size="1.5rem" />
-      <p className="name">{i18nUI(action.UILabel) || action.name}</p>
+      <p className="name">{i18nUI(action.UILabel, language) || action.name}</p>
       {actionRebinding[0] === action._group && actionRebinding[1] === action.name ? (
         <>
           <div className="buttons">

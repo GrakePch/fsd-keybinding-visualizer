@@ -5,7 +5,7 @@ import ActionMap from "./components/ActionMap/ActionMap";
 import ActionMapFileConsole from "./components/ActionMapFileConsole/ActionMapFileConsole";
 import Icon from "@mdi/react";
 import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
-import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding } from "./contexts";
+import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding, CTXLanguage, type AppLanguage } from "./contexts";
 import { ActionGroup, OrderInfo, UserActionmap } from "./interfaces";
 import { useSearchParams } from "react-router-dom";
 import { actionMapCategories } from "./utils/actionMapCategories";
@@ -33,6 +33,22 @@ const getInitialActionMapWidth = () => {
   return clampActionMapWidth(window.innerWidth * 0.5);
 };
 
+const LANGUAGE_LOCAL_STORAGE_KEY = "fsd-keybinding-visualizer.lang";
+
+const isAppLanguage = (lang: string | null): lang is AppLanguage => lang === "en" || lang === "zh";
+
+const getInitialLanguage = (): AppLanguage => {
+  if (typeof window === "undefined") return "en";
+
+  const queryLanguage = new URLSearchParams(window.location.search).get("lang");
+  if (isAppLanguage(queryLanguage)) return queryLanguage;
+
+  const storedLanguage = window.localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY);
+  if (isAppLanguage(storedLanguage)) return storedLanguage;
+
+  return "en";
+};
+
 function App() {
   const [searchParam, setSearchParam] = useSearchParams();
   const [defaultActionGroups, setDefaultActionGroups] = useState<Record<string, ActionGroup>>({});
@@ -44,6 +60,7 @@ function App() {
   const [isActionMapOpen, setIsActionMapOpen] = useState(true);
   const [isActionMapResizing, setIsActionMapResizing] = useState(false);
   const [actionMapWidth, setActionMapWidth] = useState(getInitialActionMapWidth);
+  const [language, setLanguage] = useState<AppLanguage>(getInitialLanguage);
 
   useEffect(() => {
     initDefaultActionGroups(defaultProfile, setDefaultActionGroups, setCombinedActionGroups, setOrderInfo);
@@ -85,11 +102,21 @@ function App() {
 
   useEffect(() => {
     const cate = searchParam.get("c") || "";
-    if (actionMapCategories.includes(cate) === false) {
-      searchParam.delete("c");
-      setSearchParam(searchParam);
+    if (searchParam.has("c") && actionMapCategories.includes(cate) === false) {
+      const nextSearchParam = new URLSearchParams(searchParam);
+      nextSearchParam.delete("c");
+      setSearchParam(nextSearchParam);
     }
   }, [defaultActionGroups, orderInfo, searchParam, setSearchParam]);
+
+  useEffect(() => {
+    if (searchParam.get("lang") !== language) {
+      const nextSearchParam = new URLSearchParams(searchParam);
+      nextSearchParam.set("lang", language);
+      setSearchParam(nextSearchParam, { replace: true });
+    }
+    window.localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, language);
+  }, [language, searchParam, setSearchParam]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -138,46 +165,65 @@ function App() {
     "--action-sidebar-width": `${actionMapWidth}px`,
   } as CSSProperties;
 
+  const switchLanguage = () => {
+    const nextLanguage: AppLanguage = language === "en" ? "zh" : "en";
+    const nextSearchParam = new URLSearchParams(searchParam);
+
+    nextSearchParam.set("lang", nextLanguage);
+    setLanguage(nextLanguage);
+    setSearchParam(nextSearchParam);
+    window.localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, nextLanguage);
+  };
+
+  const counterpartLanguage = language === "en" ? "zh" : "en";
+
   return (
-    <CTXOrderInfo.Provider value={orderInfo}>
-      <CTXDefaultActionGroups.Provider value={defaultActionGroups}>
-        <CTXUserActionmap.Provider value={[userActionmap, setUserActionmap]}>
-          <CTXCombinedActionGroups.Provider value={[combinedActionGroups, setCombinedActionGroups]}>
-            <CTXKeysHovering.Provider value={[keysHovering, setKeysHovering]}>
-              <CTXActionRebinding.Provider value={[actionRebinding, setActionRebinding]}>
-                <div className={"AppShell" + (isActionMapOpen ? "" : " action-map-closed") + (isActionMapResizing ? " action-map-resizing" : "")} style={appShellStyle}>
-                  <main className="visualizer-pane">
-                    <KeyboardFull />
-                    <ActionMapFileConsole />
-                  </main>
-                  <aside className="action-map-sidebar" aria-label="Action map sidebar">
-                    <button
-                      className="action-map-toggle"
-                      type="button"
-                      aria-label={isActionMapOpen ? "收起 ActionMap" : "展开 ActionMap"}
-                      aria-expanded={isActionMapOpen}
-                      onClick={() => setIsActionMapOpen((open) => !open)}
-                    >
-                      <Icon path={isActionMapOpen ? mdiChevronRight : mdiChevronLeft} size="1.25rem" />
-                    </button>
-                    <div className="action-map-drawer">
-                      <div
-                        className="action-map-resize-handle"
-                        role="separator"
-                        aria-orientation="vertical"
-                        aria-label="调整 ActionMap 宽度"
-                        onPointerDown={handleActionMapResizePointerDown}
-                      />
-                      <ActionMap />
-                    </div>
-                  </aside>
-                </div>
-              </CTXActionRebinding.Provider>
-            </CTXKeysHovering.Provider>
-          </CTXCombinedActionGroups.Provider>
-        </CTXUserActionmap.Provider>
-      </CTXDefaultActionGroups.Provider>
-    </CTXOrderInfo.Provider>
+    <CTXLanguage.Provider value={[language, setLanguage]}>
+      <CTXOrderInfo.Provider value={orderInfo}>
+        <CTXDefaultActionGroups.Provider value={defaultActionGroups}>
+          <CTXUserActionmap.Provider value={[userActionmap, setUserActionmap]}>
+            <CTXCombinedActionGroups.Provider value={[combinedActionGroups, setCombinedActionGroups]}>
+              <CTXKeysHovering.Provider value={[keysHovering, setKeysHovering]}>
+                <CTXActionRebinding.Provider value={[actionRebinding, setActionRebinding]}>
+                  <div className={"AppShell" + (isActionMapOpen ? "" : " action-map-closed") + (isActionMapResizing ? " action-map-resizing" : "")} style={appShellStyle}>
+                    <main className="visualizer-pane">
+                      <div className="visualizer-scroll">
+                        <KeyboardFull />
+                      </div>
+                      <ActionMapFileConsole />
+                      <button className="language-toggle-fab" type="button" aria-label={counterpartLanguage === "zh" ? "切换到中文" : "Switch to English"} onClick={switchLanguage}>
+                        {counterpartLanguage === "zh" ? "中" : "EN"}
+                      </button>
+                    </main>
+                    <aside className="action-map-sidebar" aria-label="Action map sidebar">
+                      <button
+                        className="action-map-toggle"
+                        type="button"
+                        aria-label={isActionMapOpen ? "收起 ActionMap" : "展开 ActionMap"}
+                        aria-expanded={isActionMapOpen}
+                        onClick={() => setIsActionMapOpen((open) => !open)}
+                      >
+                        <Icon path={isActionMapOpen ? mdiChevronRight : mdiChevronLeft} size="1.25rem" />
+                      </button>
+                      <div className="action-map-drawer">
+                        <div
+                          className="action-map-resize-handle"
+                          role="separator"
+                          aria-orientation="vertical"
+                          aria-label="调整 ActionMap 宽度"
+                          onPointerDown={handleActionMapResizePointerDown}
+                        />
+                        <ActionMap />
+                      </div>
+                    </aside>
+                  </div>
+                </CTXActionRebinding.Provider>
+              </CTXKeysHovering.Provider>
+            </CTXCombinedActionGroups.Provider>
+          </CTXUserActionmap.Provider>
+        </CTXDefaultActionGroups.Provider>
+      </CTXOrderInfo.Provider>
+    </CTXLanguage.Provider>
   );
 }
 

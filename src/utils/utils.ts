@@ -74,11 +74,11 @@ export function parseInputString(input: string): KeyWithMod {
 }
 
 function normalizeLocale(lang?: string): "en" | "zh" {
-  if (lang?.toLowerCase().startsWith("en")) {
-    return "en";
+  if (lang?.toLowerCase().startsWith("zh")) {
+    return "zh";
   }
 
-  return "zh";
+  return "en";
 }
 
 export function i18nUI(label: string, lang?: string): string {

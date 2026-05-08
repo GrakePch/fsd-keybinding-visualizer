@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./KeyKB.css";
-import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXActionRebinding, CTXUserActionmap } from "../../contexts";
+import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXActionRebinding, CTXUserActionmap, CTXLanguage } from "../../contexts";
 import { useSearchParams } from "react-router-dom";
 import { getModifier, i18nUI, modifiers, rebindAction } from "../../utils/utils";
 import Icon from "@mdi/react";
@@ -20,6 +20,7 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
   const [actionOnKey, setActionOnKey] = useState({ g: "", a: "" });
   const [actionRebinding, setActinoRebinding] = useContext(CTXActionRebinding);
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
+  const [language] = useContext(CTXLanguage);
 
   useEffect(() => {
     setActionOnKey(getShownAction(orderInfo, keyId, searchParam, combinedActionGroups));
@@ -56,7 +57,7 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
               (actionIcon(actionOnKey.g, actionOnKey.a) ? (
                 <Icon className={getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)} path={actionIcon(actionOnKey.g, actionOnKey.a)} size="2rem" />
               ) : (
-                <div className={"action-label " + getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)}>{i18nUI(combinedActionGroups[actionOnKey.g].actions[actionOnKey.a].UILabel) || actionOnKey.a}</div>
+                <div className={"action-label " + getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)}>{i18nUI(combinedActionGroups[actionOnKey.g].actions[actionOnKey.a].UILabel, language) || actionOnKey.a}</div>
               ))}
           </div>
           <div className="key-side">
