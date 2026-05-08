@@ -5,12 +5,12 @@ import ActionMap from "./components/ActionMap/ActionMap";
 import ActionMapFileConsole from "./components/ActionMapFileConsole/ActionMapFileConsole";
 import Icon from "@mdi/react";
 import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
-import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding, CTXLanguage, type AppLanguage } from "./contexts";
+import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding, CTXActionBindingDraft, CTXLanguage, type ActionBindingDraft, type AppLanguage } from "./contexts";
 import { ActionGroup, OrderInfo, UserActionmap } from "./interfaces";
 import { useSearchParams } from "react-router-dom";
 import { actionMapCategories } from "./utils/actionMapCategories";
 import defaultProfile from "./data/defaultProfile.json";
-import { initDefaultActionGroups, rebindAction } from "./utils/utils";
+import { initDefaultActionGroups } from "./utils/utils";
 import { keyCodeToCigInput } from "./utils/keyCodes";
 
 const getActionMapWidthBounds = () => {
@@ -57,6 +57,7 @@ function App() {
   const [userActionmap, setUserActionmap] = useState<UserActionmap>({});
   const [combinedActionGroups, setCombinedActionGroups] = useState<Record<string, ActionGroup>>({});
   const [actionRebinding, setActionRebinding] = useState<[string, string]>(["", ""]);
+  const [actionBindingDraft, setActionBindingDraft] = useState<ActionBindingDraft | null>(null);
   const [isActionMapOpen, setIsActionMapOpen] = useState(true);
   const [isActionMapResizing, setIsActionMapResizing] = useState(false);
   const [actionMapWidth, setActionMapWidth] = useState(getInitialActionMapWidth);
@@ -72,7 +73,20 @@ function App() {
       console.log(event);
       if (actionRebinding[1] === "") return;
       if (!keyCodeToCigInput[event.code]) return;
-      rebindAction(...actionRebinding, keyCodeToCigInput[event.code], combinedActionGroups[actionRebinding[0]].actions[actionRebinding[1]].kbm.modifier, null, userActionmap, setUserActionmap);
+      setActionBindingDraft((draft) =>
+        draft
+          ? {
+              ...draft,
+              current: {
+                ...draft.current,
+                kbm: {
+                  ...draft.current.kbm,
+                  key: keyCodeToCigInput[event.code],
+                },
+              },
+            }
+          : draft
+      );
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -80,7 +94,7 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [actionRebinding, combinedActionGroups, userActionmap]);
+  }, [actionRebinding]);
 
   useEffect(() => {
     const combined = structuredClone(defaultActionGroups);
@@ -185,38 +199,40 @@ function App() {
             <CTXCombinedActionGroups.Provider value={[combinedActionGroups, setCombinedActionGroups]}>
               <CTXKeysHovering.Provider value={[keysHovering, setKeysHovering]}>
                 <CTXActionRebinding.Provider value={[actionRebinding, setActionRebinding]}>
-                  <div className={"AppShell" + (isActionMapOpen ? "" : " action-map-closed") + (isActionMapResizing ? " action-map-resizing" : "")} style={appShellStyle}>
-                    <main className="visualizer-pane">
-                      <div className="visualizer-scroll">
-                        <KeyboardFull />
-                      </div>
-                      <ActionMapFileConsole />
-                      <button className="language-toggle-fab" type="button" aria-label={counterpartLanguage === "zh" ? "切换到中文" : "Switch to English"} onClick={switchLanguage}>
-                        {counterpartLanguage === "zh" ? "中" : "EN"}
-                      </button>
-                    </main>
-                    <aside className="action-map-sidebar" aria-label="Action map sidebar">
-                      <button
-                        className="action-map-toggle"
-                        type="button"
-                        aria-label={isActionMapOpen ? "收起 ActionMap" : "展开 ActionMap"}
-                        aria-expanded={isActionMapOpen}
-                        onClick={() => setIsActionMapOpen((open) => !open)}
-                      >
-                        <Icon path={isActionMapOpen ? mdiChevronRight : mdiChevronLeft} size="1.25rem" />
-                      </button>
-                      <div className="action-map-drawer">
-                        <div
-                          className="action-map-resize-handle"
-                          role="separator"
-                          aria-orientation="vertical"
-                          aria-label="调整 ActionMap 宽度"
-                          onPointerDown={handleActionMapResizePointerDown}
-                        />
-                        <ActionMap />
-                      </div>
-                    </aside>
-                  </div>
+                  <CTXActionBindingDraft.Provider value={[actionBindingDraft, setActionBindingDraft]}>
+                    <div className={"AppShell" + (isActionMapOpen ? "" : " action-map-closed") + (isActionMapResizing ? " action-map-resizing" : "")} style={appShellStyle}>
+                      <main className="visualizer-pane">
+                        <div className="visualizer-scroll">
+                          <KeyboardFull />
+                        </div>
+                        <ActionMapFileConsole />
+                        <button className="language-toggle-fab" type="button" aria-label={counterpartLanguage === "zh" ? "切换到中文" : "Switch to English"} onClick={switchLanguage}>
+                          {counterpartLanguage === "zh" ? "中" : "EN"}
+                        </button>
+                      </main>
+                      <aside className="action-map-sidebar" aria-label="Action map sidebar">
+                        <button
+                          className="action-map-toggle"
+                          type="button"
+                          aria-label={isActionMapOpen ? "收起 ActionMap" : "展开 ActionMap"}
+                          aria-expanded={isActionMapOpen}
+                          onClick={() => setIsActionMapOpen((open) => !open)}
+                        >
+                          <Icon path={isActionMapOpen ? mdiChevronRight : mdiChevronLeft} size="1.25rem" />
+                        </button>
+                        <div className="action-map-drawer">
+                          <div
+                            className="action-map-resize-handle"
+                            role="separator"
+                            aria-orientation="vertical"
+                            aria-label="调整 ActionMap 宽度"
+                            onPointerDown={handleActionMapResizePointerDown}
+                          />
+                          <ActionMap />
+                        </div>
+                      </aside>
+                    </div>
+                  </CTXActionBindingDraft.Provider>
                 </CTXActionRebinding.Provider>
               </CTXKeysHovering.Provider>
             </CTXCombinedActionGroups.Provider>

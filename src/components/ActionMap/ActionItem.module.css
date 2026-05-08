@@ -56,19 +56,27 @@
 }
 
 .clearButton {
-  color: hsl(0, 50%, 55%);
-}
-
-.clearButton:hover {
-  background-color: hsla(0, 50%, 55%, .25);
-}
-
-.resetButton {
   color: hsl(50, 50%, 50%);
 }
 
-.resetButton:hover {
+.clearButton:hover {
   background-color: hsla(50, 50%, 50%, .25);
+}
+
+.resetButton {
+  color: hsl(200, 70%, 70%);
+}
+
+.resetButton:hover {
+  background-color: hsla(200, 70%, 70%, .22);
+}
+
+.cancelButton {
+  color: hsl(0, 0%, 72%);
+}
+
+.cancelButton:hover {
+  background-color: hsla(0, 0%, 72%, .18);
 }
 
 .multiTapCheckbox {

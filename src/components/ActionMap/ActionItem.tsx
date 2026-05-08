@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import Icon from "@mdi/react";
-import { mdiContentSave, mdiPencil, mdiRestore, mdiTrashCanOutline } from "@mdi/js";
-import { CTXActionRebinding, CTXKeysHovering, CTXUserActionmap, type AppLanguage } from "../../contexts";
+import { mdiCheck, mdiClose, mdiLinkOff, mdiPencil, mdiRestore } from "@mdi/js";
+import { CTXActionBindingDraft, CTXActionRebinding, CTXDefaultActionGroups, CTXKeysHovering, CTXUserActionmap, type ActionBindingValue, type AppLanguage } from "../../contexts";
 import type { Action } from "../../interfaces";
 import actionIcon from "../../icons/actionIcon";
 import { formatKeyLabel } from "../../utils/keyCodes";
@@ -26,11 +26,24 @@ const modifierClassByKey: Record<string, string> = {
 
 const getKbmSpanClassName = (key: string) => cx(styles.kbm, modifiers.includes(key) && modifierClassByKey[key]);
 
+const getBindingValue = (action: Action): ActionBindingValue => ({
+  kbm: { ...action.kbm },
+  multiTap: action.multiTap || "",
+});
+
+const areBindingValuesEqual = (a: ActionBindingValue, b: ActionBindingValue) => a.kbm.key === b.kbm.key && a.kbm.modifier === b.kbm.modifier && a.multiTap === b.multiTap;
+
 const ActionItem = ({ action, language }: ActionItemProps) => {
   const [, setKeysHovering] = useContext(CTXKeysHovering);
+  const defaultActionGroups = useContext(CTXDefaultActionGroups);
   const [actionRebinding, setActionRebinding] = useContext(CTXActionRebinding);
+  const [actionBindingDraft, setActionBindingDraft] = useContext(CTXActionBindingDraft);
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
   const isRebinding = actionRebinding[0] === action._group && actionRebinding[1] === action.name;
+  const defaultAction = defaultActionGroups[action._group]?.actions[action.name];
+  const defaultBinding = defaultAction ? getBindingValue(defaultAction) : getBindingValue(action);
+  const displayedBinding = isRebinding && actionBindingDraft ? actionBindingDraft.current : getBindingValue(action);
+  const hasDraftChanges = Boolean(isRebinding && actionBindingDraft && !areBindingValuesEqual(actionBindingDraft.initial, actionBindingDraft.current));
   const multiTapId = `multiTap_${action._group}_${action.name}`;
 
   useEffect(() => {
@@ -39,34 +52,85 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
     };
   }, [setKeysHovering]);
 
+  const updateDraftCurrent = (nextBinding: ActionBindingValue) => {
+    setActionBindingDraft((draft) => (draft ? { ...draft, current: nextBinding } : draft));
+  };
+
+  const handleStartRebinding = () => {
+    const currentBinding = getBindingValue(action);
+
+    setActionBindingDraft({
+      initial: currentBinding,
+      current: currentBinding,
+    });
+    setActionRebinding([action._group, action.name]);
+  };
+
+  const handleConfirmRebinding = () => {
+    if (!actionBindingDraft) return;
+
+    if (areBindingValuesEqual(actionBindingDraft.current, defaultBinding)) {
+      resetAction(action._group, action.name, userActionmap, setUserActionmap);
+    } else {
+      rebindAction(action._group, action.name, actionBindingDraft.current.kbm.key, actionBindingDraft.current.kbm.modifier, actionBindingDraft.current.multiTap, userActionmap, setUserActionmap);
+    }
+    setActionBindingDraft(null);
+    setActionRebinding(["", ""]);
+  };
+
+  const handleCancelRebinding = () => {
+    setActionBindingDraft(null);
+    setActionRebinding(["", ""]);
+  };
+
   return (
-    <div className={styles.action} onMouseEnter={() => setKeysHovering([action.kbm.modifier, action.kbm.key])} onMouseLeave={() => setKeysHovering([])}>
+    <div className={styles.action} onMouseEnter={() => setKeysHovering([displayedBinding.kbm.modifier, displayedBinding.kbm.key])} onMouseLeave={() => setKeysHovering([])}>
       <Icon className={styles.icon} path={actionIcon(action._group, action.name) || ""} size="1.5rem" />
       <p className={styles.name}>{i18nUI(action.UILabel, language) || action.name}</p>
       {isRebinding ? (
         <>
           <div className={styles.buttons}>
             <button
-              className={styles.actionButton}
+              className={cx(styles.actionButton, styles.clearButton)}
               onClick={() => {
-                setActionRebinding(["", ""]);
+                updateDraftCurrent({ kbm: { key: "", modifier: "" }, multiTap: "" });
               }}
             >
-              <Icon path={mdiContentSave} size="1rem" />
+              <Icon path={mdiLinkOff} size="1rem" />
+              解绑
             </button>
+            <button
+              className={cx(styles.actionButton, styles.resetButton)}
+              onClick={() => {
+                updateDraftCurrent(defaultBinding);
+              }}
+            >
+              <Icon path={mdiRestore} size="1rem" />
+              默认
+            </button>
+            <button className={cx(styles.actionButton, styles.cancelButton)} onClick={handleCancelRebinding}>
+              <Icon path={mdiClose} size="1rem" />
+              取消
+            </button>
+            {hasDraftChanges && (
+              <button className={styles.actionButton} onClick={handleConfirmRebinding}>
+                <Icon path={mdiCheck} size="1rem" />
+                确认
+              </button>
+            )}
           </div>
           <input
             className={styles.multiTapCheckbox}
             type="checkbox"
             id={multiTapId}
-            checked={action.multiTap === "2"}
-            onChange={(e) => rebindAction(action._group, action.name, action.kbm.key, action.kbm.modifier, e.target.checked ? "2" : "", userActionmap, setUserActionmap)}
+            checked={displayedBinding.multiTap === "2"}
+            onChange={(e) => updateDraftCurrent({ ...displayedBinding, multiTap: e.target.checked ? "2" : "" })}
           />
           <label className={styles.multiTapLabel} htmlFor={multiTapId}>
             双击
           </label>
           <p className={styles.kbms}>
-            <select className={styles.modifierSelect} onChange={(e) => rebindAction(action._group, action.name, action.kbm.key, e.target.value, null, userActionmap, setUserActionmap)} value={action.kbm.modifier}>
+            <select className={styles.modifierSelect} onChange={(e) => updateDraftCurrent({ ...displayedBinding, kbm: { ...displayedBinding.kbm, modifier: e.target.value } })} value={displayedBinding.kbm.modifier}>
               <option value="">无组合键</option>
               {modifiers.map((m) => (
                 <option value={m} key={m}>
@@ -74,8 +138,8 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
                 </option>
               ))}
             </select>
-            <span className={getKbmSpanClassName(action.kbm.key)} title={action.kbm.key}>
-              {formatKeyLabel(action.kbm.key) || " "}
+            <span className={getKbmSpanClassName(displayedBinding.kbm.key)} title={displayedBinding.kbm.key}>
+              {formatKeyLabel(displayedBinding.kbm.key) || " "}
             </span>
           </p>
         </>
@@ -83,27 +147,8 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
         <>
           <div className={styles.buttons}>
             <button
-              className={cx(styles.actionButton, styles.clearButton)}
-              onClick={() => {
-                rebindAction(action._group, action.name, "", "", "", userActionmap, setUserActionmap);
-              }}
-            >
-              <Icon path={mdiTrashCanOutline} size="1rem" />
-            </button>
-            <button
-              className={cx(styles.actionButton, styles.resetButton)}
-              onClick={() => {
-                resetAction(action._group, action.name, userActionmap, setUserActionmap);
-              }}
-            >
-              <Icon path={mdiRestore} size="1rem" />
-              默认
-            </button>
-            <button
               className={styles.actionButton}
-              onClick={() => {
-                setActionRebinding([action._group, action.name]);
-              }}
+              onClick={handleStartRebinding}
             >
               <Icon path={mdiPencil} size="1rem" />
             </button>

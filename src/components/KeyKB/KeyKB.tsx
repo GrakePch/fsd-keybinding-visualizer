@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import "./KeyKB.css";
-import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXActionRebinding, CTXUserActionmap, CTXLanguage } from "../../contexts";
+import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXActionRebinding, CTXActionBindingDraft, CTXLanguage } from "../../contexts";
 import { useSearchParams } from "react-router-dom";
-import { getModifier, i18nUI, modifiers, rebindAction } from "../../utils/utils";
+import { getModifier, i18nUI, modifiers } from "../../utils/utils";
 import Icon from "@mdi/react";
 import actionIcon from "../../icons/actionIcon";
 import { actionMapCategoriesMap, filterOurHidden } from "../../utils/actionMapCategories";
@@ -18,8 +18,8 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
   const orderInfo = useContext(CTXOrderInfo);
   const [keysHovering] = useContext(CTXKeysHovering);
   const [actionOnKey, setActionOnKey] = useState({ g: "", a: "" });
-  const [actionRebinding, setActinoRebinding] = useContext(CTXActionRebinding);
-  const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
+  const [actionRebinding] = useContext(CTXActionRebinding);
+  const [, setActionBindingDraft] = useContext(CTXActionBindingDraft);
   const [language] = useContext(CTXLanguage);
 
   useEffect(() => {
@@ -43,8 +43,20 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
           onClick={() => {
             if (cigInputNonBinable.has(keyId)) return;
             if (actionRebinding[0]) {
-              rebindAction(actionRebinding[0], actionRebinding[1], keyId, combinedActionGroups[actionRebinding[0]].actions[actionRebinding[1]].kbm.modifier, null, userActionmap, setUserActionmap);
-              setActinoRebinding(["", ""]);
+              setActionBindingDraft((draft) =>
+                draft
+                  ? {
+                      ...draft,
+                      current: {
+                        ...draft.current,
+                        kbm: {
+                          ...draft.current.kbm,
+                          key: keyId,
+                        },
+                      },
+                    }
+                  : draft
+              );
             } else {
               if (searchParam.get("k") === keyId) searchParam.delete("k");
               else searchParam.set("k", keyId);
