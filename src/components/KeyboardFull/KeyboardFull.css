@@ -4,13 +4,19 @@
     min-width: 100%;
     min-height: 100%;
     padding: 1rem;
+    box-sizing: border-box;
     overflow: visible;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.KeyboardFull .keyboard-layout {
+    width: max-content;
+    margin: 0 auto;
+}
+
 .KeyboardFull .line {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
