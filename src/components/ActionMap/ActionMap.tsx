@@ -172,6 +172,8 @@ const ActionGroupHeader = ({ group, isExpanded, onToggle }: { group: ActionGroup
   );
 };
 
+const getKbmSpanClassName = (key: string) => (modifiers.includes(key) ? key : undefined);
+
 const ActionItem = ({ action }: { action: Action }) => {
   const [, setKeysHovering] = useContext(CTXKeysHovering);
   const [actionRebinding, setActionRebinding] = useContext(CTXActionRebinding);
@@ -215,7 +217,7 @@ const ActionItem = ({ action }: { action: Action }) => {
                 </option>
               ))}
             </select>
-            {<span title={action.kbm.key}>{formatKeyLabel(action.kbm.key) || " "}</span>}
+            {<span className={getKbmSpanClassName(action.kbm.key)} title={action.kbm.key}>{formatKeyLabel(action.kbm.key) || " "}</span>}
           </p>
         </>
       ) : (
@@ -249,8 +251,16 @@ const ActionItem = ({ action }: { action: Action }) => {
           </div>
           <p className="kbms">
             {action.kbm.key && action.multiTap === "2" && "双击"}
-            {action.kbm.modifier && <span title={action.kbm.modifier}>{formatKeyLabel(action.kbm.modifier)}</span>}
-            {action.kbm.key && <span title={action.kbm.key}>{formatKeyLabel(action.kbm.key)}</span>}
+            {action.kbm.modifier && (
+              <span className={getKbmSpanClassName(action.kbm.modifier)} title={action.kbm.modifier}>
+                {formatKeyLabel(action.kbm.modifier)}
+              </span>
+            )}
+            {action.kbm.key && (
+              <span className={getKbmSpanClassName(action.kbm.key)} title={action.kbm.key}>
+                {formatKeyLabel(action.kbm.key)}
+              </span>
+            )}
           </p>
         </>
       )}

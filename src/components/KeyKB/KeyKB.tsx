@@ -29,7 +29,7 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
       className="KeyKB"
       style={{
         width: widthX * 4 + "rem",
-        height: "4rem",
+        height: "4.5rem",
         padding: gap / 2 + "rem",
       }}
     >
@@ -37,7 +37,7 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
         <div
           className={"cap " + keyId + (keysHovering.includes(keyId) ? " hover" : "") + (searchParam.get("k") === keyId ? " highlighted" : "")}
           style={{
-            height: heightX * 4 - gap + "rem",
+            height: heightX * 4.5 - gap + "rem",
           }}
           onClick={() => {
             if (cigInputNonBinable.has(keyId)) return;
@@ -51,21 +51,25 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
             }
           }}
         >
-          <p className="key-label" title={keyId}>
-            {formatKeyLabel(keyId)}
-          </p>
-          {actionOnKey.a &&
-            (actionIcon(actionOnKey.g, actionOnKey.a) ? (
-              <Icon className={getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)} path={actionIcon(actionOnKey.g, actionOnKey.a)} size="2rem" />
-            ) : (
-              <div className={"action-label " + getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)}>{i18nUI(combinedActionGroups[actionOnKey.g].actions[actionOnKey.a].UILabel) || actionOnKey.a}</div>
-            ))}
+          <div className="key-face">
+            {actionOnKey.a &&
+              (actionIcon(actionOnKey.g, actionOnKey.a) ? (
+                <Icon className={getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)} path={actionIcon(actionOnKey.g, actionOnKey.a)} size="2rem" />
+              ) : (
+                <div className={"action-label " + getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)}>{i18nUI(combinedActionGroups[actionOnKey.g].actions[actionOnKey.a].UILabel) || actionOnKey.a}</div>
+              ))}
+          </div>
+          <div className="key-side">
+            <p className="key-label" title={keyId}>
+              {formatKeyLabel(keyId)}
+            </p>
+          </div>
         </div>
       ) : (
         <div
           className="_empty"
           style={{
-            height: heightX * 4 - gap + "rem",
+            height: heightX * 4.5 - gap + "rem",
           }}
         ></div>
       )}

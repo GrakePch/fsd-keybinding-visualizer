@@ -9,36 +9,6 @@
     background-color: var(--color-bg-0-5);
     display: flex;
     flex-direction: column;
-    outline: 0 solid var(--color-text);
-    transition: outline .1s;
-}
-
-.ActionMap.highlighted {
-    outline: .25rem solid var(--color-text);
-}
-
-.ActionMap.highlighted.lalt {
-    outline-color: var(--color-lalt);
-}
-
-.ActionMap.highlighted.ralt {
-    outline-color: var(--color-ralt);
-}
-
-.ActionMap.highlighted.lshift {
-    outline-color: var(--color-lshift);
-}
-
-.ActionMap.highlighted.rshift {
-    outline-color: var(--color-rshift);
-}
-
-.ActionMap.highlighted.lctrl {
-    outline-color: var(--color-lctrl);
-}
-
-.ActionMap.highlighted.rctrl {
-    outline-color: var(--color-rctrl);
 }
 
 .ActionMap>.select-category {
@@ -209,4 +179,34 @@
     background-color: #80808080;
     padding: 0 .5rem;
     border-radius: .25rem;
+}
+
+.Action>.kbms>span.lalt {
+    color: color-mix(in srgb, var(--color-lalt) 72%, var(--color-text));
+    background-color: color-mix(in srgb, var(--color-lalt) 24%, transparent);
+}
+
+.Action>.kbms>span.ralt {
+    color: color-mix(in srgb, var(--color-ralt) 72%, var(--color-text));
+    background-color: color-mix(in srgb, var(--color-ralt) 24%, transparent);
+}
+
+.Action>.kbms>span.lctrl {
+    color: color-mix(in srgb, var(--color-lctrl) 72%, var(--color-text));
+    background-color: color-mix(in srgb, var(--color-lctrl) 24%, transparent);
+}
+
+.Action>.kbms>span.rctrl {
+    color: color-mix(in srgb, var(--color-rctrl) 72%, var(--color-text));
+    background-color: color-mix(in srgb, var(--color-rctrl) 24%, transparent);
+}
+
+.Action>.kbms>span.lshift {
+    color: color-mix(in srgb, var(--color-lshift) 72%, var(--color-text));
+    background-color: color-mix(in srgb, var(--color-lshift) 24%, transparent);
+}
+
+.Action>.kbms>span.rshift {
+    color: color-mix(in srgb, var(--color-rshift) 72%, var(--color-text));
+    background-color: color-mix(in srgb, var(--color-rshift) 24%, transparent);
 }

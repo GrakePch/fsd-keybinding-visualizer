@@ -3,14 +3,17 @@
 }
 
 .KeyKB .cap {
-    padding: .25rem;
+    --key-face-bg: var(--color-bg-2);
+    --key-side-bg: var(--color-bg-0-5);
+    padding: 0;
     border-radius: .25rem;
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
     overflow-wrap: break-word;
-    background-color: var(--color-bg-1);
+    background-color: var(--key-side-bg);
     outline: 2px solid transparent;
     cursor: pointer;
 }
@@ -35,37 +38,75 @@
 }
 
 .KeyKB .cap.hover {
-    background-color: var(--color-bg-2);
+    --key-face-bg: var(--color-bg-2);
 }
 
 .KeyKB .cap.highlighted {
+    --key-face-bg: var(--color-text);
+    --key-side-bg: color-mix(in srgb, var(--key-face-bg) 75%, #000);
     color: var(--color-bg);
-    background-color: var(--color-text);
 }
 
 .KeyKB .cap.lalt.highlighted {
-    background-color: var(--color-lalt);
+    --key-face-bg: var(--color-lalt);
 }
 .KeyKB .cap.ralt.highlighted {
-    background-color: var(--color-ralt);
+    --key-face-bg: var(--color-ralt);
 }
 .KeyKB .cap.lshift.highlighted {
-    background-color: var(--color-lshift);
+    --key-face-bg: var(--color-lshift);
 }
 .KeyKB .cap.rshift.highlighted {
-    background-color: var(--color-rshift);
+    --key-face-bg: var(--color-rshift);
 }
 .KeyKB .cap.lctrl.highlighted {
-    background-color: var(--color-lctrl);
+    --key-face-bg: var(--color-lctrl);
 }
 .KeyKB .cap.rctrl.highlighted {
-    background-color: var(--color-rctrl);
+    --key-face-bg: var(--color-rctrl);
+}
+
+.KeyKB .key-face {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    padding: .25rem .25rem .5rem;
+    border-radius: .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    background-color: var(--key-face-bg);
+    pointer-events: none;
+}
+
+.KeyKB .key-side {
+    flex: 0 0 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: transparent;
+    pointer-events: none;
 }
 
 .KeyKB .key-label {
-    position: absolute;
-    top: .25rem;
-    left: .25rem;
+    width: 100%;
+    height: 1rem;
+    padding: 0 .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0 0 .25rem .25rem;
+    font-size: .75rem;
+    line-height: 1;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
 }
 
 .KeyKB .cap svg.lalt {
