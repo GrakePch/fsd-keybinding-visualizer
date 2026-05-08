@@ -193,6 +193,14 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
       updateRecordingBinding(input);
     };
 
+    const handleWheel = (event: WheelEvent) => {
+      if (event.deltaY === 0) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      updateRecordingBinding(event.deltaY < 0 ? "mwheel_up" : "mwheel_down");
+    };
+
     const handleContextMenu = (event: MouseEvent) => {
       event.preventDefault();
       event.stopPropagation();
@@ -201,12 +209,14 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
     window.addEventListener("keydown", handleKeyDown, { capture: true });
     window.addEventListener("keyup", handleKeyUp, { capture: true });
     window.addEventListener("mousedown", handleMouseDown, { capture: true });
+    window.addEventListener("wheel", handleWheel, { capture: true, passive: false });
     window.addEventListener("contextmenu", handleContextMenu, { capture: true });
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown, { capture: true });
       window.removeEventListener("keyup", handleKeyUp, { capture: true });
       window.removeEventListener("mousedown", handleMouseDown, { capture: true });
+      window.removeEventListener("wheel", handleWheel, { capture: true });
       window.removeEventListener("contextmenu", handleContextMenu, { capture: true });
     };
   }, [cancelRecording, recording, updateRecordingBinding]);
