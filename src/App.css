@@ -122,8 +122,8 @@
   cursor: col-resize;
   touch-action: none;
   background-color: var(--color-bg-0-5);
-  border-left: 1px solid #ffffff14;
-  border-right: 1px solid #00000060;
+  border-left: 1px solid var(--color-bg-2);
+  border-right: 1px solid var(--color-bg-2);
   transition: background-color .16s;
 }
 

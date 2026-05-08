@@ -3,7 +3,7 @@
   left: 50%;
   bottom: 1.25rem;
   z-index: 1;
-  width: min(32rem, calc(100% - 2rem));
+  width: min(44rem, calc(100% - 2rem));
   padding: .75rem;
   border: 1px solid #ffffff18;
   border-radius: .5rem;

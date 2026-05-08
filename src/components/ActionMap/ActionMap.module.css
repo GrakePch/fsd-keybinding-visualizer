@@ -1,4 +1,5 @@
 .root {
+  container-type: inline-size;
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
@@ -15,27 +16,25 @@
   box-sizing: border-box;
   padding: .5rem;
   border-bottom: 1px solid var(--color-bg-2);
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(4rem, 12rem) max-content;
   align-items: center;
   gap: .5rem;
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
 }
 
 .actionSearch {
-  flex: 1 1 14rem;
-  min-width: 0;
-  width: 14rem;
-  max-width: 100%;
+  min-width: 10rem;
+  width: 100%;
 }
 
 .categorySelect {
-  max-width: 12rem;
-  flex: 0 1 12rem;
+  min-width: 4rem;
+  width: 100%;
 }
 
 .clearKeyFilterButton {
-  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -93,4 +92,19 @@
   left: 0;
   right: 0;
   min-width: 0;
+}
+
+@container (max-width: 30rem) {
+  .controls {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    min-height: 5.5rem;
+  }
+
+  .actionSearch {
+    grid-column: 1 / -1;
+  }
+
+  .categorySelect {
+    min-width: 0;
+  }
 }

@@ -57,19 +57,30 @@
 }
 
 .buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: flex;
+  align-items: center;
   gap: .25rem;
-  flex-shrink: 0;
-  visibility: hidden;
+  max-width: 100%;
+  padding-left: 2rem;
+  background: linear-gradient(to right, transparent 0, var(--color-bg-2) 2rem);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .action:hover .buttons {
-  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .recording .buttons,
 .recording:hover .buttons {
-  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .recordingHint {
@@ -94,7 +105,7 @@
 
 .actionButton:hover {
   filter: brightness(1.1);
-  background-color: #606060;
+  background-color: #707070;
 }
 
 .clearButton {
