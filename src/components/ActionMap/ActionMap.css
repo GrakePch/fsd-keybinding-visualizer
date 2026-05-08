@@ -1,10 +1,11 @@
 .ActionMap {
-    flex-shrink: 1;
-    flex-grow: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
     line-height: 1.5;
-    margin: 1rem;
-    border-radius: 1rem;
+    margin: 0;
+    border-radius: 0;
     background-color: var(--color-bg-0-5);
     display: flex;
     flex-direction: column;
@@ -47,9 +48,23 @@
 }
 
 .ActionMap>.list-action-groups {
-    height: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow: auto;
     padding: .5rem 0;
+}
+
+.virtual-action-map-space {
+    position: relative;
+    min-width: 0;
+}
+
+.virtual-action-map-row {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-width: 0;
 }
 
 .ActionMap>.list-action-groups::-webkit-scrollbar {
@@ -63,15 +78,25 @@
 
 .ActionGroup {
     list-style-type: none;
+    height: 100%;
+    min-width: 0;
 }
 
 .ActionGroup>.name {
-    padding: .5rem;
+    height: 100%;
+    padding: 0 .5rem;
     display: flex;
     align-items: center;
     gap: .5rem;
     /* transition: background .1s; */
     cursor: pointer;
+}
+
+.ActionGroup>.name>span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .ActionGroup>.name:hover {
@@ -83,21 +108,27 @@
 }
 
 .ActionGroup>ul {
-    padding: 0 1rem 0 2.5rem;
+    padding: 0 1rem;
 }
 
 .Action {
     list-style-type: none;
     display: flex;
     gap: .5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 100%;
+    width: calc(100% - 2rem);
+    min-width: 0;
+    margin: 0 1rem;
+    overflow: hidden;
     padding: .125rem 0;
     border-top: 1px solid #80808080;
     background-color: var(--color-bg-0-5);
     /* transition: background .1s; */
 }
 
-.Action:last-child {
+.Action.action-list-end {
     border-bottom: 1px solid #80808080;
 }
 
@@ -110,7 +141,11 @@
 }
 
 .Action>.name {
-    flex-grow: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Action>.buttons {
@@ -157,10 +192,15 @@
     font-size: .8rem;
     line-height: 1;
     align-self: center;
+    white-space: nowrap;
 }
 .Action>.kbms {
+    flex: 0 0 auto;
     min-width: 6rem;
+    overflow: hidden;
     text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Action>.kbms>span {

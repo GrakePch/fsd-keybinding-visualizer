@@ -5,3 +5,94 @@
   display: flex;
   flex-direction: column;
 }
+
+.AppShell {
+  --action-sidebar-width: 50vw;
+  --action-toggle-size: 2.5rem;
+
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.keyboard-pane {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+.action-map-sidebar {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 var(--action-sidebar-width);
+  min-width: 0;
+  min-height: 0;
+  transition: flex-basis .24s ease;
+}
+
+.AppShell.action-map-resizing .action-map-sidebar {
+  transition: none;
+}
+
+.AppShell.action-map-closed .action-map-sidebar {
+  flex-basis: 0;
+}
+
+.action-map-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--action-sidebar-width);
+  display: flex;
+  min-height: 0;
+  background-color: var(--color-bg-0-5);
+  transform: translateX(0);
+  transition: transform .24s ease;
+}
+
+.AppShell.action-map-resizing .action-map-drawer {
+  transition: none;
+}
+
+.AppShell.action-map-closed .action-map-drawer {
+  transform: translateX(100%);
+}
+
+.action-map-toggle {
+  position: absolute;
+  top: 1rem;
+  left: calc(-1 * var(--action-toggle-size));
+  z-index: 3;
+  width: var(--action-toggle-size);
+  height: var(--action-toggle-size);
+  padding: 0;
+  border-radius: .5rem 0 0 .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-1);
+  box-shadow: var(--shadow-2);
+}
+
+.action-map-toggle:hover:not(:disabled) {
+  background-color: var(--color-bg-2);
+}
+
+.action-map-resize-handle {
+  flex: 0 0 .75rem;
+  min-height: 100%;
+  cursor: col-resize;
+  touch-action: none;
+  background-color: var(--color-bg-0-5);
+  border-left: 1px solid #ffffff14;
+  border-right: 1px solid #00000060;
+  transition: background-color .16s;
+}
+
+.action-map-resize-handle:hover,
+.action-map-resize-handle:active {
+  background-color: var(--color-bg-2);
+}

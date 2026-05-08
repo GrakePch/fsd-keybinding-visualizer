@@ -93,7 +93,7 @@ export function getUserActionmap(userActionmapParsed: object): UserActionmap {
       });
     });
     return res;
-  } catch (e) {
+  } catch {
     return {};
   }
 }
