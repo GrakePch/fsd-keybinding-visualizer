@@ -1,5 +1,7 @@
 import { useMemo } from "react";
+import type { AppLanguage } from "../../contexts";
 import type { Action, ActionGroup, OrderInfo } from "../../interfaces";
+import { i18nUI } from "../../utils/utils";
 
 type ActionMapRowBase = {
   key: string;
@@ -22,26 +24,45 @@ export type ActionMapVirtualRow = ActionMapGroupRow | ActionMapActionRow;
 
 type UseActionMapVirtualRowsProps = {
   activeKeyFilter: string | null;
+  actionSearch: string;
   actionRowHeight: number;
   combinedActionGroups: Record<string, ActionGroup>;
   expandedGroups: Record<string, boolean>;
   groupRowHeight: number;
+  language: AppLanguage;
   orderInfo: OrderInfo;
   visibleGroupNames: string[];
 };
 
+const includesActionSearch = (action: Action, language: AppLanguage, normalizedSearch: string) => {
+  if (!normalizedSearch) return true;
+
+  const localizedLabel = i18nUI(action.UILabel, language);
+  const englishLabel = i18nUI(action.UILabel, "en");
+  const searchValues = [localizedLabel, englishLabel];
+
+  if (!localizedLabel) {
+    searchValues.push(action.name);
+  }
+
+  return searchValues.some((value) => value.toLowerCase().includes(normalizedSearch));
+};
+
 export const useActionMapVirtualRows = ({
   activeKeyFilter,
+  actionSearch,
   actionRowHeight,
   combinedActionGroups,
   expandedGroups,
   groupRowHeight,
+  language,
   orderInfo,
   visibleGroupNames,
 }: UseActionMapVirtualRowsProps) => {
   return useMemo(() => {
     const rows: ActionMapVirtualRow[] = [];
     let top = 0;
+    const normalizedActionSearch = actionSearch.trim().toLowerCase();
 
     visibleGroupNames.forEach((groupName) => {
       const group = combinedActionGroups[groupName];
@@ -52,6 +73,10 @@ export const useActionMapVirtualRows = ({
 
       if (activeKeyFilter) {
         filteredListActions = filteredListActions.filter((action) => action.kbm.key === activeKeyFilter || action.kbm.modifier === activeKeyFilter);
+      }
+
+      if (normalizedActionSearch) {
+        filteredListActions = filteredListActions.filter((action) => includesActionSearch(action, language, normalizedActionSearch));
       }
 
       if (filteredListActions.length === 0) return;
@@ -82,5 +107,5 @@ export const useActionMapVirtualRows = ({
     });
 
     return rows;
-  }, [actionRowHeight, activeKeyFilter, combinedActionGroups, expandedGroups, groupRowHeight, orderInfo.inGroupOrder, visibleGroupNames]);
+  }, [actionRowHeight, actionSearch, activeKeyFilter, combinedActionGroups, expandedGroups, groupRowHeight, language, orderInfo.inGroupOrder, visibleGroupNames]);
 };

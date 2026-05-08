@@ -10,6 +10,7 @@ import { useActionMapVirtualRows } from "./useActionMapVirtualRows";
 const ACTION_MAP_OVERSCAN_ROWS = 8;
 const GROUP_ROW_HEIGHT_REM = 2.5;
 const ACTION_ROW_HEIGHT_REM = 2;
+const ACTION_SEARCH_DEBOUNCE_MS = 1000;
 
 const getRootRemSize = () => parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
 
@@ -47,14 +48,46 @@ const ActionMap = () => {
   const groupRowHeight = GROUP_ROW_HEIGHT_REM * remSize;
   const actionRowHeight = ACTION_ROW_HEIGHT_REM * remSize;
   const activeKeyFilter = searchParam.get("k");
+  const actionSearch = searchParam.get("q") || "";
+  const [actionSearchDraft, setActionSearchDraft] = useState(actionSearch);
   const selectedCategory = searchParam.get("c");
   const visibleGroupNames = selectedCategory ? actionMapCategoriesMap[selectedCategory] ?? [] : filterOurHidden(orderInfo.groupOrder);
+
+  useEffect(() => {
+    setActionSearchDraft(actionSearch);
+  }, [actionSearch]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      if (actionSearchDraft === actionSearch) return;
+
+      const nextSearchParam = new URLSearchParams(searchParam);
+      const nextSearch = actionSearchDraft.trim();
+      if (nextSearch) nextSearchParam.set("q", nextSearch);
+      else nextSearchParam.delete("q");
+      setSearchParam(nextSearchParam);
+    }, ACTION_SEARCH_DEBOUNCE_MS);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [actionSearch, actionSearchDraft, searchParam, setSearchParam]);
+
+  useEffect(() => {
+    if (!listRef.current) return;
+
+    listRef.current.scrollTop = 0;
+    updateListViewport();
+  }, [activeKeyFilter, actionSearch, selectedCategory, updateListViewport]);
+
   const virtualRows = useActionMapVirtualRows({
     activeKeyFilter,
+    actionSearch,
     actionRowHeight,
     combinedActionGroups,
     expandedGroups,
     groupRowHeight,
+    language,
     orderInfo,
     visibleGroupNames,
   });
@@ -66,42 +99,72 @@ const ActionMap = () => {
 
   return (
     <div className={styles.root}>
-      <select
-        className={styles.categorySelect}
-        value={searchParam.get("c") || ""}
-        onChange={(e) => {
-          const nextSearchParam = new URLSearchParams(searchParam);
-          nextSearchParam.set("c", e.target.value);
-          setSearchParam(nextSearchParam);
-        }}
-      >
-        <option value="">all</option>
-        {actionMapCategories.map((c) => (
-          <option value={c} key={c}>
-            {c}
-          </option>
-        ))}
-      </select>
+      <div className={styles.controls}>
+        <input
+          aria-label={language === "zh" ? "搜索操作" : "Search actions"}
+          className={styles.actionSearch}
+          placeholder={language === "zh" ? "搜索操作" : "Search actions"}
+          type="search"
+          value={actionSearchDraft}
+          onChange={(e) => {
+            setActionSearchDraft(e.target.value);
+          }}
+        />
+        <select
+          className={styles.categorySelect}
+          value={searchParam.get("c") || ""}
+          onChange={(e) => {
+            const nextSearchParam = new URLSearchParams(searchParam);
+            nextSearchParam.set("c", e.target.value);
+            setSearchParam(nextSearchParam);
+          }}
+        >
+          <option value="">all</option>
+          {actionMapCategories.map((c) => (
+            <option value={c} key={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+        <button
+          aria-hidden={!activeKeyFilter}
+          className={`${styles.clearKeyFilterButton} ${activeKeyFilter ? "" : styles.clearKeyFilterButtonHidden}`}
+          disabled={!activeKeyFilter}
+          tabIndex={activeKeyFilter ? 0 : -1}
+          type="button"
+          onClick={() => {
+            const nextSearchParam = new URLSearchParams(searchParam);
+            nextSearchParam.delete("k");
+            setSearchParam(nextSearchParam);
+          }}
+        >
+          关闭按键筛选
+        </button>
+      </div>
 
       <div className={styles.actionGroupList} ref={listRef} onScroll={updateListViewport}>
-        <div className={styles.virtualSpace} style={{ height: totalRowsHeight }}>
-          {visibleRows.map((row) => (
-            <div className={styles.virtualRow} key={row.key} style={{ height: row.height, transform: `translateY(${row.top}px)` }}>
-              {row.type === "group" ? (
-                <ActionGroupHeader
-                  group={row.group}
-                  isExpanded={row.isExpanded}
-                  onToggle={() => {
-                    setExpandedGroups((groups) => ({ ...groups, [row.group.name]: !(groups[row.group.name] ?? true) }));
-                  }}
-                  language={language}
-                />
-              ) : (
-                <ActionItem action={row.action} language={language} />
-              )}
-            </div>
-          ))}
-        </div>
+        {virtualRows.length === 0 ? (
+          <div className={styles.emptyState}>当前筛选或搜索无键位</div>
+        ) : (
+          <div className={styles.virtualSpace} style={{ height: totalRowsHeight }}>
+            {visibleRows.map((row) => (
+              <div className={styles.virtualRow} key={row.key} style={{ height: row.height, transform: `translateY(${row.top}px)` }}>
+                {row.type === "group" ? (
+                  <ActionGroupHeader
+                    group={row.group}
+                    isExpanded={row.isExpanded}
+                    onToggle={() => {
+                      setExpandedGroups((groups) => ({ ...groups, [row.group.name]: !(groups[row.group.name] ?? true) }));
+                    }}
+                    language={language}
+                  />
+                ) : (
+                  <ActionItem action={row.action} language={language} />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

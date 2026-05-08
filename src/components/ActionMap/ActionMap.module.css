@@ -11,10 +11,48 @@
   flex-direction: column;
 }
 
+.controls {
+  box-sizing: border-box;
+  padding: .5rem;
+  border-bottom: 1px solid var(--color-bg-2);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  height: 3rem;
+  width: 100%;
+}
+
+.actionSearch {
+  flex: 1 1 14rem;
+  min-width: 0;
+  width: 14rem;
+  max-width: 100%;
+}
+
 .categorySelect {
-  margin: .5rem;
   max-width: 12rem;
-  align-self: center;
+  flex: 0 1 12rem;
+}
+
+.clearKeyFilterButton {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.clearKeyFilterButtonHidden {
+  visibility: hidden;
+}
+
+.actionSearch,
+.categorySelect,
+.clearKeyFilterButton {
+  box-sizing: border-box;
+  height: 2rem;
+  line-height: 1.25rem;
 }
 
 .actionGroupList {
@@ -22,6 +60,17 @@
   min-height: 0;
   overflow: auto;
   padding: .5rem 0;
+}
+
+.emptyState {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  color: var(--color-text-2);
+  text-align: center;
 }
 
 .actionGroupList::-webkit-scrollbar {

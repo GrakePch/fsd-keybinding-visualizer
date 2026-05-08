@@ -49,6 +49,12 @@ const getInitialLanguage = (): AppLanguage => {
   return "en";
 };
 
+const isEditableEventTarget = (target: EventTarget | null) => {
+  if (!(target instanceof HTMLElement)) return false;
+
+  return target.isContentEditable || target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT";
+};
+
 function App() {
   const [searchParam, setSearchParam] = useSearchParams();
   const [defaultActionGroups, setDefaultActionGroups] = useState<Record<string, ActionGroup>>({});
@@ -69,11 +75,12 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      event.preventDefault();
-      console.log(event);
       if (actionRebinding[1] === "") return;
+      if (isEditableEventTarget(event.target)) return;
       if (codesNonBindable.has(event.code)) return;
       if (!keyCodeToCigInput[event.code]) return;
+
+      event.preventDefault();
       setActionBindingDraft((draft) =>
         draft
           ? {
