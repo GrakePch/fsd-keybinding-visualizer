@@ -7,6 +7,7 @@ import { actionMapCategories, actionMapCategoriesMap, filterOurHidden } from "..
 import { useSearchParams } from "react-router-dom";
 import { Action, ActionGroup } from "../../interfaces";
 import { i18nUI, modifiers, rebindAction, resetAction } from "../../utils/utils";
+import { formatKeyLabel } from "../../utils/keyCodes";
 import actionIcon from "../../icons/actionIcon";
 
 const ACTION_MAP_OVERSCAN_ROWS = 8;
@@ -214,7 +215,7 @@ const ActionItem = ({ action }: { action: Action }) => {
                 </option>
               ))}
             </select>
-            {<span>{action.kbm.key.length === 1 ? action.kbm.key.toUpperCase() : action.kbm.key || " "}</span>}
+            {<span title={action.kbm.key}>{formatKeyLabel(action.kbm.key) || " "}</span>}
           </p>
         </>
       ) : (
@@ -248,8 +249,8 @@ const ActionItem = ({ action }: { action: Action }) => {
           </div>
           <p className="kbms">
             {action.kbm.key && action.multiTap === "2" && "双击"}
-            {action.kbm.modifier && <span>{action.kbm.modifier}</span>}
-            {action.kbm.key && <span>{action.kbm.key.length === 1 ? action.kbm.key.toUpperCase() : action.kbm.key}</span>}
+            {action.kbm.modifier && <span title={action.kbm.modifier}>{formatKeyLabel(action.kbm.modifier)}</span>}
+            {action.kbm.key && <span title={action.kbm.key}>{formatKeyLabel(action.kbm.key)}</span>}
           </p>
         </>
       )}

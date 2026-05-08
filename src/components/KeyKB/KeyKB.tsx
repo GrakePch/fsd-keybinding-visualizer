@@ -7,7 +7,7 @@ import Icon from "@mdi/react";
 import actionIcon from "../../icons/actionIcon";
 import { actionMapCategoriesMap, filterOurHidden } from "../../utils/actionMapCategories";
 import { OrderInfo, ActionGroup } from "../../interfaces";
-import { cigInputNonBinable } from "../../utils/keyCodes";
+import { cigInputNonBinable, formatKeyLabel } from "../../utils/keyCodes";
 
 const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; heightX?: number }) => {
   widthX = widthX || 1;
@@ -51,7 +51,9 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
             }
           }}
         >
-          <p className="key-label">{keyId}</p>
+          <p className="key-label" title={keyId}>
+            {formatKeyLabel(keyId)}
+          </p>
           {actionOnKey.a &&
             (actionIcon(actionOnKey.g, actionOnKey.a) ? (
               <Icon className={getModifier(combinedActionGroups, actionOnKey.g, actionOnKey.a)} path={actionIcon(actionOnKey.g, actionOnKey.a)} size="2rem" />

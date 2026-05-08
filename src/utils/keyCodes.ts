@@ -2,6 +2,74 @@ export const codesNonBindable = new Set(["Escape", "MetaLeft", "MetaRight"]);
 
 export const cigInputNonBinable = new Set(["escape", "win", "fn", "print"]);
 
+export const keyCodeLabels: Record<string, string> = {
+  escape: "Esc",
+  backtick: "`",
+  minus: "-",
+  minues: "-",
+  equals: "=",
+  equal: "=",
+  backspace: "Backspace",
+  tab: "Tab",
+  lbracket: "[",
+  rbracket: "]",
+  backslash: "\\",
+  capslock: "Caps",
+  semicolon: ";",
+  apostrophe: "'",
+  enter: "Enter",
+  comma: ",",
+  period: ".",
+  slash: "/",
+  lshift: "L Shift",
+  rshift: "R Shift",
+  lctrl: "L Ctrl",
+  rctrl: "R Ctrl",
+  lalt: "L Alt",
+  ralt: "R Alt",
+  win: "Win",
+  space: "Space",
+  fn: "Fn",
+  menu: "Menu",
+  print: "PrtSc",
+  scrolllock: "Scroll",
+  pause: "Pause",
+  insert: "Ins",
+  delete: "Del",
+  home: "Home",
+  end: "End",
+  pgup: "PgUp",
+  pgdn: "PgDn",
+  up: "Up",
+  down: "Down",
+  left: "Left",
+  right: "Right",
+  numlock: "Num",
+  np_divide: "/",
+  np_multiply: "*",
+  np_subtract: "-",
+  np_add: "+",
+  np_enter: "Enter",
+  np_period: ".",
+  mouse1: "Mouse 1",
+  mouse2: "Mouse 2",
+  mouse3: "Mouse 3",
+  mwheel_up: "Wheel Up",
+  mwheel_down: "Wheel Down",
+};
+
+for (let i = 0; i <= 9; i += 1) {
+  keyCodeLabels[`np_${i}`] = `${i}`;
+}
+
+export function formatKeyLabel(code: string): string {
+  if (!code) return "";
+  if (keyCodeLabels[code]) return keyCodeLabels[code];
+  if (code.length === 1) return code.toUpperCase();
+  if (/^f\d+$/i.test(code)) return code.toUpperCase();
+  return code;
+}
+
 export const keyCodeToCigInput: Record<string, string> = {
   Escape: "escape",
   MetaLeft: "win",
@@ -65,8 +133,8 @@ export const keyCodeToCigInput: Record<string, string> = {
   F12: "f12",
 
   Backquote: "backtick",
-  Minus: "minues",
-  Equal: "equal",
+  Minus: "minus",
+  Equal: "equals",
   Backspace: "backspace",
   Tab: "tab",
   BracketLeft: "lbracket",
