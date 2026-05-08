@@ -1,0 +1,63 @@
+{
+  "app": {
+    "title": "FSD 键位可视化工具"
+  },
+  "actionMap": {
+    "allCategories": "全部",
+    "categories": {
+      "camera": "镜头",
+      "ground_vehicle": "地面载具",
+      "interaction": "交互",
+      "player": "玩家",
+      "ship_general": "飞船通用",
+      "social": "社交",
+      "spectator": "观察者",
+      "turret": "炮塔",
+      "vehicle_mining_and_salvage": "载具采矿与打捞"
+    },
+    "clearKeyFilter": "关闭按键筛选",
+    "emptyState": "当前筛选或搜索无键位",
+    "searchActions": "搜索操作"
+  },
+  "actionMapFileConsole": {
+    "ariaLabel": "Action map 文件控制台",
+    "cancel": "取消",
+    "downloadXml": "下载 XML",
+    "export": "导出",
+    "import": "导入",
+    "importLocalPathHint": "若读取本地路径，请选择游戏目录下的 LIVE / PTU 文件夹",
+    "loadedFile": "已加载文件：{{fileName}}",
+    "localPath": "读取路径：{{path}}",
+    "localPathUnsupported": "当前浏览器不支持本地路径读写，请使用 Chromium 系浏览器。",
+    "missingActionmapWarning": "未找到 actionmaps.xml；覆写游戏设置时将创建该文件。",
+    "noChangesToOverwrite": "没有发生修改，无需覆写。",
+    "notLoaded": "未加载 actionmap.xml",
+    "overwriteFailedWarning": "覆写游戏设置失败。",
+    "overwriteLocalPath": "覆写本地路径",
+    "readLocalPath": "读取本地路径",
+    "readLocalPathFailedWarning": "读取本地路径失败或已取消。",
+    "requiresLocalPathImport": "需要先通过读取本地路径导入。",
+    "uploadFailedWarning": "读取上传文件失败。",
+    "uploadXml": "上传 XML"
+  },
+  "actionMapSidebar": {
+    "ariaLabel": "Action map 侧边栏",
+    "collapse": "收起 ActionMap",
+    "expand": "展开 ActionMap",
+    "resizeHandle": "调整 ActionMap 宽度"
+  },
+  "actionRebinding": {
+    "clear": "解绑",
+    "doubleTap": "双击",
+    "record": "录入",
+    "recordingHint": "按下 Esc 取消录入",
+    "reset": "默认",
+    "singleTap": "单击"
+  },
+  "language": {
+    "chineseShort": "中",
+    "englishShort": "EN",
+    "switchToChinese": "切换到中文",
+    "switchToEnglish": "切换到英文"
+  }
+}

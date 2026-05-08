@@ -1,0 +1,63 @@
+{
+  "app": {
+    "title": "FSD Keybinding Visualizer"
+  },
+  "actionMap": {
+    "allCategories": "All",
+    "categories": {
+      "camera": "Camera",
+      "ground_vehicle": "Ground Vehicle",
+      "interaction": "Interaction",
+      "player": "Player",
+      "ship_general": "Ship General",
+      "social": "Social",
+      "spectator": "Spectator",
+      "turret": "Turret",
+      "vehicle_mining_and_salvage": "Vehicle Mining and Salvage"
+    },
+    "clearKeyFilter": "Clear key filter",
+    "emptyState": "No bindings match the current filter or search",
+    "searchActions": "Search actions"
+  },
+  "actionMapFileConsole": {
+    "ariaLabel": "Action map file console",
+    "cancel": "Cancel",
+    "downloadXml": "Download XML",
+    "export": "Export",
+    "import": "Import",
+    "importLocalPathHint": "To read a local path, choose the LIVE / PTU folder under the game directory",
+    "loadedFile": "Loaded file: {{fileName}}",
+    "localPath": "Path: {{path}}",
+    "localPathUnsupported": "The current browser does not support local path read/write. Use a Chromium-based browser.",
+    "missingActionmapWarning": "actionmaps.xml was not found. It will be created when overwriting game settings.",
+    "noChangesToOverwrite": "No changes to overwrite.",
+    "notLoaded": "No actionmap.xml loaded",
+    "overwriteFailedWarning": "Failed to overwrite game settings.",
+    "overwriteLocalPath": "Overwrite local path",
+    "readLocalPath": "Read local path",
+    "readLocalPathFailedWarning": "Failed to read local path or the operation was canceled.",
+    "requiresLocalPathImport": "Import from a local path first.",
+    "uploadFailedWarning": "Failed to read uploaded file.",
+    "uploadXml": "Upload XML"
+  },
+  "actionMapSidebar": {
+    "ariaLabel": "Action map sidebar",
+    "collapse": "Collapse ActionMap",
+    "expand": "Expand ActionMap",
+    "resizeHandle": "Resize ActionMap width"
+  },
+  "actionRebinding": {
+    "clear": "Unbind",
+    "doubleTap": "Double tap",
+    "record": "Record",
+    "recordingHint": "Press Esc to cancel recording",
+    "reset": "Default",
+    "singleTap": "Single tap"
+  },
+  "language": {
+    "chineseShort": "中",
+    "englishShort": "EN",
+    "switchToChinese": "Switch to Chinese",
+    "switchToEnglish": "Switch to English"
+  }
+}

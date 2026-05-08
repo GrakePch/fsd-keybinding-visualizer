@@ -1,11 +1,5 @@
 import { Action, ActionGroup, KeyWithMod, OrderInfo, RawAction, RawActionGroup, RawDefaultProfile, UserActionmap } from "../interfaces";
-import keybindingEn from "../i18n/keybinding/en.json";
-import keybindingZh from "../i18n/keybinding/zh.json";
-
-const keybindingI18n: Record<string, Record<string, string>> = {
-  en: keybindingEn,
-  zh: keybindingZh,
-};
+import i18n from "../i18n";
 
 export const modifiers = ["lalt", "ralt", "lctrl", "rctrl", "lshift", "rshift"];
 
@@ -87,7 +81,15 @@ export function i18nUI(label: string, lang?: string): string {
   const key = isToken ? normalizedLabel.slice(1).toLowerCase() : normalizedLabel.toLowerCase();
   const locale = normalizeLocale(lang);
 
-  return keybindingI18n[locale]?.[key] || keybindingI18n.en[key] || (isToken ? "" : label);
+  if (i18n.exists(key, { lng: locale, ns: "keybinding" })) {
+    return i18n.getFixedT(locale, "keybinding")(key);
+  }
+
+  if (i18n.exists(key, { lng: "en", ns: "keybinding" })) {
+    return i18n.getFixedT("en", "keybinding")(key);
+  }
+
+  return isToken ? "" : label;
 }
 
 export function getModifier(actionGroups: Record<string, ActionGroup>, groupName: string, actionName: string): string {

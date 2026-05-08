@@ -1,5 +1,6 @@
 import "./ActionMapFileConsole.css";
 import { ChangeEvent, useContext, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CTXUserActionmap } from "../../contexts";
 import { buildActionmapsXML, getUserActionmap } from "../../utils/utils";
 import xmlToJson from "../../utils/xmlToJson";
@@ -29,10 +30,9 @@ type WindowWithDirectoryPicker = Window & {
 };
 
 const ACTIONMAP_PATH_PARTS = ["USER", "Client", "0", "Profiles", "default", "actionmaps.xml"];
-const LOCAL_PATH_UNSUPPORTED = "当前浏览器不支持本地路径读写，请使用 Chromium 系浏览器。";
-const IMPORT_LOCAL_PATH_HINT = "若读取本地路径，请选择游戏目录下的 LIVE / PTU 文件夹";
 
 const ActionMapFileConsole = () => {
+  const { t } = useTranslation("ui");
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
   const [mode, setMode] = useState<ConsoleMode>("idle");
   const [source, setSource] = useState<LoadedActionmapSource>("none");
@@ -49,11 +49,11 @@ const ActionMapFileConsole = () => {
   const canWriteLocalPath = source === "localPath" && localRootDirectory !== null && hasActionmapChanges;
 
   const loadedLabel = useMemo(() => {
-    if (source === "localPath" && localPathLabel) return `读取路径：${localPathLabel}`;
-    if (source === "upload" && loadedFileName) return `已加载文件：${loadedFileName}`;
-    return "未加载 actionmap.xml";
-  }, [loadedFileName, localPathLabel, source]);
-  const consoleLabel = mode === "import" ? IMPORT_LOCAL_PATH_HINT : loadedLabel;
+    if (source === "localPath" && localPathLabel) return t("actionMapFileConsole.localPath", { path: localPathLabel });
+    if (source === "upload" && loadedFileName) return t("actionMapFileConsole.loadedFile", { fileName: loadedFileName });
+    return t("actionMapFileConsole.notLoaded");
+  }, [loadedFileName, localPathLabel, source, t]);
+  const consoleLabel = mode === "import" ? t("actionMapFileConsole.importLocalPathHint") : loadedLabel;
 
   const loadActionmapXml = (xmlString: string) => {
     const parser = new DOMParser();
@@ -84,7 +84,7 @@ const ActionMapFileConsole = () => {
       setLocalPathLabel("");
       setMode("idle");
     } catch {
-      console.warn("读取上传文件失败。");
+      console.warn(t("actionMapFileConsole.uploadFailedWarning"));
     }
   };
 
@@ -99,7 +99,7 @@ const ActionMapFileConsole = () => {
 
   const importFromLocalPath = async () => {
     if (!canUseLocalPath) {
-      console.warn(LOCAL_PATH_UNSUPPORTED);
+      console.warn(t("actionMapFileConsole.localPathUnsupported"));
       return;
     }
 
@@ -119,10 +119,10 @@ const ActionMapFileConsole = () => {
         loadActionmapXml(await file.text());
       } catch {
         setBaselineActionmapJson(currentActionmapJson);
-        console.warn("未找到 actionmaps.xml；覆写游戏设置时将创建该文件。");
+        console.warn(t("actionMapFileConsole.missingActionmapWarning"));
       }
     } catch {
-      console.warn("读取本地路径失败或已取消。");
+      console.warn(t("actionMapFileConsole.readLocalPathFailedWarning"));
     }
   };
 
@@ -151,12 +151,12 @@ const ActionMapFileConsole = () => {
       setBaselineActionmapJson(currentActionmapJson);
       setMode("idle");
     } catch {
-      console.warn("覆写游戏设置失败。");
+      console.warn(t("actionMapFileConsole.overwriteFailedWarning"));
     }
   };
 
   return (
-    <section className="ActionMapFileConsole" aria-label="Action map file console">
+    <section className="ActionMapFileConsole" aria-label={t("actionMapFileConsole.ariaLabel")}>
       <input className="actionmap-file-input" ref={fileInputRef} type="file" accept=".xml" onChange={handleUploadFileSelect} />
       <p className="actionmap-file-source" title={consoleLabel}>
         {consoleLabel}
@@ -165,41 +165,41 @@ const ActionMapFileConsole = () => {
         {mode === "idle" && (
           <>
             <button type="button" onClick={() => setMode("import")}>
-              导入
+              {t("actionMapFileConsole.import")}
             </button>
             <button type="button" onClick={() => setMode("export")}>
-              导出
+              {t("actionMapFileConsole.export")}
             </button>
           </>
         )}
         {mode === "import" && (
           <>
             <button type="button" onClick={() => setMode("idle")}>
-              取消
+              {t("actionMapFileConsole.cancel")}
             </button>
             <button type="button" onClick={openUploadPicker}>
-              上传 xml
+              {t("actionMapFileConsole.uploadXml")}
             </button>
-            <button type="button" onClick={importFromLocalPath} disabled={!canUseLocalPath} title={canUseLocalPath ? "" : LOCAL_PATH_UNSUPPORTED}>
-              读取本地路径
+            <button type="button" onClick={importFromLocalPath} disabled={!canUseLocalPath} title={canUseLocalPath ? "" : t("actionMapFileConsole.localPathUnsupported")}>
+              {t("actionMapFileConsole.readLocalPath")}
             </button>
           </>
         )}
         {mode === "export" && (
           <>
             <button type="button" onClick={() => setMode("idle")}>
-              取消
+              {t("actionMapFileConsole.cancel")}
             </button>
             <button type="button" onClick={downloadActionmapXml}>
-              下载 xml
+              {t("actionMapFileConsole.downloadXml")}
             </button>
             <button
               type="button"
               onClick={overwriteLocalPath}
               disabled={!canWriteLocalPath}
-              title={canWriteLocalPath ? "" : source !== "localPath" ? "需要先通过读取本地路径导入。" : "没有发生修改，无需覆写。"}
+              title={canWriteLocalPath ? "" : source !== "localPath" ? t("actionMapFileConsole.requiresLocalPathImport") : t("actionMapFileConsole.noChangesToOverwrite")}
             >
-              覆写本地路径
+              {t("actionMapFileConsole.overwriteLocalPath")}
             </button>
           </>
         )}

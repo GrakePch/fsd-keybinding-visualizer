@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CTXOrderInfo, CTXCombinedActionGroups, CTXLanguage } from "../../contexts";
 import { actionMapCategories, actionMapCategoriesMap, filterOurHidden } from "../../utils/actionMapCategories";
 import { useSearchParams } from "react-router-dom";
@@ -16,6 +17,7 @@ const getRootRemSize = () => parseFloat(getComputedStyle(document.documentElemen
 
 const ActionMap = () => {
   const [searchParam, setSearchParam] = useSearchParams();
+  const { t } = useTranslation("ui");
   const orderInfo = useContext(CTXOrderInfo);
   const [combinedActionGroups] = useContext(CTXCombinedActionGroups);
   const [language] = useContext(CTXLanguage);
@@ -101,9 +103,9 @@ const ActionMap = () => {
     <div className={styles.root}>
       <div className={styles.controls}>
         <input
-          aria-label={language === "zh" ? "搜索操作" : "Search actions"}
+          aria-label={t("actionMap.searchActions")}
           className={styles.actionSearch}
-          placeholder={language === "zh" ? "搜索操作" : "Search actions"}
+          placeholder={t("actionMap.searchActions")}
           type="search"
           value={actionSearchDraft}
           onChange={(e) => {
@@ -119,10 +121,10 @@ const ActionMap = () => {
             setSearchParam(nextSearchParam);
           }}
         >
-          <option value="">all</option>
+          <option value="">{t("actionMap.allCategories")}</option>
           {actionMapCategories.map((c) => (
             <option value={c} key={c}>
-              {c}
+              {t(`actionMap.categories.${c}`, { defaultValue: c })}
             </option>
           ))}
         </select>
@@ -138,13 +140,13 @@ const ActionMap = () => {
             setSearchParam(nextSearchParam);
           }}
         >
-          关闭按键筛选
+          {t("actionMap.clearKeyFilter")}
         </button>
       </div>
 
       <div className={styles.actionGroupList} ref={listRef} onScroll={updateListViewport}>
         {virtualRows.length === 0 ? (
-          <div className={styles.emptyState}>当前筛选或搜索无键位</div>
+          <div className={styles.emptyState}>{t("actionMap.emptyState")}</div>
         ) : (
           <div className={styles.virtualSpace} style={{ height: totalRowsHeight }}>
             {visibleRows.map((row) => (

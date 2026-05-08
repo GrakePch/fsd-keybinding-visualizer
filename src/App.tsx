@@ -8,6 +8,7 @@ import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding, CTXActionBindingDraft, CTXLanguage, type ActionBindingDraft, type AppLanguage } from "./contexts";
 import { ActionGroup, OrderInfo, UserActionmap } from "./interfaces";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { actionMapCategories } from "./utils/actionMapCategories";
 import defaultProfile from "./data/defaultProfile.json";
 import { initDefaultActionGroups } from "./utils/utils";
@@ -57,6 +58,7 @@ const isEditableEventTarget = (target: EventTarget | null) => {
 
 function App() {
   const [searchParam, setSearchParam] = useSearchParams();
+  const { t, i18n } = useTranslation("ui");
   const [defaultActionGroups, setDefaultActionGroups] = useState<Record<string, ActionGroup>>({});
   const [orderInfo, setOrderInfo] = useState<OrderInfo>({ groupOrder: [], inGroupOrder: {} });
   const [keysHovering, setKeysHovering] = useState<string[]>([]);
@@ -72,6 +74,10 @@ function App() {
   useEffect(() => {
     initDefaultActionGroups(defaultProfile, setDefaultActionGroups, setCombinedActionGroups, setOrderInfo);
   }, []);
+
+  useEffect(() => {
+    document.title = t("app.title");
+  }, [t]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -132,13 +138,18 @@ function App() {
   }, [defaultActionGroups, orderInfo, searchParam, setSearchParam]);
 
   useEffect(() => {
+    if (i18n.language !== language) {
+      void i18n.changeLanguage(language);
+    }
+    document.documentElement.lang = language;
+
     if (searchParam.get("lang") !== language) {
       const nextSearchParam = new URLSearchParams(searchParam);
       nextSearchParam.set("lang", language);
       setSearchParam(nextSearchParam, { replace: true });
     }
     window.localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, language);
-  }, [language, searchParam, setSearchParam]);
+  }, [i18n, language, searchParam, setSearchParam]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -214,15 +225,15 @@ function App() {
                           <KeyboardFull />
                         </div>
                         <ActionMapFileConsole />
-                        <button className="language-toggle-fab" type="button" aria-label={counterpartLanguage === "zh" ? "切换到中文" : "Switch to English"} onClick={switchLanguage}>
-                          {counterpartLanguage === "zh" ? "中" : "EN"}
+                        <button className="language-toggle-fab" type="button" aria-label={t(counterpartLanguage === "zh" ? "language.switchToChinese" : "language.switchToEnglish")} onClick={switchLanguage}>
+                          {t(counterpartLanguage === "zh" ? "language.chineseShort" : "language.englishShort")}
                         </button>
                       </main>
-                      <aside className="action-map-sidebar" aria-label="Action map sidebar">
+                      <aside className="action-map-sidebar" aria-label={t("actionMapSidebar.ariaLabel")}>
                         <button
                           className="action-map-toggle"
                           type="button"
-                          aria-label={isActionMapOpen ? "收起 ActionMap" : "展开 ActionMap"}
+                          aria-label={t(isActionMapOpen ? "actionMapSidebar.collapse" : "actionMapSidebar.expand")}
                           aria-expanded={isActionMapOpen}
                           onClick={() => setIsActionMapOpen((open) => !open)}
                         >
@@ -233,7 +244,7 @@ function App() {
                             className="action-map-resize-handle"
                             role="separator"
                             aria-orientation="vertical"
-                            aria-label="调整 ActionMap 宽度"
+                            aria-label={t("actionMapSidebar.resizeHandle")}
                             onPointerDown={handleActionMapResizePointerDown}
                           />
                           <ActionMap />

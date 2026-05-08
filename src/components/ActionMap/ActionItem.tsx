@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "@mdi/react";
 import { mdiGestureDoubleTap, mdiKeyboard, mdiLinkOff, mdiRestore } from "@mdi/js";
 import { CTXDefaultActionGroups, CTXKeysHovering, CTXUserActionmap, type ActionBindingValue, type AppLanguage } from "../../contexts";
@@ -60,6 +61,7 @@ const getLastPressedModifier = (pressedModifiers: Set<string>) => {
 };
 
 const ActionItem = ({ action, language }: ActionItemProps) => {
+  const { t } = useTranslation("ui");
   const [, setKeysHovering] = useContext(CTXKeysHovering);
   const defaultActionGroups = useContext(CTXDefaultActionGroups);
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
@@ -266,35 +268,35 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
       <Icon className={styles.icon} path={actionIcon(action._group, action.name) || ""} size="1.5rem" />
       <p className={styles.name}>{i18nUI(action.UILabel, language) || action.name}</p>
       {recording ? (
-        <div className={styles.recordingHint}>按下 esc 取消录入</div>
+        <div className={styles.recordingHint}>{t("actionRebinding.recordingHint")}</div>
       ) : (
         <div className={styles.buttons}>
           {hasBinding && (
             <button className={cx(styles.actionButton, styles.clearButton)} type="button" onClick={handleClearBinding}>
               <Icon path={mdiLinkOff} size="1rem" />
-              解绑
+              {t("actionRebinding.clear")}
             </button>
           )}
           {!isDefaultBinding && (
             <button className={cx(styles.actionButton, styles.resetButton)} type="button" onClick={handleResetBinding}>
               <Icon path={mdiRestore} size="1rem" />
-              默认
+              {t("actionRebinding.reset")}
             </button>
           )}
           {hasBinding && (
             <button className={styles.actionButton} type="button" onClick={handleToggleDoubleTap}>
               <Icon path={mdiGestureDoubleTap} size="1rem" />
-              {isDoubleTap ? "单击" : "双击"}
+              {t(isDoubleTap ? "actionRebinding.singleTap" : "actionRebinding.doubleTap")}
             </button>
           )}
           <button className={styles.actionButton} type="button" onClick={handleStartRecording}>
             <Icon path={mdiKeyboard} size="1rem" />
-            录入
+            {t("actionRebinding.record")}
           </button>
         </div>
       )}
       <p className={styles.kbms}>
-        {displayedBinding.kbm.key && displayedBinding.multiTap === "2" && "双击"}
+        {displayedBinding.kbm.key && displayedBinding.multiTap === "2" && t("actionRebinding.doubleTap")}
         {displayedBinding.kbm.modifier && (
           <span className={getKbmSpanClassName(displayedBinding.kbm.modifier)} title={displayedBinding.kbm.modifier}>
             {formatKeyLabel(displayedBinding.kbm.modifier)}
