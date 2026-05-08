@@ -1,13 +1,12 @@
 import "./ActionMap.css";
-import { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiChevronRight, mdiContentSave, mdiPencil, mdiRestore, mdiTrashCanOutline } from "@mdi/js";
 import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding } from "../../contexts";
 import { actionMapCategories, actionMapCategoriesMap, filterOurHidden } from "../../utils/actionMapCategories";
 import { useSearchParams } from "react-router-dom";
-import { Action, ActionGroup, UserActionmap } from "../../interfaces";
-import { getUserActionmap, i18nUI, modifiers, rebindAction, resetAction, buildActionmapsXML } from "../../utils/utils";
-import xmlToJson from "../../utils/xmlToJson";
+import { Action, ActionGroup } from "../../interfaces";
+import { i18nUI, modifiers, rebindAction, resetAction } from "../../utils/utils";
 import actionIcon from "../../icons/actionIcon";
 
 const ACTION_MAP_OVERSCAN_ROWS = 8;
@@ -38,27 +37,11 @@ const getRootRemSize = () => parseFloat(getComputedStyle(document.documentElemen
 const ActionMap = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const orderInfo = useContext(CTXOrderInfo);
-  const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
   const [combinedActionGroups] = useContext(CTXCombinedActionGroups);
-  const [userImportXMLStr, setUserImportXMLStr] = useState("");
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const [listViewport, setListViewport] = useState({ scrollTop: 0, height: 0 });
   const [remSize, setRemSize] = useState(getRootRemSize);
   const listRef = useRef<HTMLDivElement>(null);
-
-
-  const exportActionmapAsXML = () => {
-    const xml = buildActionmapsXML(userImportXMLStr, userActionmap);
-    console.log(xml)
-    const blob = new Blob([xml], { type: "application/xml" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "actionmap.xml";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
 
   const updateListViewport = useCallback(() => {
     const list = listRef.current;
@@ -153,10 +136,6 @@ const ActionMap = () => {
           </option>
         ))}
       </select>
-
-      <input type="file" id="inputActionMaps" name="actionMaps" accept=".xml" onChange={(e) => handleFileSelect(e, setUserActionmap, setUserImportXMLStr)} />
-
-      <button className="export" onClick={exportActionmapAsXML}>导出 actionmap.xml</button>
 
       <div className="list-action-groups" ref={listRef} onScroll={updateListViewport}>
         <div className="virtual-action-map-space" style={{ height: totalRowsHeight }}>
@@ -276,27 +255,6 @@ const ActionItem = ({ action }: { action: Action }) => {
       )}
     </div>
   );
-};
-
-const handleFileSelect = (e: ChangeEvent<HTMLInputElement>, setUserActionmap: React.Dispatch<React.SetStateAction<UserActionmap>>, setUserImportXMLStr: React.Dispatch<React.SetStateAction<string>>) => {
-  const files = e.target.files;
-  if (!files) return;
-  const file = files[0];
-
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.readAsText(file);
-  reader.onload = function (e) {
-    if (!e.target) return;
-    const xmlString = e.target.result as string;
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-    const result = xmlToJson(xmlDoc);
-    
-    setUserImportXMLStr(xmlString);
-    setUserActionmap(getUserActionmap(result));
-  };
 };
 
 export default ActionMap;

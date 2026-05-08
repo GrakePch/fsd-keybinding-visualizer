@@ -1,0 +1,53 @@
+.ActionMapFileConsole {
+  position: absolute;
+  left: 50%;
+  bottom: 1.25rem;
+  z-index: 1;
+  width: min(32rem, calc(100% - 2rem));
+  padding: .75rem;
+  border: 1px solid #ffffff18;
+  border-radius: .5rem;
+  background-color: color-mix(in srgb, var(--color-bg-0-5) 92%, transparent);
+  box-shadow: var(--shadow-2);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.actionmap-file-input {
+  display: none;
+}
+
+.actionmap-file-source {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text);
+  font-weight: 500;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actionmap-file-controls {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.actionmap-file-controls button {
+  min-width: 5.5rem;
+  padding: .45rem .75rem;
+  border-radius: .375rem;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 719px) {
+  .ActionMapFileConsole {
+    bottom: .75rem;
+  }
+
+  .actionmap-file-controls {
+    flex-wrap: wrap;
+  }
+}

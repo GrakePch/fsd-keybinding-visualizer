@@ -2,6 +2,7 @@ import { useEffect, useState, type CSSProperties, type PointerEvent as ReactPoin
 import "./App.css";
 import KeyboardFull from "./components/KeyboardFull/KeyboardFull";
 import ActionMap from "./components/ActionMap/ActionMap";
+import ActionMapFileConsole from "./components/ActionMapFileConsole/ActionMapFileConsole";
 import Icon from "@mdi/react";
 import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding } from "./contexts";
@@ -145,8 +146,9 @@ function App() {
             <CTXKeysHovering.Provider value={[keysHovering, setKeysHovering]}>
               <CTXActionRebinding.Provider value={[actionRebinding, setActionRebinding]}>
                 <div className={"AppShell" + (isActionMapOpen ? "" : " action-map-closed") + (isActionMapResizing ? " action-map-resizing" : "")} style={appShellStyle}>
-                  <main className="keyboard-pane">
+                  <main className="visualizer-pane">
                     <KeyboardFull />
+                    <ActionMapFileConsole />
                   </main>
                   <aside className="action-map-sidebar" aria-label="Action map sidebar">
                     <button
