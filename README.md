@@ -1,5 +1,17 @@
 # React + TypeScript + Vite
 
+## Keybinding i18n
+
+Keybinding action labels are generated from the same 42kit `global.ini` sources used by
+`Fancy-SC-Ship-Info-2`.
+
+```bash
+npm run update:keybinding-i18n
+```
+
+The script reads labels from `src/data/defaultProfile.json` and writes the compact locale
+files in `src/i18n/keybinding/`. GitHub Actions also refreshes them weekly.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

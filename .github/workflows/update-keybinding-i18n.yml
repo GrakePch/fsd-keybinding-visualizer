@@ -1,0 +1,52 @@
+name: Update Keybinding I18n
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Friday at 00:30 China Standard Time (Thursday 16:30 UTC)
+    - cron: "30 16 * * 4"
+
+permissions:
+  contents: write
+
+jobs:
+  update-keybinding-i18n:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Regenerate keybinding i18n
+        run: npm run update:keybinding-i18n
+
+      - name: Check if i18n changed
+        id: i18n-changed
+        run: |
+          if git diff --quiet -- src/i18n/keybinding; then
+            echo "No keybinding i18n changes detected."
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push changes
+        if: steps.i18n-changed.outputs.updated == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/i18n/keybinding/en.json
+          git add src/i18n/keybinding/zh.json
+          git commit -m "chore(i18n): update keybinding translations"
+          git push origin main

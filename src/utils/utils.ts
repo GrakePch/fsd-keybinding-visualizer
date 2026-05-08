@@ -1,7 +1,11 @@
 import { Action, ActionGroup, KeyWithMod, OrderInfo, RawAction, RawActionGroup, RawDefaultProfile, UserActionmap } from "../interfaces";
-import i18nRaw from "../i18n/i18n.json";
+import keybindingEn from "../i18n/keybinding/en.json";
+import keybindingZh from "../i18n/keybinding/zh.json";
 
-const i18n: Record<string, Record<string, string>> = i18nRaw;
+const keybindingI18n: Record<string, Record<string, string>> = {
+  en: keybindingEn,
+  zh: keybindingZh,
+};
 
 export const modifiers = ["lalt", "ralt", "lctrl", "rctrl", "lshift", "rshift"];
 
@@ -69,8 +73,21 @@ export function parseInputString(input: string): KeyWithMod {
   return { key: res[1], modifier: res[0] };
 }
 
+function normalizeLocale(lang?: string): "en" | "zh" {
+  if (lang?.toLowerCase().startsWith("en")) {
+    return "en";
+  }
+
+  return "zh";
+}
+
 export function i18nUI(label: string, lang?: string): string {
-  return i18n[label.slice(1).toLowerCase()]?.[lang || "zh_Hans"] || label;
+  const normalizedLabel = label.trim();
+  const isToken = normalizedLabel.startsWith("@");
+  const key = isToken ? normalizedLabel.slice(1).toLowerCase() : normalizedLabel.toLowerCase();
+  const locale = normalizeLocale(lang);
+
+  return keybindingI18n[locale]?.[key] || keybindingI18n.en[key] || (isToken ? "" : label);
 }
 
 export function getModifier(actionGroups: Record<string, ActionGroup>, groupName: string, actionName: string): string {

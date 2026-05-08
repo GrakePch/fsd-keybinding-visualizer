@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode development",
+    "update:keybinding-i18n": "node scripts/update-keybinding-i18n.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
