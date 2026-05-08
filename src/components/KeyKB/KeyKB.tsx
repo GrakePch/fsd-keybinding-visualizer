@@ -58,9 +58,10 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
                   : draft
               );
             } else {
-              if (searchParam.get("k") === keyId) searchParam.delete("k");
-              else searchParam.set("k", keyId);
-              setSearchParam(searchParam);
+              const nextSearchParam = new URLSearchParams(searchParam);
+              if (nextSearchParam.get("k") === keyId) nextSearchParam.delete("k");
+              else nextSearchParam.set("k", keyId);
+              setSearchParam(nextSearchParam);
             }
           }}
         >

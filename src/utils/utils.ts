@@ -116,20 +116,33 @@ export function getUserActionmap(userActionmapParsed: object): UserActionmap {
 }
 
 export function rebindAction(groupName: string, actionName: string, key: string, mod: string, multiTap: string | null, userActionmap: UserActionmap, setUserActionmap: React.Dispatch<React.SetStateAction<UserActionmap>>): void {
-  if (!userActionmap[groupName]) userActionmap[groupName] = {};
-  if (!userActionmap[groupName][actionName]) userActionmap[groupName][actionName] = { kbm: { key: "", modifier: "" }, multiTap: "" };
-  userActionmap[groupName][actionName].kbm.key = key;
-  userActionmap[groupName][actionName].kbm.modifier = mod;
-  if (multiTap !== null) userActionmap[groupName][actionName].multiTap = multiTap;
-  setUserActionmap({ ...userActionmap });
+  const actionGroup = userActionmap[groupName] || {};
+  const previousBinding = actionGroup[actionName] || { kbm: { key: "", modifier: "" }, multiTap: "" };
+
+  setUserActionmap({
+    ...userActionmap,
+    [groupName]: {
+      ...actionGroup,
+      [actionName]: {
+        kbm: { key, modifier: mod },
+        multiTap: multiTap ?? previousBinding.multiTap,
+      },
+    },
+  });
 }
 
 export function resetAction(groupName: string, actionName: string, userActionmap: UserActionmap, setUserActionmap: React.Dispatch<React.SetStateAction<UserActionmap>>): void {
-  if (!userActionmap[groupName]) return;
-  if (!userActionmap[groupName][actionName]) return;
-  delete userActionmap[groupName][actionName];
-  if (Object.keys(userActionmap[groupName]).length === 0) delete userActionmap[groupName];
-  setUserActionmap({ ...userActionmap });
+  const actionGroup = userActionmap[groupName];
+  if (!actionGroup?.[actionName]) return;
+
+  const nextActionGroup = { ...actionGroup };
+  delete nextActionGroup[actionName];
+
+  const nextUserActionmap = { ...userActionmap };
+  if (Object.keys(nextActionGroup).length === 0) delete nextUserActionmap[groupName];
+  else nextUserActionmap[groupName] = nextActionGroup;
+
+  setUserActionmap(nextUserActionmap);
 }
 
 export function buildActionmapsXML(userImportXMLStr: string, userActionmap: UserActionmap): string {

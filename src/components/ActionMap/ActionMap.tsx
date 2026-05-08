@@ -70,8 +70,9 @@ const ActionMap = () => {
         className={styles.categorySelect}
         value={searchParam.get("c") || ""}
         onChange={(e) => {
-          searchParam.set("c", e.target.value);
-          setSearchParam(searchParam);
+          const nextSearchParam = new URLSearchParams(searchParam);
+          nextSearchParam.set("c", e.target.value);
+          setSearchParam(nextSearchParam);
         }}
       >
         <option value="">all</option>
