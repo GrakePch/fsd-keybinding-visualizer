@@ -1,0 +1,135 @@
+.action {
+  list-style-type: none;
+  display: flex;
+  gap: .5rem;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 2rem);
+  min-width: 0;
+  margin: 0 1rem;
+  overflow: hidden;
+  padding: .125rem 0;
+  border-top: 1px solid #80808080;
+  background-color: var(--color-bg-0-5);
+}
+
+.action:hover {
+  background-color: var(--color-bg-2);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buttons {
+  display: flex;
+  flex-shrink: 0;
+  visibility: hidden;
+}
+
+.action:hover .buttons {
+  visibility: visible;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  font-size: .8rem;
+  padding: .25rem .375rem;
+  background: transparent;
+  border-radius: .5rem;
+}
+
+.actionButton:hover {
+  filter: brightness(1.1);
+  background-color: #606060;
+}
+
+.clearButton {
+  color: hsl(0, 50%, 55%);
+}
+
+.clearButton:hover {
+  background-color: hsla(0, 50%, 55%, .25);
+}
+
+.resetButton {
+  color: hsl(50, 50%, 50%);
+}
+
+.resetButton:hover {
+  background-color: hsla(50, 50%, 50%, .25);
+}
+
+.multiTapCheckbox {
+  flex-shrink: 0;
+}
+
+.multiTapLabel {
+  flex-shrink: 0;
+  font-size: .8rem;
+  line-height: 1;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.kbms {
+  flex: 0 0 auto;
+  min-width: 6rem;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modifierSelect {
+  max-width: 100%;
+}
+
+.kbm {
+  line-height: 1;
+  margin-left: .5rem;
+  background-color: #80808080;
+  padding: 0 .5rem;
+  border-radius: .25rem;
+}
+
+.lalt {
+  color: color-mix(in srgb, var(--color-lalt) 72%, var(--color-text));
+  background-color: color-mix(in srgb, var(--color-lalt) 24%, transparent);
+}
+
+.ralt {
+  color: color-mix(in srgb, var(--color-ralt) 72%, var(--color-text));
+  background-color: color-mix(in srgb, var(--color-ralt) 24%, transparent);
+}
+
+.lctrl {
+  color: color-mix(in srgb, var(--color-lctrl) 72%, var(--color-text));
+  background-color: color-mix(in srgb, var(--color-lctrl) 24%, transparent);
+}
+
+.rctrl {
+  color: color-mix(in srgb, var(--color-rctrl) 72%, var(--color-text));
+  background-color: color-mix(in srgb, var(--color-rctrl) 24%, transparent);
+}
+
+.lshift {
+  color: color-mix(in srgb, var(--color-lshift) 72%, var(--color-text));
+  background-color: color-mix(in srgb, var(--color-lshift) 24%, transparent);
+}
+
+.rshift {
+  color: color-mix(in srgb, var(--color-rshift) 72%, var(--color-text));
+  background-color: color-mix(in srgb, var(--color-rshift) 24%, transparent);
+}
