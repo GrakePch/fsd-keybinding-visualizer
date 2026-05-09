@@ -1,5 +1,5 @@
 import "./ActionMapFileConsole.css";
-import { ChangeEvent, useContext, useMemo, useRef, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CTXUserActionmap } from "../../contexts";
 import { buildActionmapsXML, getUserActionmap } from "../../utils/utils";
@@ -41,7 +41,10 @@ const ActionMapFileConsole = () => {
   const [loadedFileName, setLoadedFileName] = useState("");
   const [localRootDirectory, setLocalRootDirectory] = useState<FileSystemDirectoryHandleLike | null>(null);
   const [localPathLabel, setLocalPathLabel] = useState("");
+  const [isLocalActionmapMissing, setIsLocalActionmapMissing] = useState(false);
+  const [isOverwriteSuccessVisible, setIsOverwriteSuccessVisible] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const overwriteSuccessTimerRef = useRef<number | null>(null);
 
   const canUseLocalPath = useMemo(() => typeof (window as WindowWithDirectoryPicker).showDirectoryPicker === "function", []);
   const currentActionmapJson = useMemo(() => JSON.stringify(userActionmap), [userActionmap]);
@@ -49,11 +52,19 @@ const ActionMapFileConsole = () => {
   const canWriteLocalPath = source === "localPath" && localRootDirectory !== null && hasActionmapChanges;
 
   const loadedLabel = useMemo(() => {
+    if (source === "localPath" && isLocalActionmapMissing) return t("actionMapFileConsole.missingActionmapLabel");
     if (source === "localPath" && localPathLabel) return t("actionMapFileConsole.localPath", { path: localPathLabel });
     if (source === "upload" && loadedFileName) return t("actionMapFileConsole.loadedFile", { fileName: loadedFileName });
     return t("actionMapFileConsole.notLoaded");
-  }, [loadedFileName, localPathLabel, source, t]);
-  const consoleLabel = mode === "import" ? t("actionMapFileConsole.importLocalPathHint") : loadedLabel;
+  }, [isLocalActionmapMissing, loadedFileName, localPathLabel, source, t]);
+  const consoleLabel = isOverwriteSuccessVisible ? t("actionMapFileConsole.overwriteSuccess") : mode === "import" ? t("actionMapFileConsole.importLocalPathHint") : loadedLabel;
+  const isMissingActionmapLabelVisible = !isOverwriteSuccessVisible && mode !== "import" && source === "localPath" && isLocalActionmapMissing;
+
+  useEffect(() => {
+    return () => {
+      if (overwriteSuccessTimerRef.current !== null) window.clearTimeout(overwriteSuccessTimerRef.current);
+    };
+  }, []);
 
   const loadActionmapXml = (xmlString: string) => {
     const parser = new DOMParser();
@@ -70,6 +81,15 @@ const ActionMapFileConsole = () => {
     fileInputRef.current?.click();
   };
 
+  const showOverwriteSuccess = () => {
+    if (overwriteSuccessTimerRef.current !== null) window.clearTimeout(overwriteSuccessTimerRef.current);
+    setIsOverwriteSuccessVisible(true);
+    overwriteSuccessTimerRef.current = window.setTimeout(() => {
+      setIsOverwriteSuccessVisible(false);
+      overwriteSuccessTimerRef.current = null;
+    }, 3000);
+  };
+
   const handleUploadFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = "";
@@ -82,6 +102,7 @@ const ActionMapFileConsole = () => {
       setLoadedFileName(file.name);
       setLocalRootDirectory(null);
       setLocalPathLabel("");
+      setIsLocalActionmapMissing(false);
       setMode("idle");
     } catch {
       console.warn(t("actionMapFileConsole.uploadFailedWarning"));
@@ -111,6 +132,7 @@ const ActionMapFileConsole = () => {
       setLocalPathLabel(rootDirectory.name);
       setSource("localPath");
       setLoadedFileName("");
+      setIsLocalActionmapMissing(false);
       setMode("idle");
 
       try {
@@ -118,7 +140,10 @@ const ActionMapFileConsole = () => {
         const file = await actionmapHandle.getFile();
         loadActionmapXml(await file.text());
       } catch {
-        setBaselineActionmapJson(currentActionmapJson);
+        setImportedXmlString("");
+        setBaselineActionmapJson("{}");
+        setUserActionmap({});
+        setIsLocalActionmapMissing(true);
         console.warn(t("actionMapFileConsole.missingActionmapWarning"));
       }
     } catch {
@@ -150,6 +175,7 @@ const ActionMapFileConsole = () => {
       await writable.close();
       setBaselineActionmapJson(currentActionmapJson);
       setMode("idle");
+      showOverwriteSuccess();
     } catch {
       console.warn(t("actionMapFileConsole.overwriteFailedWarning"));
     }
@@ -158,7 +184,12 @@ const ActionMapFileConsole = () => {
   return (
     <section className="ActionMapFileConsole" aria-label={t("actionMapFileConsole.ariaLabel")}>
       <input className="actionmap-file-input" ref={fileInputRef} type="file" accept=".xml" onChange={handleUploadFileSelect} />
-      <p className="actionmap-file-source" title={consoleLabel}>
+      <p
+        className={`actionmap-file-source${isOverwriteSuccessVisible ? " actionmap-file-source--success" : ""}${
+          isMissingActionmapLabelVisible ? " actionmap-file-source--error" : ""
+        }`}
+        title={consoleLabel}
+      >
         {consoleLabel}
       </p>
       <div className="actionmap-file-controls">

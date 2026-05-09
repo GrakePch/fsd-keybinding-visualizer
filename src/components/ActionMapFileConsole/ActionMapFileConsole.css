@@ -29,6 +29,14 @@
   white-space: nowrap;
 }
 
+.actionmap-file-source--success {
+  color: #49d17d;
+}
+
+.actionmap-file-source--error {
+  color: #ff6b6b;
+}
+
 .actionmap-file-controls {
   display: flex;
   justify-content: center;
