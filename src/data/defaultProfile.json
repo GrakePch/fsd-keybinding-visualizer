@@ -403,155 +403,9 @@
                                             "_UIShowInvert": "1"
                                         },
                                         {
-                                            "_name": "turret_vj_mode",
-                                            "_UILabel": "@ui_CO_Turret_VJMode",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "turret_vj_mode_pitch",
-                                                    "_UILabel": "@ui_CO_Turret_VJoyModePitch",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "turret_vj_mode_yaw",
-                                                    "_UILabel": "@ui_CO_Turret_VJoyModeYaw",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "_name": "turret_relative_mode",
-                                            "_UILabel": "@ui_COTurretRelativeMode",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "turret_relative_mode_pitch",
-                                                    "_UILabel": "@ui_CO_TurretRelativeModePitch",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "turret_relative_mode_yaw",
-                                                    "_UILabel": "@ui_CO_TurretRelativeModeYaw",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
-                                        },
-                                        {
                                             "_name": "turret_limiter_relative",
                                             "_UILabel": "@ui_CO_TurretLimiterRelative",
                                             "_UIShowInvert": "1"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "_name": "any_vehicle",
-                                    "_UILabel": "@ui_COAnyVehicle",
-                                    "_UIShowCurve": "-1",
-                                    "_UIShowInvert": "-1",
-                                    "optiongroup": [
-                                        {
-                                            "_name": "av_vj_mode",
-                                            "_UILabel": "@ui_COVJMode",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "-1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "av_vj_mode_pitch",
-                                                    "_UILabel": "@ui_COVJModePitch",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_vj_mode_yaw",
-                                                    "_UILabel": "@ui_COVJModeYaw",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_vj_mode_roll",
-                                                    "_UILabel": "@ui_COVJModeRoll",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "_name": "av_vj_mode_fixed",
-                                            "_UILabel": "@ui_COVJFixedMode",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "-1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "av_vj_fixed_mode_pitch",
-                                                    "_UILabel": "@ui_COVJFixedModePitch",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_vj_fixed_mode_yaw",
-                                                    "_UILabel": "@ui_COVJFixedModeYaw",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_vj_fixed_mode_roll",
-                                                    "_UILabel": "@ui_COVJFixedModeRoll",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "_name": "av_relative_mode",
-                                            "_UILabel": "@ui_CORelativeMode",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "-1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "av_relative_mode_pitch",
-                                                    "_UILabel": "@ui_CORelativeModePitch",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_relative_mode_yaw",
-                                                    "_UILabel": "@ui_CORelativeModeYaw",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_relative_mode_roll",
-                                                    "_UILabel": "@ui_CORelativeModeRoll",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "_name": "av_aim_mode",
-                                            "_UILabel": "@ui_COAimMode",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "-1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "av_aim_mode_pitch",
-                                                    "_UILabel": "@ui_COAimModePitch",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "av_aim_mode_yaw",
-                                                    "_UILabel": "@ui_COAimModeYaw",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
                                         }
                                     ]
                                 },
@@ -933,28 +787,6 @@
                                                 {
                                                     "_name": "flight_view_yaw",
                                                     "_UILabel": "@ui_COFlightViewX",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "_name": "flight_throttle",
-                                            "_UILabel": "@ui_COThrottleSensitivity",
-                                            "_UIShowCurve": "1",
-                                            "_UIShowInvert": "-1",
-                                            "optiongroup": [
-                                                {
-                                                    "_name": "flight_thrust_abs_half",
-                                                    "_invert": "1",
-                                                    "_UILabel": "@ui_COFlightThrustAbsHalf",
-                                                    "_UIShowCurve": "1",
-                                                    "_UIShowInvert": "1"
-                                                },
-                                                {
-                                                    "_name": "flight_thrust_abs_full",
-                                                    "_invert": "0",
-                                                    "_UILabel": "@ui_COFlightThrustAbsFull",
                                                     "_UIShowCurve": "1",
                                                     "_UIShowInvert": "1"
                                                 }
@@ -1782,6 +1614,33 @@
                         "_UILabel": "@ui_v_operator_mode_toggle_prev",
                         "_UIDescription": "@ui_v_operator_mode_toggle_prev_desc",
                         "_Category": "ShipSystems"
+                    },
+                    {
+                        "_name": "v_light_amplification_toggle",
+                        "_activationMode": "tap",
+                        "_keyboard": "ralt+l",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_light_amplification_toggle",
+                        "_UIDescription": "@ui_v_light_amplification_toggle_desc"
+                    },
+                    {
+                        "_name": "v_light_amplification_on",
+                        "_activationMode": "tap",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_light_amplification_on",
+                        "_UIDescription": "@ui_v_light_amplification_on_desc"
+                    },
+                    {
+                        "_name": "v_light_amplification_off",
+                        "_activationMode": "tap",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_light_amplification_off",
+                        "_UIDescription": "@ui_v_light_amplification_off_desc"
                     }
                 ]
             },
@@ -2308,6 +2167,15 @@
                         "_UILabel": "@ui_CIMFDSoftSelectMFD10Long"
                     },
                     {
+                        "_name": "v_mfd_quick_action_repair_all",
+                        "_activationMode": "tap",
+                        "_keyboard": "",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_CIMFD_Quick_Action_Repair_All",
+                        "_UIDescription": "ui_CIMFD_Quick_Action_Repair_All_Desc"
+                    },
+                    {
                         "_name": "v_mfd_select_view_self_status_short",
                         "_activationMode": "tap",
                         "_keyboard": " ",
@@ -2692,7 +2560,7 @@
                         "_name": "v_pitch_up",
                         "_onPress": "1",
                         "_onRelease": "1",
-                        "_keyboard": " ",
+                        "_keyboard": "down",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_CIPitchUp",
@@ -2702,7 +2570,7 @@
                         "_name": "v_pitch_down",
                         "_onPress": "1",
                         "_onRelease": "1",
-                        "_keyboard": " ",
+                        "_keyboard": "up",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_CIPitchDown",
@@ -2729,7 +2597,7 @@
                         "_onPress": "1",
                         "_onRelease": "1",
                         "_always": "1",
-                        "_keyboard": " ",
+                        "_keyboard": "left",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_CIYawLeft",
@@ -2740,7 +2608,7 @@
                         "_onPress": "1",
                         "_onRelease": "1",
                         "_always": "1",
-                        "_keyboard": " ",
+                        "_keyboard": "right",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_CIYawRight",
@@ -3026,27 +2894,34 @@
                         "_UIDescription": "@ui_v_strafe_trim_reset_short_desc"
                     },
                     {
-                        "_name": "v_ifcs_toggle_vector_decoupling",
-                        "_activationMode": "smart_toggle",
+                        "_name": "v_ifcs_vector_decoupling_toggle",
+                        "_activationMode": "tap",
                         "_keyboard": "c",
                         "_gamepad": "b",
                         "_joystick": " ",
-                        "_UILabel": "@ui_CIToggleDecoupledMode",
-                        "_UIDescription": "@ui_CIToggleDecoupledModeDesc",
-                        "_UICategory": "@ui_CCFlightModes",
-                        "_Category": "FlightSystems",
-                        "states": {
-                            "state": [
-                                {
-                                    "_name": "on",
-                                    "_UILabel": "@ui_CIToggleDecoupledMode_State_Disable"
-                                },
-                                {
-                                    "_name": "off",
-                                    "_UILabel": "@ui_CIToggleDecoupledMode_State_Enable"
-                                }
-                            ]
-                        }
+                        "_UILabel": "@ui_v_ifcs_vector_decoupling_toggle",
+                        "_UIDescription": "@ui_v_ifcs_vector_decoupling_toggle_desc",
+                        "_Category": "FlightSystems"
+                    },
+                    {
+                        "_name": "v_ifcs_vector_decoupling_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_vector_decoupling_on",
+                        "_UIDescription": "@ui_v_ifcs_vector_decoupling_on_desc",
+                        "_Category": "FlightSystems"
+                    },
+                    {
+                        "_name": "v_ifcs_vector_decoupling_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_vector_decoupling_off",
+                        "_UIDescription": "@ui_v_ifcs_vector_decoupling_off_desc",
+                        "_Category": "FlightSystems"
                     },
                     {
                         "_name": "v_afterburner",
@@ -3114,13 +2989,31 @@
                         "_UIDescription": "@ui_v_ifcs_speed_limiter_abs_desc"
                     },
                     {
-                        "_name": "v_ifcs_limiter_toggle",
-                        "_activationMode": "smart_toggle",
+                        "_name": "v_ifcs_speed_limiter_toggle",
+                        "_activationMode": "tap",
                         "_keyboard": " ",
                         "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_v_ifcs_limiter_toggle",
-                        "_UIDescription": "@ui_v_ifcs_limiter_toggle_desc"
+                        "_UILabel": "@ui_v_ifcs_speed_limiter_toggle",
+                        "_UIDescription": "@ui_v_ifcs_speed_limiter_toggle_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_speed_limiter_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_speed_limiter_on",
+                        "_UIDescription": "@ui_v_ifcs_speed_limiter_on_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_speed_limiter_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_speed_limiter_off",
+                        "_UIDescription": "@ui_v_ifcs_speed_limiter_off_desc"
                     },
                     {
                         "_name": "v_accel_range_up",
@@ -3323,26 +3216,34 @@
                         "_UIDescription": "@ui_CIRetractLandingSystemDesc"
                     },
                     {
-                        "_name": "v_toggle_vtol",
-                        "_activationMode": "press",
+                        "_name": "v_vtol_toggle",
+                        "_activationMode": "tap",
                         "_keyboard": "k",
                         "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_CIToggleVTOL",
-                        "_UIDescription": "@ui_CIToggleVTOLDesc",
-                        "_Category": "FlightSystems",
-                        "states": {
-                            "state": [
-                                {
-                                    "_name": "on",
-                                    "_UILabel": "@ui_CIToggleVTOL_Disable"
-                                },
-                                {
-                                    "_name": "off",
-                                    "_UILabel": "@ui_CIToggleVTOL_Enable"
-                                }
-                            ]
-                        }
+                        "_UILabel": "@ui_v_ifcs_vtol_toggle",
+                        "_UIDescription": "@ui_v_ifcs_vtol_toggle_desc",
+                        "_Category": "FlightSystems"
+                    },
+                    {
+                        "_name": "v_vtol_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_vtol_on",
+                        "_UIDescription": "@ui_v_ifcs_vtol_on_desc",
+                        "_Category": "FlightSystems"
+                    },
+                    {
+                        "_name": "v_vtol_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_vtol_off",
+                        "_UIDescription": "@ui_v_ifcs_vtol_off_desc",
+                        "_Category": "FlightSystems"
                     },
                     {
                         "_name": "v_transform_deploy",
@@ -3462,27 +3363,13 @@
                         "_UIDescription": "@ui_CIJumpDriveJumpRequestDesc"
                     },
                     {
-                        "_name": "v_ifcs_toggle_gravity_compensation",
+                        "_name": "v_ifcs_gravity_compensation_toggle",
                         "_activationMode": "tap",
                         "_keyboard": " ",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_v_ifcs_toggle_gravity_compensation",
-                        "_UIDescription": "@ui_v_ifcs_toggle_gravity_compensation_desc",
-                        "_UICategory": "@ui_CCFlightModes",
-                        "_Category": "FlightSystems",
-                        "states": {
-                            "state": [
-                                {
-                                    "_name": "on",
-                                    "_UILabel": "@ui_v_ifcs_gravity_compensation_off"
-                                },
-                                {
-                                    "_name": "off",
-                                    "_UILabel": "@ui_v_ifcs_gravity_compensation_on"
-                                }
-                            ]
-                        }
+                        "_UIDescription": "@ui_v_ifcs_toggle_gravity_compensation_desc"
                     },
                     {
                         "_name": "v_ifcs_gravity_compensation_on",
@@ -3501,6 +3388,33 @@
                         "_joystick": " ",
                         "_UILabel": "@ui_v_ifcs_gravity_compensation_off",
                         "_UIDescription": "@ui_v_ifcs_gravity_compensation_off_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_wind_compensation_toggle",
+                        "_activationMode": "tap",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_wind_compensation_toggle",
+                        "_UIDescription": "@ui_v_ifcs_wind_compensation_toggle_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_wind_compensation_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_wind_compensation_on",
+                        "_UIDescription": "@ui_v_ifcs_wind_compensation_on_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_wind_compensation_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_wind_compensation_off",
+                        "_UIDescription": "@ui_v_ifcs_wind_compensation_off_desc"
                     },
                     {
                         "_name": "v_auto_precision_mode_toggle",
@@ -3585,9 +3499,90 @@
                         "_UIDescription": "@ui_v_ifcs_proximity_assist_off_desc"
                     },
                     {
-                        "_name": "v_ifcs_reset_gmeter_max",
+                        "_name": "v_ifcs_stability_toggle",
                         "_activationMode": "tap",
                         "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_stability_toggle",
+                        "_UIDescription": "@ui_v_ifcs_stability_toggle_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_stability_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_stability_on",
+                        "_UIDescription": "@ui_v_ifcs_stability_on_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_stability_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_stability_off",
+                        "_UIDescription": "@ui_v_ifcs_stability_off_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_command_toggle",
+                        "_activationMode": "tap",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_command_toggle",
+                        "_UIDescription": "@ui_v_ifcs_command_toggle_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_command_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_command_on",
+                        "_UIDescription": "@ui_v_ifcs_command_on_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_command_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_command_off",
+                        "_UIDescription": "@ui_v_ifcs_command_off_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_core_toggle",
+                        "_activationMode": "tap",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_core_toggle",
+                        "_UIDescription": "@ui_v_ifcs_core_toggle_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_core_on",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_core_on",
+                        "_UIDescription": "@ui_v_ifcs_core_on_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_core_off",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_ifcs_core_off",
+                        "_UIDescription": "@ui_v_ifcs_core_off_desc"
+                    },
+                    {
+                        "_name": "v_ifcs_reset_gmeter_max",
+                        "_activationMode": "tap",
+                        "_keyboard": "ralt+c",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_v_ifcs_reset_gmeter_max",
@@ -4344,6 +4339,17 @@
                         "_Category": "MiningMode"
                     },
                     {
+                        "_name": "v_mining_use_permanent_modifier",
+                        "_activationMode": "press",
+                        "_mouse": "",
+                        "_keyboard": "lalt+4",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_CIMiningLaserType",
+                        "_UIDescription": "@ui_CIMiningConsumableDesc",
+                        "_Category": "MiningMode"
+                    },
+                    {
                         "_name": "v_jettison_volatile_cargo",
                         "_activationMode": "press",
                         "_mouse": "",
@@ -4936,15 +4942,6 @@
                         "_UIDescription": "@ui_CI_TurretLimiterAbsoluteDesc"
                     },
                     {
-                        "_name": "turret_change_firemode",
-                        "_onPress": "1",
-                        "_keyboard": " ",
-                        "_gamepad": " ",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_CI_TurretChangeWeaponFireMode",
-                        "_UIDescription": "@ui_CI_TurretChangeWeaponFireModeDesc"
-                    },
-                    {
                         "_name": "turret_change_position",
                         "_activationMode": "press",
                         "_keyboard": "s",
@@ -4962,89 +4959,103 @@
                 "_UICategory": "@ui_CCSpaceFlight",
                 "action": [
                     {
-                        "_name": "v_weapon_manual_gimbal_cycle_source",
-                        "_activationMode": "tap",
-                        "_keyboard": " ",
-                        "_gamepad": " ",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_ci_v_weapon_manual_gimbal_cycle_source",
-                        "_UIDescription": "@ui_ci_v_weapon_manual_gimbal_cycle_source_desc",
-                        "_Category": "WeaponSystems"
-                    },
-                    {
-                        "_name": "v_weapon_gimbal_mode_cycle_all",
+                        "_name": "v_weapon_gimbals_state_toggle",
                         "_activationMode": "tap",
                         "_keyboard": "g",
                         "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_CIGimbalLock",
-                        "_UIDescription": "@ui_CIGimbalLockDesc"
+                        "_UILabel": "@ui_v_weapon_gimbals_state_toggle",
+                        "_UIDescription": "@ui_v_weapon_gimbals_state_toggle_desc"
                     },
                     {
-                        "_name": "v_weapon_gimbal_mode_cycle_fixed_auto",
+                        "_name": "v_weapon_gimbals_state_set_locked",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_gimbals_state_set_locked",
+                        "_UIDescription": "@ui_v_weapon_gimbals_state_set_locked_desc"
+                    },
+                    {
+                        "_name": "v_weapon_gimbals_state_set_unlocked",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_gimbals_state_set_unlocked",
+                        "_UIDescription": "@ui_v_weapon_gimbals_state_set_unlocked_desc"
+                    },
+                    {
+                        "_name": "v_weapon_gimbals_unlocked_cycle_source",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_gimbals_unlocked_cycle_source",
+                        "_UIDescription": "@ui_v_weapon_gimbals_unlocked_cycle_source_desc"
+                    },
+                    {
+                        "_name": "v_weapon_aim_type_cycle",
+                        "_activationMode": "tap",
+                        "_keyboard": "ralt+g",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_aim_type_cycle",
+                        "_UIDescription": "@ui_v_weapon_aim_type_cycle_desc"
+                    },
+                    {
+                        "_name": "v_weapon_aim_type_set_pip_aiming",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_aim_type_set_pip_aiming",
+                        "_UIDescription": "@ui_v_weapon_aim_type_set_pip_aiming_desc"
+                    },
+                    {
+                        "_name": "v_weapon_aim_type_set_painting",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_aim_type_set_painting",
+                        "_UIDescription": "@ui_v_weapon_aim_type_set_painting_desc"
+                    },
+                    {
+                        "_name": "v_weapon_aim_type_set_auto",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_gamepad": " ",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_v_weapon_aim_type_set_auto",
+                        "_UIDescription": "@ui_v_weapon_aim_type_set_auto_desc"
+                    },
+                    {
+                        "_name": "v_weapon_staggered_fire_toggle",
                         "_activationMode": "tap",
                         "_keyboard": " ",
-                        "_gamepad": "shoulderl+b",
+                        "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_cycle_fixed_auto",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_cycle_fixed_auto_desc"
+                        "_UILabel": "@ui_v_weapon_staggered_fire_toggle",
+                        "_UIDescription": "@ui_v_weapon_staggered_fire_toggle_desc"
                     },
                     {
-                        "_name": "v_weapon_gimbal_mode_set_fixed_long",
-                        "_activationMode": "delayed_press",
+                        "_name": "v_weapon_staggered_fire_on",
+                        "_activationMode": "press",
                         "_keyboard": " ",
                         "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_set_fixed_long",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_set_fixed_long_desc"
+                        "_UILabel": "@ui_v_weapon_staggered_fire_on",
+                        "_UIDescription": "@ui_v_weapon_staggered_fire_on_desc"
                     },
                     {
-                        "_name": "v_weapon_gimbal_mode_set_auto_long",
-                        "_activationMode": "delayed_press",
+                        "_name": "v_weapon_staggered_fire_off",
+                        "_activationMode": "press",
                         "_keyboard": " ",
                         "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_set_auto_long",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_set_auto_long_desc"
-                    },
-                    {
-                        "_name": "v_weapon_gimbal_mode_set_manual_long",
-                        "_activationMode": "delayed_press",
-                        "_keyboard": " ",
-                        "_gamepad": "shoulderl+b",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_set_manual_long",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_set_manual_long_desc"
-                    },
-                    {
-                        "_name": "v_weapon_gimbal_mode_set_fixed",
-                        "_activationMode": "tap",
-                        "_keyboard": " ",
-                        "_gamepad": " ",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_set_fixed",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_set_fixed_desc",
-                        "_Category": "WeaponSystems"
-                    },
-                    {
-                        "_name": "v_weapon_gimbal_mode_set_auto",
-                        "_activationMode": "tap",
-                        "_keyboard": " ",
-                        "_gamepad": " ",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_set_auto",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_set_auto_desc",
-                        "_Category": "WeaponSystems"
-                    },
-                    {
-                        "_name": "v_weapon_gimbal_mode_set_manual",
-                        "_activationMode": "tap",
-                        "_keyboard": " ",
-                        "_gamepad": " ",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_v_weapon_gimbal_mode_set_manual",
-                        "_UIDescription": "@ui_v_weapon_gimbal_mode_set_manual_desc",
-                        "_Category": "WeaponSystems"
+                        "_UILabel": "@ui_v_weapon_staggered_fire_off",
+                        "_UIDescription": "@ui_v_weapon_staggered_fire_off_desc"
                     },
                     {
                         "_name": "v_weapon_suppress_aim_assists_hold",
@@ -5054,16 +5065,6 @@
                         "_joystick": " ",
                         "_UILabel": "@ui_v_weapon_suppress_aim_assists_hold",
                         "_UIDescription": "@ui_v_weapon_suppress_aim_assists_hold_desc"
-                    },
-                    {
-                        "_name": "v_weapon_change_firemode",
-                        "_onPress": "1",
-                        "_keyboard": " ",
-                        "_gamepad": " ",
-                        "_joystick": " ",
-                        "_UILabel": "@ui_CI_VWeaponChangeWeaponFireMode",
-                        "_UIDescription": "@ui_CI_VWeaponChangeWeaponFireModeDesc",
-                        "_Category": "WeaponSystems"
                     },
                     {
                         "_name": "v_weapon_pip_toggle_lead_lag",
@@ -6623,6 +6624,25 @@
                         "_UIDescription": "@ui_CIFPSMoveJumpDesc"
                     },
                     {
+                        "_name": "jump_hold",
+                        "_onPress": "0",
+                        "_onHold": "1",
+                        "_pressTriggerThreshold": "0.5",
+                        "_retriggerable": "1",
+                        "_keyboard": "space",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_CIFPSMoveJumpHold",
+                        "_UIDescription": "@ui_CIFPSMoveJumpHoldDesc"
+                    },
+                    {
+                        "_name": "jump_release",
+                        "_onRelease": "1",
+                        "_keyboard": "space",
+                        "_joystick": " ",
+                        "_UILabel": "@ui_CIFPSMoveJumpRelease",
+                        "_UIDescription": "@ui_CIFPSMoveJumpHoldDesc"
+                    },
+                    {
                         "_name": "crouch",
                         "_activationMode": "hold_toggle",
                         "_keyboard": "c",
@@ -7007,7 +7027,7 @@
                     {
                         "_name": "nextweapon",
                         "_activationMode": "press",
-                        "_keyboard": "",
+                        "_keyboard": " ",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_CIFPSNextWeapon",
@@ -7016,7 +7036,7 @@
                     {
                         "_name": "prevweapon",
                         "_activationMode": "press",
-                        "_keyboard": "",
+                        "_keyboard": " ",
                         "_gamepad": " ",
                         "_joystick": " ",
                         "_UILabel": "@ui_CIFPSPreviousWeapon",
@@ -7346,7 +7366,7 @@
                         "_name": "toggle_cursor_input",
                         "_activationMode": "press",
                         "_keyboard": "f11",
-                        "_gamepad": ""
+                        "_gamepad": " "
                     },
                     {
                         "_name": "free_thirdperson_camera",
@@ -7811,8 +7831,7 @@
                         "_gamepad": " ",
                         "_joystick": " "
                     }
-                ],
-                "#text": "/>"
+                ]
             },
             {
                 "_name": "prone",
@@ -9406,16 +9425,6 @@
                 "_UICategory": "@ui_CGUIGeneral",
                 "action": [
                     {
-                        "_name": "hmd_toggle",
-                        "_activationMode": "press",
-                        "_keyboard": "np_1"
-                    },
-                    {
-                        "_name": "hmd_center",
-                        "_activationMode": "press",
-                        "_keyboard": "np_2"
-                    },
-                    {
                         "_name": "skip_cutscene",
                         "_activationMode": "press",
                         "_keyboard": ""
@@ -9513,18 +9522,9 @@
                     },
                     {
                         "_name": "ui_click",
-                        "_onPress": "1",
-                        "_gamepad": "shoulderr",
-                        "keyboard": {
-                            "inputdata": [
-                                {
-                                    "_input": "enter"
-                                },
-                                {
-                                    "_input": "np_enter"
-                                }
-                            ]
-                        }
+                        "_onRelease": "1",
+                        "_keyboard": "enter",
+                        "_gamepad": "a"
                     },
                     {
                         "_name": "ui_back",
@@ -9546,9 +9546,6 @@
                                     "_input": "dpad_up"
                                 },
                                 {
-                                    "_input": "thumbl_up"
-                                },
-                                {
                                     "_input": "thumbr_up"
                                 }
                             ]
@@ -9565,9 +9562,6 @@
                             "inputdata": [
                                 {
                                     "_input": "dpad_down"
-                                },
-                                {
-                                    "_input": "thumbl_down"
                                 },
                                 {
                                     "_input": "thumbr_down"
@@ -9588,9 +9582,6 @@
                                     "_input": "dpad_left"
                                 },
                                 {
-                                    "_input": "thumbl_left"
-                                },
-                                {
                                     "_input": "thumbr_left"
                                 }
                             ]
@@ -9609,13 +9600,26 @@
                                     "_input": "dpad_right"
                                 },
                                 {
-                                    "_input": "thumbl_right"
-                                },
-                                {
                                     "_input": "thumbr_right"
                                 }
                             ]
                         }
+                    },
+                    {
+                        "_name": "ui_select",
+                        "_onRelease": "1",
+                        "_mouse": " ",
+                        "_keyboard": "enter",
+                        "_gamepad": "a",
+                        "_joystick": "button1"
+                    },
+                    {
+                        "_name": "ui_secondary_select",
+                        "_onRelease": "1",
+                        "_mouse": " ",
+                        "_keyboard": " ",
+                        "_gamepad": "x",
+                        "_joystick": "button2"
                     },
                     {
                         "_name": "ui_radialmenu_pageleft",
@@ -9668,6 +9672,42 @@
                         "_keyboard": "f",
                         "_gamepad": "a",
                         "_joystick": "button2"
+                    },
+                    {
+                        "_name": "ui_primaryTab_increment",
+                        "_onPress": "1",
+                        "_keyboard": "e",
+                        "_gamepad": "shoulderr"
+                    },
+                    {
+                        "_name": "ui_primaryTab_decrement",
+                        "_onPress": "1",
+                        "_keyboard": "q",
+                        "_gamepad": "shoulderl"
+                    },
+                    {
+                        "_name": "ui_secondaryTab_increment",
+                        "_onPress": "1",
+                        "_keyboard": "",
+                        "_gamepad": "triggerr_btn"
+                    },
+                    {
+                        "_name": "ui_secondaryTab_decrement",
+                        "_onPress": "1",
+                        "_keyboard": "",
+                        "_gamepad": "triggerl_btn"
+                    },
+                    {
+                        "_name": "ui_focus_increment",
+                        "_onRelease": "1",
+                        "_keyboard": "tab",
+                        "_gamepad": "x"
+                    },
+                    {
+                        "_name": "ui_focus_decrement",
+                        "_onRelease": "1",
+                        "_keyboard": "lshift+tab",
+                        "_gamepad": "y"
                     },
                     {
                         "_name": "flashui_mouse",
@@ -9770,9 +9810,6 @@
                                     "_input": "dpad_up"
                                 },
                                 {
-                                    "_input": "thumbl_up"
-                                },
-                                {
                                     "_input": "thumbr_up"
                                 }
                             ]
@@ -9789,9 +9826,6 @@
                             "inputdata": [
                                 {
                                     "_input": "dpad_down"
-                                },
-                                {
-                                    "_input": "thumbl_down"
                                 },
                                 {
                                     "_input": "thumbr_down"
@@ -9812,9 +9846,6 @@
                                     "_input": "dpad_left"
                                 },
                                 {
-                                    "_input": "thumbl_left"
-                                },
-                                {
                                     "_input": "thumbr_left"
                                 }
                             ]
@@ -9831,9 +9862,6 @@
                             "inputdata": [
                                 {
                                     "_input": "dpad_right"
-                                },
-                                {
-                                    "_input": "thumbl_right"
                                 },
                                 {
                                     "_input": "thumbr_right"
@@ -10426,6 +10454,42 @@
                 "_UICategory": "@ui_CGOpticalTracking",
                 "action": [
                     {
+                        "_name": "hmd_toggle",
+                        "_activationMode": "press",
+                        "_keyboard": "np_divide",
+                        "_joystick": " ",
+                        "_gamepad": " ",
+                        "_UILabel": "@ui_hmd_toggle",
+                        "_UIDescription": "@ui_hmd_toggle_desc"
+                    },
+                    {
+                        "_name": "hmd_recenter",
+                        "_activationMode": "press",
+                        "_keyboard": "np_5",
+                        "_joystick": " ",
+                        "_gamepad": " ",
+                        "_UILabel": "@ui_hmd_recenter",
+                        "_UIDescription": "@ui_hmd_recenter_desc"
+                    },
+                    {
+                        "_name": "hmd_theater_mode_toggle",
+                        "_activationMode": "press",
+                        "_keyboard": "lalt+np_5",
+                        "_joystick": " ",
+                        "_gamepad": " ",
+                        "_UILabel": "@ui_hmd_theater_mode_toggle",
+                        "_UIDescription": "@ui_hmd_theater_mode_toggle_desc"
+                    },
+                    {
+                        "_name": "hmd_lens_display_toggle",
+                        "_activationMode": "press",
+                        "_keyboard": " ",
+                        "_joystick": " ",
+                        "_gamepad": " ",
+                        "_UILabel": "@ui_hmd_lensDisplay_toggle",
+                        "_UIDescription": "@ui_hmd_lensDisplay_toggle_desc"
+                    },
+                    {
                         "_name": "headtrack_enabled",
                         "_activationMode": "press",
                         "_keyboard": "np_divide",
@@ -10446,7 +10510,7 @@
                     {
                         "_name": "headtrack_recenter_device",
                         "_activationMode": "press",
-                        "_keyboard": " ",
+                        "_keyboard": "np_5",
                         "_joystick": " ",
                         "_gamepad": " ",
                         "_UILabel": "@ui_CIHeadTrackRecenterDevice",
@@ -10571,7 +10635,7 @@
                         "_onRelease": "1",
                         "_mouse": "mouse1",
                         "_keyboard": " ",
-                        "_gamepad": "shoulderr",
+                        "_gamepad": "a",
                         "_joystick": "button1",
                         "_UILabel": "@ui_CIInteractionActivate",
                         "_UIDescription": "@ui_CIInteractionActivateDesc"
@@ -10683,19 +10747,17 @@
                         "_name": "pc_pit_inventory",
                         "_activationMode": "tap",
                         "_keyboard": "i",
+                        "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_CIInteractionPersonalInventory",
-                        "gamepad": {
-                            "_activationMode": "smart_toggle",
-                            "_input": "dpad_down"
-                        }
+                        "_UILabel": "@ui_pc_pit_inventory"
                     },
                     {
                         "_name": "pc_pit_looting",
                         "_activationMode": "delayed_press",
                         "_keyboard": "i",
+                        "_gamepad": " ",
                         "_joystick": " ",
-                        "_UILabel": "@ui_CIInteractionPersonalInventory"
+                        "_UILabel": "@ui_pc_pit_looting"
                     },
                     {
                         "_name": "pc_pit_looting_toggle_view",
@@ -11290,6 +11352,14 @@
                         "_mouse": "maxis_y"
                     },
                     {
+                        "_name": "character_customizer_gp_yaw",
+                        "_gamepad": "thumblx"
+                    },
+                    {
+                        "_name": "character_customizer_gp_pitch",
+                        "_gamepad": "thumbly"
+                    },
+                    {
                         "_name": "character_customizer_zoom_in",
                         "_onPress": "1",
                         "_onHold": "1",
@@ -11304,11 +11374,13 @@
                     {
                         "_name": "character_customizer_select",
                         "_onRelease": "1",
-                        "_mouse": "mouse1"
+                        "_mouse": "mouse1",
+                        "_keyboard": "f",
+                        "_gamepad": "a"
                     },
                     {
                         "_name": "character_customizer_enable_dna_edit",
-                        "_activationMode": "hold",
+                        "_onPress": "1",
                         "_onRelease": "1",
                         "_mouse": "mouse1"
                     },
@@ -11322,7 +11394,8 @@
                         "_name": "character_customizer_enable_mouse_rotation",
                         "_activationMode": "hold",
                         "_onRelease": "1",
-                        "_mouse": "mouse2"
+                        "_mouse": "mouse2",
+                        "_gamepad": "thumbr"
                     },
                     {
                         "_name": "character_customizer_library_scroll_up",
@@ -11358,29 +11431,25 @@
                         "_name": "character_customizer_yaw_left",
                         "_onPress": "1",
                         "_onRelease": "1",
-                        "_keyboard": "left",
-                        "_gamepad": " "
+                        "_keyboard": "left"
                     },
                     {
                         "_name": "character_customizer_yaw_right",
                         "_onPress": "1",
                         "_onRelease": "1",
-                        "_keyboard": "right",
-                        "_gamepad": " "
+                        "_keyboard": "right"
                     },
                     {
                         "_name": "character_customizer_pitch_up",
                         "_onPress": "1",
                         "_onRelease": "1",
-                        "_keyboard": "up",
-                        "_gamepad": " "
+                        "_keyboard": "up"
                     },
                     {
                         "_name": "character_customizer_pitch_down",
                         "_onPress": "1",
                         "_onRelease": "1",
-                        "_keyboard": "down",
-                        "_gamepad": " "
+                        "_keyboard": "down"
                     },
                     {
                         "_name": "character_customizer_step_up",
@@ -11428,7 +11497,17 @@
                         "_name": "character_customizer_toggle_face_tracking",
                         "_onPress": "1",
                         "_keyboard": "space",
-                        "_gamepad": " "
+                        "_gamepad": "thumbl"
+                    },
+                    {
+                        "_name": "character_customizer_dnaHandle_select",
+                        "_onRelease": "1",
+                        "_gamepad": "a"
+                    },
+                    {
+                        "_name": "character_customizer_dnaHandle_deselect",
+                        "_onRelease": "1",
+                        "_gamepad": "b"
                     }
                 ]
             },

@@ -563,6 +563,30 @@
                         "_iconName": ""
                     },
                     {
+                        "_name": "maxis_x",
+                        "_localizationString": "@input_key_mouse_xAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_xaxis"
+                    },
+                    {
+                        "_name": "maxis_y",
+                        "_localizationString": "@input_key_mouse_yAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_yaxis"
+                    },
+                    {
+                        "_name": "maxis_z",
+                        "_localizationString": "@input_key_mouse_zAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_zaxis"
+                    },
+                    {
+                        "_name": "maxis_xy",
+                        "_localizationString": "@input_key_mouse_xyAxis",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_xyaxis"
+                    },
+                    {
                         "_name": "mouse1",
                         "_localizationString": "@input_key_mouse_button1",
                         "_shortLocString": "",
@@ -575,16 +599,70 @@
                         "_iconName": "Mouse_Right_Click"
                     },
                     {
+                        "_name": "mouse3",
+                        "_localizationString": "@input_key_mouse_button3",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Wheel"
+                    },
+                    {
+                        "_name": "mouse4",
+                        "_localizationString": "@input_key_mouse_button4",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse5",
+                        "_localizationString": "@input_key_mouse_button5",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse6",
+                        "_localizationString": "@input_key_mouse_button6",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse7",
+                        "_localizationString": "@input_key_mouse_button7",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse8",
+                        "_localizationString": "@input_key_mouse_button8",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse9",
+                        "_localizationString": "@input_key_mouse_button9",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
+                        "_name": "mouse10",
+                        "_localizationString": "@input_key_mouse_button10",
+                        "_shortLocString": "",
+                        "_iconName": ""
+                    },
+                    {
                         "_name": "mouse1_2",
                         "_localizationString": "@input_key_mouse_button12",
                         "_shortLocString": "",
                         "_iconName": "Mouse_Left_Right_Click"
                     },
                     {
-                        "_name": "maxis_z",
-                        "_localizationString": "@input_key_mouse_zAxis",
+                        "_name": "mwheel_up",
+                        "_localizationString": "@input_key_mouse_wheelUp",
                         "_shortLocString": "",
-                        "_iconName": ""
+                        "_iconName": "Mouse_Wheel_Up"
+                    },
+                    {
+                        "_name": "mwheel_down",
+                        "_localizationString": "@input_key_mouse_wheelDown",
+                        "_shortLocString": "",
+                        "_iconName": "Mouse_Wheel_Down"
                     }
                 ]
             },
