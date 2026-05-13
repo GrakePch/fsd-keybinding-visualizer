@@ -1,0 +1,32 @@
+.viewport {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #3a3a3a 0, var(--color-bg) 56%);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: .25;
+  background-image: linear-gradient(#ffffff14 1px, transparent 1px), linear-gradient(90deg, #ffffff14 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+.overlay {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  max-width: min(32rem, calc(100% - 2rem));
+  padding: .625rem .75rem;
+  border: 1px solid #ffffff18;
+  border-radius: .5rem;
+  color: var(--color-text-1);
+  background-color: color-mix(in srgb, var(--color-bg-0-5) 88%, transparent);
+  box-shadow: var(--shadow-1);
+}
+
+.overlay p + p {
+  margin-top: .25rem;
+}

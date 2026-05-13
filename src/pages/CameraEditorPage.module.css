@@ -4,4 +4,5 @@
   display: grid;
   grid-template-columns: 18rem minmax(0, 1fr) 22rem;
   overflow: hidden;
+  background: var(--color-bg);
 }

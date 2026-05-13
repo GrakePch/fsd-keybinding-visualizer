@@ -1,0 +1,18 @@
+.field {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  align-items: center;
+  gap: .75rem;
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.field input {
+  min-width: 0;
+  width: 100%;
+  padding: .45rem .5rem;
+  border: 1px solid #ffffff18;
+  border-radius: .375rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}

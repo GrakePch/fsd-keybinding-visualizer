@@ -1,0 +1,69 @@
+.drawer {
+  min-height: 0;
+  border-right: 1px solid #ffffff18;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-bg-0-5);
+}
+
+.groupsSection {
+  min-height: 0;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: .75rem;
+  padding: .75rem;
+}
+
+.heading {
+  font-family: var(--font-geom);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--color-text-1);
+  text-transform: uppercase;
+}
+
+.emptyState {
+  color: var(--color-text-2);
+  font-size: .9rem;
+  line-height: 1.3;
+}
+
+.groupList {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  overflow: auto;
+}
+
+.groupButton {
+  width: 100%;
+  padding: .625rem .75rem;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
+  text-align: left;
+}
+
+.groupButtonActive {
+  background-color: var(--color-bg-2);
+  box-shadow: inset 0 0 0 1px #ffffff22;
+}
+
+.groupName {
+  max-width: 100%;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slotCount {
+  color: var(--color-text-2);
+  font-size: .8rem;
+}
