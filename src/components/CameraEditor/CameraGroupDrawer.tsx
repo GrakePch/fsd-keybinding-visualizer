@@ -1,15 +1,18 @@
+import { ReactNode } from "react";
 import { SavedViewGroup } from "../../types/savedViews";
 import styles from "./CameraGroupDrawer.module.css";
 
 interface CameraGroupDrawerProps {
+  fileConsole?: ReactNode;
   groups: SavedViewGroup[];
   selectedGroupId: string;
   onSelectGroup: (groupId: string) => void;
 }
 
-function CameraGroupDrawer({ groups, selectedGroupId, onSelectGroup }: CameraGroupDrawerProps) {
+function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, onSelectGroup }: CameraGroupDrawerProps) {
   return (
     <aside className={styles.drawer} aria-label="Camera group manager">
+      {fileConsole}
       <section className={styles.groupsSection}>
         <h2 className={styles.heading}>Groups</h2>
         {groups.length === 0 ? (

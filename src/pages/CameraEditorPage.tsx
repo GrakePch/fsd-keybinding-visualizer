@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import CameraControlPanel from "../components/CameraEditor/CameraControlPanel";
+import CameraFileConsole from "../components/CameraEditor/CameraFileConsole";
 import CameraGroupDrawer from "../components/CameraEditor/CameraGroupDrawer";
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
@@ -8,12 +9,22 @@ import styles from "./CameraEditorPage.module.css";
 
 function CameraEditorPage() {
   const [savedViews, setSavedViews] = useState<SavedViewsDocument | null>(null);
+  const [baselineSavedViewsJson, setBaselineSavedViewsJson] = useState("null");
   const [selectedGroupId, setSelectedGroupId] = useState("");
   const [selectedSlotId, setSelectedSlotId] = useState(0);
   const loadedModel = null;
 
   const selectedGroup = useMemo(() => savedViews?.groups.find((group) => group.id === selectedGroupId), [savedViews, selectedGroupId]);
   const selectedSlot = selectedGroup ? getSlotById(selectedGroup, selectedSlotId) : undefined;
+  const currentSavedViewsJson = JSON.stringify(savedViews);
+  const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
+
+  const loadSavedViews = (document: SavedViewsDocument) => {
+    setSavedViews(document);
+    setBaselineSavedViewsJson(JSON.stringify(document));
+    setSelectedGroupId(document.groups[0]?.id || "");
+    setSelectedSlotId(0);
+  };
 
   const updateSlot = (slot: SavedCameraSlot) => {
     if (!savedViews || !selectedGroup) return;
@@ -33,7 +44,12 @@ function CameraEditorPage() {
 
   return (
     <main className={styles.page}>
-      <CameraGroupDrawer groups={savedViews?.groups || []} selectedGroupId={selectedGroupId} onSelectGroup={setSelectedGroupId} />
+      <CameraGroupDrawer
+        fileConsole={<CameraFileConsole savedViews={savedViews} hasChanges={hasSavedViewsChanges} onLoad={(document) => loadSavedViews(document)} onSaved={() => setBaselineSavedViewsJson(JSON.stringify(savedViews))} />}
+        groups={savedViews?.groups || []}
+        selectedGroupId={selectedGroupId}
+        onSelectGroup={setSelectedGroupId}
+      />
       <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} />
       <CameraControlPanel
         loadedModel={loadedModel}

@@ -17,7 +17,7 @@ interface CameraControlPanelProps {
 }
 
 function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, onSelectSlot, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
-  const copySourceSlots = selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [];
+  const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const selectedCopySource = useMemo(() => copySourceSlots.find((slot) => slot.id === copySourceSlotId) || copySourceSlots[0], [copySourceSlotId, copySourceSlots]);
 
