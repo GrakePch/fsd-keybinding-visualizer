@@ -11,6 +11,36 @@
   display: block;
 }
 
+.labelLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.targetOffsetMarker {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 2px solid color-mix(in srgb, var(--color-lalt) 78%, white 22%);
+  border-radius: 999rem;
+  display: grid;
+  place-items: center;
+  color: var(--color-text);
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--color-halt) 80%, white 20%), var(--color-lalt));
+  box-shadow: 0 0 .95rem color-mix(in srgb, var(--color-lalt) 52%, transparent), 0 .25rem .75rem #0008;
+  font-family: var(--font-geom);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 1px 2px #000b;
+  transform: translate(-50%, -50%);
+}
+
+.targetOffsetMarkerActive {
+  border-color: var(--color-halt);
+  box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--color-halt) 35%, transparent), 0 0 1.25rem color-mix(in srgb, var(--color-halt) 68%, transparent), 0 .25rem .75rem #0008;
+}
+
 .statusOverlay {
   position: absolute;
   inset: 0;

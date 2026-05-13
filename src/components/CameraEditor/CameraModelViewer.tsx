@@ -3,19 +3,24 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { CSS2DObject, CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import { getModelLoadProgressPercent } from "../../utils/cameraModelOverlay";
-import { getCameraFitFromBounds } from "../../utils/cameraViewport";
+import { getCameraFitFromBounds, type TargetOffsetMarker } from "../../utils/cameraViewport";
 import styles from "./CameraModelViewer.module.css";
 
 interface CameraModelViewerProps {
+  activeSlotId?: number;
+  markers: TargetOffsetMarker[];
   model: SelectableVehicleModel;
 }
 
 type LoadState = "loading" | "ready" | "error";
 
-function CameraModelViewer({ model }: CameraModelViewerProps) {
+function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const markerObjectsRef = useRef<CSS2DObject[]>([]);
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [loadProgress, setLoadProgress] = useState<number | null>(null);
 
@@ -29,6 +34,7 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
     let disposed = false;
     let animationFrame = 0;
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
     const cameraFit = getCameraFitFromBounds(model.bounds);
     const camera = new THREE.PerspectiveCamera(45, 1, cameraFit.near, cameraFit.far);
     camera.position.set(...cameraFit.cameraPosition);
@@ -39,6 +45,10 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.domElement.className = styles.canvas;
     host.appendChild(renderer.domElement);
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.domElement.className = styles.labelLayer;
+    host.appendChild(labelRenderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -58,6 +68,7 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
       camera.aspect = clientWidth / clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(clientWidth, clientHeight, false);
+      labelRenderer.setSize(clientWidth, clientHeight);
     };
 
     const resizeObserver = new ResizeObserver(resize);
@@ -90,6 +101,7 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
     const animate = () => {
       controls.update();
       renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
       animationFrame = window.requestAnimationFrame(animate);
     };
     animate();
@@ -97,6 +109,9 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
     return () => {
       disposed = true;
       window.cancelAnimationFrame(animationFrame);
+      markerObjectsRef.current.forEach((markerObject) => markerObject.removeFromParent());
+      markerObjectsRef.current = [];
+      if (sceneRef.current === scene) sceneRef.current = null;
       resizeObserver.disconnect();
       controls.dispose();
       scene.traverse((object) => {
@@ -108,8 +123,32 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
       });
       renderer.dispose();
       renderer.domElement.remove();
+      labelRenderer.domElement.remove();
     };
   }, [model]);
+
+  useEffect(() => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+
+    markerObjectsRef.current.forEach((markerObject) => markerObject.removeFromParent());
+    markerObjectsRef.current = markers.map((marker) => {
+      const element = document.createElement("div");
+      element.className = `${styles.targetOffsetMarker} ${activeSlotId === marker.slotId ? styles.targetOffsetMarkerActive : ""}`;
+      element.textContent = marker.label;
+      element.title = `Slot ${marker.label} target offset`;
+      element.setAttribute("aria-label", `Camera slot ${marker.label} target offset`);
+      const markerObject = new CSS2DObject(element);
+      markerObject.position.set(...marker.position);
+      scene.add(markerObject);
+      return markerObject;
+    });
+
+    return () => {
+      markerObjectsRef.current.forEach((markerObject) => markerObject.removeFromParent());
+      markerObjectsRef.current = [];
+    };
+  }, [activeSlotId, markers, model.src]);
 
   return (
     <div className={styles.viewer} ref={hostRef}>

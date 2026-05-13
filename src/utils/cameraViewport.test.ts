@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCameraFitFromBounds } from "./cameraViewport";
+import { getCameraFitFromBounds, getTargetOffsetMarkers } from "./cameraViewport";
 
 describe("getCameraFitFromBounds", () => {
   it("uses manifest bounds to center and distance the preview camera", () => {
@@ -24,5 +24,33 @@ describe("getCameraFitFromBounds", () => {
     expect(fit.cameraPosition).toEqual([0, 60, 240]);
     expect(fit.near).toBe(0.1);
     expect(fit.far).toBe(2000);
+  });
+});
+
+describe("getTargetOffsetMarkers", () => {
+  it("maps camera target offsets into CSS2D world-space marker positions with slot labels", () => {
+    const markers = getTargetOffsetMarkers([
+      { id: 0, targetOffset: { x: -10, y: 100, z: -5 } },
+      { id: 4, targetOffset: { x: 0, y: 200, z: 0 } },
+      { id: 8, targetOffset: { x: 10, y: 300, z: 5 } },
+    ]);
+
+    expect(markers).toEqual([
+      { slotId: 0, label: "1", position: [-10, 0, -5] },
+      { slotId: 4, label: "5", position: [0, 0, 0] },
+      { slotId: 8, label: "9", position: [10, 0, 5] },
+    ]);
+  });
+
+  it("separates markers in world space when target offsets share the same x/z position", () => {
+    const markers = getTargetOffsetMarkers([
+      { id: 1, targetOffset: { x: 3, y: 10, z: -7 } },
+      { id: 2, targetOffset: { x: 3, y: 20, z: -7 } },
+    ]);
+
+    expect(markers).toEqual([
+      { slotId: 1, label: "2", position: [3, 0, -8.5] },
+      { slotId: 2, label: "3", position: [3, 0, -5.5] },
+    ]);
   });
 });
