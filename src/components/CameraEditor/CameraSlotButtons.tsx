@@ -8,12 +8,14 @@ interface CameraSlotButtonsProps {
   onSelectSlot: (slotId: number) => void;
 }
 
+const SLOT_DISPLAY_ORDER = [6, 7, 8, 3, 4, 5, 0, 1, 2];
+
 const cx = (...classNames: Array<string | false | null | undefined>) => classNames.filter(Boolean).join(" ");
 
 function CameraSlotButtons({ selectedGroup, selectedSlotId, onSelectSlot }: CameraSlotButtonsProps) {
   return (
     <div className={styles.slots} aria-label="Camera slots">
-      {Array.from({ length: 9 }, (_, slotId) => {
+      {SLOT_DISPLAY_ORDER.map((slotId) => {
         const hasSlot = selectedGroup ? Boolean(getSlotById(selectedGroup, slotId)) : false;
 
         return (

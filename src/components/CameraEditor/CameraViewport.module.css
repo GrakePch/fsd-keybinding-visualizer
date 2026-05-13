@@ -14,19 +14,39 @@
   background-size: 2rem 2rem;
 }
 
-.overlay {
+.modelPreview {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  max-width: min(32rem, calc(100% - 2rem));
-  padding: .625rem .75rem;
-  border: 1px solid #ffffff18;
-  border-radius: .5rem;
-  color: var(--color-text-1);
-  background-color: color-mix(in srgb, var(--color-bg-0-5) 88%, transparent);
-  box-shadow: var(--shadow-1);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
 }
 
-.overlay p + p {
-  margin-top: .25rem;
+.modelCard {
+  max-width: min(34rem, 100%);
+  border: 1px solid #ffffff1f;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 1rem 1.25rem;
+  color: var(--color-text-1);
+  background-color: color-mix(in srgb, var(--color-bg-0-5) 82%, transparent);
+  box-shadow: var(--shadow-2);
+  text-align: center;
+}
+
+.modelCard strong {
+  color: var(--color-text);
+  font-family: var(--font-geom);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.previewLabel {
+  color: var(--color-lalt);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }

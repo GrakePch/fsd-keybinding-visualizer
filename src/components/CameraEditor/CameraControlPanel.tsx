@@ -1,22 +1,24 @@
 import { useMemo, useState } from "react";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
+import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import CameraNumberField from "./CameraNumberField";
 import CameraSlotButtons from "./CameraSlotButtons";
 import CameraVector3Editor from "./CameraVector3Editor";
 import styles from "./CameraControlPanel.module.css";
 
 interface CameraControlPanelProps {
-  loadedModel: null;
+  loadedModel: SelectableVehicleModel | null;
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
   onSelectSlot: (slotId: number) => void;
+  onSelectModel: () => void;
   onUpdateSlot: (slot: SavedCameraSlot) => void;
   onCreateSlot: () => void;
   onCopySlot: (sourceSlotId: number) => void;
 }
 
-function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, onSelectSlot, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, onSelectSlot, onSelectModel, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const selectedCopySource = useMemo(() => copySourceSlots.find((slot) => slot.id === copySourceSlotId) || copySourceSlots[0], [copySourceSlotId, copySourceSlots]);
@@ -30,7 +32,15 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
     <aside className={styles.panel} aria-label="Camera controls">
       <section className={styles.section}>
         <h2 className={styles.heading}>Loaded Model</h2>
-        {loadedModel ? null : null}
+        {loadedModel && (
+          <div className={styles.loadedModelCard}>
+            <strong>{loadedModel.displayName}</strong>
+            <span>{loadedModel.className || loadedModel.slug}</span>
+          </div>
+        )}
+        <button className={styles.modelButton} type="button" onClick={onSelectModel}>
+          {loadedModel ? "Change model" : "Select model"}
+        </button>
       </section>
 
       <section className={styles.section}>

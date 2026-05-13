@@ -1,0 +1,82 @@
+.panel {
+  min-height: 0;
+  border-left: 1px solid #ffffff18;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: .75rem;
+  overflow: hidden;
+  padding: .875rem;
+  background-color: var(--color-bg-0-5);
+}
+
+.searchLabel {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  color: var(--color-text-1);
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.searchLabel input {
+  width: 100%;
+  min-width: 0;
+  padding: .55rem .6rem;
+  border: 1px solid #ffffff22;
+  border-radius: .5rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.statusRow {
+  min-height: 1.2rem;
+  color: var(--color-text-2);
+  line-height: 1.3;
+}
+
+.modelList {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  overflow: auto;
+  padding-right: .25rem;
+}
+
+.modelButton {
+  width: 100%;
+  border: 1px solid #ffffff12;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
+  text-align: left;
+}
+
+.modelButtonActive {
+  border-color: var(--color-lalt);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-lalt) 55%, transparent);
+}
+
+.modelName {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.modelMeta {
+  color: var(--color-text-2);
+  font-size: .8rem;
+  line-height: 1.25;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+}
+
+.actions button {
+  border-radius: .5rem;
+}
