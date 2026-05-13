@@ -31,5 +31,6 @@ export type VehicleModelManifestState = {
 export type SelectableVehicleModel = VehicleModelEntry & {
   slug: string;
   displayName: string;
-  src: string | null;
+  glb: string;
+  src: string;
 };

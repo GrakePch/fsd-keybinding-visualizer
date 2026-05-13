@@ -74,8 +74,9 @@ function loadVehicleModelManifest() {
   return manifestPromise;
 }
 
-function getSelectableVehicleModels(manifest: VehicleModelManifest | null): SelectableVehicleModel[] {
+export function getSelectableVehicleModels(manifest: VehicleModelManifest | null): SelectableVehicleModel[] {
   return Object.entries(manifest?.models || {})
+    .filter(([, model]) => Boolean(model.glb?.trim()))
     .map(([slug, model]) => {
       const displayName = model.spvName || model.rsiName || model.className || slug;
 
