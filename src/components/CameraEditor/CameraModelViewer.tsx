@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
+import { getModelLoadProgressPercent } from "../../utils/cameraModelOverlay";
 import { getCameraFitFromBounds } from "../../utils/cameraViewport";
 import styles from "./CameraModelViewer.module.css";
 
@@ -16,6 +17,7 @@ type LoadState = "loading" | "ready" | "error";
 function CameraModelViewer({ model }: CameraModelViewerProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [loadState, setLoadState] = useState<LoadState>("loading");
+  const [loadProgress, setLoadProgress] = useState<number | null>(null);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -65,14 +67,19 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
     const loader = new GLTFLoader();
     loader.setMeshoptDecoder(MeshoptDecoder);
     setLoadState("loading");
+    setLoadProgress(null);
     loader.load(
       model.src,
       (gltf) => {
         if (disposed) return;
         scene.add(gltf.scene);
+        setLoadProgress(100);
         setLoadState("ready");
       },
-      undefined,
+      (event) => {
+        if (disposed) return;
+        setLoadProgress(getModelLoadProgressPercent(event));
+      },
       (error) => {
         if (disposed) return;
         console.warn("Vehicle model failed to load", error);
@@ -108,7 +115,14 @@ function CameraModelViewer({ model }: CameraModelViewerProps) {
     <div className={styles.viewer} ref={hostRef}>
       {loadState !== "ready" && (
         <div className={styles.statusOverlay}>
-          <span>{loadState === "loading" ? "Loading 3D model…" : "3D model failed to load"}</span>
+          <div className={styles.statusCard}>
+            <span>{loadState === "loading" ? "Loading 3D model…" : "3D model failed to load"}</span>
+            {loadState === "loading" && (
+              <div className={styles.progressTrack} role="progressbar" aria-label="3D model loading progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={loadProgress ?? undefined}>
+                <div className={styles.progressFill} style={{ width: `${loadProgress ?? 12}%` }} />
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

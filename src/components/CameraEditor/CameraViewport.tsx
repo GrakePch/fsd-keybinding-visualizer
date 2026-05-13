@@ -1,5 +1,6 @@
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
+import { shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
 import CameraModelViewer from "./CameraModelViewer";
 import styles from "./CameraViewport.module.css";
 
@@ -11,11 +12,13 @@ interface CameraViewportProps {
 }
 
 function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel }: CameraViewportProps) {
+  const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel: Boolean(model?.src) });
+
   return (
     <section className={styles.viewport} aria-label="Camera 3D viewport">
       <div className={styles.grid} />
       {model?.src && <CameraModelViewer model={model} />}
-      {model && (
+      {model && showModelInfo && (
         <div className={styles.modelInfo}>
           <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : "Loaded Model"}</span>
           <strong>{model.displayName}</strong>
