@@ -43,7 +43,7 @@ export function useSelectableVehicleModels() {
 
 export function getVehicleModelSrc(manifest: VehicleModelManifest | null, model: Pick<SelectableVehicleModel, "glb"> | null) {
   if (!model?.glb) return null;
-  const baseUrl = trimTrailingSlash(manifest?.baseUrl || modelBaseUrl);
+  const baseUrl = trimTrailingSlash(modelBaseUrl.charAt(0) === "/" ? modelBaseUrl : manifest?.baseUrl || modelBaseUrl);
   return `${baseUrl}/${trimLeadingSlash(model.glb)}`;
 }
 

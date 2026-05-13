@@ -14,32 +14,27 @@
   background-size: 2rem 2rem;
 }
 
-.modelPreview {
+.modelInfo {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-}
-
-.modelCard {
-  max-width: min(34rem, 100%);
+  top: 1rem;
+  left: 1rem;
+  max-width: min(32rem, calc(100% - 2rem));
   border: 1px solid #ffffff1f;
-  border-radius: 1rem;
+  border-radius: .75rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
-  padding: 1rem 1.25rem;
+  gap: .35rem;
+  padding: .75rem .9rem;
   color: var(--color-text-1);
   background-color: color-mix(in srgb, var(--color-bg-0-5) 82%, transparent);
   box-shadow: var(--shadow-2);
-  text-align: center;
+  pointer-events: none;
 }
 
-.modelCard strong {
+.modelInfo strong {
   color: var(--color-text);
   font-family: var(--font-geom);
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   line-height: 1.1;
 }
 
