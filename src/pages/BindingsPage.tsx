@@ -1,0 +1,267 @@
+import { useEffect, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
+import styles from "./BindingsPage.module.css";
+import KeyboardFull from "../components/KeyboardFull/KeyboardFull";
+import ActionMap from "../components/ActionMap/ActionMap";
+import ActionMapFileConsole from "../components/ActionMapFileConsole/ActionMapFileConsole";
+import Icon from "@mdi/react";
+import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
+import { CTXDefaultActionGroups, CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXUserActionmap, CTXActionRebinding, CTXActionBindingDraft, CTXLanguage, type ActionBindingDraft, type AppLanguage } from "../contexts";
+import { ActionGroup, OrderInfo, UserActionmap } from "../interfaces";
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { actionMapCategories } from "../utils/actionMapCategories";
+import defaultProfile from "../data/defaultProfile.json";
+import { initDefaultActionGroups } from "../utils/utils";
+import { codesNonBindable, keyCodeToCigInput } from "../utils/keyCodes";
+
+const getActionMapWidthBounds = () => {
+  const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const min = 20 * rem;
+  const max = Math.max(min, Math.min(80 * rem, window.innerWidth - 5 * rem));
+
+  return { min, max };
+};
+
+const clampActionMapWidth = (width: number) => {
+  const { min, max } = getActionMapWidthBounds();
+
+  return Math.min(max, Math.max(min, width));
+};
+
+const getInitialActionMapWidth = () => {
+  if (typeof window === "undefined") return 640;
+
+  return clampActionMapWidth(window.innerWidth * 0.5);
+};
+
+const LANGUAGE_LOCAL_STORAGE_KEY = "fsd-keybinding-visualizer.lang";
+
+const isAppLanguage = (lang: string | null): lang is AppLanguage => lang === "en" || lang === "zh";
+
+const getInitialLanguage = (): AppLanguage => {
+  if (typeof window === "undefined") return "en";
+
+  const queryLanguage = new URLSearchParams(window.location.search).get("lang");
+  if (isAppLanguage(queryLanguage)) return queryLanguage;
+
+  const storedLanguage = window.localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY);
+  if (isAppLanguage(storedLanguage)) return storedLanguage;
+
+  return "en";
+};
+
+const isEditableEventTarget = (target: EventTarget | null) => {
+  if (!(target instanceof HTMLElement)) return false;
+
+  return target.isContentEditable || target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT";
+};
+
+const cx = (...classNames: Array<string | false | null | undefined>) => classNames.filter(Boolean).join(" ");
+
+function BindingsPage() {
+  const [searchParam, setSearchParam] = useSearchParams();
+  const { t, i18n } = useTranslation("ui");
+  const [defaultActionGroups, setDefaultActionGroups] = useState<Record<string, ActionGroup>>({});
+  const [orderInfo, setOrderInfo] = useState<OrderInfo>({ groupOrder: [], inGroupOrder: {} });
+  const [keysHovering, setKeysHovering] = useState<string[]>([]);
+  const [userActionmap, setUserActionmap] = useState<UserActionmap>({});
+  const [combinedActionGroups, setCombinedActionGroups] = useState<Record<string, ActionGroup>>({});
+  const [actionRebinding, setActionRebinding] = useState<[string, string]>(["", ""]);
+  const [actionBindingDraft, setActionBindingDraft] = useState<ActionBindingDraft | null>(null);
+  const [isActionMapOpen, setIsActionMapOpen] = useState(true);
+  const [isActionMapResizing, setIsActionMapResizing] = useState(false);
+  const [actionMapWidth, setActionMapWidth] = useState(getInitialActionMapWidth);
+  const [language, setLanguage] = useState<AppLanguage>(getInitialLanguage);
+
+  useEffect(() => {
+    initDefaultActionGroups(defaultProfile, setDefaultActionGroups, setCombinedActionGroups, setOrderInfo);
+  }, []);
+
+  useEffect(() => {
+    document.title = t("app.title");
+  }, [t]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (actionRebinding[1] === "") return;
+      if (isEditableEventTarget(event.target)) return;
+      if (codesNonBindable.has(event.code)) return;
+      if (!keyCodeToCigInput[event.code]) return;
+
+      event.preventDefault();
+      setActionBindingDraft((draft) =>
+        draft
+          ? {
+              ...draft,
+              current: {
+                ...draft.current,
+                kbm: {
+                  ...draft.current.kbm,
+                  key: keyCodeToCigInput[event.code],
+                },
+              },
+            }
+          : draft
+      );
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [actionRebinding]);
+
+  useEffect(() => {
+    const combined = structuredClone(defaultActionGroups);
+
+    for (const [groupName, actions] of Object.entries(userActionmap)) {
+      if (!actions) continue;
+      for (const [actionName, { kbm, multiTap }] of Object.entries(actions)) {
+        if (!kbm) continue;
+        if (groupName in combined && actionName in combined[groupName].actions) {
+          combined[groupName].actions[actionName].kbm = { ...kbm };
+          combined[groupName].actions[actionName].multiTap = multiTap;
+        }
+      }
+    }
+
+    console.log(userActionmap);
+    setCombinedActionGroups(combined);
+  }, [defaultActionGroups, userActionmap]);
+
+  useEffect(() => {
+    const cate = searchParam.get("c") || "";
+    if (searchParam.has("c") && actionMapCategories.includes(cate) === false) {
+      const nextSearchParam = new URLSearchParams(searchParam);
+      nextSearchParam.delete("c");
+      setSearchParam(nextSearchParam);
+    }
+  }, [defaultActionGroups, orderInfo, searchParam, setSearchParam]);
+
+  useEffect(() => {
+    if (i18n.language !== language) {
+      void i18n.changeLanguage(language);
+    }
+    document.documentElement.lang = language;
+
+    if (searchParam.get("lang") !== language) {
+      const nextSearchParam = new URLSearchParams(searchParam);
+      nextSearchParam.set("lang", language);
+      setSearchParam(nextSearchParam, { replace: true });
+    }
+    window.localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, language);
+  }, [i18n, language, searchParam, setSearchParam]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setActionMapWidth((width) => clampActionMapWidth(width));
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleActionMapResizePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsActionMapOpen(true);
+    setIsActionMapResizing(true);
+
+    const previousCursor = document.body.style.cursor;
+    const previousUserSelect = document.body.style.userSelect;
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+
+    const updateWidth = (clientX: number) => {
+      setActionMapWidth(clampActionMapWidth(window.innerWidth - clientX));
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      updateWidth(event.clientX);
+    };
+
+    const handlePointerUp = () => {
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerup", handlePointerUp);
+      document.body.style.cursor = previousCursor;
+      document.body.style.userSelect = previousUserSelect;
+      setIsActionMapResizing(false);
+    };
+
+    document.addEventListener("pointermove", handlePointerMove);
+    document.addEventListener("pointerup", handlePointerUp);
+    updateWidth(event.clientX);
+  };
+
+  const appShellStyle = {
+    "--action-sidebar-width": `${actionMapWidth}px`,
+  } as CSSProperties;
+
+  const switchLanguage = () => {
+    const nextLanguage: AppLanguage = language === "en" ? "zh" : "en";
+    const nextSearchParam = new URLSearchParams(searchParam);
+
+    nextSearchParam.set("lang", nextLanguage);
+    setLanguage(nextLanguage);
+    setSearchParam(nextSearchParam);
+    window.localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, nextLanguage);
+  };
+
+  const counterpartLanguage = language === "en" ? "zh" : "en";
+
+  return (
+    <CTXLanguage.Provider value={[language, setLanguage]}>
+      <CTXOrderInfo.Provider value={orderInfo}>
+        <CTXDefaultActionGroups.Provider value={defaultActionGroups}>
+          <CTXUserActionmap.Provider value={[userActionmap, setUserActionmap]}>
+            <CTXCombinedActionGroups.Provider value={[combinedActionGroups, setCombinedActionGroups]}>
+              <CTXKeysHovering.Provider value={[keysHovering, setKeysHovering]}>
+                <CTXActionRebinding.Provider value={[actionRebinding, setActionRebinding]}>
+                  <CTXActionBindingDraft.Provider value={[actionBindingDraft, setActionBindingDraft]}>
+                    <div className={cx(styles.shell, !isActionMapOpen && styles.actionMapClosed, isActionMapResizing && styles.actionMapResizing)} style={appShellStyle}>
+                      <main className={styles.visualizerPane}>
+                        <div className={styles.visualizerScroll}>
+                          <KeyboardFull />
+                        </div>
+                        <ActionMapFileConsole />
+                        <button className={styles.languageToggleFab} type="button" aria-label={t(counterpartLanguage === "zh" ? "language.switchToChinese" : "language.switchToEnglish")} onClick={switchLanguage}>
+                          {t(counterpartLanguage === "zh" ? "language.chineseShort" : "language.englishShort")}
+                        </button>
+                      </main>
+                      <aside className={styles.actionMapSidebar} aria-label={t("actionMapSidebar.ariaLabel")}>
+                        <button
+                          className={styles.actionMapToggle}
+                          type="button"
+                          aria-label={t(isActionMapOpen ? "actionMapSidebar.collapse" : "actionMapSidebar.expand")}
+                          aria-expanded={isActionMapOpen}
+                          onClick={() => setIsActionMapOpen((open) => !open)}
+                        >
+                          <Icon path={isActionMapOpen ? mdiChevronRight : mdiChevronLeft} size="1.25rem" />
+                        </button>
+                        <div className={styles.actionMapDrawer}>
+                          <div
+                            className={styles.actionMapResizeHandle}
+                            role="separator"
+                            aria-orientation="vertical"
+                            aria-label={t("actionMapSidebar.resizeHandle")}
+                            onPointerDown={handleActionMapResizePointerDown}
+                          />
+                          <ActionMap />
+                        </div>
+                      </aside>
+                    </div>
+                  </CTXActionBindingDraft.Provider>
+                </CTXActionRebinding.Provider>
+              </CTXKeysHovering.Provider>
+            </CTXCombinedActionGroups.Provider>
+          </CTXUserActionmap.Provider>
+        </CTXDefaultActionGroups.Provider>
+      </CTXOrderInfo.Provider>
+    </CTXLanguage.Provider>
+  );
+}
+
+export default BindingsPage;
