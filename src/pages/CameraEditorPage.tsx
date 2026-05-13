@@ -6,6 +6,7 @@ import CameraModelSelectorPanel from "../components/CameraEditor/CameraModelSele
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
 import type { SelectableVehicleModel } from "../types/vehicleModel";
+import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
 import { copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
 import styles from "./CameraEditorPage.module.css";
 
@@ -14,7 +15,8 @@ function CameraEditorPage() {
   const [baselineSavedViewsJson, setBaselineSavedViewsJson] = useState("null");
   const [selectedGroupId, setSelectedGroupId] = useState("");
   const [selectedSlotId, setSelectedSlotId] = useState(0);
-  const [loadedModel, setLoadedModel] = useState<SelectableVehicleModel | null>(null);
+  const [standaloneLoadedModel, setStandaloneLoadedModel] = useState<SelectableVehicleModel | null>(null);
+  const [groupModelDrafts, setGroupModelDrafts] = useState<GroupModelDrafts>({});
   const [previewModel, setPreviewModel] = useState<SelectableVehicleModel | null>(null);
   const [isSelectingModel, setIsSelectingModel] = useState(false);
 
@@ -22,6 +24,7 @@ function CameraEditorPage() {
   const selectedSlot = selectedGroup ? getSlotById(selectedGroup, selectedSlotId) : undefined;
   const currentSavedViewsJson = JSON.stringify(savedViews);
   const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
+  const loadedModel = selectedGroupId ? getDraftModelForGroup(groupModelDrafts, selectedGroupId) : standaloneLoadedModel;
   const viewportModel = isSelectingModel ? previewModel || loadedModel : loadedModel;
 
   const loadSavedViews = (document: SavedViewsDocument) => {
@@ -29,6 +32,15 @@ function CameraEditorPage() {
     setBaselineSavedViewsJson(JSON.stringify(document));
     setSelectedGroupId(document.groups[0]?.id || "");
     setSelectedSlotId(0);
+    setGroupModelDrafts({});
+    setPreviewModel(null);
+    setIsSelectingModel(false);
+  };
+
+  const selectGroup = (groupId: string) => {
+    setSelectedGroupId(groupId);
+    setPreviewModel(null);
+    setIsSelectingModel(false);
   };
 
   const updateSlot = (slot: SavedCameraSlot) => {
@@ -53,7 +65,11 @@ function CameraEditorPage() {
   };
 
   const confirmPreviewModel = () => {
-    if (previewModel) setLoadedModel(previewModel);
+    if (previewModel && selectedGroupId) {
+      setGroupModelDrafts((drafts) => setDraftModelForGroup(drafts, selectedGroupId, previewModel));
+    } else if (previewModel) {
+      setStandaloneLoadedModel(previewModel);
+    }
     setIsSelectingModel(false);
   };
 
@@ -68,7 +84,7 @@ function CameraEditorPage() {
         fileConsole={<CameraFileConsole savedViews={savedViews} hasChanges={hasSavedViewsChanges} onLoad={(document) => loadSavedViews(document)} onSaved={() => setBaselineSavedViewsJson(JSON.stringify(savedViews))} />}
         groups={savedViews?.groups || []}
         selectedGroupId={selectedGroupId}
-        onSelectGroup={setSelectedGroupId}
+        onSelectGroup={selectGroup}
       />
       <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} />
       {isSelectingModel ? (
