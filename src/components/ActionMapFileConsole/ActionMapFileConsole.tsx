@@ -1,7 +1,8 @@
 import "./ActionMapFileConsole.css";
 import { ChangeEvent, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CTXUserActionmap } from "../../contexts";
+import { CTXGameRootDirectory, CTXUserActionmap } from "../../contexts";
+import { ACTIONMAP_PATH_PARTS, WindowWithDirectoryPicker, getNestedFileHandle } from "../../utils/fileSystemAccess";
 import { buildActionmapsXML, getUserActionmap } from "../../utils/utils";
 import xmlToJson from "../../utils/xmlToJson";
 
@@ -9,38 +10,16 @@ type LoadedActionmapSource = "none" | "upload" | "localPath";
 
 type ConsoleMode = "idle" | "import" | "export";
 
-type FileSystemWritableFileStreamLike = {
-  write: (data: BlobPart) => Promise<void>;
-  close: () => Promise<void>;
-};
-
-type FileSystemFileHandleLike = {
-  getFile: () => Promise<File>;
-  createWritable: () => Promise<FileSystemWritableFileStreamLike>;
-};
-
-type FileSystemDirectoryHandleLike = {
-  name: string;
-  getDirectoryHandle: (name: string, options?: { create?: boolean }) => Promise<FileSystemDirectoryHandleLike>;
-  getFileHandle: (name: string, options?: { create?: boolean }) => Promise<FileSystemFileHandleLike>;
-};
-
-type WindowWithDirectoryPicker = Window & {
-  showDirectoryPicker?: (options?: { mode?: "read" | "readwrite" }) => Promise<FileSystemDirectoryHandleLike>;
-};
-
-const ACTIONMAP_PATH_PARTS = ["USER", "Client", "0", "Profiles", "default", "actionmaps.xml"];
-
 const ActionMapFileConsole = () => {
   const { t } = useTranslation("ui");
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
+  const [gameRootDirectory, setGameRootDirectory] = useContext(CTXGameRootDirectory);
   const [mode, setMode] = useState<ConsoleMode>("idle");
   const [source, setSource] = useState<LoadedActionmapSource>("none");
   const [importedXmlString, setImportedXmlString] = useState("");
   const [baselineActionmapJson, setBaselineActionmapJson] = useState("{}");
   const [loadedFileName, setLoadedFileName] = useState("");
-  const [localRootDirectory, setLocalRootDirectory] = useState<FileSystemDirectoryHandleLike | null>(null);
-  const [localPathLabel, setLocalPathLabel] = useState("");
+
   const [isLocalActionmapMissing, setIsLocalActionmapMissing] = useState(false);
   const [isOverwriteSuccessVisible, setIsOverwriteSuccessVisible] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -49,14 +28,14 @@ const ActionMapFileConsole = () => {
   const canUseLocalPath = useMemo(() => typeof (window as WindowWithDirectoryPicker).showDirectoryPicker === "function", []);
   const currentActionmapJson = useMemo(() => JSON.stringify(userActionmap), [userActionmap]);
   const hasActionmapChanges = currentActionmapJson !== baselineActionmapJson;
-  const canWriteLocalPath = source === "localPath" && localRootDirectory !== null && hasActionmapChanges;
+  const canWriteLocalPath = source === "localPath" && gameRootDirectory.rootDirectory !== null && hasActionmapChanges;
 
   const loadedLabel = useMemo(() => {
     if (source === "localPath" && isLocalActionmapMissing) return t("actionMapFileConsole.missingActionmapLabel");
-    if (source === "localPath" && localPathLabel) return t("actionMapFileConsole.localPath", { path: localPathLabel });
+    if (source === "localPath" && gameRootDirectory.pathLabel) return t("actionMapFileConsole.localPath", { path: gameRootDirectory.pathLabel });
     if (source === "upload" && loadedFileName) return t("actionMapFileConsole.loadedFile", { fileName: loadedFileName });
     return t("actionMapFileConsole.notLoaded");
-  }, [isLocalActionmapMissing, loadedFileName, localPathLabel, source, t]);
+  }, [gameRootDirectory.pathLabel, isLocalActionmapMissing, loadedFileName, source, t]);
   const consoleLabel = isOverwriteSuccessVisible ? t("actionMapFileConsole.overwriteSuccess") : mode === "import" ? t("actionMapFileConsole.importLocalPathHint") : loadedLabel;
   const isMissingActionmapLabelVisible = !isOverwriteSuccessVisible && mode !== "import" && source === "localPath" && isLocalActionmapMissing;
 
@@ -100,22 +79,11 @@ const ActionMapFileConsole = () => {
       loadActionmapXml(xmlString);
       setSource("upload");
       setLoadedFileName(file.name);
-      setLocalRootDirectory(null);
-      setLocalPathLabel("");
       setIsLocalActionmapMissing(false);
       setMode("idle");
     } catch {
       console.warn(t("actionMapFileConsole.uploadFailedWarning"));
     }
-  };
-
-  const getActionmapFileHandle = async (rootDirectory: FileSystemDirectoryHandleLike, create: boolean) => {
-    let directory = rootDirectory;
-    for (const pathPart of ACTIONMAP_PATH_PARTS.slice(0, -1)) {
-      directory = await directory.getDirectoryHandle(pathPart, { create });
-    }
-
-    return directory.getFileHandle(ACTIONMAP_PATH_PARTS.at(-1)!, { create });
   };
 
   const importFromLocalPath = async () => {
@@ -125,18 +93,20 @@ const ActionMapFileConsole = () => {
     }
 
     try {
-      const rootDirectory = await (window as WindowWithDirectoryPicker).showDirectoryPicker?.({ mode: "readwrite" });
-      if (!rootDirectory) return;
+      let rootDirectory = gameRootDirectory.rootDirectory;
+      if (!rootDirectory) {
+        rootDirectory = await (window as WindowWithDirectoryPicker).showDirectoryPicker?.({ mode: "readwrite" }) || null;
+        if (!rootDirectory) return;
+        setGameRootDirectory({ rootDirectory, pathLabel: rootDirectory.name });
+      }
 
-      setLocalRootDirectory(rootDirectory);
-      setLocalPathLabel(rootDirectory.name);
       setSource("localPath");
       setLoadedFileName("");
       setIsLocalActionmapMissing(false);
       setMode("idle");
 
       try {
-        const actionmapHandle = await getActionmapFileHandle(rootDirectory, false);
+        const actionmapHandle = await getNestedFileHandle(rootDirectory, ACTIONMAP_PATH_PARTS, false);
         const file = await actionmapHandle.getFile();
         loadActionmapXml(await file.text());
       } catch {
@@ -166,10 +136,10 @@ const ActionMapFileConsole = () => {
   };
 
   const overwriteLocalPath = async () => {
-    if (!localRootDirectory) return;
+    if (!gameRootDirectory.rootDirectory) return;
 
     try {
-      const actionmapHandle = await getActionmapFileHandle(localRootDirectory, true);
+      const actionmapHandle = await getNestedFileHandle(gameRootDirectory.rootDirectory, ACTIONMAP_PATH_PARTS, true);
       const writable = await actionmapHandle.createWritable();
       await writable.write(buildActionmapsXML(importedXmlString, userActionmap));
       await writable.close();
