@@ -28,7 +28,7 @@ describe("getCameraFitFromBounds", () => {
 });
 
 describe("getTargetOffsetMarkers", () => {
-  it("maps camera target offsets into CSS2D world-space marker positions with slot labels", () => {
+  it("maps camera target offsets into CSS2D meter-space marker positions with slot labels", () => {
     const markers = getTargetOffsetMarkers([
       { id: 0, targetOffset: { x: -10, y: 100, z: -5 } },
       { id: 4, targetOffset: { x: 0, y: 200, z: 0 } },
@@ -42,7 +42,7 @@ describe("getTargetOffsetMarkers", () => {
     ]);
   });
 
-  it("separates markers in world space when target offsets share the same x/z position", () => {
+  it("separates markers in meter space when target offsets share the same x/z position", () => {
     const markers = getTargetOffsetMarkers([
       { id: 1, targetOffset: { x: 3, y: 10, z: -7 } },
       { id: 2, targetOffset: { x: 3, y: 20, z: -7 } },

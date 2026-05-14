@@ -39,7 +39,7 @@ export type TargetOffsetMarker = {
   position: [number, number, number];
 };
 
-const TARGET_OFFSET_MARKER_SPREAD_WORLD_UNITS = 1.5;
+const TARGET_OFFSET_MARKER_SPREAD_METERS = 1.5;
 
 const hasFiniteOffset = (offset: Vec3) => isFinite(offset.x) && isFinite(offset.z);
 
@@ -58,8 +58,8 @@ export function getTargetOffsetMarkers(slots: TargetOffsetMarkerInput[]): Target
     const samePositionIndex = samePositionMarkers.map((samePositionMarker) => samePositionMarker.id).indexOf(slot.id);
     const shouldSeparate = samePositionMarkers.length > 1;
     const angle = shouldSeparate ? -Math.PI / 2 + (Math.PI * 2 * samePositionIndex) / samePositionMarkers.length : 0;
-    const offsetX = shouldSeparate ? Math.round(Math.cos(angle) * TARGET_OFFSET_MARKER_SPREAD_WORLD_UNITS * 100) / 100 : 0;
-    const offsetZ = shouldSeparate ? Math.round(Math.sin(angle) * TARGET_OFFSET_MARKER_SPREAD_WORLD_UNITS * 100) / 100 : 0;
+    const offsetX = shouldSeparate ? Math.round(Math.cos(angle) * TARGET_OFFSET_MARKER_SPREAD_METERS * 100) / 100 : 0;
+    const offsetZ = shouldSeparate ? Math.round(Math.sin(angle) * TARGET_OFFSET_MARKER_SPREAD_METERS * 100) / 100 : 0;
 
     return {
       slotId: slot.id,
