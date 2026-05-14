@@ -33,23 +33,51 @@ export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undef
   };
 }
 
-export type TargetOffsetMarkerInput = Pick<SavedCameraSlot, "id" | "targetOffset">;
+export type CameraPositionMarkerInput = Pick<SavedCameraSlot, "id" | "targetOffset" | "cameraRotationAngle" | "distance">;
 
-export type TargetOffsetMarker = {
+export type CameraPositionMarker = {
   slotId: number;
   label: string;
-  position: [number, number, number];
+  targetPosition: [number, number, number];
+  cameraPosition: [number, number, number];
 };
 
-const hasFiniteOffset = (offset: Vec3) => isFinite(offset.x) && isFinite(offset.z);
+const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
-export function getTargetOffsetMarkers(slots: TargetOffsetMarkerInput[]): TargetOffsetMarker[] {
-  const slotsWithOffsets = slots.filter((slot) => hasFiniteOffset(slot.targetOffset));
-  if (!slotsWithOffsets.length) return [];
+const hasFiniteCameraPositionInputs = (slot: CameraPositionMarkerInput) =>
+  isFinite(slot.targetOffset.x) &&
+  isFinite(slot.targetOffset.y) &&
+  isFinite(slot.targetOffset.z) &&
+  isFinite(slot.cameraRotationAngle.x) &&
+  isFinite(slot.cameraRotationAngle.z) &&
+  isFinite(slot.distance);
 
-  return slotsWithOffsets.map((slot) => ({
-    slotId: slot.id,
-    label: String(slot.id + 1),
-    position: [slot.targetOffset.x, 0, slot.targetOffset.z],
-  }));
+export function savedViewPositionToViewportPosition(position: Vec3): [number, number, number] {
+  return [position.x, position.z, position.y];
+}
+
+export function getCameraBoomDirection(rotationAngle: Vec3): [number, number, number] {
+  const pitch = toRadians(rotationAngle.x);
+  const yaw = toRadians(rotationAngle.z);
+  const horizontalDistance = Math.cos(pitch);
+
+  return [Math.sin(yaw) * horizontalDistance, -Math.sin(pitch), Math.cos(yaw) * horizontalDistance];
+}
+
+export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[]): CameraPositionMarker[] {
+  return slots.filter(hasFiniteCameraPositionInputs).map((slot) => {
+    const targetPosition = savedViewPositionToViewportPosition(slot.targetOffset);
+    const boomDirection = getCameraBoomDirection(slot.cameraRotationAngle);
+
+    return {
+      slotId: slot.id,
+      label: String(slot.id + 1),
+      targetPosition,
+      cameraPosition: [
+        targetPosition[0] + boomDirection[0] * slot.distance,
+        targetPosition[1] + boomDirection[1] * slot.distance,
+        targetPosition[2] + boomDirection[2] * slot.distance,
+      ],
+    };
+  });
 }

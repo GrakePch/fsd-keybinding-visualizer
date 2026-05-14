@@ -6,12 +6,12 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { CSS2DObject, CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import { getModelLoadProgressPercent } from "../../utils/cameraModelOverlay";
-import { getCameraFitFromBounds, type TargetOffsetMarker, VEHICLE_MODEL_METERS_PER_SOURCE_UNIT } from "../../utils/cameraViewport";
+import { getCameraFitFromBounds, type CameraPositionMarker, VEHICLE_MODEL_METERS_PER_SOURCE_UNIT } from "../../utils/cameraViewport";
 import styles from "./CameraModelViewer.module.css";
 
 interface CameraModelViewerProps {
   activeSlotId?: number;
-  markers: TargetOffsetMarker[];
+  markers: CameraPositionMarker[];
   model: SelectableVehicleModel;
 }
 
@@ -21,6 +21,7 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
   const hostRef = useRef<HTMLDivElement | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const markerObjectsRef = useRef<CSS2DObject[]>([]);
+  const markerLineObjectsRef = useRef<THREE.Line[]>([]);
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [loadProgress, setLoadProgress] = useState<number | null>(null);
 
@@ -112,6 +113,13 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
       window.cancelAnimationFrame(animationFrame);
       markerObjectsRef.current.forEach((markerObject) => markerObject.removeFromParent());
       markerObjectsRef.current = [];
+      markerLineObjectsRef.current.forEach((lineObject) => {
+        lineObject.geometry.dispose();
+        const materials = Array.isArray(lineObject.material) ? lineObject.material : [lineObject.material];
+        materials.forEach((material) => material.dispose());
+        lineObject.removeFromParent();
+      });
+      markerLineObjectsRef.current = [];
       if (sceneRef.current === scene) sceneRef.current = null;
       resizeObserver.disconnect();
       controls.dispose();
@@ -133,21 +141,56 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
     if (!scene) return;
 
     markerObjectsRef.current.forEach((markerObject) => markerObject.removeFromParent());
-    markerObjectsRef.current = markers.map((marker) => {
-      const element = document.createElement("div");
-      element.className = `${styles.targetOffsetMarker} ${activeSlotId === marker.slotId ? styles.targetOffsetMarkerActive : ""}`;
-      element.textContent = marker.label;
-      element.title = `Slot ${marker.label} target offset`;
-      element.setAttribute("aria-label", `Camera slot ${marker.label} target offset`);
-      const markerObject = new CSS2DObject(element);
-      markerObject.position.set(...marker.position);
-      scene.add(markerObject);
-      return markerObject;
+    markerObjectsRef.current = [];
+    markerLineObjectsRef.current.forEach((lineObject) => {
+      lineObject.geometry.dispose();
+      const materials = Array.isArray(lineObject.material) ? lineObject.material : [lineObject.material];
+      materials.forEach((material) => material.dispose());
+      lineObject.removeFromParent();
+    });
+    markerLineObjectsRef.current = [];
+
+    markers.forEach((marker) => {
+      const isActive = activeSlotId === marker.slotId;
+      const cameraElement = document.createElement("div");
+      cameraElement.className = `${styles.cameraPositionMarker} ${isActive ? styles.cameraPositionMarkerActive : ""}`;
+      cameraElement.textContent = marker.label;
+      cameraElement.title = `Slot ${marker.label} camera position`;
+      cameraElement.setAttribute("aria-label", `Camera slot ${marker.label} camera position`);
+      const cameraMarkerObject = new CSS2DObject(cameraElement);
+      cameraMarkerObject.position.set(...marker.cameraPosition);
+      scene.add(cameraMarkerObject);
+      markerObjectsRef.current.push(cameraMarkerObject);
+
+      if (!isActive) return;
+
+      const targetElement = document.createElement("div");
+      targetElement.className = styles.targetOffsetDot;
+      targetElement.title = `Slot ${marker.label} target offset`;
+      targetElement.setAttribute("aria-label", `Camera slot ${marker.label} target offset`);
+      const targetMarkerObject = new CSS2DObject(targetElement);
+      targetMarkerObject.position.set(...marker.targetPosition);
+      scene.add(targetMarkerObject);
+      markerObjectsRef.current.push(targetMarkerObject);
+
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...marker.targetPosition), new THREE.Vector3(...marker.cameraPosition)]);
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, depthTest: false, depthWrite: false, transparent: true, opacity: isActive ? 0.72 : 0.48 });
+      const lineObject = new THREE.Line(lineGeometry, lineMaterial);
+      lineObject.renderOrder = 10;
+      scene.add(lineObject);
+      markerLineObjectsRef.current.push(lineObject);
     });
 
     return () => {
       markerObjectsRef.current.forEach((markerObject) => markerObject.removeFromParent());
       markerObjectsRef.current = [];
+      markerLineObjectsRef.current.forEach((lineObject) => {
+        lineObject.geometry.dispose();
+        const materials = Array.isArray(lineObject.material) ? lineObject.material : [lineObject.material];
+        materials.forEach((material) => material.dispose());
+        lineObject.removeFromParent();
+      });
+      markerLineObjectsRef.current = [];
     };
   }, [activeSlotId, markers, model.src]);
 

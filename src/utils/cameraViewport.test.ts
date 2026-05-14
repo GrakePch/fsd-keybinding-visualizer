@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCameraFitFromBounds, getTargetOffsetMarkers } from "./cameraViewport";
+import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, savedViewPositionToViewportPosition } from "./cameraViewport";
 
 describe("getCameraFitFromBounds", () => {
   it("converts centimeter manifest bounds into meter-space camera fit", () => {
@@ -27,30 +27,78 @@ describe("getCameraFitFromBounds", () => {
   });
 });
 
-describe("getTargetOffsetMarkers", () => {
-  it("maps camera target offsets into CSS2D meter-space marker positions with slot labels", () => {
-    const markers = getTargetOffsetMarkers([
-      { id: 0, targetOffset: { x: -10, y: 100, z: -5 } },
-      { id: 4, targetOffset: { x: 0, y: 200, z: 0 } },
-      { id: 8, targetOffset: { x: 10, y: 300, z: 5 } },
+describe("savedViewPositionToViewportPosition", () => {
+  it("maps Star Citizen saved-view coordinates to the Three.js viewport axes", () => {
+    expect(savedViewPositionToViewportPosition({ x: 1, y: 2, z: 3 })).toEqual([1, 3, 2]);
+  });
+});
+
+describe("getCameraBoomDirection", () => {
+  it("uses the viewport +Z axis as the zero-rotation ship nose direction", () => {
+    const direction = getCameraBoomDirection({ x: 0, y: 0, z: 0 });
+
+    expect(direction[0]).toBeCloseTo(0);
+    expect(direction[1]).toBeCloseTo(0);
+    expect(direction[2]).toBeCloseTo(1);
+  });
+
+  it("applies pitch around the horizontal boom direction", () => {
+    const direction = getCameraBoomDirection({ x: -30, y: 0, z: 0 });
+
+    expect(direction[0]).toBeCloseTo(0);
+    expect(direction[1]).toBeCloseTo(0.5);
+    expect(direction[2]).toBeCloseTo(0.8660254);
+  });
+
+  it("applies yaw around the viewport up axis", () => {
+    const direction = getCameraBoomDirection({ x: 0, y: 0, z: 90 });
+
+    expect(direction[0]).toBeCloseTo(1);
+    expect(direction[1]).toBeCloseTo(0);
+    expect(direction[2]).toBeCloseTo(0);
+  });
+});
+
+describe("getCameraPositionMarkers", () => {
+  it("places the camera marker from target offset, rotation angle, and distance", () => {
+    const markers = getCameraPositionMarkers([
+      {
+        id: 0,
+        targetOffset: { x: 10, y: 20, z: 30 },
+        cameraRotationAngle: { x: 0, y: 0, z: 0 },
+        distance: 5,
+      },
     ]);
 
     expect(markers).toEqual([
-      { slotId: 0, label: "1", position: [-10, 0, -5] },
-      { slotId: 4, label: "5", position: [0, 0, 0] },
-      { slotId: 8, label: "9", position: [10, 0, 5] },
+      {
+        slotId: 0,
+        label: "1",
+        targetPosition: [10, 30, 20],
+        cameraPosition: [10, 30, 25],
+      },
     ]);
   });
 
-  it("keeps original marker positions when target offsets share the same x/z position", () => {
-    const markers = getTargetOffsetMarkers([
-      { id: 1, targetOffset: { x: 3, y: 10, z: -7 } },
-      { id: 2, targetOffset: { x: 3, y: 20, z: -7 } },
+  it("keeps overlapping targets and cameras at their true computed positions", () => {
+    const markers = getCameraPositionMarkers([
+      {
+        id: 1,
+        targetOffset: { x: 3, y: 10, z: -7 },
+        cameraRotationAngle: { x: 0, y: 0, z: 0 },
+        distance: 2,
+      },
+      {
+        id: 2,
+        targetOffset: { x: 3, y: 10, z: -7 },
+        cameraRotationAngle: { x: 0, y: 0, z: 0 },
+        distance: 2,
+      },
     ]);
 
     expect(markers).toEqual([
-      { slotId: 1, label: "2", position: [3, 0, -7] },
-      { slotId: 2, label: "3", position: [3, 0, -7] },
+      { slotId: 1, label: "2", targetPosition: [3, -7, 10], cameraPosition: [3, -7, 12] },
+      { slotId: 2, label: "3", targetPosition: [3, -7, 10], cameraPosition: [3, -7, 12] },
     ]);
   });
 });
