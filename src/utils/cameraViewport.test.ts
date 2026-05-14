@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 import { getCameraFitFromBounds, getTargetOffsetMarkers } from "./cameraViewport";
 
 describe("getCameraFitFromBounds", () => {
-  it("uses manifest bounds to center and distance the preview camera", () => {
+  it("converts centimeter manifest bounds into meter-space camera fit", () => {
     const fit = getCameraFitFromBounds({
-      center: [10, 20, 30],
-      size: [100, 200, 50],
-      radius: 120,
+      center: [1000, 2000, 3000],
+      size: [10000, 20000, 5000],
+      radius: 12000,
     });
 
     expect(fit.target).toEqual([10, 20, 30]);

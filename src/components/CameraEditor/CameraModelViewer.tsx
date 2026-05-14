@@ -6,7 +6,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { CSS2DObject, CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import { getModelLoadProgressPercent } from "../../utils/cameraModelOverlay";
-import { getCameraFitFromBounds, type TargetOffsetMarker } from "../../utils/cameraViewport";
+import { getCameraFitFromBounds, type TargetOffsetMarker, VEHICLE_MODEL_METERS_PER_SOURCE_UNIT } from "../../utils/cameraViewport";
 import styles from "./CameraModelViewer.module.css";
 
 interface CameraModelViewerProps {
@@ -83,6 +83,7 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
       model.src,
       (gltf) => {
         if (disposed) return;
+        gltf.scene.scale.setScalar(VEHICLE_MODEL_METERS_PER_SOURCE_UNIT);
         scene.add(gltf.scene);
         setLoadProgress(100);
         setLoadState("ready");

@@ -8,6 +8,8 @@ export type CameraFit = {
   far: number;
 };
 
+export const VEHICLE_MODEL_METERS_PER_SOURCE_UNIT = 0.01;
+
 const DEFAULT_CAMERA_FIT: CameraFit = {
   target: [0, 0, 0],
   cameraPosition: [0, 60, 240],
@@ -20,8 +22,8 @@ export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undef
     return DEFAULT_CAMERA_FIT;
   }
 
-  const [centerX, centerY, centerZ] = bounds.center;
-  const radius = bounds.radius;
+  const [centerX, centerY, centerZ] = bounds.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
+  const radius = bounds.radius * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT;
 
   return {
     target: [centerX, centerY, centerZ],
