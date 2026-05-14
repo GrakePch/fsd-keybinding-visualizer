@@ -42,15 +42,15 @@ describe("getTargetOffsetMarkers", () => {
     ]);
   });
 
-  it("separates markers in meter space when target offsets share the same x/z position", () => {
+  it("keeps original marker positions when target offsets share the same x/z position", () => {
     const markers = getTargetOffsetMarkers([
       { id: 1, targetOffset: { x: 3, y: 10, z: -7 } },
       { id: 2, targetOffset: { x: 3, y: 20, z: -7 } },
     ]);
 
     expect(markers).toEqual([
-      { slotId: 1, label: "2", position: [3, 0, -8.5] },
-      { slotId: 2, label: "3", position: [3, 0, -5.5] },
+      { slotId: 1, label: "2", position: [3, 0, -7] },
+      { slotId: 2, label: "3", position: [3, 0, -7] },
     ]);
   });
 });
