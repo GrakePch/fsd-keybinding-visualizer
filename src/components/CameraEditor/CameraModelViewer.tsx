@@ -6,7 +6,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { CSS2DObject, CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import { getModelLoadProgressPercent } from "../../utils/cameraModelOverlay";
-import { getCameraFitFromBounds, type CameraPositionMarker, VEHICLE_MODEL_METERS_PER_SOURCE_UNIT } from "../../utils/cameraViewport";
+import { getCameraFitFromBounds, getVehicleGridFromBounds, type CameraPositionMarker, type VehicleGrid, VEHICLE_MODEL_METERS_PER_SOURCE_UNIT } from "../../utils/cameraViewport";
 import styles from "./CameraModelViewer.module.css";
 
 interface CameraModelViewerProps {
@@ -16,6 +16,36 @@ interface CameraModelViewerProps {
 }
 
 type LoadState = "loading" | "ready" | "error";
+
+const VEHICLE_GRID_LINE_COLOR = 0xc7ccd3;
+const VEHICLE_GRID_LINE_OPACITY = 0.42;
+const VEHICLE_GRID_SPACING_METERS = 5;
+
+function createVehicleGridLineSegments(grid: VehicleGrid) {
+  const halfSpan = grid.span / 2;
+  const startX = grid.center[0] - halfSpan;
+  const endX = grid.center[0] + halfSpan;
+  const startY = grid.center[1] - halfSpan;
+  const endY = grid.center[1] + halfSpan;
+  const positions: number[] = [];
+
+  for (let offset = 0; offset <= grid.span; offset += VEHICLE_GRID_SPACING_METERS) {
+    const x = startX + offset;
+    const y = startY + offset;
+    positions.push(x, startY, grid.center[2], x, endY, grid.center[2]);
+    positions.push(startX, y, grid.center[2], endX, y, grid.center[2]);
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  const material = new THREE.LineBasicMaterial({
+    color: VEHICLE_GRID_LINE_COLOR,
+    transparent: true,
+    opacity: VEHICLE_GRID_LINE_OPACITY,
+  });
+
+  return new THREE.LineSegments(geometry, material);
+}
 
 function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
@@ -37,7 +67,8 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
     const scene = new THREE.Scene();
     sceneRef.current = scene;
     const cameraFit = getCameraFitFromBounds(model.bounds);
-    const camera = new THREE.PerspectiveCamera(45, 1, cameraFit.near, cameraFit.far);
+    const camera = new THREE.OrthographicCamera(-cameraFit.viewHeight / 2, cameraFit.viewHeight / 2, cameraFit.viewHeight / 2, -cameraFit.viewHeight / 2, cameraFit.near, cameraFit.far);
+    camera.up.set(0, 0, 1);
     camera.position.set(...cameraFit.cameraPosition);
     camera.lookAt(...cameraFit.target);
 
@@ -58,15 +89,24 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
 
     const ambientLight = new THREE.HemisphereLight(0xffffff, 0x202030, 2.2);
     const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
-    keyLight.position.set(1, 2, 3);
+    keyLight.position.set(1, 3, 2);
     const fillLight = new THREE.DirectionalLight(0x8fb7ff, 1.2);
-    fillLight.position.set(-2, 1, -1);
+    fillLight.position.set(-2, -1, 1);
     scene.add(ambientLight, keyLight, fillLight);
+
+    const vehicleGrid = getVehicleGridFromBounds(model.bounds);
+    if (vehicleGrid) {
+      scene.add(createVehicleGridLineSegments(vehicleGrid));
+    }
 
     const resize = () => {
       const { clientWidth, clientHeight } = host;
       if (!clientWidth || !clientHeight) return;
-      camera.aspect = clientWidth / clientHeight;
+      const aspect = clientWidth / clientHeight;
+      camera.left = (-cameraFit.viewHeight * aspect) / 2;
+      camera.right = (cameraFit.viewHeight * aspect) / 2;
+      camera.top = cameraFit.viewHeight / 2;
+      camera.bottom = -cameraFit.viewHeight / 2;
       camera.updateProjectionMatrix();
       renderer.setSize(clientWidth, clientHeight, false);
       labelRenderer.setSize(clientWidth, clientHeight);
@@ -84,6 +124,10 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
       model.src,
       (gltf) => {
         if (disposed) return;
+        // Converted GLB assets are Y-up with the ship length on the GLB Z axis.
+        // Rotate them into the camera editor's source/saved-view coordinate system:
+        // X = lateral, Y = forward/back, Z = vertical/up.
+        gltf.scene.rotation.x = Math.PI / 2;
         gltf.scene.scale.setScalar(VEHICLE_MODEL_METERS_PER_SOURCE_UNIT);
         scene.add(gltf.scene);
         setLoadProgress(100);
@@ -124,7 +168,7 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
       resizeObserver.disconnect();
       controls.dispose();
       scene.traverse((object) => {
-        if (object instanceof THREE.Mesh) {
+        if (object instanceof THREE.Mesh || object instanceof THREE.Line) {
           object.geometry.dispose();
           const materials = Array.isArray(object.material) ? object.material : [object.material];
           materials.forEach((material) => material.dispose());

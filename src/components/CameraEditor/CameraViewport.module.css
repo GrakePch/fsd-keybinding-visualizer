@@ -3,15 +3,7 @@
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 40%, #3a3a3a 0, var(--color-bg) 56%);
-}
-
-.grid {
-  position: absolute;
-  inset: 0;
-  opacity: .25;
-  background-image: linear-gradient(#ffffff14 1px, transparent 1px), linear-gradient(90deg, #ffffff14 1px, transparent 1px);
-  background-size: 2rem 2rem;
+  background: var(--color-bg);
 }
 
 .modelInfo {

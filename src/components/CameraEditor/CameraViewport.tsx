@@ -18,7 +18,6 @@ function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel 
 
   return (
     <section className={styles.viewport} aria-label="Camera 3D viewport">
-      <div className={styles.grid} />
       {model?.src && <CameraModelViewer activeSlotId={selectedSlot?.id} markers={cameraPositionMarkers} model={model} />}
       {model && showModelInfo && (
         <div className={styles.modelInfo}>
