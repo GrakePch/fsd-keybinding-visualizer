@@ -2,6 +2,7 @@ import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import { shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
 import { getCameraFrustumAspectRatio, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
+import { getCameraViewMarker } from "../../utils/cameraView";
 import { getCameraPositionMarkers } from "../../utils/cameraViewport";
 import CameraModelViewer from "./CameraModelViewer";
 import styles from "./CameraViewport.module.css";
@@ -11,18 +12,20 @@ interface CameraViewportProps {
   selectedSlot?: SavedCameraSlot;
   model: SelectableVehicleModel | null;
   isPreviewingModel: boolean;
+  isCameraViewActive: boolean;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
 }
 
-function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel, frustumAspectRatioId }: CameraViewportProps) {
+function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel, isCameraViewActive, frustumAspectRatioId }: CameraViewportProps) {
   const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel: Boolean(model?.src) });
   const cameraPositionMarkers = getCameraPositionMarkers(selectedGroup?.slots || []);
   const shouldRenderViewer = shouldRenderCameraModelViewer({ hasRenderableModel: Boolean(model?.src), markerCount: cameraPositionMarkers.length });
   const frustumAspectRatio = getCameraFrustumAspectRatio(frustumAspectRatioId);
+  const cameraViewMarker = getCameraViewMarker({ isCameraViewActive, markers: cameraPositionMarkers, selectedSlotId: selectedSlot?.id });
 
   return (
     <section className={styles.viewport} aria-label="Camera 3D viewport">
-      {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} frustumAspectRatio={frustumAspectRatio} markers={cameraPositionMarkers} model={model} />}
+      {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} markers={cameraPositionMarkers} model={model} />}
       {model && showModelInfo && (
         <div className={styles.modelInfo}>
           <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : "Loaded Model"}</span>

@@ -4,7 +4,21 @@ import { CameraScene } from "./CameraScene";
 import styles from "./CameraModelViewer.module.css";
 import type { CameraModelViewerProps, LoadState } from "./types";
 
-function CameraModelViewer({ activeSlotId, frustumAspectRatio, markers, model }: CameraModelViewerProps) {
+function CameraViewMask({ aspectRatio }: { aspectRatio: number }) {
+  const safeAspectRatio = Number.isFinite(aspectRatio) && aspectRatio > 0 ? aspectRatio : 16 / 9;
+  const maskPadding = 1000;
+  const outerRight = safeAspectRatio + maskPadding;
+  const outerBottom = 1 + maskPadding;
+  const maskPath = `M ${-maskPadding} ${-maskPadding} H ${outerRight} V ${outerBottom} H ${-maskPadding} Z M 0 0 H ${safeAspectRatio} V 1 H 0 Z`;
+
+  return (
+    <svg className={styles.cameraViewMask} viewBox={`0 0 ${safeAspectRatio} 1`} preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+      <path d={maskPath} fill="currentColor" fillRule="evenodd" />
+    </svg>
+  );
+}
+
+function CameraModelViewer({ activeSlotId, cameraViewMarker, frustumAspectRatio, markers, model }: CameraModelViewerProps) {
   const [loadState, setLoadState] = useState<LoadState>(model?.src ? "loading" : "ready");
   const [loadProgress, setLoadProgress] = useState<number | null>(null);
 
@@ -17,8 +31,9 @@ function CameraModelViewer({ activeSlotId, frustumAspectRatio, markers, model }:
   return (
     <div className={styles.viewer}>
       <Canvas className={styles.canvas} gl={{ alpha: true, antialias: true }} dpr={[1, 2]}>
-        <CameraScene activeSlotId={activeSlotId} frustumAspectRatio={frustumAspectRatio} markers={markers} model={model} onLoadProgress={setLoadProgress} onLoadStateChange={setLoadState} />
+        <CameraScene activeSlotId={activeSlotId} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} markers={markers} model={model} onLoadProgress={setLoadProgress} onLoadStateChange={setLoadState} />
       </Canvas>
+      {cameraViewMarker && <CameraViewMask aspectRatio={frustumAspectRatio} />}
       {loadState !== "ready" && (
         <div className={styles.statusOverlay}>
           <div className={styles.statusCard}>

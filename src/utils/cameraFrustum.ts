@@ -29,13 +29,24 @@ export const CAMERA_FRUSTUM_ASPECT_RATIOS: CameraFrustumAspectRatioOption[] = [
 
 export const DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID: CameraFrustumAspectRatioId = "16:9";
 
-const CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES = 85;
+export const CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES = 85;
 const VECTOR_EPSILON = 1e-9;
 
 const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
 export function getCameraFrustumAspectRatio(aspectRatioId: string): number {
   return CAMERA_FRUSTUM_ASPECT_RATIOS.find((option) => option.id === aspectRatioId)?.value ?? getCameraFrustumAspectRatio(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
+}
+
+export function getContainedCameraViewVerticalFov(baseVerticalFovDegrees: number, screenAspectRatio: number, viewportAspectRatio: number): number {
+  const safeBaseFov = isFinite(baseVerticalFovDegrees) && baseVerticalFovDegrees > 0 ? baseVerticalFovDegrees : CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES;
+  const safeScreenAspectRatio = isFinite(screenAspectRatio) && screenAspectRatio > 0 ? screenAspectRatio : getCameraFrustumAspectRatio(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
+  const safeViewportAspectRatio = isFinite(viewportAspectRatio) && viewportAspectRatio > 0 ? viewportAspectRatio : safeScreenAspectRatio;
+
+  if (safeScreenAspectRatio <= safeViewportAspectRatio) return safeBaseFov;
+
+  const baseHalfFovRadians = toRadians(safeBaseFov / 2);
+  return (Math.atan(Math.tan(baseHalfFovRadians) * (safeScreenAspectRatio / safeViewportAspectRatio)) * 360) / Math.PI;
 }
 
 export function getCameraFrustumLineSegments(marker: CameraFrustumInput, aspectRatio: number): CameraFrustumLineSegment[] {

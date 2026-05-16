@@ -13,6 +13,9 @@ interface CameraControlPanelProps {
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
+  canEnterCameraView: boolean;
+  isCameraViewActive: boolean;
+  onToggleCameraView: () => void;
   onSelectSlot: (slotId: number) => void;
   onSelectModel: () => void;
   onSelectFrustumAspectRatio: (aspectRatioId: CameraFrustumAspectRatioId) => void;
@@ -21,7 +24,7 @@ interface CameraControlPanelProps {
   onCopySlot: (sourceSlotId: number) => void;
 }
 
-function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const selectedCopySource = useMemo(() => copySourceSlots.find((slot) => slot.id === copySourceSlotId) || copySourceSlots[0], [copySourceSlotId, copySourceSlots]);
@@ -49,6 +52,9 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
       <section className={styles.section}>
         <h2 className={styles.heading}>Camera Slots</h2>
         <CameraSlotButtons selectedGroup={selectedGroup} selectedSlotId={selectedSlotId} onSelectSlot={onSelectSlot} />
+        <button className={styles.cameraViewButton} type="button" disabled={!canEnterCameraView && !isCameraViewActive} onClick={onToggleCameraView}>
+          {isCameraViewActive ? "Exit Camera View" : "Enter Camera View"}
+        </button>
       </section>
 
       <section className={styles.editorSection}>

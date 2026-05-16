@@ -46,7 +46,8 @@
   line-height: 1.2;
 }
 
-.modelButton {
+.modelButton,
+.cameraViewButton {
   border-radius: .5rem;
 }
 

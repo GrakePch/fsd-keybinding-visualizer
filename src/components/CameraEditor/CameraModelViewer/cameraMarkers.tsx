@@ -35,7 +35,7 @@ function ActiveMarkerLine({ marker }: { marker: CameraPositionMarker }) {
   );
 }
 
-export function CameraMarkers({ activeSlotId, frustumAspectRatio, markers }: { activeSlotId?: number; frustumAspectRatio: number; markers: CameraPositionMarker[] }) {
+export function CameraMarkers({ activeSlotId, frustumAspectRatio, hideMarkerGuides = false, markers }: { activeSlotId?: number; frustumAspectRatio: number; hideMarkerGuides?: boolean; markers: CameraPositionMarker[] }) {
   return (
     <>
       {markers.map((marker) => {
@@ -43,11 +43,15 @@ export function CameraMarkers({ activeSlotId, frustumAspectRatio, markers }: { a
 
         return (
           <group key={marker.slotId}>
-            <CameraMarkerLabel isActive={isActive} marker={marker} />
+            {!hideMarkerGuides && <CameraMarkerLabel isActive={isActive} marker={marker} />}
             {isActive && (
               <>
-                <TargetOffsetDot marker={marker} />
-                <ActiveMarkerLine marker={marker} />
+                {!hideMarkerGuides && (
+                  <>
+                    <TargetOffsetDot marker={marker} />
+                    <ActiveMarkerLine marker={marker} />
+                  </>
+                )}
                 <CameraFrustum aspectRatio={frustumAspectRatio} marker={marker} />
               </>
             )}
