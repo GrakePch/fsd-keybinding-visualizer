@@ -85,8 +85,8 @@ describe("getCameraBoomDirection", () => {
     expect(direction[2]).toBeCloseTo(0.5);
   });
 
-  it("applies yaw around the viewport Z-up axis", () => {
-    const direction = getCameraBoomDirection({ x: 0, y: 0, z: 90 });
+  it("treats negative yaw as clockwise around the viewport Z-up axis", () => {
+    const direction = getCameraBoomDirection({ x: 0, y: 0, z: -90 });
 
     expect(direction[0]).toBeCloseTo(-1);
     expect(direction[1]).toBeCloseTo(0);

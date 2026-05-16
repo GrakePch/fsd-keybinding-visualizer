@@ -102,7 +102,7 @@ export function getCameraBoomDirection(rotationAngle: Vec3): [number, number, nu
   const yaw = toRadians(rotationAngle.z);
   const horizontalDistance = Math.cos(pitch);
 
-  return [-Math.sin(yaw) * horizontalDistance, -Math.cos(yaw) * horizontalDistance, -Math.sin(pitch)];
+  return [Math.sin(yaw) * horizontalDistance, -Math.cos(yaw) * horizontalDistance, -Math.sin(pitch)];
 }
 
 export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[]): CameraPositionMarker[] {
