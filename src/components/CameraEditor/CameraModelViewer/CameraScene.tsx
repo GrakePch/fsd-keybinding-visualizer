@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { CameraGizmo } from "./CameraGizmo";
 import { getCameraFitFromBounds, getVehicleGridFromBounds } from "../../../utils/cameraViewport";
 import { CameraMarkers } from "./cameraMarkers";
 import type { CameraModelViewerProps, LoadState } from "./types";
@@ -19,6 +20,7 @@ export function CameraScene({ activeSlotId, frustumAspectRatio, markers, model, 
       <VehicleGridLines grid={vehicleGrid} />
       <VehicleModel model={model} onLoadProgress={onLoadProgress} onLoadStateChange={onLoadStateChange} />
       <CameraMarkers activeSlotId={activeSlotId} frustumAspectRatio={frustumAspectRatio} markers={markers} />
+      <CameraGizmo />
     </>
   );
 }
