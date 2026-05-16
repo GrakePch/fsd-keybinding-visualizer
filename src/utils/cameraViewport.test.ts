@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, getVehicleGridFromBounds, savedViewPositionToViewportPosition } from "./cameraViewport";
+import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, getCameraRotationUpVector, getVehicleGridFromBounds, savedViewPositionToViewportPosition } from "./cameraViewport";
 
 describe("getCameraFitFromBounds", () => {
   it("converts centimeter manifest bounds into meter-space camera fit", () => {
@@ -92,6 +92,24 @@ describe("getCameraBoomDirection", () => {
     expect(direction[1]).toBeCloseTo(0);
     expect(direction[2]).toBeCloseTo(0);
   });
+
+  it("applies saved rotations in y then local x then world z order", () => {
+    const direction = getCameraBoomDirection({ x: 30, y: 45, z: 60 });
+
+    expect(direction[0]).toBeCloseTo(0.573223305);
+    expect(direction[1]).toBeCloseTo(-0.73919892);
+    expect(direction[2]).toBeCloseTo(-0.353553391);
+  });
+});
+
+describe("getCameraRotationUpVector", () => {
+  it("applies saved rotations to camera up in y then local x then world z order", () => {
+    const up = getCameraRotationUpVector({ x: 30, y: 45, z: 60 });
+
+    expect(up[0]).toBeCloseTo(0.73919892);
+    expect(up[1]).toBeCloseTo(0.280330086);
+    expect(up[2]).toBeCloseTo(0.612372436);
+  });
 });
 
 describe("getCameraPositionMarkers", () => {
@@ -113,6 +131,7 @@ describe("getCameraPositionMarkers", () => {
         label: "1",
         targetPosition: [10, 20, 30],
         cameraPosition: [10, 15, 30],
+        cameraRotationAngle: { x: 0, y: 0, z: 0 },
         lensSize: 14,
         fStop: 11,
       },
@@ -140,8 +159,8 @@ describe("getCameraPositionMarkers", () => {
     ]);
 
     expect(markers).toEqual([
-      { slotId: 1, label: "2", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], lensSize: 14, fStop: 11 },
-      { slotId: 2, label: "3", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], lensSize: 14, fStop: 11 },
+      { slotId: 1, label: "2", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], cameraRotationAngle: { x: 0, y: 0, z: 0 }, lensSize: 14, fStop: 11 },
+      { slotId: 2, label: "3", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], cameraRotationAngle: { x: 0, y: 0, z: 0 }, lensSize: 14, fStop: 11 },
     ]);
   });
 });

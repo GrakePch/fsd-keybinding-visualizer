@@ -53,7 +53,12 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
       <section className={styles.section}>
         <h2 className={styles.heading}>Camera Slots</h2>
         <CameraSlotButtons selectedGroup={selectedGroup} selectedSlotId={selectedSlotId} onSelectSlot={onSelectSlot} />
-        <button className={styles.cameraViewButton} type="button" disabled={!canEnterCameraView && !isCameraViewActive} onClick={onToggleCameraView}>
+        <button
+          className={`${styles.cameraViewButton} ${isCameraViewActive ? styles.cameraViewButtonActive : ""}`}
+          type="button"
+          disabled={!canEnterCameraView && !isCameraViewActive}
+          onClick={onToggleCameraView}
+        >
           {isCameraViewActive ? "Exit Camera View" : "Enter Camera View"}
         </button>
       </section>
@@ -91,7 +96,17 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
               <input readOnly value={selectedSlot.type} />
             </label>
             <CameraVector3Editor label="Target Offset" value={selectedSlot.targetOffset} onChange={(targetOffset) => updateSlot({ targetOffset })} />
-            <CameraVector3Editor label="Rotation Angle" value={selectedSlot.cameraRotationAngle} onChange={(cameraRotationAngle) => updateSlot({ cameraRotationAngle })} />
+            <CameraVector3Editor
+              label="Rotation Angle"
+              value={selectedSlot.cameraRotationAngle}
+              fields={[
+                { axis: "x", label: "Pitch" },
+                { axis: "y", label: "Roll" },
+                { axis: "z", label: "Yaw" },
+              ]}
+              variant="angleSlider"
+              onChange={(cameraRotationAngle) => updateSlot({ cameraRotationAngle })}
+            />
             <CameraNumberField label="Distance" value={selectedSlot.distance} onChange={(distance) => updateSlot({ distance })} />
             <CameraLensZoomField value={selectedSlot.lensSize} onChange={(lensSize) => updateSlot({ lensSize })} />
             <CameraNumberField label="F-Stop" value={selectedSlot.fStop} onChange={(fStop) => updateSlot({ fStop })} />

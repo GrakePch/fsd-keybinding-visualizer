@@ -79,6 +79,7 @@ export type CameraPositionMarker = {
   label: string;
   targetPosition: [number, number, number];
   cameraPosition: [number, number, number];
+  cameraRotationAngle: Vec3;
   lensSize: number;
   fStop: number;
 };
@@ -88,6 +89,7 @@ const hasFiniteCameraPositionInputs = (slot: CameraPositionMarkerInput) =>
   isFinite(slot.targetOffset.y) &&
   isFinite(slot.targetOffset.z) &&
   isFinite(slot.cameraRotationAngle.x) &&
+  isFinite(slot.cameraRotationAngle.y) &&
   isFinite(slot.cameraRotationAngle.z) &&
   isFinite(slot.distance) &&
   isFinite(slot.lensSize) &&
@@ -98,11 +100,36 @@ export function savedViewPositionToViewportPosition(position: Vec3): [number, nu
 }
 
 export function getCameraBoomDirection(rotationAngle: Vec3): [number, number, number] {
-  const pitch = toRadians(rotationAngle.x);
-  const yaw = toRadians(rotationAngle.z);
-  const horizontalDistance = Math.cos(pitch);
+  return rotateVectorByCameraRotation([0, -1, 0], rotationAngle);
+}
 
-  return [Math.sin(yaw) * horizontalDistance, -Math.cos(yaw) * horizontalDistance, -Math.sin(pitch)];
+export function getCameraRotationUpVector(rotationAngle: Vec3): [number, number, number] {
+  return rotateVectorByCameraRotation([0, 0, 1], rotationAngle);
+}
+
+function rotateVectorByCameraRotation(vector: [number, number, number], rotationAngle: Vec3): [number, number, number] {
+  // Saved camera rotations are applied in source/game order: Y, then local X, then world Z.
+  // The X axis itself follows the preceding Y rotation, matching the in-game camera axes.
+  const afterY = rotateVectorAroundAxis(vector, [0, 1, 0], rotationAngle.y);
+  const localXAxisAfterY = rotateVectorAroundAxis([1, 0, 0], [0, 1, 0], rotationAngle.y);
+  const afterX = rotateVectorAroundAxis(afterY, localXAxisAfterY, rotationAngle.x);
+
+  return rotateVectorAroundAxis(afterX, [0, 0, 1], rotationAngle.z);
+}
+
+function rotateVectorAroundAxis(vector: [number, number, number], axis: [number, number, number], degrees: number): [number, number, number] {
+  const radians = toRadians(degrees);
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  const oneMinusCos = 1 - cos;
+  const [x, y, z] = vector;
+  const [axisX, axisY, axisZ] = axis;
+
+  return [
+    x * (cos + axisX * axisX * oneMinusCos) + y * (axisX * axisY * oneMinusCos - axisZ * sin) + z * (axisX * axisZ * oneMinusCos + axisY * sin),
+    x * (axisY * axisX * oneMinusCos + axisZ * sin) + y * (cos + axisY * axisY * oneMinusCos) + z * (axisY * axisZ * oneMinusCos - axisX * sin),
+    x * (axisZ * axisX * oneMinusCos - axisY * sin) + y * (axisZ * axisY * oneMinusCos + axisX * sin) + z * (cos + axisZ * axisZ * oneMinusCos),
+  ];
 }
 
 export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[]): CameraPositionMarker[] {
@@ -119,6 +146,7 @@ export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[]): Ca
         targetPosition[1] + boomDirection[1] * slot.distance,
         targetPosition[2] + boomDirection[2] * slot.distance,
       ],
+      cameraRotationAngle: slot.cameraRotationAngle,
       lensSize: slot.lensSize,
       fStop: slot.fStop,
     };

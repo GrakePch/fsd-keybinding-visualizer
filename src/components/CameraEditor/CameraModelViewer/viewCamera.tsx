@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three/examples/jsm/controls/OrbitControls.js";
 import { getCameraLensVerticalFov, getContainedCameraViewVerticalFov } from "../../../utils/cameraFrustum";
-import type { CameraFit, CameraPositionMarker } from "../../../utils/cameraViewport";
+import { getCameraRotationUpVector, type CameraFit, type CameraPositionMarker } from "../../../utils/cameraViewport";
 
 function OrbitViewCamera({ cameraFit }: { cameraFit: CameraFit }) {
   const initialCameraFitRef = useRef(cameraFit);
@@ -64,7 +64,7 @@ function SavedCameraView({ cameraFit, marker, screenAspectRatio }: { cameraFit: 
     const containedVerticalFov = getContainedCameraViewVerticalFov(getCameraLensVerticalFov(marker.lensSize), screenAspectRatio, viewportAspectRatio);
 
     camera.position.set(...marker.cameraPosition);
-    camera.up.set(0, 0, 1);
+    camera.up.set(...getCameraRotationUpVector(marker.cameraRotationAngle));
     camera.aspect = viewportAspectRatio;
     camera.fov = containedVerticalFov;
     camera.near = cameraFit.near;
@@ -76,7 +76,7 @@ function SavedCameraView({ cameraFit, marker, screenAspectRatio }: { cameraFit: 
   const viewportAspectRatio = size.height ? size.width / size.height : screenAspectRatio;
   const containedVerticalFov = getContainedCameraViewVerticalFov(getCameraLensVerticalFov(marker.lensSize), screenAspectRatio, viewportAspectRatio);
 
-  return <PerspectiveCamera ref={cameraRef} makeDefault aspect={viewportAspectRatio} fov={containedVerticalFov} near={cameraFit.near} far={cameraFit.far} position={marker.cameraPosition} up={[0, 0, 1]} />;
+  return <PerspectiveCamera ref={cameraRef} makeDefault aspect={viewportAspectRatio} fov={containedVerticalFov} near={cameraFit.near} far={cameraFit.far} position={marker.cameraPosition} up={getCameraRotationUpVector(marker.cameraRotationAngle)} />;
 }
 
 export function ViewCamera({ cameraFit, cameraViewMarker, screenAspectRatio }: { cameraFit: CameraFit; cameraViewMarker: CameraPositionMarker | null; screenAspectRatio: number }) {

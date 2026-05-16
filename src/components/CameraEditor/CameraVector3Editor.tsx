@@ -4,23 +4,95 @@ import styles from "./CameraVector3Editor.module.css";
 interface CameraVector3EditorProps {
   label: string;
   value: Vec3;
+  fields?: CameraVector3EditorField[];
+  variant?: "number" | "angleSlider";
   onChange: (value: Vec3) => void;
 }
 
-function CameraVector3Editor({ label, value, onChange }: CameraVector3EditorProps) {
+export type CameraVector3EditorField = {
+  axis: keyof Vec3;
+  label: string;
+};
+
+const DEFAULT_FIELDS: CameraVector3EditorField[] = [
+  { axis: "x", label: "X" },
+  { axis: "y", label: "Y" },
+  { axis: "z", label: "Z" },
+];
+
+const MIN_ANGLE_DEGREES = -180;
+const MAX_ANGLE_DEGREES = 180;
+const MIN_PITCH_DEGREES = -85;
+const MAX_PITCH_DEGREES = 70;
+const ANGLE_STEP_DEGREES = 0.1;
+
+function getAngleRange(axis: keyof Vec3) {
+  return axis === "x" ? { min: MIN_PITCH_DEGREES, max: MAX_PITCH_DEGREES } : { min: MIN_ANGLE_DEGREES, max: MAX_ANGLE_DEGREES };
+}
+
+function clampAngle(value: number, axis: keyof Vec3) {
+  const { min, max } = getAngleRange(axis);
+  return Math.min(max, Math.max(min, value));
+}
+
+function formatAngle(value: number, axis: keyof Vec3) {
+  return clampAngle(value, axis).toFixed(1);
+}
+
+function parseAngle(value: string, axis: keyof Vec3) {
+  return Number(formatAngle(Number(value), axis));
+}
+
+function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = "number", onChange }: CameraVector3EditorProps) {
+  const isAngleSlider = variant === "angleSlider";
+
   const updateAxis = (axis: keyof Vec3, nextValue: string) => {
-    onChange({ ...value, [axis]: Number(nextValue) });
+    onChange({ ...value, [axis]: isAngleSlider ? parseAngle(nextValue, axis) : Number(nextValue) });
   };
 
   return (
-    <fieldset className={styles.fieldset}>
+    <fieldset className={`${styles.fieldset} ${isAngleSlider ? styles.angleSliderFieldset : ""}`}>
       <legend>{label}</legend>
-      {(["x", "y", "z"] as Array<keyof Vec3>).map((axis) => (
-        <label className={styles.axisField} key={axis}>
-          <span>{axis.toUpperCase()}</span>
-          <input type="number" value={value[axis]} onChange={(event) => updateAxis(axis, event.target.value)} />
-        </label>
-      ))}
+      {fields.map((field) => {
+        const angleValue = formatAngle(value[field.axis], field.axis);
+        const angleRange = getAngleRange(field.axis);
+
+        return (
+          <label className={`${styles.axisField} ${isAngleSlider ? styles.angleSliderField : ""}`} key={field.axis}>
+            {isAngleSlider ? (
+              <>
+                <span className={styles.labelRow}>
+                  <span>{field.label}</span>
+                  <input
+                    className={styles.angleValue}
+                    aria-label={`${field.label} angle`}
+                    type="number"
+                    min={angleRange.min}
+                    max={angleRange.max}
+                    step={ANGLE_STEP_DEGREES}
+                    value={angleValue}
+                    onChange={(event) => updateAxis(field.axis, event.target.value)}
+                  />
+                </span>
+                <input
+                  aria-label={field.label}
+                  type="range"
+                  min={angleRange.min}
+                  max={angleRange.max}
+                  step={ANGLE_STEP_DEGREES}
+                  value={angleValue}
+                  onChange={(event) => updateAxis(field.axis, event.target.value)}
+                />
+              </>
+            ) : (
+              <>
+                <span>{field.label}</span>
+                <input type="number" value={value[field.axis]} onChange={(event) => updateAxis(field.axis, event.target.value)} />
+              </>
+            )}
+          </label>
+        );
+      })}
     </fieldset>
   );
 }

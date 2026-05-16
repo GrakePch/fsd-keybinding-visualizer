@@ -70,6 +70,48 @@ describe("getCameraFrustumLineSegments", () => {
     expect(segments[2].to[2]).toBeCloseTo(-halfHeight);
   });
 
+  it("rotates the frustum plane around the camera view direction from roll", () => {
+    const halfHeight = Math.tan((80 * Math.PI) / 360) * 4;
+    const halfWidth = halfHeight * (16 / 9);
+    const segments = getCameraFrustumLineSegments(
+      {
+        cameraPosition: [0, -10, 0],
+        targetPosition: [0, 0, 0],
+        cameraRotationAngle: { x: 0, y: 90, z: 0 },
+        lensSize: 0,
+        fStop: 4,
+      },
+      16 / 9,
+    );
+
+    expect(segments[0].to[0]).toBeCloseTo(halfHeight);
+    expect(segments[0].to[1]).toBeCloseTo(-6);
+    expect(segments[0].to[2]).toBeCloseTo(halfWidth);
+    expect(segments[1].to[0]).toBeCloseTo(halfHeight);
+    expect(segments[1].to[2]).toBeCloseTo(-halfWidth);
+    expect(segments[2].to[0]).toBeCloseTo(-halfHeight);
+  });
+
+  it("uses the full y then local x then world z saved rotation order for the frustum plane", () => {
+    const segments = getCameraFrustumLineSegments(
+      {
+        cameraPosition: [7.5, -4.33012702, -5],
+        targetPosition: [0, 0, 0],
+        cameraRotationAngle: { x: 30, y: 45, z: 60 },
+        lensSize: 0,
+        fStop: 4,
+      },
+      16 / 9,
+    );
+
+    expect(segments[0].to[0]).toBeCloseTo(5.927446404);
+    expect(segments[0].to[1]).toBeCloseTo(-6.449817193);
+    expect(segments[0].to[2]).toBeCloseTo(2.476875144);
+    expect(segments[1].to[0]).toBeCloseTo(7.431323009);
+    expect(segments[1].to[1]).toBeCloseTo(3.522434129);
+    expect(segments[1].to[2]).toBeCloseTo(-3.903532928);
+  });
+
   it("returns no frustum lines when the camera and target overlap", () => {
     expect(getCameraFrustumLineSegments({ cameraPosition: [1, 2, 3], targetPosition: [1, 2, 3], lensSize: 0, fStop: 4 }, 16 / 9)).toEqual([]);
   });

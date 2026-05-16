@@ -51,6 +51,16 @@
   border-radius: .5rem;
 }
 
+.cameraViewButton {
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+}
+
+.cameraViewButtonActive {
+  border-color: var(--color-lalt);
+}
+
 .emptyState,
 .emptySlotActions p {
   color: var(--color-text-2);

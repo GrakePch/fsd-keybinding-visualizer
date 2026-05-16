@@ -8,6 +8,7 @@ export type CameraFrustumLineSegment = {
 export type CameraFrustumInput = {
   cameraPosition: CameraFrustumVector3;
   targetPosition: CameraFrustumVector3;
+  cameraRotationAngle?: { x?: number; y?: number; z?: number };
   lensSize: number;
   fStop: number;
 };
@@ -72,8 +73,8 @@ export function getCameraFrustumLineSegments(marker: CameraFrustumInput, aspectR
   if (frustumDepth <= VECTOR_EPSILON) return [];
   const frustumCenter = addVectors(cameraPosition, scaleVector(forward, frustumDepth));
 
-  const upReference: CameraFrustumVector3 = [0, 0, 1];
-  const fallbackUpReference: CameraFrustumVector3 = [1, 0, 0];
+  const upReference = getCameraRotationUpVector(marker.cameraRotationAngle);
+  const fallbackUpReference = getCameraRotationUpVector({ ...marker.cameraRotationAngle, x: 0, y: 90, z: 0 });
   const right = normalizeVector(crossVectors(forward, upReference)) ?? normalizeVector(crossVectors(forward, fallbackUpReference));
   if (!right) return [];
 
@@ -120,6 +121,40 @@ function crossVectors(left: CameraFrustumVector3, right: CameraFrustumVector3): 
     left[1] * right[2] - left[2] * right[1],
     left[2] * right[0] - left[0] * right[2],
     left[0] * right[1] - left[1] * right[0],
+  ];
+}
+
+function getCameraRotationUpVector(rotationAngle: CameraFrustumInput["cameraRotationAngle"]): CameraFrustumVector3 {
+  return rotateVectorByCameraRotation([0, 0, 1], rotationAngle);
+}
+
+function rotateVectorByCameraRotation(vector: CameraFrustumVector3, rotationAngle: CameraFrustumInput["cameraRotationAngle"]): CameraFrustumVector3 {
+  const yRotation = getFiniteRotationDegrees(rotationAngle?.y);
+  const xRotation = getFiniteRotationDegrees(rotationAngle?.x);
+  const zRotation = getFiniteRotationDegrees(rotationAngle?.z);
+  const afterY = rotateVectorAroundAxis(vector, [0, 1, 0], yRotation);
+  const localXAxisAfterY = rotateVectorAroundAxis([1, 0, 0], [0, 1, 0], yRotation);
+  const afterX = rotateVectorAroundAxis(afterY, localXAxisAfterY, xRotation);
+
+  return rotateVectorAroundAxis(afterX, [0, 0, 1], zRotation);
+}
+
+function getFiniteRotationDegrees(value: number | undefined) {
+  return typeof value === "number" && isFinite(value) ? value : 0;
+}
+
+function rotateVectorAroundAxis(vector: CameraFrustumVector3, axis: CameraFrustumVector3, degrees: number): CameraFrustumVector3 {
+  const radians = toRadians(degrees);
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  const oneMinusCos = 1 - cos;
+  const [x, y, z] = vector;
+  const [axisX, axisY, axisZ] = axis;
+
+  return [
+    x * (cos + axisX * axisX * oneMinusCos) + y * (axisX * axisY * oneMinusCos - axisZ * sin) + z * (axisX * axisZ * oneMinusCos + axisY * sin),
+    x * (axisY * axisX * oneMinusCos + axisZ * sin) + y * (cos + axisY * axisY * oneMinusCos) + z * (axisY * axisZ * oneMinusCos - axisX * sin),
+    x * (axisZ * axisX * oneMinusCos - axisY * sin) + y * (axisZ * axisY * oneMinusCos + axisX * sin) + z * (cos + axisZ * axisZ * oneMinusCos),
   ];
 }
 

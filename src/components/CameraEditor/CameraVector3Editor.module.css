@@ -4,7 +4,7 @@
   border: 1px solid #ffffff18;
   border-radius: .5rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: .5rem;
 }
 
@@ -32,4 +32,41 @@
   border-radius: .375rem;
   color: var(--color-text);
   background-color: var(--color-bg);
+}
+
+.angleSliderFieldset {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.angleSliderField {
+  gap: .35rem;
+  color: var(--color-text-1);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.angleSliderField .angleValue {
+  width: 5.5rem;
+  padding: .2rem .35rem;
+  color: var(--color-text-2);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.angleSliderField input[type="range"] {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  accent-color: var(--color-lalt);
 }
