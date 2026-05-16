@@ -9,8 +9,17 @@ interface ModelLoadProgressInput {
   lengthComputable?: boolean;
 }
 
+interface ViewportCanvasInput {
+  hasRenderableModel: boolean;
+  markerCount: number;
+}
+
 export function shouldShowViewportModelInfo({ hasModel, hasRenderableModel }: ViewportModelInfoInput) {
   return hasModel && !hasRenderableModel;
+}
+
+export function shouldRenderCameraModelViewer({ hasRenderableModel, markerCount }: ViewportCanvasInput) {
+  return hasRenderableModel || markerCount > 0;
 }
 
 export function getModelLoadProgressPercent({ loaded, total, lengthComputable = true }: ModelLoadProgressInput) {

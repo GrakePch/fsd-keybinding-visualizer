@@ -1,6 +1,6 @@
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
-import { shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
+import { shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
 import { getCameraPositionMarkers } from "../../utils/cameraViewport";
 import CameraModelViewer from "./CameraModelViewer";
 import styles from "./CameraViewport.module.css";
@@ -15,10 +15,11 @@ interface CameraViewportProps {
 function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel }: CameraViewportProps) {
   const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel: Boolean(model?.src) });
   const cameraPositionMarkers = getCameraPositionMarkers(selectedGroup?.slots || []);
+  const shouldRenderViewer = shouldRenderCameraModelViewer({ hasRenderableModel: Boolean(model?.src), markerCount: cameraPositionMarkers.length });
 
   return (
     <section className={styles.viewport} aria-label="Camera 3D viewport">
-      {model?.src && <CameraModelViewer activeSlotId={selectedSlot?.id} markers={cameraPositionMarkers} model={model} />}
+      {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} markers={cameraPositionMarkers} model={model} />}
       {model && showModelInfo && (
         <div className={styles.modelInfo}>
           <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : "Loaded Model"}</span>
