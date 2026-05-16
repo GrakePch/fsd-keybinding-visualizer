@@ -6,6 +6,7 @@ import CameraModelSelectorPanel from "../components/CameraEditor/CameraModelSele
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
 import type { SelectableVehicleModel } from "../types/vehicleModel";
+import { DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, type CameraFrustumAspectRatioId } from "../utils/cameraFrustum";
 import { getAutoSelectedVehicleModel } from "../utils/cameraAutoVehicleModel";
 import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
 import { copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
@@ -21,6 +22,7 @@ function CameraEditorPage() {
   const [groupModelDrafts, setGroupModelDrafts] = useState<GroupModelDrafts>({});
   const [previewModel, setPreviewModel] = useState<SelectableVehicleModel | null>(null);
   const [isSelectingModel, setIsSelectingModel] = useState(false);
+  const [frustumAspectRatioId, setFrustumAspectRatioId] = useState<CameraFrustumAspectRatioId>(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
   const { models } = useSelectableVehicleModels();
 
   const selectedGroup = useMemo(() => savedViews?.groups.find((group) => group.id === selectedGroupId), [savedViews, selectedGroupId]);
@@ -91,7 +93,7 @@ function CameraEditorPage() {
         selectedGroupId={selectedGroupId}
         onSelectGroup={selectGroup}
       />
-      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} />
+      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} frustumAspectRatioId={frustumAspectRatioId} />
       {isSelectingModel ? (
         <CameraModelSelectorPanel
           selectedModel={loadedModel}
@@ -106,8 +108,10 @@ function CameraEditorPage() {
           selectedGroup={selectedGroup}
           selectedSlot={selectedSlot}
           selectedSlotId={selectedSlotId}
+          frustumAspectRatioId={frustumAspectRatioId}
           onSelectSlot={setSelectedSlotId}
           onSelectModel={openModelSelector}
+          onSelectFrustumAspectRatio={setFrustumAspectRatioId}
           onUpdateSlot={updateSlot}
           onCreateSlot={createSelectedSlot}
           onCopySlot={copyIntoSelectedSlot}

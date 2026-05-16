@@ -2,6 +2,7 @@ import { Html } from "@react-three/drei";
 import { useEffect, useMemo } from "react";
 import * as THREE from "three";
 import type { CameraPositionMarker } from "../../../utils/cameraViewport";
+import { CameraFrustum } from "./CameraFrustum";
 import styles from "./CameraModelViewer.module.css";
 
 function CameraMarkerLabel({ isActive, marker }: { isActive: boolean; marker: CameraPositionMarker }) {
@@ -34,7 +35,7 @@ function ActiveMarkerLine({ marker }: { marker: CameraPositionMarker }) {
   );
 }
 
-export function CameraMarkers({ activeSlotId, markers }: { activeSlotId?: number; markers: CameraPositionMarker[] }) {
+export function CameraMarkers({ activeSlotId, frustumAspectRatio, markers }: { activeSlotId?: number; frustumAspectRatio: number; markers: CameraPositionMarker[] }) {
   return (
     <>
       {markers.map((marker) => {
@@ -47,6 +48,7 @@ export function CameraMarkers({ activeSlotId, markers }: { activeSlotId?: number
               <>
                 <TargetOffsetDot marker={marker} />
                 <ActiveMarkerLine marker={marker} />
+                <CameraFrustum aspectRatio={frustumAspectRatio} marker={marker} />
               </>
             )}
           </group>

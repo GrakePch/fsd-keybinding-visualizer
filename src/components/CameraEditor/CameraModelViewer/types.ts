@@ -3,6 +3,7 @@ import type { CameraPositionMarker } from "../../../utils/cameraViewport";
 
 export interface CameraModelViewerProps {
   activeSlotId?: number;
+  frustumAspectRatio: number;
   markers: CameraPositionMarker[];
   model: SelectableVehicleModel | null;
 }

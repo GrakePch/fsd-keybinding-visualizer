@@ -4,7 +4,7 @@ import { CameraScene } from "./CameraScene";
 import styles from "./CameraModelViewer.module.css";
 import type { CameraModelViewerProps, LoadState } from "./types";
 
-function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerProps) {
+function CameraModelViewer({ activeSlotId, frustumAspectRatio, markers, model }: CameraModelViewerProps) {
   const [loadState, setLoadState] = useState<LoadState>(model?.src ? "loading" : "ready");
   const [loadProgress, setLoadProgress] = useState<number | null>(null);
 
@@ -17,7 +17,7 @@ function CameraModelViewer({ activeSlotId, markers, model }: CameraModelViewerPr
   return (
     <div className={styles.viewer}>
       <Canvas className={styles.canvas} gl={{ alpha: true, antialias: true }} dpr={[1, 2]}>
-        <CameraScene activeSlotId={activeSlotId} markers={markers} model={model} onLoadProgress={setLoadProgress} onLoadStateChange={setLoadState} />
+        <CameraScene activeSlotId={activeSlotId} frustumAspectRatio={frustumAspectRatio} markers={markers} model={model} onLoadProgress={setLoadProgress} onLoadStateChange={setLoadState} />
       </Canvas>
       {loadState !== "ready" && (
         <div className={styles.statusOverlay}>

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
+import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import CameraNumberField from "./CameraNumberField";
 import CameraSlotButtons from "./CameraSlotButtons";
 import CameraVector3Editor from "./CameraVector3Editor";
@@ -11,14 +12,16 @@ interface CameraControlPanelProps {
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
+  frustumAspectRatioId: CameraFrustumAspectRatioId;
   onSelectSlot: (slotId: number) => void;
   onSelectModel: () => void;
+  onSelectFrustumAspectRatio: (aspectRatioId: CameraFrustumAspectRatioId) => void;
   onUpdateSlot: (slot: SavedCameraSlot) => void;
   onCreateSlot: () => void;
   onCopySlot: (sourceSlotId: number) => void;
 }
 
-function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, onSelectSlot, onSelectModel, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const selectedCopySource = useMemo(() => copySourceSlots.find((slot) => slot.id === copySourceSlotId) || copySourceSlots[0], [copySourceSlotId, copySourceSlots]);
@@ -87,6 +90,24 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
             <CameraNumberField label="F-Stop" value={selectedSlot.fStop} onChange={(fStop) => updateSlot({ fStop })} />
           </div>
         )}
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.heading}>Screen Aspect</h2>
+        <div className={styles.aspectRatioOptions} role="radiogroup" aria-label="Screen aspect ratio">
+          {CAMERA_FRUSTUM_ASPECT_RATIOS.map((option) => (
+            <button
+              key={option.id}
+              className={`${styles.aspectRatioButton} ${frustumAspectRatioId === option.id ? styles.aspectRatioButtonActive : ""}`}
+              type="button"
+              role="radio"
+              aria-checked={frustumAspectRatioId === option.id}
+              onClick={() => onSelectFrustumAspectRatio(option.id)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
       </section>
     </aside>
   );

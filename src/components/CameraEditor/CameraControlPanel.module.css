@@ -87,3 +87,28 @@
 .copyControls button {
   border-radius: .5rem;
 }
+
+.aspectRatioOptions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .4rem;
+}
+
+.aspectRatioButton {
+  min-width: 0;
+  border: 1px solid #ffffff18;
+  border-radius: .45rem;
+  padding: .45rem .35rem;
+  color: var(--color-text-1);
+  background-color: var(--color-bg);
+  font-family: var(--font-geom);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.aspectRatioButtonActive {
+  border-color: color-mix(in srgb, var(--color-lalt) 80%, transparent);
+  color: #071017;
+  background-color: var(--color-lalt);
+}
+
