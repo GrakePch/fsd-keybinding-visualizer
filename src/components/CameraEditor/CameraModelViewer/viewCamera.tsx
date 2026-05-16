@@ -47,7 +47,7 @@ function OrbitViewCamera({ cameraFit }: { cameraFit: CameraFit }) {
   return (
     <>
       <OrthographicCamera ref={cameraRef} makeDefault near={initialCameraFit.near} far={initialCameraFit.far} position={initialCameraFit.cameraPosition} up={[0, 0, 1]} />
-      <OrbitControls ref={controlsRef} enableDamping makeDefault />
+      <OrbitControls ref={controlsRef} enableDamping enablePan={false} makeDefault />
     </>
   );
 }
