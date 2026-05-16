@@ -3,7 +3,7 @@ import { useThree } from "@react-three/fiber";
 import { useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three/examples/jsm/controls/OrbitControls.js";
-import { CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES, getContainedCameraViewVerticalFov } from "../../../utils/cameraFrustum";
+import { getCameraLensVerticalFov, getContainedCameraViewVerticalFov } from "../../../utils/cameraFrustum";
 import type { CameraFit, CameraPositionMarker } from "../../../utils/cameraViewport";
 
 function OrbitViewCamera({ cameraFit }: { cameraFit: CameraFit }) {
@@ -61,7 +61,7 @@ function SavedCameraView({ cameraFit, marker, screenAspectRatio }: { cameraFit: 
     if (!camera || !size.height) return;
 
     const viewportAspectRatio = size.width / size.height;
-    const containedVerticalFov = getContainedCameraViewVerticalFov(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES, screenAspectRatio, viewportAspectRatio);
+    const containedVerticalFov = getContainedCameraViewVerticalFov(getCameraLensVerticalFov(marker.lensSize), screenAspectRatio, viewportAspectRatio);
 
     camera.position.set(...marker.cameraPosition);
     camera.up.set(0, 0, 1);
@@ -74,7 +74,7 @@ function SavedCameraView({ cameraFit, marker, screenAspectRatio }: { cameraFit: 
   }, [cameraFit.far, cameraFit.near, marker, screenAspectRatio, size.height, size.width]);
 
   const viewportAspectRatio = size.height ? size.width / size.height : screenAspectRatio;
-  const containedVerticalFov = getContainedCameraViewVerticalFov(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES, screenAspectRatio, viewportAspectRatio);
+  const containedVerticalFov = getContainedCameraViewVerticalFov(getCameraLensVerticalFov(marker.lensSize), screenAspectRatio, viewportAspectRatio);
 
   return <PerspectiveCamera ref={cameraRef} makeDefault aspect={viewportAspectRatio} fov={containedVerticalFov} near={cameraFit.near} far={cameraFit.far} position={marker.cameraPosition} up={[0, 0, 1]} />;
 }

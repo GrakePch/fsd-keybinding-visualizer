@@ -1,4 +1,5 @@
 import { SavedCameraSlot, SavedViewAttributes, SavedViewGroup, SavedViewsDocument, Vec3 } from "../types/savedViews";
+import { DEFAULT_CAMERA_LENS_SIZE, normalizeCameraLensSize } from "./cameraFrustum";
 
 const DEFAULT_TYPE = "OrbitSCItemSeat";
 const DEFAULT_ROTATION: Vec3 = { x: -15, y: 0, z: 0 };
@@ -55,7 +56,7 @@ export function createDefaultCameraSlot(slotId: number): SavedCameraSlot {
     cameraRotationAngle: { ...DEFAULT_ROTATION },
     distance: 1,
     targetOffset: { ...DEFAULT_OFFSET },
-    lensSize: 2,
+    lensSize: DEFAULT_CAMERA_LENS_SIZE,
     fStop: 11,
     rawAttributes: {},
   };
@@ -81,7 +82,7 @@ const parseSlot = (element: Element): SavedCameraSlot => {
     cameraRotationAngle: parseVec3(rawAttributes.CameraRotationAngle, DEFAULT_ROTATION),
     distance: parseNumber(rawAttributes.Distance, 1),
     targetOffset: parseVec3(rawAttributes.TargetOffset, DEFAULT_OFFSET),
-    lensSize: parseNumber(rawAttributes.LensSize, 2),
+    lensSize: normalizeCameraLensSize(parseNumber(rawAttributes.LensSize, DEFAULT_CAMERA_LENS_SIZE)),
     fStop: parseNumber(rawAttributes.FStop, 11),
     rawAttributes,
   };

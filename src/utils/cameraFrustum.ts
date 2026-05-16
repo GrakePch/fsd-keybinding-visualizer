@@ -8,6 +8,7 @@ export type CameraFrustumLineSegment = {
 export type CameraFrustumInput = {
   cameraPosition: CameraFrustumVector3;
   targetPosition: CameraFrustumVector3;
+  lensSize: number;
   fStop: number;
 };
 
@@ -29,7 +30,10 @@ export const CAMERA_FRUSTUM_ASPECT_RATIOS: CameraFrustumAspectRatioOption[] = [
 
 export const DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID: CameraFrustumAspectRatioId = "16:9";
 
-export const CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES = 85;
+export const CAMERA_LENS_VERTICAL_FOV_DEGREES = [80, 70, 58, 51, 45, 41, 35, 30, 28, 24, 22, 19, 15, 12, 10] as const;
+export const MIN_CAMERA_LENS_SIZE = 0;
+export const MAX_CAMERA_LENS_SIZE = CAMERA_LENS_VERTICAL_FOV_DEGREES.length - 1;
+export const DEFAULT_CAMERA_LENS_SIZE = 2;
 const VECTOR_EPSILON = 1e-9;
 
 const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
@@ -38,8 +42,17 @@ export function getCameraFrustumAspectRatio(aspectRatioId: string): number {
   return CAMERA_FRUSTUM_ASPECT_RATIOS.find((option) => option.id === aspectRatioId)?.value ?? getCameraFrustumAspectRatio(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
 }
 
+export function normalizeCameraLensSize(lensSize: number): number {
+  if (!isFinite(lensSize)) return DEFAULT_CAMERA_LENS_SIZE;
+  return Math.min(MAX_CAMERA_LENS_SIZE, Math.max(MIN_CAMERA_LENS_SIZE, Math.round(lensSize)));
+}
+
+export function getCameraLensVerticalFov(lensSize: number): number {
+  return CAMERA_LENS_VERTICAL_FOV_DEGREES[normalizeCameraLensSize(lensSize)];
+}
+
 export function getContainedCameraViewVerticalFov(baseVerticalFovDegrees: number, screenAspectRatio: number, viewportAspectRatio: number): number {
-  const safeBaseFov = isFinite(baseVerticalFovDegrees) && baseVerticalFovDegrees > 0 ? baseVerticalFovDegrees : CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES;
+  const safeBaseFov = isFinite(baseVerticalFovDegrees) && baseVerticalFovDegrees > 0 ? baseVerticalFovDegrees : getCameraLensVerticalFov(DEFAULT_CAMERA_LENS_SIZE);
   const safeScreenAspectRatio = isFinite(screenAspectRatio) && screenAspectRatio > 0 ? screenAspectRatio : getCameraFrustumAspectRatio(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
   const safeViewportAspectRatio = isFinite(viewportAspectRatio) && viewportAspectRatio > 0 ? viewportAspectRatio : safeScreenAspectRatio;
 
@@ -69,7 +82,7 @@ export function getCameraFrustumLineSegments(marker: CameraFrustumInput, aspectR
 
   // Star Citizen stores FOV as vertical FOV. Preserve the vertical angle and
   // widen/narrow only the horizontal extent as the monitor aspect ratio changes.
-  const halfHeight = Math.tan(toRadians(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES / 2)) * frustumDepth;
+  const halfHeight = Math.tan(toRadians(getCameraLensVerticalFov(marker.lensSize) / 2)) * frustumDepth;
   const safeAspectRatio = isFinite(aspectRatio) && aspectRatio > 0 ? aspectRatio : getCameraFrustumAspectRatio(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
   const halfWidth = halfHeight * safeAspectRatio;
 

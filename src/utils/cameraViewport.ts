@@ -72,13 +72,14 @@ export function getVehicleGridFromBounds(bounds: VehicleModelBounds | null | und
   };
 }
 
-export type CameraPositionMarkerInput = Pick<SavedCameraSlot, "id" | "targetOffset" | "cameraRotationAngle" | "distance" | "fStop">;
+export type CameraPositionMarkerInput = Pick<SavedCameraSlot, "id" | "targetOffset" | "cameraRotationAngle" | "distance" | "lensSize" | "fStop">;
 
 export type CameraPositionMarker = {
   slotId: number;
   label: string;
   targetPosition: [number, number, number];
   cameraPosition: [number, number, number];
+  lensSize: number;
   fStop: number;
 };
 
@@ -89,6 +90,7 @@ const hasFiniteCameraPositionInputs = (slot: CameraPositionMarkerInput) =>
   isFinite(slot.cameraRotationAngle.x) &&
   isFinite(slot.cameraRotationAngle.z) &&
   isFinite(slot.distance) &&
+  isFinite(slot.lensSize) &&
   isFinite(slot.fStop);
 
 export function savedViewPositionToViewportPosition(position: Vec3): [number, number, number] {
@@ -117,6 +119,7 @@ export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[]): Ca
         targetPosition[1] + boomDirection[1] * slot.distance,
         targetPosition[2] + boomDirection[2] * slot.distance,
       ],
+      lensSize: slot.lensSize,
       fStop: slot.fStop,
     };
   });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CAMERA_FRUSTUM_ASPECT_RATIOS, CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES, DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, getCameraFrustumAspectRatio, getCameraFrustumLineSegments, getContainedCameraViewVerticalFov } from "./cameraFrustum";
+import { CAMERA_FRUSTUM_ASPECT_RATIOS, CAMERA_LENS_VERTICAL_FOV_DEGREES, DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, DEFAULT_CAMERA_LENS_SIZE, getCameraFrustumAspectRatio, getCameraFrustumLineSegments, getCameraLensVerticalFov, getContainedCameraViewVerticalFov, normalizeCameraLensSize } from "./cameraFrustum";
 
 describe("camera frustum aspect ratio configuration", () => {
   it("offers common desktop monitor aspect ratios with 16:9 as the default", () => {
@@ -18,27 +18,45 @@ describe("camera frustum aspect ratio configuration", () => {
   });
 });
 
+describe("camera lens size FOV mapping", () => {
+  it("maps discrete lens size values to vertical FOV degrees", () => {
+    expect(CAMERA_LENS_VERTICAL_FOV_DEGREES).toEqual([80, 70, 58, 51, 45, 41, 35, 30, 28, 24, 22, 19, 15, 12, 10]);
+    expect(getCameraLensVerticalFov(0)).toBe(80);
+    expect(getCameraLensVerticalFov(7)).toBe(30);
+    expect(getCameraLensVerticalFov(14)).toBe(10);
+  });
+
+  it("normalizes lens size to a 0-14 integer slider range", () => {
+    expect(normalizeCameraLensSize(-1)).toBe(0);
+    expect(normalizeCameraLensSize(6.6)).toBe(7);
+    expect(normalizeCameraLensSize(20)).toBe(14);
+    expect(normalizeCameraLensSize(Number.NaN)).toBe(DEFAULT_CAMERA_LENS_SIZE);
+  });
+});
+
 describe("camera view contained FOV", () => {
   it("keeps the saved vertical FOV when the viewport is at least as wide as the selected screen aspect", () => {
-    expect(getContainedCameraViewVerticalFov(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES, 16 / 9, 21 / 9)).toBe(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES);
+    expect(getContainedCameraViewVerticalFov(getCameraLensVerticalFov(0), 16 / 9, 21 / 9)).toBe(getCameraLensVerticalFov(0));
   });
 
   it("widens the vertical FOV when the selected screen aspect is wider than the viewport", () => {
-    const containedFov = getContainedCameraViewVerticalFov(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES, 16 / 9, 4 / 3);
-    const expected = (Math.atan(Math.tan((CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES * Math.PI) / 360) * ((16 / 9) / (4 / 3))) * 360) / Math.PI;
+    const baseFov = getCameraLensVerticalFov(0);
+    const containedFov = getContainedCameraViewVerticalFov(baseFov, 16 / 9, 4 / 3);
+    const expected = (Math.atan(Math.tan((baseFov * Math.PI) / 360) * ((16 / 9) / (4 / 3))) * 360) / Math.PI;
 
-    expect(containedFov).toBeGreaterThan(CAMERA_FRUSTUM_VERTICAL_FOV_DEGREES);
+    expect(containedFov).toBeGreaterThan(baseFov);
     expect(containedFov).toBeCloseTo(expected);
   });
 });
 describe("getCameraFrustumLineSegments", () => {
   it("builds a vertical-FOV frustum whose width changes with the selected aspect ratio", () => {
-    const halfHeight = Math.tan((85 * Math.PI) / 360) * 4;
+    const halfHeight = Math.tan((80 * Math.PI) / 360) * 4;
     const halfWidth = halfHeight * (16 / 9);
     const segments = getCameraFrustumLineSegments(
       {
         cameraPosition: [0, -10, 0],
         targetPosition: [0, 0, 0],
+        lensSize: 0,
         fStop: 4,
       },
       16 / 9,
@@ -53,6 +71,6 @@ describe("getCameraFrustumLineSegments", () => {
   });
 
   it("returns no frustum lines when the camera and target overlap", () => {
-    expect(getCameraFrustumLineSegments({ cameraPosition: [1, 2, 3], targetPosition: [1, 2, 3], fStop: 4 }, 16 / 9)).toEqual([]);
+    expect(getCameraFrustumLineSegments({ cameraPosition: [1, 2, 3], targetPosition: [1, 2, 3], lensSize: 0, fStop: 4 }, 16 / 9)).toEqual([]);
   });
 });

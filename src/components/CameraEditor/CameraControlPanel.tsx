@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { SelectableVehicleModel } from "../../types/vehicleModel";
 import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
+import CameraLensZoomField from "./CameraLensZoomField";
 import CameraNumberField from "./CameraNumberField";
 import CameraSlotButtons from "./CameraSlotButtons";
 import CameraVector3Editor from "./CameraVector3Editor";
@@ -92,7 +93,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
             <CameraVector3Editor label="Target Offset" value={selectedSlot.targetOffset} onChange={(targetOffset) => updateSlot({ targetOffset })} />
             <CameraVector3Editor label="Rotation Angle" value={selectedSlot.cameraRotationAngle} onChange={(cameraRotationAngle) => updateSlot({ cameraRotationAngle })} />
             <CameraNumberField label="Distance" value={selectedSlot.distance} onChange={(distance) => updateSlot({ distance })} />
-            <CameraNumberField label="Lens Size" value={selectedSlot.lensSize} onChange={(lensSize) => updateSlot({ lensSize })} />
+            <CameraLensZoomField value={selectedSlot.lensSize} onChange={(lensSize) => updateSlot({ lensSize })} />
             <CameraNumberField label="F-Stop" value={selectedSlot.fStop} onChange={(fStop) => updateSlot({ fStop })} />
           </div>
         )}

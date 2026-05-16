@@ -102,6 +102,7 @@ describe("getCameraPositionMarkers", () => {
         targetOffset: { x: 10, y: 20, z: 30 },
         cameraRotationAngle: { x: 0, y: 0, z: 0 },
         distance: 5,
+        lensSize: 14,
         fStop: 11,
       },
     ]);
@@ -112,6 +113,7 @@ describe("getCameraPositionMarkers", () => {
         label: "1",
         targetPosition: [10, 20, 30],
         cameraPosition: [10, 15, 30],
+        lensSize: 14,
         fStop: 11,
       },
     ]);
@@ -124,6 +126,7 @@ describe("getCameraPositionMarkers", () => {
         targetOffset: { x: 3, y: 10, z: -7 },
         cameraRotationAngle: { x: 0, y: 0, z: 0 },
         distance: 2,
+        lensSize: 14,
         fStop: 11,
       },
       {
@@ -131,13 +134,14 @@ describe("getCameraPositionMarkers", () => {
         targetOffset: { x: 3, y: 10, z: -7 },
         cameraRotationAngle: { x: 0, y: 0, z: 0 },
         distance: 2,
+        lensSize: 14,
         fStop: 11,
       },
     ]);
 
     expect(markers).toEqual([
-      { slotId: 1, label: "2", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], fStop: 11 },
-      { slotId: 2, label: "3", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], fStop: 11 },
+      { slotId: 1, label: "2", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], lensSize: 14, fStop: 11 },
+      { slotId: 2, label: "3", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], lensSize: 14, fStop: 11 },
     ]);
   });
 });
