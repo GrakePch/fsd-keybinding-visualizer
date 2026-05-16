@@ -6,8 +6,10 @@ import CameraModelSelectorPanel from "../components/CameraEditor/CameraModelSele
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
 import type { SelectableVehicleModel } from "../types/vehicleModel";
+import { getAutoSelectedVehicleModel } from "../utils/cameraAutoVehicleModel";
 import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
 import { copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
+import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
 import styles from "./CameraEditorPage.module.css";
 
 function CameraEditorPage() {
@@ -19,12 +21,15 @@ function CameraEditorPage() {
   const [groupModelDrafts, setGroupModelDrafts] = useState<GroupModelDrafts>({});
   const [previewModel, setPreviewModel] = useState<SelectableVehicleModel | null>(null);
   const [isSelectingModel, setIsSelectingModel] = useState(false);
+  const { models } = useSelectableVehicleModels();
 
   const selectedGroup = useMemo(() => savedViews?.groups.find((group) => group.id === selectedGroupId), [savedViews, selectedGroupId]);
   const selectedSlot = selectedGroup ? getSlotById(selectedGroup, selectedSlotId) : undefined;
   const currentSavedViewsJson = JSON.stringify(savedViews);
   const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
-  const loadedModel = selectedGroupId ? getDraftModelForGroup(groupModelDrafts, selectedGroupId) : standaloneLoadedModel;
+  const manualGroupModel = selectedGroupId ? getDraftModelForGroup(groupModelDrafts, selectedGroupId) : null;
+  const autoGroupModel = selectedGroupId && selectedGroup ? getAutoSelectedVehicleModel(selectedGroup.id, models) : null;
+  const loadedModel = selectedGroupId ? manualGroupModel || autoGroupModel : standaloneLoadedModel;
   const viewportModel = isSelectingModel ? previewModel || loadedModel : loadedModel;
 
   const loadSavedViews = (document: SavedViewsDocument) => {
