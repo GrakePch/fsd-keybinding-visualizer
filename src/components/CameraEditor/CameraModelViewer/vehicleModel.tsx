@@ -72,7 +72,7 @@ export function VehicleModel({ model, onLoadProgress, onLoadStateChange }: { mod
       disposed = true;
       if (loadedScene) disposeObject3D(loadedScene);
     };
-  }, [model, onLoadProgress, onLoadStateChange]);
+  }, [model?.src, onLoadProgress, onLoadStateChange]);
 
   if (!scene) return null;
 

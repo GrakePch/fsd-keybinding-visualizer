@@ -1,0 +1,39 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.valueInput {
+  width: 5.5rem;
+  min-width: 0;
+  padding: .2rem .35rem;
+  border: 1px solid #ffffff18;
+  border-radius: .375rem;
+  color: var(--color-text-2);
+  background-color: var(--color-bg);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.field input[type="range"] {
+  min-width: 0;
+  width: 100%;
+  accent-color: var(--color-lalt);
+}
+
+.rangeNote {
+  color: var(--color-text-3, var(--color-text-2));
+  font-size: .75rem;
+  font-weight: 500;
+}

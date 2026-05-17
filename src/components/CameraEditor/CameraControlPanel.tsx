@@ -3,8 +3,10 @@ import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
 import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
+import { getCameraControlRanges, type CameraControlAxisRange, type CameraControlRangeSource } from "../../utils/cameraControlRanges";
 import CameraLensZoomField from "./CameraLensZoomField";
 import CameraNumberField from "./CameraNumberField";
+import CameraSliderNumberField from "./CameraSliderNumberField";
 import CameraSlotButtons from "./CameraSlotButtons";
 import CameraVector3Editor from "./CameraVector3Editor";
 import styles from "./CameraControlPanel.module.css";
@@ -26,10 +28,31 @@ interface CameraControlPanelProps {
   onCopySlot: (sourceSlotId: number) => void;
 }
 
+function getCameraControlRangeNote(source: CameraControlRangeSource, range: CameraControlAxisRange) {
+  const sourceLabel = source === "precise" ? "Tested range" : source === "inferred" ? "Estimated from model size" : "Default range";
+  return range.isCurrentValueOutsideRecommendedRange ? `${sourceLabel}; current value is outside the recommended range.` : sourceLabel;
+}
+
 function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const selectedCopySource = useMemo(() => copySourceSlots.find((slot) => slot.id === copySourceSlotId) || copySourceSlots[0], [copySourceSlotId, copySourceSlots]);
+  const cameraControlRanges = useMemo(
+    () =>
+      getCameraControlRanges({
+        className: loadedModel?.spvClassName || loadedModel?.className,
+        bounds: loadedModel?.bounds,
+        currentTargetOffset: selectedSlot?.targetOffset,
+        currentDistance: selectedSlot?.distance,
+      }),
+    [loadedModel?.bounds, loadedModel?.className, loadedModel?.spvClassName, selectedSlot?.distance, selectedSlot?.targetOffset],
+  );
+  const cameraControlTargetOffsetRangeNotes = {
+    x: getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.targetOffset.x),
+    y: getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.targetOffset.y),
+    z: getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.targetOffset.z),
+  };
+  const cameraControlDistanceRangeNote = getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.distance);
 
   const updateSlot = (patch: Partial<SavedCameraSlot>) => {
     if (!selectedSlot) return;
@@ -97,7 +120,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
               <span>Type</span>
               <input readOnly value={selectedSlot.type} />
             </label>
-            <CameraVector3Editor label="Target Offset" value={selectedSlot.targetOffset} onChange={(targetOffset) => updateSlot({ targetOffset })} />
+            <CameraVector3Editor label="Target Offset" value={selectedSlot.targetOffset} variant="rangeSlider" ranges={cameraControlRanges.targetOffset} rangeNotes={cameraControlTargetOffsetRangeNotes} onChange={(targetOffset) => updateSlot({ targetOffset })} />
             <CameraVector3Editor
               label="Rotation Angle"
               value={selectedSlot.cameraRotationAngle}
@@ -109,7 +132,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
               variant="angleSlider"
               onChange={(cameraRotationAngle) => updateSlot({ cameraRotationAngle })}
             />
-            <CameraNumberField label="Distance" value={selectedSlot.distance} onChange={(distance) => updateSlot({ distance })} />
+            <CameraSliderNumberField label="Distance" value={selectedSlot.distance} range={cameraControlRanges.distance} rangeNote={cameraControlDistanceRangeNote} onChange={(distance) => updateSlot({ distance })} />
             <CameraLensZoomField value={selectedSlot.lensSize} onChange={(lensSize) => updateSlot({ lensSize })} />
             <CameraNumberField label="F-Stop" value={selectedSlot.fStop} onChange={(fStop) => updateSlot({ fStop })} />
           </div>

@@ -103,6 +103,10 @@ export type CameraPositionMarker = {
   fStop: number;
 };
 
+type CameraPositionMarkerOptions = {
+  minimumDistance?: number;
+};
+
 const hasFiniteCameraPositionInputs = (slot: CameraPositionMarkerInput) =>
   isFinite(slot.targetOffset.x) &&
   isFinite(slot.targetOffset.y) &&
@@ -151,19 +155,22 @@ function rotateVectorAroundAxis(vector: [number, number, number], axis: [number,
   ];
 }
 
-export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[]): CameraPositionMarker[] {
+export function getCameraPositionMarkers(slots: CameraPositionMarkerInput[], options: CameraPositionMarkerOptions = {}): CameraPositionMarker[] {
+  const minimumDistance = isFinite(options.minimumDistance as number) ? (options.minimumDistance as number) : null;
+
   return slots.filter(hasFiniteCameraPositionInputs).map((slot) => {
     const targetPosition = savedViewPositionToViewportPosition(slot.targetOffset);
     const boomDirection = getCameraBoomDirection(slot.cameraRotationAngle);
+    const renderDistance = minimumDistance === null ? slot.distance : Math.max(slot.distance, minimumDistance);
 
     return {
       slotId: slot.id,
       label: String(slot.id + 1),
       targetPosition,
       cameraPosition: [
-        targetPosition[0] + boomDirection[0] * slot.distance,
-        targetPosition[1] + boomDirection[1] * slot.distance,
-        targetPosition[2] + boomDirection[2] * slot.distance,
+        targetPosition[0] + boomDirection[0] * renderDistance,
+        targetPosition[1] + boomDirection[1] * renderDistance,
+        targetPosition[2] + boomDirection[2] * renderDistance,
       ],
       cameraRotationAngle: slot.cameraRotationAngle,
       lensSize: slot.lensSize,

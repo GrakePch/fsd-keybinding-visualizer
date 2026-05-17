@@ -48,4 +48,27 @@ describe("CameraVector3Editor", () => {
     expect(markup).toContain("step=\"0.1\"");
     expect(markup).not.toContain("-15.2°");
   });
+
+  it("can render target offset fields as sliders with wider numeric input ranges", () => {
+    const markup = renderToStaticMarkup(
+      <CameraVector3Editor
+        label="Target Offset"
+        value={{ x: 125, y: -20, z: 5 }}
+        variant="rangeSlider"
+        ranges={{
+          x: { recommended: { min: -100, max: 100 }, slider: { min: -100, max: 125 }, input: { min: -200, max: 200 }, isCurrentValueOutsideRecommendedRange: true },
+          y: { recommended: { min: -100, max: 100 }, slider: { min: -100, max: 100 }, input: { min: -200, max: 200 }, isCurrentValueOutsideRecommendedRange: false },
+          z: { recommended: { min: -60, max: 60 }, slider: { min: -60, max: 60 }, input: { min: -120, max: 120 }, isCurrentValueOutsideRecommendedRange: false },
+        }}
+        rangeNotes={{ x: "Estimated from model size; current value is outside the recommended range.", y: "Estimated from model size", z: "Estimated from model size" }}
+        onChange={() => {}}
+      />,
+    );
+
+    expect(markup).toContain("Estimated from model size");
+    expect(markup).toContain("Estimated from model size; current value is outside the recommended range.");
+    expect(markup).toMatch(/aria-label="X value" type="number" min="-200" max="200" step="0.1" value="125.0"/);
+    expect(markup).toMatch(/aria-label="X" type="range" min="-100" max="125" step="0.1" value="125"/);
+    expect(markup).toMatch(/aria-label="Z value" type="number" min="-120" max="120" step="0.1" value="5.0"/);
+  });
 });

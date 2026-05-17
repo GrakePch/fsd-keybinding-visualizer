@@ -70,3 +70,10 @@
   background-color: transparent;
   accent-color: var(--color-lalt);
 }
+
+.rangeNote {
+  margin-top: -.25rem;
+  color: var(--color-text-3, var(--color-text-2));
+  font-size: .75rem;
+  font-weight: 500;
+}

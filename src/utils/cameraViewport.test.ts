@@ -180,4 +180,50 @@ describe("getCameraPositionMarkers", () => {
       { slotId: 2, label: "3", targetPosition: [3, 10, -7], cameraPosition: [3, 8, -7], cameraRotationAngle: { x: 0, y: 0, z: 0 }, lensSize: 14, fStop: 11 },
     ]);
   });
+
+  it("clamps rendered distance to the optional minimum without changing other marker data", () => {
+    const markers = getCameraPositionMarkers(
+      [
+        {
+          id: 0,
+          targetOffset: { x: 10, y: 20, z: 30 },
+          cameraRotationAngle: { x: 0, y: 0, z: 0 },
+          distance: 5,
+          lensSize: 14,
+          fStop: 11,
+        },
+      ],
+      { minimumDistance: 8 },
+    );
+
+    expect(markers).toEqual([
+      {
+        slotId: 0,
+        label: "1",
+        targetPosition: [10, 20, 30],
+        cameraPosition: [10, 12, 30],
+        cameraRotationAngle: { x: 0, y: 0, z: 0 },
+        lensSize: 14,
+        fStop: 11,
+      },
+    ]);
+  });
+
+  it("does not clamp rendered distance above the optional minimum", () => {
+    const markers = getCameraPositionMarkers(
+      [
+        {
+          id: 0,
+          targetOffset: { x: 10, y: 20, z: 30 },
+          cameraRotationAngle: { x: 0, y: 0, z: 0 },
+          distance: 12,
+          lensSize: 14,
+          fStop: 11,
+        },
+      ],
+      { minimumDistance: 8 },
+    );
+
+    expect(markers[0].cameraPosition).toEqual([10, 8, 30]);
+  });
 });
