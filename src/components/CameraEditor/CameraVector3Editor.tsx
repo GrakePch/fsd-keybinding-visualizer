@@ -139,6 +139,17 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
               <>
                 <span className={styles.labelRow}>
                   <span>{field.label}</span>
+                </span>
+                <span className={styles.controlRow}>
+                  <input
+                    aria-label={field.label}
+                    type="range"
+                    min={angleRange.min}
+                    max={angleRange.max}
+                    step={ANGLE_STEP_DEGREES}
+                    value={angleValue}
+                    onChange={(event) => updateAxis(field.axis, event.target.value)}
+                  />
                   <input
                     className={styles.angleValue}
                     aria-label={`${field.label} angle`}
@@ -156,20 +167,23 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
                     }}
                   />
                 </span>
-                <input
-                  aria-label={field.label}
-                  type="range"
-                  min={angleRange.min}
-                  max={angleRange.max}
-                  step={ANGLE_STEP_DEGREES}
-                  value={angleValue}
-                  onChange={(event) => updateAxis(field.axis, event.target.value)}
-                />
               </>
             ) : isRangeSlider && range ? (
               <>
                 <span className={styles.labelRow}>
                   <span>{field.label}</span>
+                  {rangeNote && <span className={styles.rangeNote}>{rangeNote}</span>}
+                </span>
+                <span className={styles.controlRow}>
+                  <input
+                    aria-label={field.label}
+                    type="range"
+                    min={range.slider.min}
+                    max={range.slider.max}
+                    step={RANGE_SLIDER_STEP}
+                    value={value[field.axis]}
+                    onChange={(event) => updateRangeSlider(field.axis, event.target.value)}
+                  />
                   <input
                     className={styles.angleValue}
                     aria-label={`${field.label} value`}
@@ -187,16 +201,6 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
                     }}
                   />
                 </span>
-                <input
-                  aria-label={field.label}
-                  type="range"
-                  min={range.slider.min}
-                  max={range.slider.max}
-                  step={RANGE_SLIDER_STEP}
-                  value={value[field.axis]}
-                  onChange={(event) => updateRangeSlider(field.axis, event.target.value)}
-                />
-                {rangeNote && <span className={styles.rangeNote}>{rangeNote}</span>}
               </>
             ) : (
               <>

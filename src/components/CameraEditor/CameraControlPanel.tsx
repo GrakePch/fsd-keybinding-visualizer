@@ -30,7 +30,7 @@ interface CameraControlPanelProps {
 
 function getCameraControlRangeNote(source: CameraControlRangeSource, range: CameraControlAxisRange) {
   const sourceLabel = source === "precise" ? "Tested range" : source === "inferred" ? "Estimated from model size" : "Default range";
-  return range.isCurrentValueOutsideRecommendedRange ? `${sourceLabel}; current value is outside the recommended range.` : sourceLabel;
+  return range.isCurrentValueOutsideRecommendedRange ? `${sourceLabel}: outside recommended range` : sourceLabel;
 }
 
 function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
@@ -116,10 +116,6 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
 
         {selectedSlot && (
           <div className={styles.fields}>
-            <label className={styles.typeField}>
-              <span>Type</span>
-              <input readOnly value={selectedSlot.type} />
-            </label>
             <CameraVector3Editor label="Target Offset" value={selectedSlot.targetOffset} variant="rangeSlider" ranges={cameraControlRanges.targetOffset} rangeNotes={cameraControlTargetOffsetRangeNotes} onChange={(targetOffset) => updateSlot({ targetOffset })} />
             <CameraVector3Editor
               label="Rotation Angle"

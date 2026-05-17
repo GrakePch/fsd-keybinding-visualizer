@@ -75,8 +75,11 @@
   gap: .75rem;
 }
 
-.copyControls select,
-.typeField input {
+.fields {
+  font-size: .85rem;
+}
+
+.copyControls select {
   width: 100%;
   min-width: 0;
   padding: .45rem .5rem;
@@ -84,14 +87,6 @@
   border-radius: .375rem;
   color: var(--color-text);
   background-color: var(--color-bg);
-}
-
-.typeField {
-  display: flex;
-  flex-direction: column;
-  gap: .35rem;
-  color: var(--color-text-1);
-  font-weight: 600;
 }
 
 .emptySlotActions button,

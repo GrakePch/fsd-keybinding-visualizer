@@ -5,12 +5,13 @@
   border-radius: .5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: .5rem;
+  gap: .25rem;
 }
 
 .fieldset legend {
   padding: 0 .25rem;
   color: var(--color-text-1);
+  font-size: .85rem;
   font-weight: 600;
 }
 
@@ -32,18 +33,20 @@
   border-radius: .375rem;
   color: var(--color-text);
   background-color: var(--color-bg);
+  font-family: var(--font-slim);
+  font-variant-numeric: tabular-nums;
 }
 
 .angleSliderFieldset {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: .25rem;
 }
 
 .angleSliderField {
   gap: .35rem;
   color: var(--color-text-1);
-  font-size: 1rem;
+  font-size: .85rem;
   font-weight: 600;
 }
 
@@ -52,18 +55,39 @@
   align-items: baseline;
   justify-content: space-between;
   gap: .75rem;
+  min-width: 0;
+}
+
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
 }
 
 .angleSliderField .angleValue {
-  width: 5.5rem;
+  width: 4.25rem;
   padding: .2rem .35rem;
   color: var(--color-text-2);
+  font-family: var(--font-slim);
   font-size: .85rem;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
+.angleSliderField .angleValue::-webkit-outer-spin-button,
+.angleSliderField .angleValue::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.angleSliderField .angleValue {
+  appearance: textfield;
+}
+
 .angleSliderField input[type="range"] {
+  min-width: 0;
+  width: auto;
+  flex: 1;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -72,8 +96,10 @@
 }
 
 .rangeNote {
-  margin-top: -.25rem;
+  min-width: 0;
+  flex: 1;
   color: var(--color-text-3, var(--color-text-2));
   font-size: .75rem;
   font-weight: 500;
+  text-align: right;
 }

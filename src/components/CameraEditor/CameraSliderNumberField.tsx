@@ -39,6 +39,10 @@ function CameraSliderNumberField({ label, value, range, step = 0.1, rangeNote, o
     <label className={styles.field}>
       <span className={styles.labelRow}>
         <span>{label}</span>
+        {rangeNote && <span className={styles.rangeNote}>{rangeNote}</span>}
+      </span>
+      <span className={styles.controlRow}>
+        <input aria-label={label} type="range" min={range.slider.min} max={range.slider.max} step={step} value={value} onChange={(event) => updateSliderValue(event.target.value)} />
         <input
           aria-label={`${label} value`}
           className={styles.valueInput}
@@ -56,8 +60,6 @@ function CameraSliderNumberField({ label, value, range, step = 0.1, rangeNote, o
           }}
         />
       </span>
-      <input aria-label={label} type="range" min={range.slider.min} max={range.slider.max} step={step} value={value} onChange={(event) => updateSliderValue(event.target.value)} />
-      {rangeNote && <span className={styles.rangeNote}>{rangeNote}</span>}
     </label>
   );
 }
