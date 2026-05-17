@@ -19,5 +19,5 @@
 
 .slotButtonActive {
   color: var(--color-bg);
-  background-color: var(--color-text);
+  background-color: var(--color-lalt);
 }

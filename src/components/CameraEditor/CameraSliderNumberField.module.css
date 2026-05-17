@@ -29,7 +29,7 @@
 .field input[type="range"] {
   min-width: 0;
   width: 100%;
-  accent-color: var(--color-lalt);
+  accent-color: var(--color-text);
 }
 
 .rangeNote {

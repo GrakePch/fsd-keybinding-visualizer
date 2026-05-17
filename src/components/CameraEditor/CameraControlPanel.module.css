@@ -118,8 +118,8 @@
 }
 
 .aspectRatioButtonActive {
-  border-color: color-mix(in srgb, var(--color-lalt) 80%, transparent);
+  border-color: color-mix(in srgb, var(--color-text) 80%, transparent);
   color: #071017;
-  background-color: var(--color-lalt);
+  background-color: var(--color-text);
 }
 
