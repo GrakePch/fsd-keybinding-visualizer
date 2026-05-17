@@ -136,7 +136,7 @@ function CameraEditorPage() {
         selectedGroupId={selectedGroupId}
         onSelectGroup={selectGroup}
       />
-      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} />
+      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
       {isSelectingModel ? (
         <CameraModelSelectorPanel
           selectedModel={loadedModel}

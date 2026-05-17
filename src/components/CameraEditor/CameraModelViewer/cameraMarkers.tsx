@@ -5,10 +5,20 @@ import type { CameraPositionMarker } from "../../../utils/cameraViewport";
 import { CameraFrustum } from "./CameraFrustum";
 import styles from "./CameraModelViewer.module.css";
 
-function CameraMarkerLabel({ isActive, marker }: { isActive: boolean; marker: CameraPositionMarker }) {
+function CameraMarkerLabel({ isActive, marker, onSelectSlot }: { isActive: boolean; marker: CameraPositionMarker; onSelectSlot: (slotId: number) => void }) {
+  const selectSlot = () => onSelectSlot(marker.slotId);
+
   return (
-    <Html center className={`${styles.cameraPositionMarker} ${isActive ? styles.cameraPositionMarkerActive : ""}`} position={marker.cameraPosition} title={`Slot ${marker.label} camera position`} transform={false} zIndexRange={[20, 0]}>
-      <span aria-label={`Camera slot ${marker.label} camera position`}>{marker.label}</span>
+    <Html center position={marker.cameraPosition} transform={false} zIndexRange={[20, 0]}>
+      <button
+        className={`${styles.cameraPositionMarker} ${isActive ? styles.cameraPositionMarkerActive : ""}`}
+        type="button"
+        aria-label={`Select camera slot ${marker.label}`}
+        onClick={selectSlot}
+        onPointerDown={(event) => event.stopPropagation()}
+      >
+        <span aria-hidden="true">{marker.label}</span>
+      </button>
     </Html>
   );
 }
@@ -35,7 +45,7 @@ function ActiveMarkerLine({ marker }: { marker: CameraPositionMarker }) {
   );
 }
 
-export function CameraMarkers({ activeSlotId, frustumAspectRatio, hideMarkerGuides = false, markers }: { activeSlotId?: number; frustumAspectRatio: number; hideMarkerGuides?: boolean; markers: CameraPositionMarker[] }) {
+export function CameraMarkers({ activeSlotId, frustumAspectRatio, hideMarkerGuides = false, markers, onSelectSlot }: { activeSlotId?: number; frustumAspectRatio: number; hideMarkerGuides?: boolean; markers: CameraPositionMarker[]; onSelectSlot: (slotId: number) => void }) {
   return (
     <>
       {markers.map((marker) => {
@@ -43,7 +53,7 @@ export function CameraMarkers({ activeSlotId, frustumAspectRatio, hideMarkerGuid
 
         return (
           <group key={marker.slotId}>
-            {!hideMarkerGuides && <CameraMarkerLabel isActive={isActive} marker={marker} />}
+            {!hideMarkerGuides && <CameraMarkerLabel isActive={isActive} marker={marker} onSelectSlot={onSelectSlot} />}
             {isActive && (
               <>
                 {!hideMarkerGuides && (

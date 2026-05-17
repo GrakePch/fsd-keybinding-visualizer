@@ -7,6 +7,7 @@ export interface CameraModelViewerProps {
   frustumAspectRatio: number;
   markers: CameraPositionMarker[];
   model: SelectableVehicleModel | null;
+  onSelectSlot: (slotId: number) => void;
 }
 
 export type LoadState = "loading" | "ready" | "error";

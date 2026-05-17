@@ -14,9 +14,10 @@ interface CameraViewportProps {
   isPreviewingModel: boolean;
   isCameraViewActive: boolean;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
+  onSelectSlot: (slotId: number) => void;
 }
 
-function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel, isCameraViewActive, frustumAspectRatioId }: CameraViewportProps) {
+function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
   const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel: Boolean(model?.src) });
   const cameraPositionMarkers = getCameraPositionMarkers(selectedGroup?.slots || []);
   const shouldRenderViewer = shouldRenderCameraModelViewer({ hasRenderableModel: Boolean(model?.src), markerCount: cameraPositionMarkers.length });
@@ -25,7 +26,7 @@ function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel,
 
   return (
     <section className={styles.viewport} aria-label="Camera 3D viewport">
-      {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} markers={cameraPositionMarkers} model={model} />}
+      {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} markers={cameraPositionMarkers} model={model} onSelectSlot={onSelectSlot} />}
       {model && showModelInfo && (
         <div className={styles.modelInfo}>
           <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : "Loaded Model"}</span>
