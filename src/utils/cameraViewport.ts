@@ -10,18 +10,29 @@ export type CameraFit = {
 };
 
 export type VehicleGrid = {
-  center: [number, number, number];
-  span: number;
+  min: [number, number, number];
+  max: [number, number, number];
+};
+
+export type TargetOffsetBoundingBox = {
+  min: [number, number, number];
+  max: [number, number, number];
+};
+
+export type TargetOffsetBoundingBoxRange = {
+  x: { min: number; max: number };
+  y: { min: number; max: number };
+  z: { min: number; max: number };
 };
 
 export const VEHICLE_MODEL_METERS_PER_SOURCE_UNIT = 0.01;
 const CAMERA_NEAR_PLANE_METERS = 0.01;
-const ORTHOGRAPHIC_CAMERA_OFFSET_X_RADIUS_MULTIPLIER = 1.8;
-const ORTHOGRAPHIC_CAMERA_OFFSET_Y_RADIUS_MULTIPLIER = 5.5;
-const ORTHOGRAPHIC_CAMERA_OFFSET_Z_RADIUS_MULTIPLIER = 1.8;
-const VEHICLE_GRID_SPACING_METERS = 5;
-const DEFAULT_VEHICLE_GRID_CELL_COUNT = 12;
-const GRID_SPAN_ROUNDING_EPSILON = 1e-9;
+const ORTHOGRAPHIC_CAMERA_OFFSET_X_DIRECTION = 1.8;
+const ORTHOGRAPHIC_CAMERA_OFFSET_Y_DIRECTION = 5.5;
+const ORTHOGRAPHIC_CAMERA_OFFSET_Z_DIRECTION = 1.8;
+const ORTHOGRAPHIC_CAMERA_BACK_DISTANCE_MARGIN_METERS = 1;
+const VEHICLE_GRID_SPACING_METERS = 10;
+const GRID_LINE_EPSILON = 1e-9;
 
 // The camera editor viewport intentionally follows the source vehicle/saved-view
 // coordinate system instead of Three.js's default Y-up convention:
@@ -37,20 +48,34 @@ const DEFAULT_CAMERA_FIT: CameraFit = {
 
 const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
-export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undefined): CameraFit {
+type CameraFitOptions = {
+  maxCameraMarkerDistance?: number;
+};
+
+export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undefined, options: CameraFitOptions = {}): CameraFit {
   if (!bounds || !isFinite(bounds.radius) || bounds.radius <= 0) {
     return DEFAULT_CAMERA_FIT;
   }
 
   const [centerX, centerY, centerZ] = bounds.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
+  const [sourceSizeX, sourceSizeY, sourceSizeZ] = bounds.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
   const radius = bounds.radius * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT;
+  const boundsDiagonalHalf = Math.sqrt(sourceSizeX * sourceSizeX + sourceSizeY * sourceSizeY + sourceSizeZ * sourceSizeZ) / 2;
+  const maxCameraMarkerDistance = isFinite(options.maxCameraMarkerDistance as number) ? Math.max(options.maxCameraMarkerDistance as number, 0) : 0;
+  const cameraBackDistance = boundsDiagonalHalf + maxCameraMarkerDistance + CAMERA_NEAR_PLANE_METERS + ORTHOGRAPHIC_CAMERA_BACK_DISTANCE_MARGIN_METERS;
+  const offsetDirectionLength = Math.sqrt(
+    ORTHOGRAPHIC_CAMERA_OFFSET_X_DIRECTION * ORTHOGRAPHIC_CAMERA_OFFSET_X_DIRECTION +
+      ORTHOGRAPHIC_CAMERA_OFFSET_Y_DIRECTION * ORTHOGRAPHIC_CAMERA_OFFSET_Y_DIRECTION +
+      ORTHOGRAPHIC_CAMERA_OFFSET_Z_DIRECTION * ORTHOGRAPHIC_CAMERA_OFFSET_Z_DIRECTION,
+  );
+  const cameraOffsetScale = cameraBackDistance / offsetDirectionLength;
 
   return {
     target: [centerX, centerY, centerZ],
     cameraPosition: [
-      centerX + radius * ORTHOGRAPHIC_CAMERA_OFFSET_X_RADIUS_MULTIPLIER,
-      centerY + radius * ORTHOGRAPHIC_CAMERA_OFFSET_Y_RADIUS_MULTIPLIER,
-      centerZ + radius * ORTHOGRAPHIC_CAMERA_OFFSET_Z_RADIUS_MULTIPLIER,
+      centerX + ORTHOGRAPHIC_CAMERA_OFFSET_X_DIRECTION * cameraOffsetScale,
+      centerY + ORTHOGRAPHIC_CAMERA_OFFSET_Y_DIRECTION * cameraOffsetScale,
+      centerZ + ORTHOGRAPHIC_CAMERA_OFFSET_Z_DIRECTION * cameraOffsetScale,
     ],
     viewHeight: radius * 2.8,
     near: CAMERA_NEAR_PLANE_METERS,
@@ -58,37 +83,94 @@ export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undef
   };
 }
 
-export function getVehicleGridFromBounds(bounds: VehicleModelBounds | null | undefined): VehicleGrid | null {
-  if (!bounds) {
-    return getDefaultVehicleGrid();
-  }
-
-  if (bounds.size.some((value) => !isFinite(value) || value <= 0)) {
+export function getTargetOffsetBoundingBox(ranges: TargetOffsetBoundingBoxRange | null | undefined): TargetOffsetBoundingBox | null {
+  if (!ranges || !isUsableRange(ranges.x) || !isUsableRange(ranges.y) || !isUsableRange(ranges.z)) {
     return null;
   }
 
-  const [sourceCenterX, sourceCenterY, sourceCenterZ] = bounds.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
-  const [sourceSizeX, sourceSizeY, sourceSizeZ] = bounds.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
-  const span = getEvenCellGridSpan(Math.max(sourceSizeX, sourceSizeY) * 1.1);
-
   return {
-    center: [sourceCenterX, sourceCenterY, sourceCenterZ - sourceSizeZ / 2 - 1],
-    span,
+    min: [ranges.x.min, ranges.y.min, ranges.z.min],
+    max: [ranges.x.max, ranges.y.max, ranges.z.max],
   };
 }
 
-function getDefaultVehicleGrid(): VehicleGrid {
+function isUsableRange(range: { min: number; max: number }) {
+  return isFinite(range.min) && isFinite(range.max) && range.min < range.max;
+}
+
+export function getTargetOffsetBoundingBoxEdgePoints(bounds: TargetOffsetBoundingBox): [number, number, number][] {
+  const [minX, minY, minZ] = bounds.min;
+  const [maxX, maxY, maxZ] = bounds.max;
+  const corners = {
+    minMinMin: [minX, minY, minZ] as [number, number, number],
+    maxMinMin: [maxX, minY, minZ] as [number, number, number],
+    maxMaxMin: [maxX, maxY, minZ] as [number, number, number],
+    minMaxMin: [minX, maxY, minZ] as [number, number, number],
+    minMinMax: [minX, minY, maxZ] as [number, number, number],
+    maxMinMax: [maxX, minY, maxZ] as [number, number, number],
+    maxMaxMax: [maxX, maxY, maxZ] as [number, number, number],
+    minMaxMax: [minX, maxY, maxZ] as [number, number, number],
+  };
+
+  return [
+    corners.minMinMin,
+    corners.maxMinMin,
+    corners.maxMinMin,
+    corners.maxMaxMin,
+    corners.maxMaxMin,
+    corners.minMaxMin,
+    corners.minMaxMin,
+    corners.minMinMin,
+    corners.minMinMax,
+    corners.maxMinMax,
+    corners.maxMinMax,
+    corners.maxMaxMax,
+    corners.maxMaxMax,
+    corners.minMaxMax,
+    corners.minMaxMax,
+    corners.minMinMax,
+    corners.minMinMin,
+    corners.minMinMax,
+    corners.maxMinMin,
+    corners.maxMinMax,
+    corners.maxMaxMin,
+    corners.maxMaxMax,
+    corners.minMaxMin,
+    corners.minMaxMax,
+  ];
+}
+
+export function getVehicleGridFromTargetOffsetBoundingBox(bounds: TargetOffsetBoundingBox | null | undefined): VehicleGrid | null {
+  if (!bounds || !isUsableRange({ min: bounds.min[0], max: bounds.max[0] }) || !isUsableRange({ min: bounds.min[1], max: bounds.max[1] }) || !isFinite(bounds.min[2])) {
+    return null;
+  }
+
   return {
-    center: [0, 0, 0],
-    span: DEFAULT_VEHICLE_GRID_CELL_COUNT * VEHICLE_GRID_SPACING_METERS,
+    min: [bounds.min[0], bounds.min[1], bounds.min[2]],
+    max: [bounds.max[0], bounds.max[1], bounds.min[2]],
   };
 }
 
-function getEvenCellGridSpan(rawSpan: number) {
-  const cellCount = Math.ceil((rawSpan - GRID_SPAN_ROUNDING_EPSILON) / VEHICLE_GRID_SPACING_METERS);
-  const evenCellCount = cellCount % 2 === 0 ? cellCount : cellCount + 1;
+export function getVehicleGridLineValues(min: number, max: number, spacing = VEHICLE_GRID_SPACING_METERS): number[] {
+  if (!isFinite(min) || !isFinite(max) || !isFinite(spacing) || spacing <= 0 || min > max) {
+    return [];
+  }
 
-  return evenCellCount * VEHICLE_GRID_SPACING_METERS;
+  const values = [normalizeNearZero(min), 0, normalizeNearZero(max)];
+  for (let value = spacing; value < max - GRID_LINE_EPSILON; value += spacing) {
+    values.push(normalizeNearZero(value));
+  }
+  for (let value = -spacing; value > min + GRID_LINE_EPSILON; value -= spacing) {
+    values.push(normalizeNearZero(value));
+  }
+
+  return values
+    .sort((a, b) => a - b)
+    .filter((value, index, sortedValues) => index === 0 || Math.abs(value - sortedValues[index - 1]) > GRID_LINE_EPSILON);
+}
+
+function normalizeNearZero(value: number) {
+  return Math.abs(value) < GRID_LINE_EPSILON ? 0 : value;
 }
 
 export type CameraPositionMarkerInput = Pick<SavedCameraSlot, "id" | "targetOffset" | "cameraRotationAngle" | "distance" | "lensSize" | "fStop">;

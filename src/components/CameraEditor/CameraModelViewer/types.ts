@@ -1,12 +1,14 @@
 import type { VehicleViewportModel } from "../../../types/vehicleModel";
-import type { CameraPositionMarker } from "../../../utils/cameraViewport";
+import type { CameraPositionMarker, TargetOffsetBoundingBox } from "../../../utils/cameraViewport";
 
 export interface CameraModelViewerProps {
   activeSlotId?: number;
   cameraViewMarker: CameraPositionMarker | null;
   frustumAspectRatio: number;
+  maxCameraMarkerDistance: number;
   markers: CameraPositionMarker[];
   model: VehicleViewportModel | null;
+  targetOffsetBounds: TargetOffsetBoundingBox | null;
   onSelectSlot: (slotId: number) => void;
 }
 

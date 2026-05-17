@@ -1,6 +1,8 @@
+import type { CSSProperties } from "react";
 import { useState } from "react";
 import { Vec3 } from "../../types/savedViews";
 import type { CameraControlAxisRange } from "../../utils/cameraControlRanges";
+import { CAMERA_GIZMO_AXIS_COLORS } from "../../utils/cameraGizmo";
 import styles from "./CameraVector3Editor.module.css";
 
 interface CameraVector3EditorProps {
@@ -30,6 +32,20 @@ const MIN_PITCH_DEGREES = -85;
 const MAX_PITCH_DEGREES = 70;
 const ANGLE_STEP_DEGREES = 0.1;
 const RANGE_SLIDER_STEP = 0.1;
+
+const AXIS_COLOR_BY_KEY: Record<keyof Vec3, (typeof CAMERA_GIZMO_AXIS_COLORS)[number]> = {
+  x: CAMERA_GIZMO_AXIS_COLORS[0],
+  y: CAMERA_GIZMO_AXIS_COLORS[1],
+  z: CAMERA_GIZMO_AXIS_COLORS[2],
+};
+
+type AxisSliderStyle = CSSProperties & {
+  "--camera-axis-color": string;
+};
+
+function getAxisSliderStyle(axis: keyof Vec3): AxisSliderStyle {
+  return { "--camera-axis-color": AXIS_COLOR_BY_KEY[axis] };
+}
 
 function formatSliderNumber(value: number) {
   return Number.isFinite(value) ? value.toFixed(1) : "0.0";
@@ -115,9 +131,10 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
         const rangeNote = rangeNotes[field.axis];
         const sliderValue = formatSliderNumber(value[field.axis]);
         const rangeInputValue = rangeDrafts[field.axis] ?? sliderValue;
+        const axisSliderStyle = getAxisSliderStyle(field.axis);
 
         return (
-          <label className={`${styles.axisField} ${isAngleSlider || isRangeSlider ? styles.angleSliderField : ""}`} key={field.axis}>
+          <label className={`${styles.axisField} ${isAngleSlider || isRangeSlider ? styles.angleSliderField : ""}`} key={field.axis} style={axisSliderStyle}>
             {isAngleSlider ? (
               <>
                 <span className={styles.labelRow}>

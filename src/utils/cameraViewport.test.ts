@@ -1,18 +1,28 @@
 import { describe, expect, it } from "vitest";
-import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, getCameraRotationUpVector, getVehicleGridFromBounds, savedViewPositionToViewportPosition } from "./cameraViewport";
+import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, getCameraRotationUpVector, getTargetOffsetBoundingBox, getTargetOffsetBoundingBoxEdgePoints, getVehicleGridFromTargetOffsetBoundingBox, getVehicleGridLineValues, savedViewPositionToViewportPosition } from "./cameraViewport";
 
 describe("getCameraFitFromBounds", () => {
   it("converts centimeter manifest bounds into meter-space camera fit", () => {
-    const fit = getCameraFitFromBounds({
-      center: [1000, 2000, 3000],
-      size: [10000, 20000, 5000],
-      radius: 12000,
-    });
+    const fit = getCameraFitFromBounds(
+      {
+        center: [1000, 2000, 3000],
+        size: [10000, 20000, 5000],
+        radius: 12000,
+      },
+      { maxCameraMarkerDistance: 170 },
+    );
+
+    const cameraOffset = [
+      fit.cameraPosition[0] - fit.target[0],
+      fit.cameraPosition[1] - fit.target[1],
+      fit.cameraPosition[2] - fit.target[2],
+    ];
+    const cameraDistance = Math.sqrt(cameraOffset[0] * cameraOffset[0] + cameraOffset[1] * cameraOffset[1] + cameraOffset[2] * cameraOffset[2]);
 
     expect(fit.target).toEqual([10, 20, 30]);
-    expect(fit.cameraPosition[0]).toBeCloseTo(226);
-    expect(fit.cameraPosition[1]).toBeCloseTo(680);
-    expect(fit.cameraPosition[2]).toBeCloseTo(246);
+    expect(cameraDistance).toBeCloseTo(Math.sqrt(100 * 100 + 200 * 200 + 50 * 50) / 2 + 170 + 1.01);
+    expect(cameraOffset[0] / cameraOffset[1]).toBeCloseTo(1.8 / 5.5);
+    expect(cameraOffset[2] / cameraOffset[1]).toBeCloseTo(1.8 / 5.5);
     expect(fit.viewHeight).toBeCloseTo(336);
     expect(fit.near).toBe(0.01);
     expect(fit.far).toBe(2000);
@@ -29,53 +39,88 @@ describe("getCameraFitFromBounds", () => {
   });
 });
 
-describe("getVehicleGridFromBounds", () => {
-  it("places a five-meter X-Y grid below the Z-up model and sizes it from the larger horizontal bound", () => {
-    const grid = getVehicleGridFromBounds({
-      center: [1000, 2000, 3000],
-      size: [10000, 20000, 5000],
-      radius: 12000,
+describe("getVehicleGridFromTargetOffsetBoundingBox", () => {
+  it("places the grid on the bounding box bottom and extends to the bounding box edges", () => {
+    const grid = getVehicleGridFromTargetOffsetBoundingBox({
+      min: [-30, -25, -15],
+      max: [30, 25, 15],
     });
 
     expect(grid).toEqual({
-      center: [10, 20, 4],
-      span: 220,
-    });
-  });
-
-  it("covers long vehicles whose source forward axis is viewport y", () => {
-    const grid = getVehicleGridFromBounds({
-      center: [0, 0, 0],
-      size: [2348.11865234375, 5069.072265625, 1331.482421875],
-      radius: 2871.497888733335,
-    });
-
-    expect(grid?.center[0]).toBeCloseTo(0);
-    expect(grid?.center[1]).toBeCloseTo(0);
-    expect(grid?.center[2]).toBeCloseTo(-7.657412109375);
-    expect(grid?.span).toBe(60);
-  });
-
-  it("rounds grid span up to an even number of cells per side", () => {
-    const grid = getVehicleGridFromBounds({
-      center: [0, 0, 0],
-      size: [5000, 1000, 1000],
-      radius: 3000,
-    });
-
-    expect(grid?.span).toBe(60);
-    expect(grid ? grid.span / 5 : 0).toBe(12);
-  });
-
-  it("uses a centered twelve-cell grid through the origin when no model bounds are loaded", () => {
-    expect(getVehicleGridFromBounds(null)).toEqual({
-      center: [0, 0, 0],
-      span: 60,
+      min: [-30, -25, -15],
+      max: [30, 25, -15],
     });
   });
 
   it("does not render a vehicle grid with unusable bounds", () => {
-    expect(getVehicleGridFromBounds({ center: [0, 0, 0], size: [0, 100, 100], radius: 100 })).toBeNull();
+    expect(getVehicleGridFromTargetOffsetBoundingBox({ min: [0, -1, 0], max: [0, 1, 2] })).toBeNull();
+  });
+});
+
+describe("getVehicleGridLineValues", () => {
+  it("uses ten-meter spacing from the center axis and stops at bounding edges", () => {
+    expect(getVehicleGridLineValues(-2, 23)).toEqual([-2, 0, 10, 20, 23]);
+  });
+
+  it("extends in both directions from the center axis", () => {
+    expect(getVehicleGridLineValues(-25, 25)).toEqual([-25, -20, -10, 0, 10, 20, 25]);
+  });
+
+  it("does not duplicate the center axis or max edge when spacing lands exactly on it", () => {
+    expect(getVehicleGridLineValues(-10, 20)).toEqual([-10, 0, 10, 20]);
+  });
+});
+
+describe("getTargetOffsetBoundingBox", () => {
+  it("builds a viewport-space box from target-offset recommended ranges", () => {
+    expect(
+      getTargetOffsetBoundingBox({
+        x: { min: -30, max: 30 },
+        y: { min: -25, max: 25 },
+        z: { min: -15, max: 15 },
+      }),
+    ).toEqual({
+      min: [-30, -25, -15],
+      max: [30, 25, 15],
+    });
+  });
+
+  it("skips unusable target-offset ranges", () => {
+    expect(
+      getTargetOffsetBoundingBox({
+        x: { min: -30, max: -30 },
+        y: { min: -25, max: 25 },
+        z: { min: -15, max: 15 },
+      }),
+    ).toBeNull();
+  });
+});
+
+describe("getTargetOffsetBoundingBoxEdgePoints", () => {
+  it("returns twelve edge line segments for the target-offset box", () => {
+    const points = getTargetOffsetBoundingBoxEdgePoints({ min: [-1, -2, -3], max: [4, 5, 6] });
+
+    expect(points).toHaveLength(24);
+    expect(points.slice(0, 8)).toEqual([
+      [-1, -2, -3],
+      [4, -2, -3],
+      [4, -2, -3],
+      [4, 5, -3],
+      [4, 5, -3],
+      [-1, 5, -3],
+      [-1, 5, -3],
+      [-1, -2, -3],
+    ]);
+    expect(points.slice(16)).toEqual([
+      [-1, -2, -3],
+      [-1, -2, 6],
+      [4, -2, -3],
+      [4, -2, 6],
+      [4, 5, -3],
+      [4, 5, 6],
+      [-1, 5, -3],
+      [-1, 5, 6],
+    ]);
   });
 });
 

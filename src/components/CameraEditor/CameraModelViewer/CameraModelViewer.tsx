@@ -18,7 +18,7 @@ function CameraViewMask({ aspectRatio }: { aspectRatio: number }) {
   );
 }
 
-function CameraModelViewer({ activeSlotId, cameraViewMarker, frustumAspectRatio, markers, model, onSelectSlot }: CameraModelViewerProps) {
+function CameraModelViewer({ activeSlotId, cameraViewMarker, frustumAspectRatio, maxCameraMarkerDistance, markers, model, targetOffsetBounds, onSelectSlot }: CameraModelViewerProps) {
   const [loadState, setLoadState] = useState<LoadState>(model?.src ? "loading" : "ready");
   const [loadProgress, setLoadProgress] = useState<number | null>(null);
 
@@ -31,7 +31,7 @@ function CameraModelViewer({ activeSlotId, cameraViewMarker, frustumAspectRatio,
   return (
     <div className={styles.viewer}>
       <Canvas className={styles.canvas} gl={{ alpha: true, antialias: true }} dpr={[1, 2]}>
-        <CameraScene activeSlotId={activeSlotId} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} markers={markers} model={model} onSelectSlot={onSelectSlot} onLoadProgress={setLoadProgress} onLoadStateChange={setLoadState} />
+        <CameraScene activeSlotId={activeSlotId} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} maxCameraMarkerDistance={maxCameraMarkerDistance} markers={markers} model={model} targetOffsetBounds={targetOffsetBounds} onSelectSlot={onSelectSlot} onLoadProgress={setLoadProgress} onLoadStateChange={setLoadState} />
       </Canvas>
       {cameraViewMarker && <CameraViewMask aspectRatio={frustumAspectRatio} />}
       {loadState !== "ready" && (

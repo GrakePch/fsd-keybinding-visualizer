@@ -68,7 +68,7 @@
   border: 0;
   border-radius: 0;
   background-color: transparent;
-  accent-color: var(--color-lalt);
+  accent-color: var(--camera-axis-color, var(--color-lalt));
 }
 
 .rangeNote {
