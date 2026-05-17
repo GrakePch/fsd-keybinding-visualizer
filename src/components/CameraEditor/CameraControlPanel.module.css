@@ -1,0 +1,120 @@
+.panel {
+  min-height: 0;
+  border-left: 1px solid #ffffff18;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: auto;
+  padding: .875rem;
+  background-color: var(--color-bg-0-5);
+}
+
+.section,
+.editorSection {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.heading {
+  font-family: var(--font-geom);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--color-text-1);
+  text-transform: uppercase;
+}
+
+.loadedModelCard {
+  border: 1px solid #ffffff18;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding: .625rem .75rem;
+  background-color: var(--color-bg);
+}
+
+.loadedModelCard strong {
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.loadedModelCard span {
+  color: var(--color-text-2);
+  font-size: .85rem;
+  line-height: 1.2;
+}
+
+.modelButton,
+.cameraViewButton {
+  border-radius: .5rem;
+}
+
+.cameraViewButton {
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+}
+
+.cameraViewButtonActive {
+  border-color: var(--color-lalt);
+}
+
+.emptyState,
+.emptySlotActions p {
+  color: var(--color-text-2);
+  line-height: 1.3;
+}
+
+.emptySlotActions,
+.copyControls,
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.fields {
+  font-size: .85rem;
+}
+
+.copyControls select {
+  width: 100%;
+  min-width: 0;
+  padding: .45rem .5rem;
+  border: 1px solid #ffffff18;
+  border-radius: .375rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.emptySlotActions button,
+.copyControls button {
+  border-radius: .5rem;
+}
+
+.aspectRatioOptions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .4rem;
+}
+
+.aspectRatioButton {
+  min-width: 0;
+  border: 1px solid #ffffff18;
+  border-radius: .45rem;
+  padding: .45rem .35rem;
+  color: var(--color-text-1);
+  background-color: var(--color-bg);
+  font-family: var(--font-geom);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.aspectRatioButtonActive {
+  border-color: color-mix(in srgb, var(--color-text) 80%, transparent);
+  color: #071017;
+  background-color: var(--color-text);
+}
+

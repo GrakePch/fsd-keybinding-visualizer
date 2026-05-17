@@ -1,0 +1,83 @@
+.console {
+  flex: 0 0 auto;
+  padding: .75rem;
+  border-bottom: 1px solid #ffffff18;
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  background-color: color-mix(in srgb, var(--color-bg-1) 72%, transparent);
+}
+
+.fileInput {
+  display: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.header h2 {
+  font-family: var(--font-geom);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--color-text-1);
+  text-transform: uppercase;
+}
+
+.dirtyPill {
+  padding: .125rem .375rem;
+  border-radius: 100rem;
+  color: #ffd37a;
+  background-color: #ffd37a1f;
+  font-size: .7rem;
+  font-weight: 700;
+}
+
+.loadedLabel {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text-2);
+  font-size: .85rem;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.errorLabel {
+  color: #ff6b6b;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+}
+
+.controlRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .375rem;
+}
+
+.controls button,
+.fullWidthButton {
+  min-width: 0;
+  padding: .45rem .5rem;
+  border-radius: .375rem;
+  font-size: .85rem;
+  white-space: nowrap;
+}
+
+.fullWidthButton {
+  width: 100%;
+}
+
+.controlDivider {
+  height: 1px;
+  margin: .125rem 0;
+  background-color: #ffffff18;
+}

@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import { ActionGroup, KeyWithMod, OrderInfo, UserActionmap } from "./interfaces";
+import { GameRootDirectoryState } from "./utils/fileSystemAccess";
 
 export type AppLanguage = "en" | "zh";
 
@@ -28,3 +29,5 @@ export const CTXActionRebinding = createContext<[[string, string], React.Dispatc
 export const CTXActionBindingDraft = createContext<[ActionBindingDraft | null, React.Dispatch<React.SetStateAction<ActionBindingDraft | null>>]>([null, () => {}]);
 
 export const CTXLanguage = createContext<[AppLanguage, React.Dispatch<React.SetStateAction<AppLanguage>>]>(["en", () => {}]);
+
+export const CTXGameRootDirectory = createContext<[GameRootDirectoryState, React.Dispatch<React.SetStateAction<GameRootDirectoryState>>]>([{ rootDirectory: null, pathLabel: "" }, () => {}]);

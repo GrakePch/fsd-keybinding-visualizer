@@ -1,0 +1,62 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  color: var(--color-text-1);
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+  min-width: 0;
+}
+
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.valueInput {
+  width: 4.25rem;
+  min-width: 0;
+  padding: .2rem .35rem;
+  border: 1px solid #ffffff18;
+  border-radius: .375rem;
+  color: var(--color-text-2);
+  background-color: var(--color-bg);
+  font-family: var(--font-slim);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.valueInput::-webkit-outer-spin-button,
+.valueInput::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.valueInput {
+  appearance: textfield;
+}
+
+.field input[type="range"] {
+  min-width: 0;
+  width: auto;
+  flex: 1;
+  accent-color: var(--color-text);
+}
+
+.rangeNote {
+  min-width: 0;
+  flex: 1;
+  color: var(--color-text-3, var(--color-text-2));
+  font-size: .75rem;
+  font-weight: 500;
+  text-align: right;
+}

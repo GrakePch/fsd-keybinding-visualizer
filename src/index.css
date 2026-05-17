@@ -108,10 +108,16 @@ a:hover {
   text-decoration: underline;
 }
 
-body {
-  margin: 0;
+html,
+body,
+#root {
+  width: 100%;
   min-width: 320px;
   min-height: 100vh;
+}
+
+body {
+  margin: 0;
 }
 
 h1 {

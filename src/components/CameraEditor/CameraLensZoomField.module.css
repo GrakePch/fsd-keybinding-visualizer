@@ -1,0 +1,33 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  color: var(--color-text-1);
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.control {
+  display: block;
+  min-width: 0;
+}
+
+.control input {
+  min-width: 0;
+  width: 100%;
+  accent-color: var(--color-text);
+}
+
+.fovValue {
+  color: var(--color-text-2);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
