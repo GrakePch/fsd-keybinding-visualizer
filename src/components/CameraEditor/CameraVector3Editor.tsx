@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Vec3 } from "../../types/savedViews";
 import styles from "./CameraVector3Editor.module.css";
 
@@ -45,9 +46,29 @@ function parseAngle(value: string, axis: keyof Vec3) {
 
 function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = "number", onChange }: CameraVector3EditorProps) {
   const isAngleSlider = variant === "angleSlider";
+  const [angleDrafts, setAngleDrafts] = useState<Partial<Record<keyof Vec3, string>>>({});
 
   const updateAxis = (axis: keyof Vec3, nextValue: string) => {
     onChange({ ...value, [axis]: isAngleSlider ? parseAngle(nextValue, axis) : Number(nextValue) });
+  };
+
+  const updateAngleDraft = (axis: keyof Vec3, nextValue: string) => {
+    setAngleDrafts((drafts) => ({ ...drafts, [axis]: nextValue }));
+    const parsedValue = Number(nextValue);
+    if (Number.isFinite(parsedValue)) {
+      onChange({ ...value, [axis]: clampAngle(parsedValue, axis) });
+    }
+  };
+
+  const commitAngleDraft = (axis: keyof Vec3) => {
+    const draft = angleDrafts[axis];
+    setAngleDrafts((drafts) => {
+      const remainingDrafts = { ...drafts };
+      delete remainingDrafts[axis];
+      return remainingDrafts;
+    });
+    if (draft === undefined || draft.trim() === "") return;
+    updateAxis(axis, draft);
   };
 
   return (
@@ -56,6 +77,7 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
       {fields.map((field) => {
         const angleValue = formatAngle(value[field.axis], field.axis);
         const angleRange = getAngleRange(field.axis);
+        const angleInputValue = angleDrafts[field.axis] ?? angleValue;
 
         return (
           <label className={`${styles.axisField} ${isAngleSlider ? styles.angleSliderField : ""}`} key={field.axis}>
@@ -70,8 +92,14 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
                     min={angleRange.min}
                     max={angleRange.max}
                     step={ANGLE_STEP_DEGREES}
-                    value={angleValue}
-                    onChange={(event) => updateAxis(field.axis, event.target.value)}
+                    value={angleInputValue}
+                    onBlur={() => commitAngleDraft(field.axis)}
+                    onChange={(event) => updateAngleDraft(field.axis, event.target.value)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        event.currentTarget.blur();
+                      }
+                    }}
                   />
                 </span>
                 <input
