@@ -20,6 +20,7 @@ const ORTHOGRAPHIC_CAMERA_OFFSET_X_RADIUS_MULTIPLIER = 1.8;
 const ORTHOGRAPHIC_CAMERA_OFFSET_Y_RADIUS_MULTIPLIER = 5.5;
 const ORTHOGRAPHIC_CAMERA_OFFSET_Z_RADIUS_MULTIPLIER = 1.8;
 const VEHICLE_GRID_SPACING_METERS = 5;
+const DEFAULT_VEHICLE_GRID_CELL_COUNT = 12;
 const GRID_SPAN_ROUNDING_EPSILON = 1e-9;
 
 // The camera editor viewport intentionally follows the source vehicle/saved-view
@@ -58,18 +59,36 @@ export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undef
 }
 
 export function getVehicleGridFromBounds(bounds: VehicleModelBounds | null | undefined): VehicleGrid | null {
-  if (!bounds || bounds.size.some((value) => !isFinite(value) || value <= 0)) {
+  if (!bounds) {
+    return getDefaultVehicleGrid();
+  }
+
+  if (bounds.size.some((value) => !isFinite(value) || value <= 0)) {
     return null;
   }
 
   const [sourceCenterX, sourceCenterY, sourceCenterZ] = bounds.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
   const [sourceSizeX, sourceSizeY, sourceSizeZ] = bounds.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
-  const span = Math.ceil((Math.max(sourceSizeX, sourceSizeY) * 1.1 - GRID_SPAN_ROUNDING_EPSILON) / VEHICLE_GRID_SPACING_METERS) * VEHICLE_GRID_SPACING_METERS;
+  const span = getEvenCellGridSpan(Math.max(sourceSizeX, sourceSizeY) * 1.1);
 
   return {
     center: [sourceCenterX, sourceCenterY, sourceCenterZ - sourceSizeZ / 2 - 1],
     span,
   };
+}
+
+function getDefaultVehicleGrid(): VehicleGrid {
+  return {
+    center: [0, 0, 0],
+    span: DEFAULT_VEHICLE_GRID_CELL_COUNT * VEHICLE_GRID_SPACING_METERS,
+  };
+}
+
+function getEvenCellGridSpan(rawSpan: number) {
+  const cellCount = Math.ceil((rawSpan - GRID_SPAN_ROUNDING_EPSILON) / VEHICLE_GRID_SPACING_METERS);
+  const evenCellCount = cellCount % 2 === 0 ? cellCount : cellCount + 1;
+
+  return evenCellCount * VEHICLE_GRID_SPACING_METERS;
 }
 
 export type CameraPositionMarkerInput = Pick<SavedCameraSlot, "id" | "targetOffset" | "cameraRotationAngle" | "distance" | "lensSize" | "fStop">;

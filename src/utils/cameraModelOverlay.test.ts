@@ -11,15 +11,15 @@ describe("camera model overlay", () => {
   });
 
   it("renders the viewport canvas when camera markers exist even without a loaded model", () => {
-    expect(shouldRenderCameraModelViewer({ hasRenderableModel: false, markerCount: 1 })).toBe(true);
+    expect(shouldRenderCameraModelViewer()).toBe(true);
   });
 
   it("renders the viewport canvas for a renderable model even without markers", () => {
-    expect(shouldRenderCameraModelViewer({ hasRenderableModel: true, markerCount: 0 })).toBe(true);
+    expect(shouldRenderCameraModelViewer()).toBe(true);
   });
 
-  it("hides the viewport canvas only when there is neither model geometry nor markers", () => {
-    expect(shouldRenderCameraModelViewer({ hasRenderableModel: false, markerCount: 0 })).toBe(false);
+  it("keeps the viewport canvas visible for the default origin grid", () => {
+    expect(shouldRenderCameraModelViewer()).toBe(true);
   });
 
   it("normalizes finite model load progress to whole percentages", () => {

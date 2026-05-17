@@ -30,7 +30,7 @@ describe("getCameraFitFromBounds", () => {
 });
 
 describe("getVehicleGridFromBounds", () => {
-  it("places a one-meter X-Y grid below the Z-up model and sizes it from the larger horizontal bound", () => {
+  it("places a five-meter X-Y grid below the Z-up model and sizes it from the larger horizontal bound", () => {
     const grid = getVehicleGridFromBounds({
       center: [1000, 2000, 3000],
       size: [10000, 20000, 5000],
@@ -56,8 +56,25 @@ describe("getVehicleGridFromBounds", () => {
     expect(grid?.span).toBe(60);
   });
 
-  it("does not render a vehicle grid without usable bounds", () => {
-    expect(getVehicleGridFromBounds(null)).toBeNull();
+  it("rounds grid span up to an even number of cells per side", () => {
+    const grid = getVehicleGridFromBounds({
+      center: [0, 0, 0],
+      size: [5000, 1000, 1000],
+      radius: 3000,
+    });
+
+    expect(grid?.span).toBe(60);
+    expect(grid ? grid.span / 5 : 0).toBe(12);
+  });
+
+  it("uses a centered twelve-cell grid through the origin when no model bounds are loaded", () => {
+    expect(getVehicleGridFromBounds(null)).toEqual({
+      center: [0, 0, 0],
+      span: 60,
+    });
+  });
+
+  it("does not render a vehicle grid with unusable bounds", () => {
     expect(getVehicleGridFromBounds({ center: [0, 0, 0], size: [0, 100, 100], radius: 100 })).toBeNull();
   });
 });

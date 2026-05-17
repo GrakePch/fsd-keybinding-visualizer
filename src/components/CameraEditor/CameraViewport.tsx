@@ -22,7 +22,7 @@ function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel,
   const hasRenderableModel = isVehicleViewportModelRenderable(model);
   const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel });
   const cameraPositionMarkers = getCameraPositionMarkers(selectedGroup?.slots || []);
-  const shouldRenderViewer = shouldRenderCameraModelViewer({ hasRenderableModel, markerCount: cameraPositionMarkers.length });
+  const shouldRenderViewer = shouldRenderCameraModelViewer();
   const frustumAspectRatio = getCameraFrustumAspectRatio(frustumAspectRatioId);
   const cameraViewMarker = getCameraViewMarker({ isCameraViewActive, markers: cameraPositionMarkers, selectedSlotId: selectedSlot?.id });
 
