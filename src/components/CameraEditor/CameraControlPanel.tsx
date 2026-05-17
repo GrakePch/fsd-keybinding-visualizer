@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
-import type { SelectableVehicleModel } from "../../types/vehicleModel";
+import type { VehicleViewportModel } from "../../types/vehicleModel";
+import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
 import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import CameraLensZoomField from "./CameraLensZoomField";
 import CameraNumberField from "./CameraNumberField";
@@ -9,7 +10,7 @@ import CameraVector3Editor from "./CameraVector3Editor";
 import styles from "./CameraControlPanel.module.css";
 
 interface CameraControlPanelProps {
-  loadedModel: SelectableVehicleModel | null;
+  loadedModel: VehicleViewportModel | null;
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
@@ -43,6 +44,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
           <div className={styles.loadedModelCard}>
             <strong>{loadedModel.displayName}</strong>
             <span>{loadedModel.className || loadedModel.slug}</span>
+            {isVehicleFallbackBoxModel(loadedModel) && <span>SPV dimensions fallback</span>}
           </div>
         )}
         <button className={styles.modelButton} type="button" onClick={onSelectModel}>

@@ -6,13 +6,15 @@ import CameraGroupDrawer from "../components/CameraEditor/CameraGroupDrawer";
 import CameraModelSelectorPanel from "../components/CameraEditor/CameraModelSelectorPanel";
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
-import type { SelectableVehicleModel } from "../types/vehicleModel";
+import type { SelectableVehicleModel, SpvVehicleEntry, VehicleViewportModel } from "../types/vehicleModel";
+import { isVehicleFallbackBoxModel } from "../types/vehicleModel";
 import { DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, type CameraFrustumAspectRatioId } from "../utils/cameraFrustum";
 import { canEnterCameraView, getCameraViewSlotIdFromSearchParams, setCameraViewSlotIdInSearchParams } from "../utils/cameraView";
 import { getCameraPositionMarkers } from "../utils/cameraViewport";
-import { getAutoSelectedVehicleModel } from "../utils/cameraAutoVehicleModel";
+import { getAutoSelectedVehicleModel, getSelectableVehicleModelWithSpvBounds } from "../utils/cameraAutoVehicleModel";
 import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
 import { copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
+import { useSpvVehicleIndex, useSpvVehicles } from "../utils/spvVehicleData";
 import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
 import styles from "./CameraEditorPage.module.css";
 
@@ -27,7 +29,9 @@ function CameraEditorPage() {
   const [isSelectingModel, setIsSelectingModel] = useState(false);
   const [frustumAspectRatioId, setFrustumAspectRatioId] = useState<CameraFrustumAspectRatioId>(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { models } = useSelectableVehicleModels();
+  const { manifest } = useSelectableVehicleModels();
+  const { vehicles: spvVehicles } = useSpvVehicles();
+  const spvVehicleIndex = useSpvVehicleIndex(spvVehicles);
 
   const cameraViewSlotId = getCameraViewSlotIdFromSearchParams(searchParams);
   const isCameraViewActive = cameraViewSlotId !== null;
@@ -38,9 +42,9 @@ function CameraEditorPage() {
   const currentSavedViewsJson = JSON.stringify(savedViews);
   const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
   const manualGroupModel = selectedGroupId ? getDraftModelForGroup(groupModelDrafts, selectedGroupId) : null;
-  const autoGroupModel = selectedGroupId && selectedGroup ? getAutoSelectedVehicleModel(selectedGroup.id, models) : null;
-  const loadedModel = selectedGroupId ? manualGroupModel || autoGroupModel : standaloneLoadedModel;
-  const viewportModel = isSelectingModel ? previewModel || loadedModel : loadedModel;
+  const autoGroupModel = selectedGroupId && selectedGroup ? getAutoSelectedVehicleModel(selectedGroup.id, spvVehicles, manifest) : null;
+  const loadedModel = selectedGroupId ? getModelWithStableSpvBounds(manualGroupModel, spvVehicleIndex) || autoGroupModel : getModelWithStableSpvBounds(standaloneLoadedModel, spvVehicleIndex);
+  const viewportModel = isSelectingModel ? getModelWithStableSpvBounds(previewModel, spvVehicleIndex) || loadedModel : loadedModel;
   const selectedSlotMarkers = useMemo(() => getCameraPositionMarkers(selectedSlot ? [selectedSlot] : []), [selectedSlot]);
   const canEnterSelectedCameraView = canEnterCameraView(selectedSlotMarkers, activeSlotId);
 
@@ -100,7 +104,7 @@ function CameraEditorPage() {
 
   const openModelSelector = () => {
     setSelectedSlotId(activeSlotId);
-    setPreviewModel(loadedModel);
+    setPreviewModel(loadedModel && !isVehicleFallbackBoxModel(loadedModel) ? loadedModel : null);
     setIsSelectingModel(true);
   };
 
@@ -139,7 +143,7 @@ function CameraEditorPage() {
       <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
       {isSelectingModel ? (
         <CameraModelSelectorPanel
-          selectedModel={loadedModel}
+          selectedModel={loadedModel && !isVehicleFallbackBoxModel(loadedModel) ? loadedModel : null}
           previewModel={previewModel}
           onPreviewModel={setPreviewModel}
           onConfirm={confirmPreviewModel}
@@ -165,6 +169,15 @@ function CameraEditorPage() {
       )}
     </main>
   );
+}
+
+function getModelWithStableSpvBounds(model: SelectableVehicleModel | null, spvVehicleIndex: Record<string, SpvVehicleEntry>): VehicleViewportModel | null {
+  if (!model) return null;
+
+  const className = model.className?.trim();
+  const spvVehicle = className ? spvVehicleIndex[className] : null;
+
+  return getSelectableVehicleModelWithSpvBounds(model, spvVehicle);
 }
 
 export default CameraEditorPage;

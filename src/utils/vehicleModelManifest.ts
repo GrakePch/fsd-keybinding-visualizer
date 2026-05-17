@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { SelectableVehicleModel, VehicleModelManifest, VehicleModelManifestState } from "../types/vehicleModel";
+import type { SelectableVehicleModel, VehicleModelEntry, VehicleModelManifest, VehicleModelManifestState } from "../types/vehicleModel";
 
 const REMOTE_MODEL_BASE_URL = "https://rsi-website-models.42kit.com/vehicles";
 const DEV_MODEL_BASE_URL = "/vehicle-models";
@@ -76,18 +76,37 @@ function loadVehicleModelManifest() {
 
 export function getSelectableVehicleModels(manifest: VehicleModelManifest | null): SelectableVehicleModel[] {
   return Object.entries(manifest?.models || {})
-    .filter(([, model]) => Boolean(model.glb?.trim()))
-    .map(([slug, model]) => {
-      const displayName = model.spvName || model.rsiName || model.className || slug;
-
-      return {
-        ...model,
-        slug,
-        displayName,
-        src: getVehicleModelSrc(manifest, model),
-      };
-    })
+    .map(([slug, model]) => getSelectableVehicleModelFromEntry(manifest, slug, model))
+    .filter((model): model is SelectableVehicleModel => Boolean(model))
     .sort((left, right) => left.displayName.localeCompare(right.displayName));
+}
+
+export function getSelectableVehicleModelByClassName(manifest: VehicleModelManifest | null, className: string) {
+  const normalizedClassName = className.trim();
+  if (!normalizedClassName) return null;
+
+  const slug = manifest?.byClassName?.[normalizedClassName];
+  const entry = slug ? manifest?.models?.[slug] : null;
+  if (!slug || !entry) return null;
+
+  return getSelectableVehicleModelFromEntry(manifest, slug, entry);
+}
+
+function getSelectableVehicleModelFromEntry(manifest: VehicleModelManifest | null, slug: string, model: VehicleModelEntry) {
+  if (!model.glb?.trim()) return null;
+
+  const src = getVehicleModelSrc(manifest, { glb: model.glb });
+  if (!src) return null;
+
+  const displayName = model.spvName || model.rsiName || model.className || slug;
+
+  return {
+    ...model,
+    slug,
+    displayName,
+    glb: model.glb,
+    src,
+  };
 }
 
 function trimTrailingSlash(value: string) {

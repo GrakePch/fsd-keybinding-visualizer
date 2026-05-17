@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
-import type { SelectableVehicleModel } from "../../../types/vehicleModel";
+import type { SelectableVehicleModel, VehicleFallbackBoxModel } from "../../../types/vehicleModel";
 import { getModelLoadProgressPercent } from "../../../utils/cameraModelOverlay";
 import { VEHICLE_MODEL_METERS_PER_SOURCE_UNIT } from "../../../utils/cameraViewport";
 import type { LoadState } from "./types";
+
+const FALLBACK_BOX_EDGE_COLOR = "#69d2ff";
 
 function disposeObject3D(root: THREE.Object3D) {
   root.traverse((object) => {
@@ -75,4 +77,53 @@ export function VehicleModel({ model, onLoadProgress, onLoadStateChange }: { mod
   if (!scene) return null;
 
   return <primitive object={scene} />;
+}
+
+export function VehicleFallbackBox({ model }: { model: VehicleFallbackBoxModel | null }) {
+  if (!model) return null;
+
+  const position = model.bounds.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
+  const size = model.bounds.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
+  const edgePositions = getBoxEdgeLinePositions(size);
+
+  return (
+    <lineSegments position={position}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[edgePositions, 3]} />
+      </bufferGeometry>
+      <lineBasicMaterial color={FALLBACK_BOX_EDGE_COLOR} transparent opacity={0.82} />
+    </lineSegments>
+  );
+}
+
+function getBoxEdgeLinePositions([sizeX, sizeY, sizeZ]: [number, number, number]) {
+  const halfX = sizeX / 2;
+  const halfY = sizeY / 2;
+  const halfZ = sizeZ / 2;
+  const corners: [number, number, number][] = [
+    [-halfX, -halfY, -halfZ],
+    [halfX, -halfY, -halfZ],
+    [halfX, halfY, -halfZ],
+    [-halfX, halfY, -halfZ],
+    [-halfX, -halfY, halfZ],
+    [halfX, -halfY, halfZ],
+    [halfX, halfY, halfZ],
+    [-halfX, halfY, halfZ],
+  ];
+  const edgeIndices = [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 0],
+    [4, 5],
+    [5, 6],
+    [6, 7],
+    [7, 4],
+    [0, 4],
+    [1, 5],
+    [2, 6],
+    [3, 7],
+  ];
+
+  return new Float32Array(edgeIndices.flatMap(([from, to]) => [...corners[from], ...corners[to]]));
 }

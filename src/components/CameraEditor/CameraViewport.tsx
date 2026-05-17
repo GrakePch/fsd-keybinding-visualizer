@@ -1,5 +1,6 @@
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
-import type { SelectableVehicleModel } from "../../types/vehicleModel";
+import type { VehicleViewportModel } from "../../types/vehicleModel";
+import { isVehicleFallbackBoxModel, isVehicleViewportModelRenderable } from "../../types/vehicleModel";
 import { shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
 import { getCameraFrustumAspectRatio, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import { getCameraViewMarker } from "../../utils/cameraView";
@@ -10,7 +11,7 @@ import styles from "./CameraViewport.module.css";
 interface CameraViewportProps {
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
-  model: SelectableVehicleModel | null;
+  model: VehicleViewportModel | null;
   isPreviewingModel: boolean;
   isCameraViewActive: boolean;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
@@ -18,9 +19,10 @@ interface CameraViewportProps {
 }
 
 function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
-  const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel: Boolean(model?.src) });
+  const hasRenderableModel = isVehicleViewportModelRenderable(model);
+  const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel });
   const cameraPositionMarkers = getCameraPositionMarkers(selectedGroup?.slots || []);
-  const shouldRenderViewer = shouldRenderCameraModelViewer({ hasRenderableModel: Boolean(model?.src), markerCount: cameraPositionMarkers.length });
+  const shouldRenderViewer = shouldRenderCameraModelViewer({ hasRenderableModel, markerCount: cameraPositionMarkers.length });
   const frustumAspectRatio = getCameraFrustumAspectRatio(frustumAspectRatioId);
   const cameraViewMarker = getCameraViewMarker({ isCameraViewActive, markers: cameraPositionMarkers, selectedSlotId: selectedSlot?.id });
 
@@ -29,7 +31,7 @@ function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel,
       {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} markers={cameraPositionMarkers} model={model} onSelectSlot={onSelectSlot} />}
       {model && showModelInfo && (
         <div className={styles.modelInfo}>
-          <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : "Loaded Model"}</span>
+          <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : isVehicleFallbackBoxModel(model) ? "SPV Dimensions Fallback" : "Loaded Model"}</span>
           <strong>{model.displayName}</strong>
           <span>{model.className || model.slug}</span>
           {selectedGroup && <span>Group: {selectedGroup.id}</span>}
