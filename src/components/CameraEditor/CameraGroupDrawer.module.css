@@ -57,10 +57,10 @@
 
 .groupName {
   max-width: 100%;
-  overflow: hidden;
   font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .slotCount {

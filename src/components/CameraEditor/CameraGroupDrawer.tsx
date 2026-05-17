@@ -9,6 +9,10 @@ interface CameraGroupDrawerProps {
   onSelectGroup: (groupId: string) => void;
 }
 
+function formatCameraGroupName(groupId: string) {
+  return groupId.replaceAll("_", " ");
+}
+
 function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, onSelectGroup }: CameraGroupDrawerProps) {
   return (
     <aside className={styles.drawer} aria-label="Camera group manager">
@@ -25,8 +29,9 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, onSelectGroup
                 key={group.id}
                 type="button"
                 onClick={() => onSelectGroup(group.id)}
+                title={group.id}
               >
-                <span className={styles.groupName}>{group.id}</span>
+                <span className={styles.groupName}>{formatCameraGroupName(group.id)}</span>
                 <span className={styles.slotCount}>{group.slots.length} slots</span>
               </button>
             ))}
