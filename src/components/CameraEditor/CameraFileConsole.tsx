@@ -24,6 +24,7 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
 
   const canUseLocalPath = useMemo(() => typeof (window as WindowWithDirectoryPicker).showDirectoryPicker === "function", []);
   const canExport = savedViews !== null;
+  const canRefreshLocalPath = canUseLocalPath && gameRootDirectory.rootDirectory !== null;
   const canOverwrite = savedViews !== null && gameRootDirectory.rootDirectory !== null;
 
   const loadedLabel = useMemo(() => {
@@ -134,21 +135,26 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
         {loadedLabel}
       </p>
       <div className={styles.controls}>
-        <button type="button" onClick={() => fileInputRef.current?.click()}>
-          Upload
+        <div className={styles.controlRow}>
+          <button type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath}>
+            Open Path
+          </button>
+          <button type="button" onClick={() => readFromLocalPath()} disabled={!canRefreshLocalPath}>
+            Refresh
+          </button>
+        </div>
+        <button className={styles.fullWidthButton} type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges}>
+          Save to path
         </button>
-        <button type="button" onClick={() => readFromLocalPath()} disabled={!canUseLocalPath}>
-          Read Path
-        </button>
-        <button type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath}>
-          Change Path
-        </button>
-        <button type="button" onClick={downloadXml} disabled={!canExport}>
-          Download
-        </button>
-        <button type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges}>
-          Overwrite
-        </button>
+        <div className={styles.controlDivider} aria-hidden="true" />
+        <div className={styles.controlRow}>
+          <button type="button" onClick={() => fileInputRef.current?.click()}>
+            Upload
+          </button>
+          <button type="button" onClick={downloadXml} disabled={!canExport}>
+            Download
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -52,12 +52,19 @@
 }
 
 .controls {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+}
+
+.controlRow {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .375rem;
 }
 
-.controls button {
+.controls button,
+.fullWidthButton {
   min-width: 0;
   padding: .45rem .5rem;
   border-radius: .375rem;
@@ -65,6 +72,12 @@
   white-space: nowrap;
 }
 
-.controls button:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
+.fullWidthButton {
+  width: 100%;
+}
+
+.controlDivider {
+  height: 1px;
+  margin: .125rem 0;
+  background-color: #ffffff18;
 }
