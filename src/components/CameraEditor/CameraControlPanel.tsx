@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import Icon from "@mdi/react";
+import { mdiCamera } from "@mdi/js";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
@@ -84,6 +86,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
           disabled={!canEnterCameraView && !isCameraViewActive}
           onClick={onToggleCameraView}
         >
+          <Icon className={styles.cameraViewButtonIcon} path={mdiCamera} size="1rem" aria-hidden="true" />
           {isCameraViewActive ? "Exit Camera View" : "Enter Camera View"}
         </button>
       </section>

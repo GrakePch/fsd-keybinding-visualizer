@@ -19,7 +19,7 @@ describe("CameraFileConsole", () => {
       />,
     );
 
-    expect(markup).toMatch(/Open Path[\s\S]*Refresh[\s\S]*Save to path[\s\S]*Upload[\s\S]*Download/);
+    expect(markup).toMatch(/Open Path[\s\S]*Refresh[\s\S]*Save to Path[\s\S]*Upload[\s\S]*Download/);
     expect(markup).not.toContain("Read Path");
     expect(markup).not.toContain("Change Path");
     expect(markup).not.toContain("Overwrite");

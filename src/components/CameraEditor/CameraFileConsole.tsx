@@ -1,4 +1,6 @@
 import { ChangeEvent, useContext, useMemo, useRef, useState } from "react";
+import Icon from "@mdi/react";
+import { mdiContentSave, mdiFolderOpen, mdiRefresh, mdiTrayArrowDown, mdiTrayArrowUp } from "@mdi/js";
 import { CTXGameRootDirectory } from "../../contexts";
 import { SAVEDVIEWS_PATH_PARTS, WindowWithDirectoryPicker, getNestedFileHandle } from "../../utils/fileSystemAccess";
 import { buildSavedViewsXml, parseSavedViewsXml } from "../../utils/savedViews";
@@ -137,21 +139,26 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
       <div className={styles.controls}>
         <div className={styles.controlRow}>
           <button type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath}>
+            <Icon className={styles.buttonIcon} path={mdiFolderOpen} size="1rem" aria-hidden="true" />
             Open Path
           </button>
           <button type="button" onClick={() => readFromLocalPath()} disabled={!canRefreshLocalPath}>
+            <Icon className={styles.buttonIcon} path={mdiRefresh} size="1rem" aria-hidden="true" />
             Refresh
           </button>
         </div>
         <button className={`${styles.fullWidthButton} buttonNormal`} type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges}>
-          Save to path
+          <Icon className={styles.buttonIcon} path={mdiContentSave} size="1rem" aria-hidden="true" />
+          Save to Path
         </button>
         <div className={styles.controlDivider} aria-hidden="true" />
         <div className={styles.controlRow}>
           <button type="button" onClick={() => fileInputRef.current?.click()}>
+            <Icon className={styles.buttonIcon} path={mdiTrayArrowUp} size="1rem" aria-hidden="true" />
             Upload
           </button>
           <button type="button" onClick={downloadXml} disabled={!canExport}>
+            <Icon className={styles.buttonIcon} path={mdiTrayArrowDown} size="1rem" aria-hidden="true" />
             Download
           </button>
         </div>
