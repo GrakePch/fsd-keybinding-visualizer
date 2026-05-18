@@ -63,6 +63,7 @@
   --color-bg-0-5: #303030;
   --color-bg-1: #353535;
   --color-bg-2: #464646;
+  --color-bg-3: #575757;
   --color-text: #dcdcdc;
   --color-text-1: #bababa;
   --color-text-2: #989898;
@@ -130,20 +131,47 @@ h1 {
   box-sizing: border-box;
 }
 
-button {
+button,
+.buttonNormal,
+.buttonHighlighted,
+.buttonAccent {
   border: none;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  color: var(--color-text);
-  background-color: var(--color-bg-1);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
   transition: background-color .2s, color .2s, box-shadow .2s;
   cursor: pointer;
 }
 
-button:hover:not(:disabled) {
-  background-color: var(--color-bg-2);
+button,
+.buttonNormal {
+  --button-text-color: var(--color-text);
+  --button-bg-color: var(--color-bg-2);
+  --button-hover-bg-color: var(--color-bg-3);
+}
+
+.buttonHighlighted {
+  --button-text-color: var(--color-bg);
+  --button-bg-color: var(--color-text);
+  --button-hover-bg-color: color-mix(in srgb, var(--color-text) 88%, white 12%);
+}
+
+.buttonAccent {
+  --button-accent-color: var(--color-lalt);
+  --button-text-color: var(--color-bg);
+  --button-bg-color: var(--button-accent-color);
+  --button-hover-bg-color: color-mix(in srgb, var(--button-accent-color) 84%, white 16%);
+}
+
+button:hover:not(:disabled),
+.buttonNormal:hover,
+.buttonHighlighted:hover,
+.buttonAccent:hover {
+  color: var(--button-text-color);
+  background-color: var(--button-hover-bg-color);
 }
 
 button:focus,
@@ -153,6 +181,7 @@ button:focus-visible {
 
 button:disabled {
   cursor: default;
+  color: var(--color-bg-2);
   background-color: var(--color-bg);
   outline: var(--color-bg-1) 1px solid;
 }

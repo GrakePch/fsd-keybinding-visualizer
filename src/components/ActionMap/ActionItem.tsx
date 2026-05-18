@@ -272,24 +272,24 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
       ) : (
         <div className={styles.buttons}>
           {hasBinding && (
-            <button className={cx(styles.actionButton, styles.clearButton)} type="button" onClick={handleClearBinding}>
+            <button className={cx(styles.actionButton, "buttonAccent", styles.clearButton)} type="button" onClick={handleClearBinding}>
               <Icon path={mdiLinkOff} size="1rem" />
               {t("actionRebinding.clear")}
             </button>
           )}
           {!isDefaultBinding && (
-            <button className={cx(styles.actionButton, styles.resetButton)} type="button" onClick={handleResetBinding}>
+            <button className={cx(styles.actionButton, "buttonAccent", styles.resetButton)} type="button" onClick={handleResetBinding}>
               <Icon path={mdiRestore} size="1rem" />
               {t("actionRebinding.reset")}
             </button>
           )}
           {hasBinding && (
-            <button className={styles.actionButton} type="button" onClick={handleToggleDoubleTap}>
+            <button className={cx(styles.actionButton, "buttonNormal")} type="button" onClick={handleToggleDoubleTap}>
               <Icon path={mdiGestureDoubleTap} size="1rem" />
               {t(isDoubleTap ? "actionRebinding.singleTap" : "actionRebinding.doubleTap")}
             </button>
           )}
-          <button className={styles.actionButton} type="button" onClick={handleStartRecording}>
+          <button className={cx(styles.actionButton, "buttonNormal")} type="button" onClick={handleStartRecording}>
             <Icon path={mdiKeyboard} size="1rem" />
             {t("actionRebinding.record")}
           </button>

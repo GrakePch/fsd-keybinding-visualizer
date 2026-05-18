@@ -20,7 +20,7 @@ function CameraSlotButtons({ selectedGroup, selectedSlotId, onSelectSlot }: Came
 
         return (
           <button
-            className={cx(styles.slotButton, !hasSlot && styles.slotButtonMissing, selectedSlotId === slotId && styles.slotButtonActive)}
+            className={cx(styles.slotButton, !hasSlot && styles.slotButtonMissing, selectedSlotId === slotId && styles.slotButtonActive, selectedSlotId === slotId && "buttonAccent")}
             key={slotId}
             type="button"
             onClick={() => onSelectSlot(slotId)}

@@ -143,7 +143,7 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
             Refresh
           </button>
         </div>
-        <button className={styles.fullWidthButton} type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges}>
+        <button className={`${styles.fullWidthButton} buttonNormal`} type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges}>
           Save to path
         </button>
         <div className={styles.controlDivider} aria-hidden="true" />

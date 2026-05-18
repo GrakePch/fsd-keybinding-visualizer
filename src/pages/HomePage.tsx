@@ -9,10 +9,10 @@ function HomePage() {
         <p className={styles.versionLabel}>pre-alpha</p>
       </header>
       <nav className={styles.actions} aria-label="Main navigation">
-        <Link className={styles.actionButton} to="/bindings">
+        <Link className={`${styles.actionButton} buttonNormal`} to="/bindings">
           Key bindings
         </Link>
-        <Link className={styles.actionButton} to="/cameras">
+        <Link className={`${styles.actionButton} buttonNormal`} to="/cameras">
           Cameras
         </Link>
       </nav>

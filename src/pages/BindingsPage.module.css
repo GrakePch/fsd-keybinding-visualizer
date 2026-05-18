@@ -37,7 +37,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-1);
   box-shadow: var(--shadow-2);
   font-family: var(--font-geom);
   font-size: .95rem;
@@ -46,7 +45,6 @@
 }
 
 .languageToggleFab:hover:not(:disabled) {
-  background-color: var(--color-bg-2);
   box-shadow: var(--shadow-3);
 }
 
@@ -100,12 +98,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-1);
   box-shadow: var(--shadow-2);
-}
-
-.actionMapToggle:hover:not(:disabled) {
-  background-color: var(--color-bg-2);
 }
 
 .actionMapResizeHandle {

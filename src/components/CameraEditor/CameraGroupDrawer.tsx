@@ -25,7 +25,7 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, onSelectGroup
           <div className={styles.groupList}>
             {groups.map((group) => (
               <button
-                className={`${styles.groupButton} ${group.id === selectedGroupId ? styles.groupButtonActive : ""}`}
+                className={`${styles.groupButton} ${group.id === selectedGroupId ? `${styles.groupButtonActive} buttonHighlighted` : ""}`}
                 key={group.id}
                 type="button"
                 onClick={() => onSelectGroup(group.id)}

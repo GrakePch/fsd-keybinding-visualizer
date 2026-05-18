@@ -28,8 +28,8 @@
   display: grid;
   place-items: center;
   padding: 0;
-  color: var(--color-bg);
-  background-color: var(--color-text);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
   box-shadow: 0 .0 .75rem #0008;
   cursor: pointer;
   font-family: var(--font-slim);
@@ -45,7 +45,8 @@
 }
 
 .cameraPositionMarkerActive {
-  background-color: var(--color-lalt);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
 }
 
 .targetOffsetDot {

@@ -195,6 +195,7 @@ const ActionMapFileConsole = () => {
               {t("actionMapFileConsole.downloadXml")}
             </button>
             <button
+              className="buttonAccent"
               type="button"
               onClick={overwriteLocalPath}
               disabled={!canWriteLocalPath}

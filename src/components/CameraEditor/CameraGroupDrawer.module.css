@@ -51,8 +51,11 @@
 }
 
 .groupButtonActive {
-  background-color: var(--color-bg-2);
   box-shadow: inset 0 0 0 1px #ffffff22;
+}
+
+.groupButtonActive .slotCount {
+  color: var(--color-bg-2);
 }
 
 .groupName {

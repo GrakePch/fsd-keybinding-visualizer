@@ -11,7 +11,7 @@ function CameraMarkerLabel({ isActive, marker, onSelectSlot }: { isActive: boole
   return (
     <Html center position={marker.cameraPosition} transform={false} zIndexRange={[20, 0]}>
       <button
-        className={`${styles.cameraPositionMarker} ${isActive ? styles.cameraPositionMarkerActive : ""}`}
+        className={`${styles.cameraPositionMarker} ${isActive ? `${styles.cameraPositionMarkerActive} buttonAccent` : "buttonHighlighted"}`}
         type="button"
         aria-label={`Select camera slot ${marker.label}`}
         onClick={selectSlot}

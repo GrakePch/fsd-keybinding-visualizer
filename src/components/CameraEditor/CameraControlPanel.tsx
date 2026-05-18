@@ -79,7 +79,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
         <h2 className={styles.heading}>Camera Slots</h2>
         <CameraSlotButtons selectedGroup={selectedGroup} selectedSlotId={selectedSlotId} onSelectSlot={onSelectSlot} />
         <button
-          className={`${styles.cameraViewButton} ${isCameraViewActive ? styles.cameraViewButtonActive : ""}`}
+          className={`${styles.cameraViewButton} ${isCameraViewActive ? `${styles.cameraViewButtonActive} buttonNormal` : ""}`}
           type="button"
           disabled={!canEnterCameraView && !isCameraViewActive}
           onClick={onToggleCameraView}
@@ -94,7 +94,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
         {selectedGroup && !selectedSlot && (
           <div className={styles.emptySlotActions}>
             <p>Slot {selectedSlotId + 1} is empty.</p>
-            <button type="button" onClick={onCreateSlot}>
+            <button className="buttonAccent" type="button" onClick={onCreateSlot}>
               Create new camera
             </button>
             {copySourceSlots.length > 0 && (
@@ -141,7 +141,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
           {CAMERA_FRUSTUM_ASPECT_RATIOS.map((option) => (
             <button
               key={option.id}
-              className={`${styles.aspectRatioButton} ${frustumAspectRatioId === option.id ? styles.aspectRatioButtonActive : ""}`}
+              className={`${styles.aspectRatioButton} ${frustumAspectRatioId === option.id ? `${styles.aspectRatioButtonActive} buttonHighlighted` : ""}`}
               type="button"
               role="radio"
               aria-checked={frustumAspectRatioId === option.id}

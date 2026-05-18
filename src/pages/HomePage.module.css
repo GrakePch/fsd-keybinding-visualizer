@@ -46,8 +46,6 @@
   min-width: 12rem;
   padding: 1rem 1.5rem;
   border-radius: .75rem;
-  color: var(--color-text);
-  background-color: var(--color-bg-1);
   box-shadow: var(--shadow-2);
   font-family: var(--font-geom);
   font-size: 1.1rem;
@@ -58,8 +56,6 @@
 }
 
 .actionButton:hover {
-  color: var(--color-text);
-  background-color: var(--color-bg-2);
   box-shadow: var(--shadow-3);
   text-decoration: none;
   transform: translateY(-1px);

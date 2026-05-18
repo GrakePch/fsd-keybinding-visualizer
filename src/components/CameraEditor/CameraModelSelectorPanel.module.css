@@ -60,6 +60,14 @@
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-lalt) 55%, transparent);
 }
 
+.modelButtonActive .modelName {
+  color: var(--color-bg);
+}
+
+.modelButtonActive .modelMeta {
+  color: var(--color-bg-2);
+}
+
 .modelName {
   color: var(--color-text);
   font-weight: 700;

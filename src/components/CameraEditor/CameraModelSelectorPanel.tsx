@@ -43,7 +43,7 @@ function CameraModelSelectorPanel({ selectedModel, previewModel, onPreviewModel,
       <div className={styles.modelList}>
         {filteredModels.map((model) => (
           <button
-            className={`${styles.modelButton} ${activeModel?.slug === model.slug ? styles.modelButtonActive : ""}`}
+            className={`${styles.modelButton} ${activeModel?.slug === model.slug ? `${styles.modelButtonActive} buttonHighlighted` : ""}`}
             key={model.slug}
             type="button"
             onClick={() => onPreviewModel(model)}
@@ -56,7 +56,7 @@ function CameraModelSelectorPanel({ selectedModel, previewModel, onPreviewModel,
 
       <div className={styles.actions}>
         <button type="button" onClick={onCancel}>Cancel</button>
-        <button type="button" onClick={onConfirm} disabled={!previewModel}>Confirm model</button>
+        <button className="buttonAccent" type="button" onClick={onConfirm} disabled={!previewModel}>Confirm model</button>
       </div>
     </aside>
   );

@@ -98,30 +98,16 @@
   height: 1.5rem;
   font-size: .8rem;
   padding: .25rem .375rem;
-  background: transparent;
   border-radius: .25rem;
   white-space: nowrap;
 }
 
-.actionButton:hover {
-  filter: brightness(1.1);
-  background-color: #707070;
-}
-
 .clearButton {
-  color: hsl(50, 50%, 50%);
-}
-
-.clearButton:hover {
-  background-color: hsla(50, 50%, 50%, .25);
+  --button-accent-color: hsl(50, 50%, 50%);
 }
 
 .resetButton {
-  color: hsl(200, 70%, 70%);
-}
-
-.resetButton:hover {
-  background-color: hsla(200, 70%, 70%, .22);
+  --button-accent-color: hsl(200, 70%, 70%);
 }
 
 .kbms {
