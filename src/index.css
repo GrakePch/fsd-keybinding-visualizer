@@ -33,12 +33,13 @@
   font-style: normal;
 }
 
+/* Google Sans Flex: https://fonts.google.com/specimen/Google+Sans+Flex */
 @font-face {
-  font-family: 'DMSans';
-  src: url('./fonts/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-stretch: 75% 100%;
-  font-style: normal;
+  font-family: 'Google Sans Flex';
+  src: url('./fonts/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf') format('truetype');
+  font-weight: 1 1000;
+  font-stretch: 25% 151%;
+  font-style: oblique -10deg 0deg;
 }
 
 :root {
@@ -56,7 +57,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --font-geom: "DMSans", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-geom: "Google Sans Flex", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-slim: "Barlow", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   --color-bg: #242424;
