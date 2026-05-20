@@ -35,6 +35,9 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
   return range.isCurrentValueOutsideRecommendedRange ? `${sourceLabel}: outside recommended range` : sourceLabel;
 }
 
+const mdiScShip =
+  "M16,16.813l-0,0.937l1.688,2.125l-0,2.125l-3.563,-2l0,-3.687l-0.875,-0.75l-0.438,1.687l-1.624,0l-0.438,-1.687l-0.875,0.75l0,3.687l-3.563,2l0.001,-2.125l1.687,-2.125l0,-0.937l-1.313,-0.875l-2.562,2.5l0,-2.875l5.188,-6.75l1.625,-6.813l2.125,-0l1.625,6.813l5.187,6.75l0,2.875l-2.562,-2.5l-1.313,0.875Z";
+
 function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
@@ -73,6 +76,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
           </div>
         )}
         <button className={styles.modelButton} type="button" onClick={onSelectModel}>
+          <Icon className={styles.modelButtonIcon} path={mdiScShip} size="1rem" aria-hidden="true" />
           {loadedModel ? "Change model" : "Select model"}
         </button>
       </section>
