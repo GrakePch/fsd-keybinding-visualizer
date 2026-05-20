@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { CameraControlAxisRange } from "../../utils/cameraControlRanges";
+import CameraRangeNoteIcon from "./CameraRangeNoteIcon";
 import styles from "./CameraSliderNumberField.module.css";
 
 interface CameraSliderNumberFieldProps {
@@ -39,7 +40,7 @@ function CameraSliderNumberField({ label, value, range, step = 0.1, rangeNote, o
     <label className={styles.field}>
       <span className={styles.labelRow}>
         <span>{label}</span>
-        {rangeNote && <span className={styles.rangeNote}>{rangeNote}</span>}
+        {rangeNote && <CameraRangeNoteIcon note={rangeNote} />}
       </span>
       <span className={styles.controlRow}>
         <input aria-label={label} type="range" min={range.slider.min} max={range.slider.max} step={step} value={value} onChange={(event) => updateSliderValue(event.target.value)} />

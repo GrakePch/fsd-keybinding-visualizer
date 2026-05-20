@@ -1,0 +1,40 @@
+.tooltipIcon {
+  z-index: 1;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--color-text-3, var(--color-text-2));
+  cursor: help;
+}
+
+.tooltipIcon > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltipIcon:hover,
+.tooltipIcon:focus-within {
+  color: var(--color-text-1);
+}
+
+.tooltipIconWarning {
+  color: #facc15;
+}
+
+.tooltipIconWarning:hover,
+.tooltipIconWarning:focus-within {
+  color: #fde047;
+}
+
+.tooltipIconDanger {
+  color: #ef4444;
+}
+
+.tooltipIconDanger:hover,
+.tooltipIconDanger:focus-within {
+  color: #f87171;
+}

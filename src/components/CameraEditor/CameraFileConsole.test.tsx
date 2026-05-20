@@ -24,4 +24,25 @@ describe("CameraFileConsole", () => {
     expect(markup).not.toContain("Change Path");
     expect(markup).not.toContain("Overwrite");
   });
+
+  it("explains which Star Citizen folder Open Path expects", () => {
+    vi.stubGlobal("window", { showDirectoryPicker: vi.fn() });
+
+    const markup = renderToStaticMarkup(
+      <CameraFileConsole
+        savedViews={null}
+        hasChanges={false}
+        onLoad={() => {}}
+        onSaved={() => {}}
+      />,
+    );
+
+    expect(markup).toContain("data-tooltip=\"Select the LIVE/PTU/EPTU folder.");
+    expect(markup).toContain("Program Files/Roberts Space Industries/StarCitizen/LIVE");
+    expect(markup).toContain("data-tooltip=\"Upload individual savedviews.xml\"");
+    expect(markup).toContain("data-tooltip=\"Download individual savedviews.xml\"");
+    expect(markup).toContain("tooltipBottomLeft");
+    expect(markup).not.toContain("tooltipIconBottomRight");
+    expect(markup).not.toContain("title=\"Select the LIVE/PTU/EPTU folder.");
+  });
 });

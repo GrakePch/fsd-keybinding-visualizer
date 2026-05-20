@@ -5,9 +5,14 @@ import { CTXGameRootDirectory } from "../../contexts";
 import { SAVEDVIEWS_PATH_PARTS, WindowWithDirectoryPicker, getNestedFileHandle } from "../../utils/fileSystemAccess";
 import { buildSavedViewsXml, parseSavedViewsXml } from "../../utils/savedViews";
 import { SavedViewsDocument } from "../../types/savedViews";
+import Tooltip from "./Tooltip";
 import styles from "./CameraFileConsole.module.css";
 
 type LoadedSavedViewsSource = "none" | "upload" | "localPath";
+
+const OPEN_PATH_TOOLTIP = "Select the LIVE/PTU/EPTU folder. Usually: Program Files/Roberts Space Industries/StarCitizen/LIVE";
+const UPLOAD_TOOLTIP = "Upload individual savedviews.xml";
+const DOWNLOAD_TOOLTIP = "Download individual savedviews.xml";
 
 interface CameraFileConsoleProps {
   savedViews: SavedViewsDocument | null;
@@ -138,10 +143,12 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
       </p>
       <div className={styles.controls}>
         <div className={styles.controlRow}>
-          <button type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath}>
-            <Icon className={styles.buttonIcon} path={mdiFolderOpen} size="1rem" aria-hidden="true" />
-            Open Path
-          </button>
+          <Tooltip className={styles.controlTooltip} tooltip={OPEN_PATH_TOOLTIP} position="bottom-left">
+            <button className={styles.tooltipButton} type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath}>
+              <Icon className={styles.buttonIcon} path={mdiFolderOpen} size="1rem" aria-hidden="true" />
+              Open Path
+            </button>
+          </Tooltip>
           <button type="button" onClick={() => readFromLocalPath()} disabled={!canRefreshLocalPath}>
             <Icon className={styles.buttonIcon} path={mdiRefresh} size="1rem" aria-hidden="true" />
             Refresh
@@ -153,14 +160,18 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
         </button>
         <div className={styles.controlDivider} aria-hidden="true" />
         <div className={styles.controlRow}>
-          <button type="button" onClick={() => fileInputRef.current?.click()}>
-            <Icon className={styles.buttonIcon} path={mdiTrayArrowUp} size="1rem" aria-hidden="true" />
-            Upload
-          </button>
-          <button type="button" onClick={downloadXml} disabled={!canExport}>
-            <Icon className={styles.buttonIcon} path={mdiTrayArrowDown} size="1rem" aria-hidden="true" />
-            Download
-          </button>
+          <Tooltip className={styles.controlTooltip} tooltip={UPLOAD_TOOLTIP} position="bottom-left">
+            <button className={styles.tooltipButton} type="button" onClick={() => fileInputRef.current?.click()}>
+              <Icon className={styles.buttonIcon} path={mdiTrayArrowUp} size="1rem" aria-hidden="true" />
+              Upload
+            </button>
+          </Tooltip>
+          <Tooltip className={styles.controlTooltip} tooltip={DOWNLOAD_TOOLTIP} position="bottom-left">
+            <button className={styles.tooltipButton} type="button" onClick={downloadXml} disabled={!canExport}>
+              <Icon className={styles.buttonIcon} path={mdiTrayArrowDown} size="1rem" aria-hidden="true" />
+              Download
+            </button>
+          </Tooltip>
         </div>
       </div>
     </section>

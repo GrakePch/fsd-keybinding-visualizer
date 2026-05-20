@@ -81,6 +81,15 @@
   flex: 0 0 auto;
 }
 
+.controlTooltip {
+  display: flex;
+  min-width: 0;
+}
+
+.tooltipButton {
+  width: 100%;
+}
+
 .fullWidthButton {
   width: 100%;
 }

@@ -50,6 +50,10 @@
   font-weight: 600;
 }
 
+.rangeSliderField {
+  gap: .12rem;
+}
+
 .labelRow {
   display: flex;
   align-items: baseline;
@@ -93,13 +97,4 @@
   border-radius: 0;
   background-color: transparent;
   accent-color: var(--camera-axis-color, var(--color-lalt));
-}
-
-.rangeNote {
-  min-width: 0;
-  flex: 1;
-  color: var(--color-text-3, var(--color-text-2));
-  font-size: .75rem;
-  font-weight: 500;
-  text-align: right;
 }

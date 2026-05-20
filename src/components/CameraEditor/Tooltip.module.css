@@ -1,0 +1,74 @@
+.tooltip {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.tooltip:hover,
+.tooltip:focus-within {
+  z-index: 20;
+}
+
+.tooltip::before,
+.tooltip::after {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + .45rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .12s ease, transform .12s ease;
+  transform: translateY(.2rem);
+}
+
+.tooltip::before {
+  content: "";
+  bottom: calc(100% + .15rem);
+  border: .3rem solid transparent;
+  border-top-color: var(--color-bg-2);
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  width: max-content;
+  max-width: 16rem;
+  padding: .45rem .55rem;
+  border: 1px solid var(--color-bg-3);
+  border-radius: .4rem;
+  color: var(--color-text);
+  background: var(--color-bg-2);
+  box-shadow: var(--shadow-3);
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.tooltipBottomRight::before,
+.tooltipBottomRight::after,
+.tooltipBottomLeft::before,
+.tooltipBottomLeft::after {
+  top: calc(100% + .45rem);
+  bottom: auto;
+}
+
+.tooltipBottomRight::before,
+.tooltipBottomLeft::before {
+  top: calc(100% + .15rem);
+  border-top-color: transparent;
+  border-bottom-color: var(--color-bg-2);
+}
+
+.tooltipBottomLeft::before,
+.tooltipBottomLeft::after {
+  right: auto;
+  left: 0;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after,
+.tooltip:focus-within::before,
+.tooltip:focus-within::after {
+  opacity: 1;
+  transform: translateY(0);
+}

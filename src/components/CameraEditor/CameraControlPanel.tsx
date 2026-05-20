@@ -31,8 +31,8 @@ interface CameraControlPanelProps {
 }
 
 function getCameraControlRangeNote(source: CameraControlRangeSource, range: CameraControlAxisRange) {
-  const sourceLabel = source === "precise" ? "Tested range" : source === "inferred" ? "Estimated from model size" : "Default range";
-  return range.isCurrentValueOutsideRecommendedRange ? `${sourceLabel}: outside recommended range` : sourceLabel;
+  const sourceNote = source === "precise" ? "This range is tested in game." : source === "inferred" ? "This range is estimated from model size." : "This range uses default values.";
+  return range.isCurrentValueOutsideRecommendedRange ? `${sourceNote}\nCurrent value is outside the range.` : sourceNote;
 }
 
 const mdiScShip =

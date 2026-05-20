@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Vec3 } from "../../types/savedViews";
 import type { CameraControlAxisRange } from "../../utils/cameraControlRanges";
 import { CAMERA_GIZMO_AXIS_COLORS } from "../../utils/cameraGizmo";
+import CameraRangeNoteIcon from "./CameraRangeNoteIcon";
 import styles from "./CameraVector3Editor.module.css";
 
 interface CameraVector3EditorProps {
@@ -134,7 +135,7 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
         const axisSliderStyle = getAxisSliderStyle(field.axis);
 
         return (
-          <label className={`${styles.axisField} ${isAngleSlider || isRangeSlider ? styles.angleSliderField : ""}`} key={field.axis} style={axisSliderStyle}>
+          <label className={`${styles.axisField} ${isAngleSlider || isRangeSlider ? styles.angleSliderField : ""} ${isRangeSlider ? styles.rangeSliderField : ""}`} key={field.axis} style={axisSliderStyle}>
             {isAngleSlider ? (
               <>
                 <span className={styles.labelRow}>
@@ -172,7 +173,7 @@ function CameraVector3Editor({ label, value, fields = DEFAULT_FIELDS, variant = 
               <>
                 <span className={styles.labelRow}>
                   <span>{field.label}</span>
-                  {rangeNote && <span className={styles.rangeNote}>{rangeNote}</span>}
+                  {rangeNote && <CameraRangeNoteIcon note={rangeNote} />}
                 </span>
                 <span className={styles.controlRow}>
                   <input
