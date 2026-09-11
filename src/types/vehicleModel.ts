@@ -47,6 +47,11 @@ export type SpvVehicleEntry = {
   Dimensions?: Partial<SpvVehicleDimensions>;
 };
 
+export type SeatVehicleEntry = {
+  groupId: string;
+  vehicleIds: string[];
+};
+
 export type VehicleFallbackBoxModel = {
   visualKind: "box";
   slug: string;

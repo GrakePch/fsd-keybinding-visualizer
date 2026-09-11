@@ -11,10 +11,11 @@ import { isVehicleFallbackBoxModel } from "../types/vehicleModel";
 import { DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, type CameraFrustumAspectRatioId } from "../utils/cameraFrustum";
 import { canEnterCameraView, getCameraViewSlotIdFromSearchParams, setCameraViewSlotIdInSearchParams } from "../utils/cameraView";
 import { getCameraPositionMarkers } from "../utils/cameraViewport";
-import { getAutoSelectedVehicleModel, getSelectableVehicleModelWithSpvBounds } from "../utils/cameraAutoVehicleModel";
+import { getSeatVehicleUsage, getSelectableVehicleModelWithSpvBounds, getVehicleDisplayName, type SeatVehicleUsage } from "../utils/cameraAutoVehicleModel";
 import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
-import { copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
+import { addSavedViewGroup, copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
 import { useSpvVehicleIndex, useSpvVehicles } from "../utils/spvVehicleData";
+import { getSeatVehicleIndex, useSeatsData } from "../utils/seatsData";
 import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
 import styles from "./CameraEditorPage.module.css";
 
@@ -31,7 +32,14 @@ function CameraEditorPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { manifest } = useSelectableVehicleModels();
   const { vehicles: spvVehicles } = useSpvVehicles();
+  const { seats } = useSeatsData();
   const spvVehicleIndex = useSpvVehicleIndex(spvVehicles);
+  const seatVehicleIndex = useMemo(() => getSeatVehicleIndex(seats), [seats]);
+  const vehicleNameById = useMemo(() => {
+    const names: Record<string, string> = {};
+    seats.forEach((seat) => seat.vehicleIds.forEach((vehicleId) => { names[vehicleId] = getVehicleDisplayName(vehicleId, manifest, spvVehicles); }));
+    return names;
+  }, [manifest, seats, spvVehicles]);
 
   const cameraViewSlotId = getCameraViewSlotIdFromSearchParams(searchParams);
   const isCameraViewActive = cameraViewSlotId !== null;
@@ -42,7 +50,8 @@ function CameraEditorPage() {
   const currentSavedViewsJson = JSON.stringify(savedViews);
   const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
   const manualGroupModel = selectedGroupId ? getDraftModelForGroup(groupModelDrafts, selectedGroupId) : null;
-  const autoGroupModel = selectedGroupId && selectedGroup ? getAutoSelectedVehicleModel(selectedGroup.id, spvVehicles, manifest) : null;
+  const selectedSeatUsage = selectedGroupId && selectedGroup ? getSeatVehicleUsage(selectedGroup.id, Object.values(seatVehicleIndex), manifest, spvVehicles) : null;
+  const autoGroupModel = selectedSeatUsage?.model || null;
   const loadedModel = selectedGroupId ? getModelWithStableSpvBounds(manualGroupModel, spvVehicleIndex) || autoGroupModel : getModelWithStableSpvBounds(standaloneLoadedModel, spvVehicleIndex);
   const viewportModel = isSelectingModel ? getModelWithStableSpvBounds(previewModel, spvVehicleIndex) || loadedModel : loadedModel;
   const selectedSlotMarkers = useMemo(() => getCameraPositionMarkers(selectedSlot ? [selectedSlot] : []), [selectedSlot]);
@@ -74,6 +83,20 @@ function CameraEditorPage() {
 
   const selectGroup = (groupId: string) => {
     setSelectedGroupId(groupId);
+    setPreviewModel(null);
+    setIsSelectingModel(false);
+    setCameraViewSlotId(null);
+  };
+
+  const addGroups = (groupIds: string[]) => {
+    const document = savedViews || { groups: [], originalXmlString: "<SavedViews>\n</SavedViews>\n" };
+    const groupIdsToAdd = groupIds.filter((groupId) => !document.groups.some((group) => group.id === groupId));
+    if (groupIdsToAdd.length === 0) return;
+
+    const nextDocument = groupIdsToAdd.reduce((currentDocument, groupId) => addSavedViewGroup(currentDocument, groupId), document);
+    setSavedViews(nextDocument);
+    setSelectedGroupId(groupIdsToAdd[0]);
+    setSelectedSlotId(0);
     setPreviewModel(null);
     setIsSelectingModel(false);
     setCameraViewSlotId(null);
@@ -137,6 +160,11 @@ function CameraEditorPage() {
       <CameraGroupDrawer
         fileConsole={<CameraFileConsole savedViews={savedViews} hasChanges={hasSavedViewsChanges} onLoad={(document) => loadSavedViews(document)} onSaved={() => setBaselineSavedViewsJson(JSON.stringify(savedViews))} />}
         groups={savedViews?.groups || []}
+        seats={seats}
+        canAddGroup={true}
+        vehicleNameById={vehicleNameById}
+        seatVehicleUsageByGroupId={getSeatVehicleUsageByGroupId(savedViews?.groups || [], seatVehicleIndex, manifest, spvVehicles)}
+        onAddGroups={addGroups}
         selectedGroupId={selectedGroupId}
         onSelectGroup={selectGroup}
       />
@@ -169,6 +197,14 @@ function CameraEditorPage() {
       )}
     </main>
   );
+}
+
+function getSeatVehicleUsageByGroupId(groups: SavedViewsDocument["groups"], seatVehicleIndex: ReturnType<typeof getSeatVehicleIndex>, manifest: Parameters<typeof getSeatVehicleUsage>[2], vehicles: Parameters<typeof getSeatVehicleUsage>[3]): Record<string, SeatVehicleUsage> {
+  return groups.reduce<Record<string, SeatVehicleUsage>>((result, group) => {
+    const usage = getSeatVehicleUsage(group.id, Object.values(seatVehicleIndex), manifest, vehicles);
+    if (usage) result[group.id] = usage;
+    return result;
+  }, {});
 }
 
 function getModelWithStableSpvBounds(model: SelectableVehicleModel | null, spvVehicleIndex: Record<string, SpvVehicleEntry>): VehicleViewportModel | null {

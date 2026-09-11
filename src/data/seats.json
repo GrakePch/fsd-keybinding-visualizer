@@ -1,0 +1,3730 @@
+{
+  "schemaVersion": 1,
+  "seats": [
+    {
+      "groupId": "Seat (SCItem) - AEGS_Avenger_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Avenger_Stalker",
+        "AEGS_Avenger_Titan",
+        "AEGS_Avenger_Titan_Renegade",
+        "AEGS_Avenger_Warlock"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Eclipse_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Eclipse",
+        "AEGS_Eclipse_BIS2950",
+        "AEGS_Eclipse_BMBRCK_S03_TEST",
+        "AEGS_Eclipse_BMBRCK_S05_TEST",
+        "AEGS_Eclipse_BMBRCK_S10_TEST"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Escpod_Bedding",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Gladius_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Gladius",
+        "AEGS_Gladius_Dunlevy",
+        "AEGS_Gladius_PIR",
+        "AEGS_Gladius_Valiant"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_GS_SCItem_Pilot_Seat",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_GS_SeatDashboard_CoPilot",
+      "vehicleIds": [
+        "AEGS_Hammerhead_GS"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_GS_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "AEGS_Hammerhead_GS"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_SCItem_Copilot_Seat",
+      "vehicleIds": [
+        "AEGS_Hammerhead",
+        "AEGS_Hammerhead_Showdown"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_SCItem_Engineer_Console",
+      "vehicleIds": [
+        "AEGS_Hammerhead",
+        "AEGS_Hammerhead_Showdown"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_SCItem_Pilot_Seat",
+      "vehicleIds": [
+        "AEGS_Hammerhead",
+        "AEGS_Hammerhead_Showdown"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Hammerhead_SCItem_Seat_Captain_Room",
+      "vehicleIds": [
+        "AEGS_Hammerhead",
+        "AEGS_Hammerhead_Showdown"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_ATC_Seat_NoArmrests",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_ATC",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Left",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Left_Back",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Left_Back_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Left_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Right",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Right_Back",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Right_Back_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Bridge_Rear_Right_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Brig",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Captain",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Captain_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Comms",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_CoPilot_Crashed",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Pilot_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Pilot_M",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Science",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Security",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Idris_SCItem_Seat_Tactical",
+      "vehicleIds": [
+        "AEGS_Idris_M",
+        "AEGS_Idris_P",
+        "AEGS_Idris_P_Collector_Military",
+        "AEGS_Idris_P_TSG"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Dashboard_Captain",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Bridge_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Bridge_Left_RemoteTurret",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Bridge_Left_RemoteTurret_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Bridge_Right_RemoteTurret",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Bridge_Right_RemoteTurret_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Bridge_Right_Tactical",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Captain",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Captain_Console",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_CoPilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Pilot_Blocked",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Javelin_SCItem_Seat_Security",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Drone_SCItem_Seat_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Remote_Turret_Console",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Remote_Turret_Console_2",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Scanning_Console",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Scanning_Console_2",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_SCItem_Engineer_Console",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Seat_CoPilot",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Seat_Drone_Left",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Seat_Drone_Right",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Seat_TractorBeam_Left",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Reclaimer_Seat_TractorBeam_Right",
+      "vehicleIds": [
+        "AEGS_Reclaimer",
+        "AEGS_Reclaimer_BIS2024_Temp",
+        "AEGS_Reclaimer_Showdown",
+        "AEGS_Reclaimer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Seat_Bed_Lower_Left",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Seat_Bed_Lower_Right",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Seat_Bed_Upper_Left",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Seat_Bed_Upper_Right",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Front",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Rear",
+      "vehicleIds": [
+        "AEGS_Redeemer",
+        "AEGS_Redeemer_PU_AI_CIV",
+        "AEGS_Redeemer_PU_AI_CRIM",
+        "AEGS_Redeemer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Engineer_Console",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Bed_Lower_Left",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Bed_Lower_Right",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Bed_Rear_Left",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Bed_Rear_Right",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Bed_Upper_Left",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Bed_Upper_Right",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Retaliator_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Retaliator"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Sabre_Firebird_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Sabre_Firebird",
+        "AEGS_Sabre_Firebird_AI_Template",
+        "AEGS_Sabre_Firebird_Collector_Milt",
+        "AEGS_Sabre_Firebird_PU_AI_CIV",
+        "AEGS_Sabre_Firebird_PU_AI_CRIM",
+        "AEGS_Sabre_Firebird_PU_AI_FF"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Sabre_Peregrine_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Sabre_Peregrine",
+        "AEGS_Sabre_Peregrine_Collector_Competition",
+        "AEGS_Sabre_Peregrine_PU_AI_CIV",
+        "AEGS_Sabre_Peregrine_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Sabre_Raven_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Sabre_Raven"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Sabre_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Sabre",
+        "AEGS_Sabre_Comet"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Tiburon_Copilot_Seat",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Tiburon_SCItem_Remote_Turret_Seat",
+      "vehicleIds": [
+        "AEGS_Tiburon",
+        "AEGS_Tiburon_PU_AI_CIV",
+        "AEGS_Tiburon_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Tiburon_SCItem_Remote_Turret_Seat_Right",
+      "vehicleIds": [
+        "AEGS_Tiburon",
+        "AEGS_Tiburon_PU_AI_CIV",
+        "AEGS_Tiburon_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Tiburon_SeatDashboard_Copilot",
+      "vehicleIds": [
+        "AEGS_Tiburon",
+        "AEGS_Tiburon_PU_AI_CIV",
+        "AEGS_Tiburon_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Tiburon_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "AEGS_Tiburon",
+        "AEGS_Tiburon_PU_AI_CIV",
+        "AEGS_Tiburon_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_SCItem_Engineer_Console",
+      "vehicleIds": [
+        "AEGS_Vanguard"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_SCItem_Seat_Bed_Lower",
+      "vehicleIds": [
+        "AEGS_Vanguard",
+        "AEGS_Vanguard_Harbinger",
+        "AEGS_Vanguard_Harbinger_PU_AI_CIV",
+        "AEGS_Vanguard_Harbinger_PU_AI_CRIM",
+        "AEGS_Vanguard_Harbinger_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_SCItem_Seat_Bed_Lower_Sentinel",
+      "vehicleIds": [
+        "AEGS_Vanguard_Sentinel",
+        "AEGS_Vanguard_Sentinel_PU_AI_CIV",
+        "AEGS_Vanguard_Sentinel_PU_AI_CRIM",
+        "AEGS_Vanguard_Sentinel_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_SCItem_Seat_Bed_Upper",
+      "vehicleIds": [
+        "AEGS_Vanguard",
+        "AEGS_Vanguard_Harbinger",
+        "AEGS_Vanguard_Harbinger_PU_AI_CIV",
+        "AEGS_Vanguard_Harbinger_PU_AI_CRIM",
+        "AEGS_Vanguard_Harbinger_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_SCItem_Seat_Bed_Upper_Sentinel",
+      "vehicleIds": [
+        "AEGS_Vanguard_Sentinel",
+        "AEGS_Vanguard_Sentinel_PU_AI_CIV",
+        "AEGS_Vanguard_Sentinel_PU_AI_CRIM",
+        "AEGS_Vanguard_Sentinel_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "AEGS_Vanguard",
+        "AEGS_Vanguard_Harbinger",
+        "AEGS_Vanguard_Harbinger_PU_AI_CIV",
+        "AEGS_Vanguard_Harbinger_PU_AI_CRIM",
+        "AEGS_Vanguard_Harbinger_Unmanned_Salvage",
+        "AEGS_Vanguard_Hoplite",
+        "AEGS_Vanguard_Sentinel",
+        "AEGS_Vanguard_Sentinel_PU_AI_CIV",
+        "AEGS_Vanguard_Sentinel_PU_AI_CRIM",
+        "AEGS_Vanguard_Sentinel_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - AEGS_Vanguard_Sentinel_SCItem_Engineer_Console",
+      "vehicleIds": [
+        "AEGS_Vanguard_Sentinel",
+        "AEGS_Vanguard_Sentinel_PU_AI_CIV",
+        "AEGS_Vanguard_Sentinel_PU_AI_CRIM",
+        "AEGS_Vanguard_Sentinel_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Arrow_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Arrow"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Asgard_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Asgard",
+        "ANVL_Asgard_Collector_Military",
+        "ANVL_Asgard_PU_AI_CIV",
+        "ANVL_Asgard_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Ballista_SCItem_Seat_Driver",
+      "vehicleIds": [
+        "ANVL_Ballista",
+        "ANVL_Ballista_Dunestalker",
+        "ANVL_Ballista_Snowblind"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Ballista_SCItem_Seat_Gunner",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Ballista_SCItem_SeatDashboard_Gunner",
+      "vehicleIds": [
+        "ANVL_Ballista",
+        "ANVL_Ballista_Dunestalker",
+        "ANVL_Ballista_Snowblind"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Bridge_Console",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Cart_Console",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Seat_Drone_Left",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Seat_Drone_Right",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Seat_Support_Left",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Carrack_SCItem_Seat_Support_Right",
+      "vehicleIds": [
+        "ANVL_Carrack",
+        "ANVL_Carrack_BIS2950",
+        "ANVL_Carrack_Expedition"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Centurion_SCItem_Seat_Driver",
+      "vehicleIds": [
+        "ANVL_Centurion"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Centurion_SCItem_Seat_Gunner",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Centurion_SCItem_SeatDashboard_Gunner",
+      "vehicleIds": [
+        "ANVL_Centurion"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Gladiator_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Gladiator",
+        "ANVL_Gladiator_BMBRCK_S03_TEST",
+        "ANVL_Gladiator_BMBRCK_S05_TEST"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hawk_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hawk"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hawk_Seat_Prisoner",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7A_Mk1_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7A_Mk1"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7A_Seat_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7C_Mk2_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7A_Mk2",
+        "ANVL_Hornet_F7A_Mk2_Exec_Military",
+        "ANVL_Hornet_F7A_Mk2_Exec_Stealth",
+        "ANVL_Hornet_F7C_Mk2",
+        "ANVL_Hornet_F7C_Mk2_AI_Super",
+        "ANVL_Hornet_F7C_Mk2_AI_Super_CIV",
+        "ANVL_Hornet_F7C_Mk2_AI_Super_CRIM",
+        "ANVL_Hornet_F7C_Mk2_PU_AI_CRIM",
+        "ANVL_Hornet_F7CR_Mk2",
+        "ANVL_Hornet_F7CS_Mk2"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7CM_Mk2_Seat_Copilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7_Mk2_Collector_Mod",
+        "ANVL_Hornet_F7CM_Mk2",
+        "ANVL_Hornet_F7CM_Mk2_Heartseeker"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7CM_Mk2_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7_Mk2_Collector_Mod",
+        "ANVL_Hornet_F7CM_Mk2",
+        "ANVL_Hornet_F7CM_Mk2_Heartseeker"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7CM_Seat_Copilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7CM",
+        "ANVL_Hornet_F7CM_Heartseeker"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_F7CM_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7CM",
+        "ANVL_Hornet_F7CM_Heartseeker"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hornet_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hornet_F7C",
+        "ANVL_Hornet_F7C_Wildfire",
+        "ANVL_Hornet_F7CR",
+        "ANVL_Hornet_F7CS"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Hurricane_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Hurricane"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Lightning_F8_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Lightning_F8",
+        "ANVL_Lightning_F8_AI_CRIM",
+        "ANVL_Lightning_F8_AI_Super_CIV",
+        "ANVL_Lightning_F8_AI_Super_CRIM",
+        "ANVL_Lightning_F8_Fleetweek",
+        "ANVL_Lightning_F8_Fleetweek_DarkBlue",
+        "ANVL_Lightning_F8_Fleetweek_Grey",
+        "ANVL_Lightning_F8_Fleetweek_LightBlue",
+        "ANVL_Lightning_F8_Fleetweek_White",
+        "ANVL_Lightning_F8_PU_AI_UEE",
+        "ANVL_Lightning_F8C",
+        "ANVL_Lightning_F8C_BIS2024_Temp",
+        "ANVL_Lightning_F8C_Collector_Military",
+        "ANVL_Lightning_F8C_Collector_Stealth",
+        "ANVL_Lightning_F8C_Exec",
+        "ANVL_Lightning_F8C_Exec_Military",
+        "ANVL_Lightning_F8C_Exec_Stealth",
+        "ANVL_Lightning_F8C_Plat"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_co_pilot_seat",
+      "vehicleIds": [
+        "ANVL_Paladin",
+        "ANVL_Paladin_AI_Super_CIV",
+        "ANVL_Paladin_AI_Super_CRIM",
+        "ANVL_Paladin_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_Pilot_Seat",
+      "vehicleIds": [
+        "ANVL_Paladin",
+        "ANVL_Paladin_AI_Super_CIV",
+        "ANVL_Paladin_AI_Super_CRIM",
+        "ANVL_Paladin_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_SCItem_Remote_Turret_Seat",
+      "vehicleIds": [
+        "ANVL_Paladin",
+        "ANVL_Paladin_AI_Super_CIV",
+        "ANVL_Paladin_AI_Super_CRIM",
+        "ANVL_Paladin_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_SCItem_Remote_Turret_Seat_Right",
+      "vehicleIds": [
+        "ANVL_Paladin",
+        "ANVL_Paladin_AI_Super_CIV",
+        "ANVL_Paladin_AI_Super_CRIM",
+        "ANVL_Paladin_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_SCItem_Seat_Bed_Lower_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_SCItem_Seat_Bed_Lower_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_SCItem_Seat_Bed_Upper_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Paladin_SCItem_Seat_Bed_Upper_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Pisces_C8R_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_C8R_Pisces",
+        "ANVL_C8R_Pisces_FW22NFZ",
+        "ANVL_C8R_Pisces_PU_AI_CIV",
+        "ANVL_C8R_Pisces_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Pisces_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_C8_Pisces",
+        "ANVL_C8_Pisces_PU_AI_CIV",
+        "ANVL_C8_Pisces_PU_AI_CRIM",
+        "ANVL_C8_Pisces_Tutorial",
+        "ANVL_C8X_Pisces_Expedition",
+        "ANVL_C8X_Pisces_Expedition_PU_AI_CIV",
+        "ANVL_C8X_Pisces_Expedition_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Spartan_SCItem_Seat_Driver",
+      "vehicleIds": [
+        "ANVL_Spartan"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Terrapin_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Terrapin",
+        "ANVL_Terrapin_BIS2024_Temp",
+        "ANVL_Terrapin_Medic",
+        "ANVL_Terrapin_Medic_AI_Template",
+        "ANVL_Terrapin_Medic_Collector_Medic",
+        "ANVL_Terrapin_Medic_PU_AI_CIV",
+        "ANVL_Terrapin_Medic_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Terrapin_SCItem_Seat_Support",
+      "vehicleIds": [
+        "ANVL_Terrapin",
+        "ANVL_Terrapin_BIS2024_Temp"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Valkyrie_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ANVL_Valkyrie",
+        "ANVL_Valkyrie_Advocacy",
+        "ANVL_Valkyrie_BIS2950",
+        "ANVL_Valkyrie_CitizenCon",
+        "ANVL_Valkyrie_Indestructible"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Valkyrie_Turret_Console_Left",
+      "vehicleIds": [
+        "ANVL_Valkyrie",
+        "ANVL_Valkyrie_Advocacy",
+        "ANVL_Valkyrie_BIS2950",
+        "ANVL_Valkyrie_CitizenCon",
+        "ANVL_Valkyrie_Indestructible"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ANVL_Valkyrie_Turret_Console_Right",
+      "vehicleIds": [
+        "ANVL_Valkyrie",
+        "ANVL_Valkyrie_Advocacy",
+        "ANVL_Valkyrie_BIS2950",
+        "ANVL_Valkyrie_CitizenCon",
+        "ANVL_Valkyrie_Indestructible"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_ATLS_GEO_SCItem_Seat_Driver",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_ATLS_IKTI_SCItem_Seat_Driver",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_ATLS_PowerSuit_SCItem_Seat_Driver",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_CSV_Seat_Driver",
+      "vehicleIds": [
+        "ARGO_CSV_Cargo"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MOLE_SCItem_CoPilot_Seat",
+      "vehicleIds": [
+        "ARGO_MOLE",
+        "ARGO_MOLE_BTALA",
+        "ARGO_MOLE_PU_AI_CIV",
+        "ARGO_MOLE_PU_AI_CRIM",
+        "ARGO_MOLE_Teach",
+        "ARGO_MOLE_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MOLE_SCItem_Seat",
+      "vehicleIds": [
+        "ARGO_MOLE",
+        "ARGO_MOLE_BTALA",
+        "ARGO_MOLE_PU_AI_CIV",
+        "ARGO_MOLE_PU_AI_CRIM",
+        "ARGO_MOLE_Teach",
+        "ARGO_MOLE_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MOTH_SCItem_CoPilot_Seat",
+      "vehicleIds": [
+        "ARGO_MOTH",
+        "ARGO_MOTH_PU_AI_CIV",
+        "ARGO_MOTH_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MOTH_SCItem_Seat",
+      "vehicleIds": [
+        "ARGO_MOTH",
+        "ARGO_MOTH_PU_AI_CIV",
+        "ARGO_MOTH_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MPUV_1T_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ARGO_MPUV",
+        "ARGO_MPUV_1T"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MPUV_SCItem_Seat_Cargo",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_MPUV_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ARGO_MPUV_Transport"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_RAFT_SCItem_Seat_Cargo",
+      "vehicleIds": [
+        "ARGO_RAFT",
+        "ARGO_RAFT_Collector_Indust",
+        "ARGO_RAFT_PU_AI_CIV",
+        "ARGO_RAFT_PU_AI_CIV_DEF",
+        "ARGO_RAFT_PU_AI_CRIM",
+        "ARGO_RAFT_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_RAFT_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "ARGO_RAFT",
+        "ARGO_RAFT_Collector_Indust",
+        "ARGO_RAFT_PU_AI_CIV",
+        "ARGO_RAFT_PU_AI_CIV_DEF",
+        "ARGO_RAFT_PU_AI_CRIM",
+        "ARGO_RAFT_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_RAFT_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ARGO_RAFT",
+        "ARGO_RAFT_Collector_Indust",
+        "ARGO_RAFT_PU_AI_CIV",
+        "ARGO_RAFT_PU_AI_CIV_DEF",
+        "ARGO_RAFT_PU_AI_CRIM",
+        "ARGO_RAFT_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ARGO_SRV_SCItem_Seat",
+      "vehicleIds": [
+        "ARGO_SRV",
+        "ARGO_SRV_PU_AI_CIV",
+        "ARGO_SRV_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - BANU_Defender_Seat",
+      "vehicleIds": [
+        "BANU_Defender",
+        "BANU_Defender_Bomb_Test",
+        "BANU_Defender_PU_AI_CIV",
+        "BANU_Defender_PU_AI_CRIM",
+        "BANU_Defender_PU_AI_DefendShip"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - BANU_Defender_Seat_Right",
+      "vehicleIds": [
+        "BANU_Defender",
+        "BANU_Defender_Bomb_Test",
+        "BANU_Defender_PU_AI_CIV",
+        "BANU_Defender_PU_AI_CRIM",
+        "BANU_Defender_PU_AI_DefendShip"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_AEGS_Med_Bay",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_colon_1_a",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_DRAK_Cutter",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_Idris_AEGS",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_Mantis_RSI",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_No_Sheets",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_Nomad_CNOU",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_RSI_Polaris_Cell",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Mattress_Utili_Capsule",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Pillow_AEGS_Med_Bay",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Pillow_Idris_AEGS",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Pillow_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Pillow_Utili_Capsule",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Bed_Sheets_No_Mattress",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - CNOU_HoverQuad_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "CNOU_HoverQuad"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CNOU_Mustang_Seat_Pilot",
+      "vehicleIds": [
+        "CNOU_Mustang_Alpha",
+        "CNOU_Mustang_Alpha_CitizenCon2018",
+        "CNOU_Mustang_Beta",
+        "CNOU_Mustang_Delta",
+        "CNOU_Mustang_Gamma",
+        "CNOU_Mustang_Omega"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CNOU_Nomad_Seat_Pilot",
+      "vehicleIds": [
+        "CNOU_Nomad",
+        "CNOU_Nomad_PU_AI_CIV",
+        "CNOU_Nomad_PU_AI_CIV_DEF",
+        "CNOU_Nomad_PU_AI_CRIM",
+        "CNOU_Nomad_Teach",
+        "CNOU_Nomad_Unmanned",
+        "CNOU_Nomad_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - Collector_SCItem_Seat_ATC",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Herclues_SCItem_Seat_CoPilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Intrepid_Seat_Pilot",
+      "vehicleIds": [
+        "CRUS_Intrepid",
+        "CRUS_Intrepid_Collector_Indust",
+        "CRUS_Intrepid_PU_AI_CIV",
+        "CRUS_Intrepid_PU_AI_CRIM",
+        "CRUS_Intrepid_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Spirit_Seat_Copilot",
+      "vehicleIds": [
+        "CRUS_Spirit_A1",
+        "CRUS_Spirit_A1_AI_CRIM",
+        "CRUS_Spirit_A1_PU_AI_CIV",
+        "CRUS_Spirit_A1_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Spirit_Seat_Copilot_C1",
+      "vehicleIds": [
+        "CRUS_Spirit_C1",
+        "CRUS_Spirit_C1_BIS2024_Temp",
+        "CRUS_Spirit_C1_Civilian",
+        "CRUS_Spirit_C1_PU_AI_CIV",
+        "CRUS_Spirit_C1_PU_AI_CRIM",
+        "CRUS_Spirit_C1_Unmanned",
+        "CRUS_Spirit_C1_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Spirit_Seat_Pilot",
+      "vehicleIds": [
+        "CRUS_Spirit_A1",
+        "CRUS_Spirit_A1_AI_CRIM",
+        "CRUS_Spirit_A1_PU_AI_CIV",
+        "CRUS_Spirit_A1_Unmanned_Salvage",
+        "CRUS_Spirit_C1",
+        "CRUS_Spirit_C1_BIS2024_Temp",
+        "CRUS_Spirit_C1_Civilian",
+        "CRUS_Spirit_C1_PU_AI_CIV",
+        "CRUS_Spirit_C1_PU_AI_CRIM",
+        "CRUS_Spirit_C1_Unmanned",
+        "CRUS_Spirit_C1_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Star_Runner_Seat_CoPilot",
+      "vehicleIds": [
+        "CRUS_Star_Runner",
+        "CRUS_Star_Runner_AI_Template_ShipBoarded",
+        "CRUS_Star_Runner_Mission_PIR_Package",
+        "CRUS_Star_Runner_PU_AI_CIV",
+        "CRUS_Star_Runner_PU_AI_CIV_DEF",
+        "CRUS_Star_Runner_PU_AI_CRIM",
+        "CRUS_Star_Runner_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Star_Runner_Seat_Pilot",
+      "vehicleIds": [
+        "CRUS_Star_Runner",
+        "CRUS_Star_Runner_AI_Template_ShipBoarded",
+        "CRUS_Star_Runner_Mission_PIR_Package",
+        "CRUS_Star_Runner_PU_AI_CIV",
+        "CRUS_Star_Runner_PU_AI_CIV_DEF",
+        "CRUS_Star_Runner_PU_AI_CRIM",
+        "CRUS_Star_Runner_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Star_Runner_Seat_Scanning",
+      "vehicleIds": [
+        "CRUS_Star_Runner",
+        "CRUS_Star_Runner_AI_Template_ShipBoarded",
+        "CRUS_Star_Runner_Mission_PIR_Package",
+        "CRUS_Star_Runner_PU_AI_CIV",
+        "CRUS_Star_Runner_PU_AI_CIV_DEF",
+        "CRUS_Star_Runner_PU_AI_CRIM",
+        "CRUS_Star_Runner_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starfighter_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "CRUS_Starfighter_Inferno",
+        "CRUS_Starfighter_Inferno_Collector_Military",
+        "CRUS_Starfighter_Inferno_PU_AI_CIV",
+        "CRUS_Starfighter_Inferno_PU_AI_CRIM",
+        "CRUS_Starfighter_Inferno_PU_AI_FF",
+        "CRUS_Starfighter_Inferno_Unmanned_Salvage",
+        "CRUS_Starfighter_Ion",
+        "CRUS_Starfighter_Ion_Collector_Stealth",
+        "CRUS_Starfighter_Ion_PU_AI_CIV",
+        "CRUS_Starfighter_Ion_PU_AI_CRIM",
+        "CRUS_Starfighter_Ion_Unmanned_Salvage",
+        "CRUS_Starfighter_Ion_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starlifter_SCItem_Bomb_Console",
+      "vehicleIds": [
+        "CRUS_Starlifter_A2",
+        "CRUS_Starlifter_A2_Collector_Military"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starlifter_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "CRUS_Starlifter_A2",
+        "CRUS_Starlifter_A2_Collector_Military",
+        "CRUS_Starlifter_C2",
+        "CRUS_Starlifter_C2_AI_Template_ShipBoarded",
+        "CRUS_Starlifter_C2_PU_AI_CIV",
+        "CRUS_Starlifter_C2_PU_AI_CIV_DEF",
+        "CRUS_Starlifter_C2_PU_AI_CRIM",
+        "CRUS_Starlifter_C2_Unmanned_Salvage",
+        "CRUS_Starlifter_M2",
+        "CRUS_Starlifter_M2_AI_Template_ShipBoarded",
+        "CRUS_Starlifter_M2_PU_AI_CIV",
+        "CRUS_Starlifter_M2_PU_AI_CIV_DEF",
+        "CRUS_Starlifter_M2_PU_AI_CRIM",
+        "CRUS_Starlifter_M2_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starlifter_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "CRUS_Starlifter_A2",
+        "CRUS_Starlifter_A2_Collector_Military",
+        "CRUS_Starlifter_C2",
+        "CRUS_Starlifter_C2_AI_Template_ShipBoarded",
+        "CRUS_Starlifter_C2_PU_AI_CIV",
+        "CRUS_Starlifter_C2_PU_AI_CIV_DEF",
+        "CRUS_Starlifter_C2_PU_AI_CRIM",
+        "CRUS_Starlifter_C2_Unmanned_Salvage",
+        "CRUS_Starlifter_M2",
+        "CRUS_Starlifter_M2_AI_Template_ShipBoarded",
+        "CRUS_Starlifter_M2_PU_AI_CIV",
+        "CRUS_Starlifter_M2_PU_AI_CIV_DEF",
+        "CRUS_Starlifter_M2_PU_AI_CRIM",
+        "CRUS_Starlifter_M2_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starlifter_SCItem_Turret_Seat_Bridge",
+      "vehicleIds": [
+        "CRUS_Starlifter_A2",
+        "CRUS_Starlifter_A2_Collector_Military",
+        "CRUS_Starlifter_M2",
+        "CRUS_Starlifter_M2_AI_Template_ShipBoarded",
+        "CRUS_Starlifter_M2_PU_AI_CIV",
+        "CRUS_Starlifter_M2_PU_AI_CIV_DEF",
+        "CRUS_Starlifter_M2_PU_AI_CRIM",
+        "CRUS_Starlifter_M2_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starlifter_SCItem_Turret_Seat_Left",
+      "vehicleIds": [
+        "CRUS_Starlifter_A2",
+        "CRUS_Starlifter_A2_Collector_Military"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - CRUS_Starlifter_SCItem_Turret_Seat_Right",
+      "vehicleIds": [
+        "CRUS_Starlifter_A2",
+        "CRUS_Starlifter_A2_Collector_Military"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Buccaneer_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Buccaneer"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_Mattress_A",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_Mattress_B",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_SCItem_Seat_Copilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_SCItem_Seat_Engineering",
+      "vehicleIds": [
+        "DRAK_Caterpillar",
+        "DRAK_Caterpillar_Boarded",
+        "DRAK_Caterpillar_Pirate",
+        "DRAK_Caterpillar_PU_Hijacked",
+        "DRAK_Caterpillar_ShipShowdown"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_SCItem_Seat_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_SCItem_Seat_SupportLeft",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_SCItem_Seat_SupportRight",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Caterpillar_SCItem_Seat_TractorBeam",
+      "vehicleIds": [
+        "DRAK_Caterpillar",
+        "DRAK_Caterpillar_Boarded",
+        "DRAK_Caterpillar_Pirate",
+        "DRAK_Caterpillar_PU_Hijacked",
+        "DRAK_Caterpillar_ShipShowdown"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Clipper_Pilot_Seat",
+      "vehicleIds": [
+        "DRAK_Clipper",
+        "DRAK_Clipper_Collector_Military",
+        "DRAK_Clipper_PU_AI_CIV",
+        "DRAK_Clipper_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Command_Module_Bed_Lower_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Command_Module_Bed_Upper_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Command_Module_SCItem_Seat_Console",
+      "vehicleIds": [
+        "DRAK_Ironclad"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Command_Module_SCItem_Seat_Console_Turret",
+      "vehicleIds": [
+        "DRAK_Ironclad",
+        "DRAK_Ironclad_Assault"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Command_Module_SCItem_SeatDashboard_CoPilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Command_Module_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Corsair_Seat_Copilot",
+      "vehicleIds": [
+        "DRAK_Corsair",
+        "DRAK_Corsair_AI_Super",
+        "DRAK_Corsair_AI_Super_CIV",
+        "DRAK_Corsair_AI_Super_CRIM",
+        "DRAK_Corsair_Exec_Military",
+        "DRAK_Corsair_Exec_StealthIndustrial"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Corsair_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Corsair",
+        "DRAK_Corsair_AI_Super",
+        "DRAK_Corsair_AI_Super_CIV",
+        "DRAK_Corsair_AI_Super_CRIM",
+        "DRAK_Corsair_Exec_Military",
+        "DRAK_Corsair_Exec_StealthIndustrial"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_00",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_01",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_02",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_03",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_04",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_05",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_06",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_07",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_08",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_09",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_10",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Prison_Pod_11",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Blue_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Cutlass_Blue",
+        "DRAK_Cutlass_Blue_AI_Template",
+        "DRAK_Cutlass_Blue_BIS2950",
+        "DRAK_Cutlass_Blue_PU_AI_CIV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Red_Seat_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Seat_CoPilot",
+      "vehicleIds": [
+        "DRAK_Cutlass_Black",
+        "DRAK_Cutlass_Black_BIS2950",
+        "DRAK_Cutlass_Black_Exec_Military",
+        "DRAK_Cutlass_Black_Exec_Stealth",
+        "DRAK_Cutlass_Black_Mission_PIR_Package",
+        "DRAK_Cutlass_Black_ShipShowdown",
+        "DRAK_Cutlass_Blue",
+        "DRAK_Cutlass_Blue_AI_Template",
+        "DRAK_Cutlass_Blue_BIS2950",
+        "DRAK_Cutlass_Blue_PU_AI_CIV",
+        "DRAK_Cutlass_Red",
+        "DRAK_Cutlass_Red_AI_Template",
+        "DRAK_Cutlass_Red_BIS2950",
+        "DRAK_Cutlass_Red_PU_AI_CIV",
+        "DRAK_Cutlass_Red_PU_AI_CIV_DEF",
+        "DRAK_Cutlass_Steel",
+        "DRAK_Cutlass_Steel_PU_AI_CIV",
+        "DRAK_Cutlass_Steel_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutlass_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Cutlass_Black",
+        "DRAK_Cutlass_Black_BIS2950",
+        "DRAK_Cutlass_Black_Exec_Military",
+        "DRAK_Cutlass_Black_Exec_Stealth",
+        "DRAK_Cutlass_Black_Mission_PIR_Package",
+        "DRAK_Cutlass_Black_ShipShowdown",
+        "DRAK_Cutlass_Red",
+        "DRAK_Cutlass_Red_AI_Template",
+        "DRAK_Cutlass_Red_BIS2950",
+        "DRAK_Cutlass_Red_PU_AI_CIV",
+        "DRAK_Cutlass_Red_PU_AI_CIV_DEF",
+        "DRAK_Cutlass_Steel",
+        "DRAK_Cutlass_Steel_PU_AI_CIV",
+        "DRAK_Cutlass_Steel_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutter_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Cutter",
+        "DRAK_Cutter_PU_AI_CIV",
+        "DRAK_Cutter_PU_AI_CRIM",
+        "DRAK_Cutter_Rambler",
+        "DRAK_Cutter_Rambler_PU_AI_CIV",
+        "DRAK_Cutter_Rambler_PU_AI_CRIM",
+        "DRAK_Cutter_Rambler_Unmanned_Salvage",
+        "DRAK_Cutter_Scout",
+        "DRAK_Cutter_Scout_PU_AI_CIV",
+        "DRAK_Cutter_Scout_PU_AI_CRIM",
+        "DRAK_Cutter_Scout_Unmanned_Salvage",
+        "DRAK_Cutter_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Cutter_Scout_Radar_Console",
+      "vehicleIds": [
+        "DRAK_Cutter_Scout",
+        "DRAK_Cutter_Scout_PU_AI_CIV",
+        "DRAK_Cutter_Scout_PU_AI_CRIM",
+        "DRAK_Cutter_Scout_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Dragonfly_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "DRAK_Dragonfly",
+        "DRAK_Dragonfly_Pink",
+        "DRAK_Dragonfly_Unmanned_FF",
+        "DRAK_Dragonfly_Unmanned_Template",
+        "DRAK_Dragonfly_Yellow"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Dragonfly_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Dragonfly",
+        "DRAK_Dragonfly_Unmanned_FF",
+        "DRAK_Dragonfly_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Dragonfly_SCItem_Seat_Pilot_Pink",
+      "vehicleIds": [
+        "DRAK_Dragonfly_Pink"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Dragonfly_SCItem_Seat_Pilot_YellowJacket",
+      "vehicleIds": [
+        "DRAK_Dragonfly_Yellow"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Golem_OX_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Golem_OX",
+        "DRAK_Golem_OX_PU_AI_CIV",
+        "DRAK_Golem_OX_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Golem_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Golem",
+        "DRAK_Golem_BTALA",
+        "DRAK_Golem_Collector_Indust",
+        "DRAK_Golem_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Herald_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Herald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Herald_SCItem_Seat_Support",
+      "vehicleIds": [
+        "DRAK_Herald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Ironclad_SCItem_Nose_Tractor_Console",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Ironclad_SCItem_SeatDashboard_Operations",
+      "vehicleIds": [
+        "DRAK_Ironclad",
+        "DRAK_Ironclad_Assault"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Ironclad_SCItem_SeatDashboard_Operations_Assault_Rear",
+      "vehicleIds": [
+        "DRAK_Ironclad_Assault"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Ironclad_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "DRAK_Ironclad",
+        "DRAK_Ironclad_Assault"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Ironclad_SCItem_SeatDashboard_TractorBeam",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Mule_Seat_Driver",
+      "vehicleIds": [
+        "DRAK_Mule"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Pitbull_SeatDashboard",
+      "vehicleIds": [
+        "DRAK_Pitbull",
+        "DRAK_Pitbull_PU_AI_CIV",
+        "DRAK_Pitbull_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - DRAK_Vulture_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "DRAK_Vulture",
+        "DRAK_Vulture_PU_AI_CIV",
+        "DRAK_Vulture_PU_AI_CIV_DEF",
+        "DRAK_Vulture_PU_AI_CRIM",
+        "DRAK_Vulture_Teach",
+        "DRAK_Vulture_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_CoPilot",
+      "vehicleIds": [
+        "ESPR_Prowler"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_A",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_A_01",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_A_02",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_A_04",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_A_13",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_A_14",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_B",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_B_03",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_B_15",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_B_16",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_05",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_06",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_07",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_08",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_09",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_10",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_11",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Drop_C_12",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Seat_Pilot",
+      "vehicleIds": [
+        "ESPR_Prowler"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Utility_Seat_CoPilot",
+      "vehicleIds": [
+        "ESPR_Prowler_Utility",
+        "ESPR_Prowler_Utility_Collector_Indust",
+        "ESPR_Prowler_Utility_PU_AI_CIV",
+        "ESPR_Prowler_Utility_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Prowler_Utility_Seat_Pilot",
+      "vehicleIds": [
+        "ESPR_Prowler_Utility",
+        "ESPR_Prowler_Utility_Collector_Indust",
+        "ESPR_Prowler_Utility_PU_AI_CIV",
+        "ESPR_Prowler_Utility_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ESPR_Talon_Pilot_Seat",
+      "vehicleIds": [
+        "ESPR_Talon",
+        "ESPR_Talon_PU_AI_CIV",
+        "ESPR_Talon_PU_AI_CRIM",
+        "ESPR_Talon_Shrike",
+        "ESPR_Talon_Shrike_PU_AI_CIV",
+        "ESPR_Talon_Shrike_PU_AI_CRIM",
+        "ESPR_Talon_Shrike_Unmanned_Salvage",
+        "ESPR_Talon_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Railen_Seat_TractorLeft",
+      "vehicleIds": [
+        "GAMA_Railen",
+        "GAMA_Railen_PU_AI_CIV",
+        "GAMA_Railen_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Railen_Seat_TractorRight",
+      "vehicleIds": [
+        "GAMA_Railen",
+        "GAMA_Railen_PU_AI_CIV",
+        "GAMA_Railen_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Railen_SeatDash_CoPilot",
+      "vehicleIds": [
+        "GAMA_Railen",
+        "GAMA_Railen_PU_AI_CIV",
+        "GAMA_Railen_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Railen_SeatDash_Pilot",
+      "vehicleIds": [
+        "GAMA_Railen",
+        "GAMA_Railen_PU_AI_CIV",
+        "GAMA_Railen_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Syulen_Pilot_Seat",
+      "vehicleIds": [
+        "GAMA_Syulen",
+        "GAMA_Syulen_Exec_Military",
+        "GAMA_Syulen_Exec_Stealth",
+        "GAMA_Syulen_PU_AI_CIV",
+        "GAMA_Syulen_PU_AI_CRIM",
+        "GAMA_Syulen_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Tyilui_Seat_TurretLeft",
+      "vehicleIds": [
+        "GAMA_Tyilui",
+        "GAMA_Tyilui_PU_AI_CIV",
+        "GAMA_Tyilui_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Tyilui_Seat_TurretRight",
+      "vehicleIds": [
+        "GAMA_Tyilui",
+        "GAMA_Tyilui_PU_AI_CIV",
+        "GAMA_Tyilui_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Tyilui_SeatDash_CoPilot",
+      "vehicleIds": [
+        "GAMA_Tyilui",
+        "GAMA_Tyilui_PU_AI_CIV",
+        "GAMA_Tyilui_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GAMA_Tyilui_SeatDash_Pilot",
+      "vehicleIds": [
+        "GAMA_Tyilui",
+        "GAMA_Tyilui_PU_AI_CIV",
+        "GAMA_Tyilui_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GLSN_Basher_Seat_Pilot",
+      "vehicleIds": [
+        "GLSN_Basher",
+        "GLSN_Basher_PU_AI_CIV",
+        "GLSN_Basher_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GLSN_Shiv_Seat_CoPilot",
+      "vehicleIds": [
+        "GLSN_Shiv",
+        "GLSN_Shiv_AI_CIV",
+        "GLSN_Shiv_AI_CRIM",
+        "GLSN_Shiv_AI_Template",
+        "GLSN_Shiv_TEMP_CosA",
+        "GLSN_Shiv_TEMP_CosB",
+        "GLSN_Shiv_TEMP_CosC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GLSN_Shiv_Seat_Pilot",
+      "vehicleIds": [
+        "GLSN_Shiv",
+        "GLSN_Shiv_AI_CIV",
+        "GLSN_Shiv_AI_CRIM",
+        "GLSN_Shiv_AI_Template",
+        "GLSN_Shiv_TEMP_CosA",
+        "GLSN_Shiv_TEMP_CosB",
+        "GLSN_Shiv_TEMP_CosC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_Greycat_SCItem_Seat_Driver",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_Greycat_SCItem_Seat_Passenger",
+      "vehicleIds": [
+        "GRIN_PTV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_MDC_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "GRIN_MDC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_MTC_SCItem_SeatDashboard_Support",
+      "vehicleIds": [
+        "GRIN_MTC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_MXC_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "GRIN_MTC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_PTV_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "GRIN_PTV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_ROC_DS_Seat_Driver",
+      "vehicleIds": [
+        "GRIN_ROC_DS"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_ROC_Seat_Driver",
+      "vehicleIds": [
+        "GRIN_ROC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_STV_Seat_Driver",
+      "vehicleIds": [
+        "GRIN_STV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_STV_Seat_Passenger",
+      "vehicleIds": [
+        "GRIN_STV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_UTV_Seat_Driver",
+      "vehicleIds": [
+        "GRIN_UTV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - GRIN_UTV_Seat_Passenger",
+      "vehicleIds": [
+        "GRIN_UTV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - Krig_l21_wolf_Seat_Pilot",
+      "vehicleIds": [
+        "KRIG_L21_Wolf",
+        "KRIG_L21_Wolf_Collector_Military",
+        "KRIG_L21_Wolf_Collector_Stealth",
+        "KRIG_L21_Wolf_PU_AI_CIV",
+        "KRIG_L21_Wolf_PU_AI_CRIM",
+        "KRIG_L22_AlphaWolf",
+        "KRIG_L22_AlphaWolf_Collector_Military",
+        "KRIG_L22_AlphaWolf_PU_AI_CIV",
+        "KRIG_L22_AlphaWolf_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - KRIG_P52_Merlin_Seat_Pilot",
+      "vehicleIds": [
+        "KRIG_P52_Merlin"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - KRIG_P72_Archimedes_Seat_Pilot",
+      "vehicleIds": [
+        "KRIG_P72_Archimedes",
+        "KRIG_P72_Archimedes_Emerald",
+        "KRIG_P72_Archimedes_PU_AI_CIV",
+        "KRIG_P72_Archimedes_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - KRIG_S65_Stingray_Seat_Pilot",
+      "vehicleIds": [
+        "KRIG_S65_Stingray",
+        "KRIG_S65_Stingray_BALLISTIC"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - Levski_SCItem_Seat_ATC",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Fortune_SCItem_Seat",
+      "vehicleIds": [
+        "MISC_Fortune",
+        "MISC_Fortune_Collector_Industrial",
+        "MISC_Fortune_PU_AI_CIV",
+        "MISC_Fortune_PU_AI_CRIM",
+        "MISC_Fortune_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Esc_Pod_Lower_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Esc_Pod_Lower_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Esc_Pod_Upper_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Esc_Pod_Upper_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Passenger_Left",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Passenger_Right",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_Base_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_MAX_Derelict_SCItem_Seat_Esc_Pod_Lower_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_MAX_Derelict_SCItem_Seat_Esc_Pod_Lower_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_MAX_Derelict_SCItem_Seat_Esc_Pod_Upper_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_MAX_Derelict_SCItem_Seat_Esc_Pod_Upper_Right",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_SCItem_Seat_Bed_Lower_Left",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_SCItem_Seat_Bed_Lower_Right",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_SCItem_Seat_Bed_Upper_Left",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Freelancer_SCItem_Seat_Bed_Upper_Right",
+      "vehicleIds": [
+        "MISC_Freelancer",
+        "MISC_Freelancer_DUR",
+        "MISC_Freelancer_MAX",
+        "MISC_Freelancer_MIS",
+        "MISC_Freelancer_PU_AI_CIV",
+        "MISC_Freelancer_PU_AI_CIV_DEF",
+        "MISC_Freelancer_PU_AI_CRIM",
+        "MISC_Freelancer_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Fury_Blastshield_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "MISC_Fury_Miru",
+        "MISC_Fury_Miru_PU_AI_CIV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Fury_LX_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "MISC_Fury_LX"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Fury_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "MISC_Fury",
+        "MISC_Fury_AI_Super",
+        "MISC_Fury_AI_Super_CIV",
+        "MISC_Fury_AI_Super_Crim",
+        "MISC_Fury_PU_AI_CIV"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_A_Seat_Pilot",
+      "vehicleIds": [
+        "MISC_Hull_A",
+        "MISC_Hull_A_PU_AI_CIV",
+        "MISC_Hull_A_PU_AI_CIV_DEF",
+        "MISC_Hull_A_PU_AI_CRIM",
+        "MISC_Hull_A_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_B_Copilot_Seat",
+      "vehicleIds": [
+        "MISC_Hull_B",
+        "MISC_Hull_B_PU_AI_CIV",
+        "MISC_Hull_B_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_B_Pilot_Seat",
+      "vehicleIds": [
+        "MISC_Hull_B",
+        "MISC_Hull_B_PU_AI_CIV",
+        "MISC_Hull_B_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_C_Engineer_Console",
+      "vehicleIds": [
+        "MISC_Hull_C",
+        "MISC_Hull_C_Unmanned",
+        "MISC_Hull_C_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_C_SCItem_Copilot_Seat",
+      "vehicleIds": [
+        "MISC_Hull_C",
+        "MISC_Hull_C_Unmanned",
+        "MISC_Hull_C_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_C_SCItem_Pilot_Seat",
+      "vehicleIds": [
+        "MISC_Hull_C",
+        "MISC_Hull_C_Unmanned",
+        "MISC_Hull_C_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_C_SCItem_Seat_Captain",
+      "vehicleIds": [
+        "MISC_Hull_C",
+        "MISC_Hull_C_Unmanned",
+        "MISC_Hull_C_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Hull_C_SCItem_Tractor_Seat",
+      "vehicleIds": [
+        "MISC_Hull_C",
+        "MISC_Hull_C_Unmanned",
+        "MISC_Hull_C_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Prospector_SCItem_Seat",
+      "vehicleIds": [
+        "MISC_Prospector",
+        "MISC_Prospector_BTALA",
+        "MISC_Prospector_Collector_Indust"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Razor_Seat_Pilot",
+      "vehicleIds": [
+        "MISC_Razor",
+        "MISC_Razor_EX",
+        "MISC_Razor_EX_PU_AI_CIV",
+        "MISC_Razor_EX_PU_AI_CRIM",
+        "MISC_Razor_LX",
+        "MISC_Razor_LX_PU_AI_CIV",
+        "MISC_Razor_LX_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Reliant_Mako_Seat_Station_Rear",
+      "vehicleIds": [
+        "MISC_Reliant_Mako",
+        "MISC_Reliant_Mako_AI_Template",
+        "MISC_Reliant_Mako_PU_AI_CIV",
+        "MISC_Reliant_Mako_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Reliant_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "MISC_Reliant",
+        "MISC_Reliant_Mako",
+        "MISC_Reliant_Mako_AI_Template",
+        "MISC_Reliant_Mako_PU_AI_CIV",
+        "MISC_Reliant_Mako_PU_AI_CRIM",
+        "MISC_Reliant_Sen",
+        "MISC_Reliant_Sen_AI_Template",
+        "MISC_Reliant_Sen_PU_AI_CIV",
+        "MISC_Reliant_Sen_PU_AI_CRIM",
+        "MISC_Reliant_Tana",
+        "MISC_Reliant_Tana_AI_Template",
+        "MISC_Reliant_Tana_PU_AI_CIV",
+        "MISC_Reliant_Tana_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Reliant_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "MISC_Reliant",
+        "MISC_Reliant_Mako",
+        "MISC_Reliant_Mako_AI_Template",
+        "MISC_Reliant_Mako_PU_AI_CIV",
+        "MISC_Reliant_Mako_PU_AI_CRIM",
+        "MISC_Reliant_Sen",
+        "MISC_Reliant_Sen_AI_Template",
+        "MISC_Reliant_Sen_PU_AI_CIV",
+        "MISC_Reliant_Sen_PU_AI_CRIM",
+        "MISC_Reliant_Tana",
+        "MISC_Reliant_Tana_AI_Template",
+        "MISC_Reliant_Tana_PU_AI_CIV",
+        "MISC_Reliant_Tana_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Reliant_Seat_Bed_Lower",
+      "vehicleIds": [
+        "MISC_Reliant_Mako",
+        "MISC_Reliant_Mako_AI_Template",
+        "MISC_Reliant_Mako_PU_AI_CIV",
+        "MISC_Reliant_Mako_PU_AI_CRIM",
+        "MISC_Reliant_Sen",
+        "MISC_Reliant_Sen_AI_Template",
+        "MISC_Reliant_Sen_PU_AI_CIV",
+        "MISC_Reliant_Sen_PU_AI_CRIM",
+        "MISC_Reliant_Tana",
+        "MISC_Reliant_Tana_AI_Template",
+        "MISC_Reliant_Tana_PU_AI_CIV",
+        "MISC_Reliant_Tana_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Reliant_Seat_Bed_Upper",
+      "vehicleIds": [
+        "MISC_Reliant_Mako",
+        "MISC_Reliant_Mako_AI_Template",
+        "MISC_Reliant_Mako_PU_AI_CIV",
+        "MISC_Reliant_Mako_PU_AI_CRIM",
+        "MISC_Reliant_Sen",
+        "MISC_Reliant_Sen_AI_Template",
+        "MISC_Reliant_Sen_PU_AI_CIV",
+        "MISC_Reliant_Sen_PU_AI_CRIM",
+        "MISC_Reliant_Tana",
+        "MISC_Reliant_Tana_AI_Template",
+        "MISC_Reliant_Tana_PU_AI_CIV",
+        "MISC_Reliant_Tana_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Reliant_Sen_Seat_Station_Rear",
+      "vehicleIds": [
+        "MISC_Reliant_Sen",
+        "MISC_Reliant_Sen_AI_Template",
+        "MISC_Reliant_Sen_PU_AI_CIV",
+        "MISC_Reliant_Sen_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_Gemini_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "MISC_Starfarer_Gemini"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_Gemini_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "MISC_Starfarer_Gemini"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_SCItem_Seat_Captain",
+      "vehicleIds": [
+        "MISC_Starfarer",
+        "MISC_Starfarer_Gemini",
+        "MISC_Starfarer_NoInterior",
+        "MISC_Starfarer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "MISC_Starfarer",
+        "MISC_Starfarer_NoInterior",
+        "MISC_Starfarer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "MISC_Starfarer",
+        "MISC_Starfarer_NoInterior",
+        "MISC_Starfarer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_SCItem_Seat_Sup_Left",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starfarer_SCItem_Seat_Sup_Right",
+      "vehicleIds": [
+        "MISC_Starfarer",
+        "MISC_Starfarer_Gemini",
+        "MISC_Starfarer_NoInterior",
+        "MISC_Starfarer_Teach"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starlancer_Copilot_Seat",
+      "vehicleIds": [
+        "MISC_Starlancer_Max",
+        "MISC_Starlancer_Max_Collector_Indust",
+        "MISC_Starlancer_Max_PU_AI_CIV",
+        "MISC_Starlancer_Max_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starlancer_Copilot_Seat_TAC",
+      "vehicleIds": [
+        "MISC_Starlancer_TAC",
+        "MISC_Starlancer_TAC_Collector_Military",
+        "MISC_Starlancer_TAC_PU_AI_CIV",
+        "MISC_Starlancer_TAC_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starlancer_Drone_Seat",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starlancer_Pilot_Seat",
+      "vehicleIds": [
+        "MISC_Starlancer_Max",
+        "MISC_Starlancer_Max_Collector_Indust",
+        "MISC_Starlancer_Max_PU_AI_CIV",
+        "MISC_Starlancer_Max_PU_AI_CRIM",
+        "MISC_Starlancer_TAC",
+        "MISC_Starlancer_TAC_Collector_Military",
+        "MISC_Starlancer_TAC_PU_AI_CIV",
+        "MISC_Starlancer_TAC_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starlancer_Support_Seat",
+      "vehicleIds": [
+        "MISC_Starlancer_Max",
+        "MISC_Starlancer_Max_Collector_Indust",
+        "MISC_Starlancer_Max_PU_AI_CIV",
+        "MISC_Starlancer_Max_PU_AI_CRIM",
+        "MISC_Starlancer_TAC",
+        "MISC_Starlancer_TAC_Collector_Military",
+        "MISC_Starlancer_TAC_PU_AI_CIV",
+        "MISC_Starlancer_TAC_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MISC_Starlite_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "MISC_Starlite",
+        "MISC_Starlite_PU_AI_CIV",
+        "MISC_Starlite_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MRAI_Guardian_MX_SeatDashboard",
+      "vehicleIds": [
+        "MRAI_Guardian_MX",
+        "MRAI_Guardian_MX_AI_CIV",
+        "MRAI_Guardian_MX_AI_CRIM",
+        "MRAI_Guardian_MX_Collector_Military"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MRAI_Guardian_QI_SeatDashboard",
+      "vehicleIds": [
+        "MRAI_Guardian_QI",
+        "MRAI_Guardian_QI_AI_Template",
+        "MRAI_Guardian_QI_Collector_Indust",
+        "MRAI_Guardian_QI_PU_AI_CIV",
+        "MRAI_Guardian_QI_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MRAI_Guardian_SeatDashboard",
+      "vehicleIds": [
+        "MRAI_Guardian",
+        "MRAI_Guardian_AI_Template",
+        "MRAI_Guardian_Military",
+        "MRAI_Guardian_PU_AI_CIV",
+        "MRAI_Guardian_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - MRAI_Pulse_Seat_Pilot",
+      "vehicleIds": [
+        "MRAI_Pulse",
+        "MRAI_Pulse_Collector_Civ",
+        "MRAI_Pulse_LX"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - OperatorSeat_Console_Sitting_Angled_ATCSeat_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - OperatorSeat_Console_Sitting_Angled_BridgeSeat_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - OperatorSeat_Console_Sitting_Angled_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - OperatorSeat_Console_Sitting_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Orbital_Sentry_SCItem_Seat_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_100i_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_100i",
+        "ORIG_100i_PU_AI_CIV",
+        "ORIG_100i_PU_AI_CRIM",
+        "ORIG_100i_Unmanned_Salvage",
+        "ORIG_125a",
+        "ORIG_125a_PU_AI_CIV",
+        "ORIG_125a_PU_AI_CRIM",
+        "ORIG_135c",
+        "ORIG_135c_PU_AI_CIV",
+        "ORIG_135c_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_100i_Seat_Bed",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_300i_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_300i",
+        "ORIG_325a"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_300i_Seat_Bed",
+      "vehicleIds": [
+        "ORIG_300i",
+        "ORIG_315p"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_315p_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_315p"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_325a_Seat_Bed",
+      "vehicleIds": [
+        "ORIG_325a"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_350r_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_350r"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_400i_SCItem_Seat_Captain",
+      "vehicleIds": [
+        "ORIG_400i",
+        "ORIG_400i_AI_Template_ShipBoarded",
+        "ORIG_400i_PU_AI_CIV",
+        "ORIG_400i_PU_AI_CIV_DEF",
+        "ORIG_400i_PU_AI_CRIM",
+        "ORIG_400i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_400i_Seat_Bridge_Left",
+      "vehicleIds": [
+        "ORIG_400i",
+        "ORIG_400i_AI_Template_ShipBoarded",
+        "ORIG_400i_PU_AI_CIV",
+        "ORIG_400i_PU_AI_CIV_DEF",
+        "ORIG_400i_PU_AI_CRIM",
+        "ORIG_400i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_400i_Seat_Bridge_Right",
+      "vehicleIds": [
+        "ORIG_400i",
+        "ORIG_400i_AI_Template_ShipBoarded",
+        "ORIG_400i_PU_AI_CIV",
+        "ORIG_400i_PU_AI_CIV_DEF",
+        "ORIG_400i_PU_AI_CRIM",
+        "ORIG_400i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_400i_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_400i",
+        "ORIG_400i_AI_Template_ShipBoarded",
+        "ORIG_400i_PU_AI_CIV",
+        "ORIG_400i_PU_AI_CIV_DEF",
+        "ORIG_400i_PU_AI_CRIM",
+        "ORIG_400i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_600i_Seat_Bridge_Left",
+      "vehicleIds": [
+        "ORIG_600i",
+        "ORIG_600i_AI_Template_ShipBoarded",
+        "ORIG_600i_BIS2951",
+        "ORIG_600i_Executive_Edition",
+        "ORIG_600i_PU_AI_CIV",
+        "ORIG_600i_PU_AI_CIV_DEF",
+        "ORIG_600i_PU_AI_CRIM",
+        "ORIG_600i_Touring",
+        "ORIG_600i_Unmanned",
+        "ORIG_600i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_600i_Seat_Bridge_Right",
+      "vehicleIds": [
+        "ORIG_600i",
+        "ORIG_600i_AI_Template_ShipBoarded",
+        "ORIG_600i_BIS2951",
+        "ORIG_600i_Executive_Edition",
+        "ORIG_600i_PU_AI_CIV",
+        "ORIG_600i_PU_AI_CIV_DEF",
+        "ORIG_600i_PU_AI_CRIM",
+        "ORIG_600i_Touring",
+        "ORIG_600i_Unmanned",
+        "ORIG_600i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_600i_Seat_Expl_Module_Left",
+      "vehicleIds": [
+        "ORIG_600i",
+        "ORIG_600i_AI_Template_ShipBoarded",
+        "ORIG_600i_BIS2951",
+        "ORIG_600i_Executive_Edition",
+        "ORIG_600i_PU_AI_CIV",
+        "ORIG_600i_PU_AI_CIV_DEF",
+        "ORIG_600i_PU_AI_CRIM",
+        "ORIG_600i_Unmanned",
+        "ORIG_600i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_600i_Seat_Expl_Module_Right",
+      "vehicleIds": [
+        "ORIG_600i",
+        "ORIG_600i_AI_Template_ShipBoarded",
+        "ORIG_600i_BIS2951",
+        "ORIG_600i_Executive_Edition",
+        "ORIG_600i_PU_AI_CIV",
+        "ORIG_600i_PU_AI_CIV_DEF",
+        "ORIG_600i_PU_AI_CRIM",
+        "ORIG_600i_Unmanned",
+        "ORIG_600i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_600i_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_600i",
+        "ORIG_600i_AI_Template_ShipBoarded",
+        "ORIG_600i_BIS2951",
+        "ORIG_600i_Executive_Edition",
+        "ORIG_600i_PU_AI_CIV",
+        "ORIG_600i_PU_AI_CIV_DEF",
+        "ORIG_600i_PU_AI_CRIM",
+        "ORIG_600i_Touring",
+        "ORIG_600i_Unmanned",
+        "ORIG_600i_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_85X_SCItem_Seat_Copilot",
+      "vehicleIds": [
+        "ORIG_85X"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_85X_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_85X"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_890J_Seat_BattleBridge_Left",
+      "vehicleIds": [
+        "ORIG_890Jump",
+        "ORIG_890Jump_AI_CIV_ShipBoarded",
+        "ORIG_890Jump_AI_Template_ShipBoarded",
+        "ORIG_890Jump_Drug_01",
+        "ORIG_890Jump_Hijacked",
+        "ORIG_890Jump_Hijacked_Pisces",
+        "ORIG_890Jump_PU_AI_CIV",
+        "ORIG_890Jump_PU_AI_CIV_DEF",
+        "ORIG_890Jump_PU_AI_CRIM",
+        "ORIG_890Jump_Unmanned",
+        "ORIG_890Jump_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_890J_Seat_BattleBridge_Middle",
+      "vehicleIds": [
+        "ORIG_890Jump",
+        "ORIG_890Jump_AI_CIV_ShipBoarded",
+        "ORIG_890Jump_AI_Template_ShipBoarded",
+        "ORIG_890Jump_Drug_01",
+        "ORIG_890Jump_Hijacked",
+        "ORIG_890Jump_Hijacked_Pisces",
+        "ORIG_890Jump_PU_AI_CIV",
+        "ORIG_890Jump_PU_AI_CIV_DEF",
+        "ORIG_890Jump_PU_AI_CRIM",
+        "ORIG_890Jump_Unmanned",
+        "ORIG_890Jump_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_890J_Seat_BattleBridge_Right",
+      "vehicleIds": [
+        "ORIG_890Jump",
+        "ORIG_890Jump_AI_CIV_ShipBoarded",
+        "ORIG_890Jump_AI_Template_ShipBoarded",
+        "ORIG_890Jump_Drug_01",
+        "ORIG_890Jump_Hijacked",
+        "ORIG_890Jump_Hijacked_Pisces",
+        "ORIG_890Jump_PU_AI_CIV",
+        "ORIG_890Jump_PU_AI_CIV_DEF",
+        "ORIG_890Jump_PU_AI_CRIM",
+        "ORIG_890Jump_Unmanned",
+        "ORIG_890Jump_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_890J_Seat_Bridge_Left",
+      "vehicleIds": [
+        "ORIG_890Jump",
+        "ORIG_890Jump_AI_CIV_ShipBoarded",
+        "ORIG_890Jump_AI_Template_ShipBoarded",
+        "ORIG_890Jump_Drug_01",
+        "ORIG_890Jump_Hijacked",
+        "ORIG_890Jump_Hijacked_Pisces",
+        "ORIG_890Jump_PU_AI_CIV",
+        "ORIG_890Jump_PU_AI_CIV_DEF",
+        "ORIG_890Jump_PU_AI_CRIM",
+        "ORIG_890Jump_Unmanned",
+        "ORIG_890Jump_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_890J_Seat_Bridge_Right",
+      "vehicleIds": [
+        "ORIG_890Jump",
+        "ORIG_890Jump_AI_CIV_ShipBoarded",
+        "ORIG_890Jump_AI_Template_ShipBoarded",
+        "ORIG_890Jump_Drug_01",
+        "ORIG_890Jump_Hijacked",
+        "ORIG_890Jump_Hijacked_Pisces",
+        "ORIG_890Jump_PU_AI_CIV",
+        "ORIG_890Jump_PU_AI_CIV_DEF",
+        "ORIG_890Jump_PU_AI_CRIM",
+        "ORIG_890Jump_Unmanned",
+        "ORIG_890Jump_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_890J_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_890Jump",
+        "ORIG_890Jump_AI_CIV_ShipBoarded",
+        "ORIG_890Jump_AI_Template_ShipBoarded",
+        "ORIG_890Jump_Drug_01",
+        "ORIG_890Jump_Hijacked",
+        "ORIG_890Jump_Hijacked_Pisces",
+        "ORIG_890Jump_PU_AI_CIV",
+        "ORIG_890Jump_PU_AI_CIV_DEF",
+        "ORIG_890Jump_PU_AI_CRIM",
+        "ORIG_890Jump_Unmanned",
+        "ORIG_890Jump_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_f",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_g",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_h",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_i",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_j",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_m",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_n",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_3_o",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_a",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_c",
+      "vehicleIds": [
+        "ORIG_325a",
+        "ORIG_350r"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_d",
+      "vehicleIds": [
+        "ORIG_300i",
+        "ORIG_315p"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_g",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_h",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_k",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_l",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - orig_bedding_duvet_4_p",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_m50_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_m50"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - Orig_m80_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_m80",
+        "ORIG_m80_PU_AI_CIV",
+        "ORIG_m80_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - ORIG_X1_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "ORIG_X1",
+        "ORIG_X1_Force",
+        "ORIG_X1_Velocity"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - PowerSuit_SCItem_Seat_Driver",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Apollo_SCItem_SeatDashboard_Co_Pilot",
+      "vehicleIds": [
+        "RSI_Apollo_Medivac",
+        "RSI_Apollo_Triage",
+        "RSI_Apollo_Triage_Collector_Stealth"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Apollo_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "RSI_Apollo_Medivac",
+        "RSI_Apollo_Triage",
+        "RSI_Apollo_Triage_Collector_Stealth"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Aurora_LX_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Aurora_GS_LX",
+        "RSI_Aurora_LX_PU_AI_CIV",
+        "RSI_Aurora_LX_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Aurora_Mk2_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "RSI_Aurora_Mk2",
+        "RSI_Aurora_Mk2_MissileModule_TEMP",
+        "RSI_Aurora_Mk2_PU_AI_CIV",
+        "RSI_Aurora_Mk2_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Aurora_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Aurora_ES_PU_AI_CIV",
+        "RSI_Aurora_ES_PU_AI_CRIM",
+        "RSI_Aurora_GS_CL",
+        "RSI_Aurora_GS_ES",
+        "RSI_Aurora_GS_LN",
+        "RSI_Aurora_GS_MR",
+        "RSI_Aurora_LN_EA_AI_PIR",
+        "RSI_Aurora_LN_PU_AI_CIV",
+        "RSI_Aurora_LN_PU_AI_CRIM",
+        "RSI_Aurora_LN_PU_AI_NT",
+        "RSI_Aurora_MR_PU_AI_CIV",
+        "RSI_Aurora_MR_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Aurora_SE_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Aurora_GS_SE"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Captain",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Comms",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_CoPilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Generic",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Pilot",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Remote_Turret_Phalanx",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Science",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Security",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Seat_Tactical",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Turret_Seat_Single",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Bengal_SCItem_Turret_Seat_Template",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_SCItem_Seat_CoPilot_Left",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_SCItem_Seat_CoPilot_Right",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_Seat_EscapePod_LeftLower",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_Seat_EscapePod_LeftUpper",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_Seat_EscapePod_RightLower",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_Phoenix_Seat_EscapePod_RightUpper",
+      "vehicleIds": [
+        "RSI_Constellation_Phoenix",
+        "RSI_Constellation_Phoenix_Emerald"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_Archimedes",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_CoPilot_Left",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_CoPilot_Left_MFD",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_CoPilot_Right",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_CoPilot_Right_MFD",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_EscapePod_LeftLower",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_EscapePod_LeftUpper",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_EscapePod_RightLower",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_EscapePod_RightUpper",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_Merlin",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Constellation_Andromeda",
+        "RSI_Constellation_Aquila",
+        "RSI_Constellation_Taurus",
+        "RSI_Constellation_Taurus_Military",
+        "RSI_Constellation_Taurus_Unmanned_Salvage",
+        "RSI_Constellation_Taurus_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Constellation_SCItem_Seat_Pilot_MFD",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Hermes_SeatDashboard_CoPilot",
+      "vehicleIds": [
+        "RSI_Hermes",
+        "RSI_Hermes_AI_CIV",
+        "RSI_Hermes_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Hermes_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "RSI_Hermes",
+        "RSI_Hermes_AI_CIV",
+        "RSI_Hermes_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Hermes_Tractor_Station",
+      "vehicleIds": [
+        "RSI_Hermes",
+        "RSI_Hermes_AI_CIV",
+        "RSI_Hermes_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Lynx_SCItem_SeatDashboard_Gunner",
+      "vehicleIds": [
+        "RSI_Lynx"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Lynx_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "RSI_Lynx"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Mantis_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Mantis",
+        "RSI_Mantis_Bomb_Test"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Meteor_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "RSI_Meteor",
+        "RSI_Meteor_Collector_Military",
+        "RSI_Meteor_Collector_Stealth",
+        "RSI_Meteor_PU_AI_CIV",
+        "RSI_Meteor_PU_AI_CRIM",
+        "RSI_Meteor_TEMP_LaserRepeater"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Perseus_CoPilot_SeatDashboard",
+      "vehicleIds": [
+        "RSI_Perseus",
+        "RSI_Perseus_AI_Super",
+        "RSI_Perseus_AI_Super_Civ",
+        "RSI_Perseus_AI_Super_Crim",
+        "RSI_Perseus_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Perseus_Gunner_SeatDashboard",
+      "vehicleIds": [
+        "RSI_Perseus",
+        "RSI_Perseus_AI_Super",
+        "RSI_Perseus_AI_Super_Civ",
+        "RSI_Perseus_AI_Super_Crim",
+        "RSI_Perseus_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Perseus_Pilot_SeatDashboard",
+      "vehicleIds": [
+        "RSI_Perseus",
+        "RSI_Perseus_AI_Super",
+        "RSI_Perseus_AI_Super_Civ",
+        "RSI_Perseus_AI_Super_Crim",
+        "RSI_Perseus_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Perseus_Torpedo_Console",
+      "vehicleIds": [
+        "RSI_Perseus",
+        "RSI_Perseus_AI_Super",
+        "RSI_Perseus_AI_Super_Civ",
+        "RSI_Perseus_AI_Super_Crim",
+        "RSI_Perseus_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_CoPilot_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_Pilot_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_Seat_Bridge",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_Seat_Bridge_MissileOnly",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_Seat_Captain",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_Torpedo_Console",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Polaris_Tractor_Console",
+      "vehicleIds": [
+        "RSI_Polaris",
+        "RSI_Polaris_AI_Super",
+        "RSI_Polaris_AI_Super_CIV",
+        "RSI_Polaris_AI_Super_Crim",
+        "RSI_Polaris_AI_Template",
+        "RSI_Polaris_Collector_Military",
+        "RSI_Polaris_PU_AI_CIV",
+        "RSI_Polaris_PU_AI_CIV_DEF",
+        "RSI_Polaris_PU_AI_CRIM",
+        "RSI_Polaris_PU_AI_FF",
+        "RSI_Polaris_PU_AI_FF_Boyd"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Salvation_SCItem_SeatDashboard",
+      "vehicleIds": [
+        "RSI_Salvation",
+        "RSI_Salvation_PU_AI_CIV",
+        "RSI_Salvation_PU_AI_CRIM"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Scorpius_Antares_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "RSI_Scorpius_Antares",
+        "RSI_Scorpius_Antares_PU_AI_CIV",
+        "RSI_Scorpius_Antares_PU_AI_CRIM",
+        "RSI_Scorpius_Antares_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Scorpius_SCItem_Seat_Gunner",
+      "vehicleIds": [
+        "RSI_Scorpius",
+        "RSI_Scorpius_PU_AI_CIV",
+        "RSI_Scorpius_PU_AI_CRIM",
+        "RSI_Scorpius_PU_AI_CRIM_Distortion",
+        "RSI_Scorpius_PU_AI_UEE",
+        "RSI_Scorpius_Stealth",
+        "RSI_Scorpius_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Scorpius_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Scorpius",
+        "RSI_Scorpius_Antares",
+        "RSI_Scorpius_Antares_PU_AI_CIV",
+        "RSI_Scorpius_Antares_PU_AI_CRIM",
+        "RSI_Scorpius_Antares_Unmanned_Salvage",
+        "RSI_Scorpius_PU_AI_CIV",
+        "RSI_Scorpius_PU_AI_CRIM",
+        "RSI_Scorpius_PU_AI_CRIM_Distortion",
+        "RSI_Scorpius_PU_AI_UEE",
+        "RSI_Scorpius_Stealth",
+        "RSI_Scorpius_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Ursa_Rover_SCItem_Seat_CoPilot",
+      "vehicleIds": [
+        "RSI_Ursa_Medivac",
+        "RSI_Ursa_Medivac_Stealth",
+        "RSI_Ursa_Rover",
+        "RSI_Ursa_Rover_Emerald",
+        "RSI_Ursa_Rover_Prison",
+        "RSI_Ursa_Rover_Unmanned_FF",
+        "RSI_Ursa_Rover_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Ursa_Rover_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "RSI_Ursa_Medivac",
+        "RSI_Ursa_Medivac_Stealth",
+        "RSI_Ursa_Rover",
+        "RSI_Ursa_Rover_Emerald",
+        "RSI_Ursa_Rover_Prison",
+        "RSI_Ursa_Rover_Unmanned_FF",
+        "RSI_Ursa_Rover_Unmanned_Template"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_Escpod_Bedding_1",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_SCItem_Seat_Bed_Lower_Left",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_SCItem_Seat_Bed_Lower_Right",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_SCItem_Seat_Bed_Upper_Right",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_SCItem_SeatDashboard_CoPilot",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_SCItem_SeatDashboard_Gunner",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - RSI_Zeus_SCItem_SeatDashboard_Pilot",
+      "vehicleIds": [
+        "RSI_Zeus_CL",
+        "RSI_Zeus_CL_AI_Template",
+        "RSI_Zeus_CL_Collector_Indust",
+        "RSI_Zeus_CL_PU_AI_CIV",
+        "RSI_Zeus_CL_PU_AI_CIV_DEF",
+        "RSI_Zeus_CL_PU_AI_CRIM",
+        "RSI_Zeus_ES",
+        "RSI_Zeus_ES_AI_Template",
+        "RSI_Zeus_ES_Collector_Indust",
+        "RSI_Zeus_ES_PU_AI_CIV",
+        "RSI_Zeus_ES_PU_AI_CRIM",
+        "RSI_Zeus_ES_Unmanned",
+        "RSI_Zeus_ES_Unmanned_Salvage"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - Ship_Bedding_TEMPLATE",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - Stool",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Cyclone_SCItem_Seat_Driver",
+      "vehicleIds": [
+        "TMBL_Cyclone",
+        "TMBL_Cyclone_MT",
+        "TMBL_Cyclone_RC",
+        "TMBL_Cyclone_RN",
+        "TMBL_Cyclone_TR"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Cyclone_SCItem_Seat_Driver_AA",
+      "vehicleIds": [
+        "TMBL_Cyclone_AA"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Cyclone_SCItem_Seat_Passenger",
+      "vehicleIds": [
+        "TMBL_Cyclone",
+        "TMBL_Cyclone_AA",
+        "TMBL_Cyclone_MT",
+        "TMBL_Cyclone_RC",
+        "TMBL_Cyclone_RN",
+        "TMBL_Cyclone_TR"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Nova_SCItem_Seat_CoDriver",
+      "vehicleIds": [
+        "TMBL_Nova"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Nova_SCItem_Seat_Driver",
+      "vehicleIds": [
+        "TMBL_Nova"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Nova_SCItem_Seat_Gunner",
+      "vehicleIds": [
+        "TMBL_Nova"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Storm_AA_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "TMBL_Storm_AA"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - TMBL_Storm_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "TMBL_Storm"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - VNCL_Blade_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "VNCL_Blade"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - VNCL_Mauler_Gunner_Seat",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - VNCL_Mauler_Pilot_Seat",
+      "vehicleIds": []
+    },
+    {
+      "groupId": "Seat (SCItem) - VNCL_Scythe_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "VNCL_Glaive",
+        "VNCL_Scythe"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - VNCL_Stinger_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "VNCL_Stinger",
+        "VNCL_Stinger_AI_Super",
+        "VNCL_Stinger_AI_Super_CIV",
+        "VNCL_Stinger_AI_Super_Crim",
+        "VNCL_Stinger_AI_Super_Vandull",
+        "VNCL_Stinger_PU_AI_DefendShip",
+        "VNCL_Stinger_PU_AI_VAN"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - XIAN_Nox_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "XIAN_Nox",
+        "XIAN_Nox_Collector_Mod",
+        "XIAN_Nox_Kue"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - XIAN_Scout_SCItem_Seat_Pilot",
+      "vehicleIds": [
+        "XIAN_Scout"
+      ]
+    },
+    {
+      "groupId": "Seat (SCItem) - XNAA_SanTokYai_Seat_Pilot",
+      "vehicleIds": [
+        "XNAA_SanTokYai",
+        "XNAA_SanTokYai_AI_DefendShip",
+        "XNAA_SanTokYai_PU_AI_CIV",
+        "XNAA_SanTokYai_PU_AI_CRIM",
+        "XNAA_SanTokYai_Unmanned_Salvage"
+      ]
+    }
+  ]
+}

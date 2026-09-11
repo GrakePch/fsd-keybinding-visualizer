@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build --mode development",
     "update:data": "node scripts/update-data-json.mjs",
+    "update:seats": "node scripts/update-seats-data.mjs",
     "update:keybinding-i18n": "node scripts/update-keybinding-i18n.mjs",
     "lint": "eslint .",
     "test": "vitest run",

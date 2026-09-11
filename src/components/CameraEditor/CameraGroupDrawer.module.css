@@ -25,6 +25,22 @@
   text-transform: uppercase;
 }
 
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addGroupButton {
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: .25rem;
+  border-radius: .35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .emptyState {
   color: var(--color-text-2);
   font-size: .9rem;
@@ -69,4 +85,193 @@
 .slotCount {
   color: var(--color-text-2);
   font-size: .8rem;
+}
+
+.usedBy {
+  max-width: 100%;
+  color: var(--color-lalt);
+  font-size: .74rem;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modalBackdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #00000088;
+}
+
+.modal {
+  width: min(42rem, 100%);
+  max-height: min(44rem, 100%);
+  padding: 1rem;
+  border: 1px solid #ffffff20;
+  border-radius: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  overflow: hidden;
+  background: var(--color-bg-0-5);
+  box-shadow: var(--shadow-3);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.modalHeader h2 {
+  font-family: var(--font-geom);
+  font-size: 1.05rem;
+}
+
+.modalHeader p {
+  margin-top: .35rem;
+  color: var(--color-text-2);
+  font-size: .85rem;
+}
+
+.searchLabel {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  color: var(--color-text-2);
+  font-size: .8rem;
+}
+
+.searchLabel input {
+  width: 100%;
+  padding: .65rem .75rem;
+  border: 1px solid #ffffff20;
+  border-radius: .4rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+}
+
+.seatList {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  overflow: auto;
+}
+
+.seatButton {
+  width: 100%;
+  padding: .65rem .75rem;
+  border-radius: .45rem;
+  border: 1px solid transparent;
+  color: var(--color-text);
+  background: var(--color-bg-1);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .2rem .75rem;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+}
+
+.seatButton:hover,
+.seatButton:focus-within {
+  border-color: #ffffff28;
+  background: var(--color-bg-2);
+}
+
+.seatButtonAdded {
+  cursor: default;
+  opacity: .72;
+}
+
+.seatCheckbox,
+.seatCheckboxIcon,
+.selectAllCheckbox {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  flex: 0 0 1rem;
+  accent-color: var(--color-lalt);
+}
+
+.seatCheckboxIcon {
+  color: var(--color-text-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seatGroupId {
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.seatVehicle {
+  color: var(--color-lalt);
+  font-size: .8rem;
+}
+
+.addedLabel {
+  grid-column: 2 / -1;
+  color: var(--color-text-2);
+  font-size: .76rem;
+}
+
+.modalFooter {
+  padding-top: .8rem;
+  border-top: 1px solid #ffffff18;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.selectAllControl,
+.modalActions,
+.modalActionButton {
+  display: inline-flex;
+  align-items: center;
+}
+
+.selectAllControl {
+  min-width: 0;
+  margin-right: auto;
+  gap: .45rem;
+  color: var(--color-text-1);
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.selectAllControl:has(input:disabled) {
+  cursor: default;
+  opacity: .65;
+}
+
+.modalActions {
+  flex-shrink: 0;
+  gap: .5rem;
+}
+
+.modalActionButton {
+  gap: .35rem;
+}
+
+@media (max-width: 38rem) {
+  .modalFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .modalActions {
+    justify-content: flex-end;
+  }
 }

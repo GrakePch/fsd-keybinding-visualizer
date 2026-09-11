@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAutoSelectedSpvVehicle, getAutoSelectedVehicleModel, getBoundsFromSpvDimensions } from "./cameraAutoVehicleModel";
+import { getAutoSelectedSpvVehicle, getAutoSelectedVehicleModel, getBoundsFromSpvDimensions, getSeatVehicleUsage, getVehicleDisplayName } from "./cameraAutoVehicleModel";
 import type { SpvVehicleEntry, VehicleModelManifest } from "../types/vehicleModel";
 
 function vehicle(className: string, name = className, dimensions = { Length: 10, Width: 4, Height: 2 }): SpvVehicleEntry {
@@ -30,6 +30,38 @@ const manifest: VehicleModelManifest = {
 };
 
 describe("camera auto vehicle model", () => {
+  it("resolves a readable vehicle name from the model manifest or SPV data", () => {
+    expect(getVehicleDisplayName("AEGS_Redeemer", manifest)).toBe("Aegis Redeemer");
+    expect(getVehicleDisplayName("MISC_Hull_A", null, [vehicle("MISC_Hull_A", "MISC Hull A")])).toBe("MISC Hull A");
+  });
+
+  it("uses the exact seats.json group mapping before resolving a model", () => {
+    const usage = getSeatVehicleUsage(
+      "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Front",
+      [{ groupId: "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Front", vehicleIds: ["AEGS_Redeemer"] }],
+      manifest,
+    );
+
+    expect(usage?.vehicleId).toBe("AEGS_Redeemer");
+    expect(usage?.displayName).toBe("Aegis Redeemer");
+    expect(usage?.model?.className).toBe("AEGS_Redeemer");
+  });
+
+  it("does not guess a vehicle for a group absent from seats.json", () => {
+    expect(getSeatVehicleUsage("Player On Foot", [{ groupId: "Seat (SCItem) - AEGS_Redeemer", vehicleIds: ["AEGS_Redeemer"] }], manifest)).toBeNull();
+  });
+
+  it("keeps a vehicle usage label when the model is unavailable", () => {
+    const usage = getSeatVehicleUsage(
+      "Seat (SCItem) - MISC_Hull_A_Seat_Pilot",
+      [{ groupId: "Seat (SCItem) - MISC_Hull_A_Seat_Pilot", vehicleIds: ["MISC_Hull_A"] }],
+      manifest,
+      [vehicle("MISC_Hull_A", "MISC Hull A")],
+    );
+
+    expect(usage).toMatchObject({ vehicleId: "MISC_Hull_A", displayName: "MISC Hull A", model: null });
+  });
+
   it("guesses the SPV vehicle whose class name appears in the camera group id", () => {
     const mercury = vehicle("CRUS_Star_Runner");
     const redeemer = vehicle("AEGS_Redeemer");

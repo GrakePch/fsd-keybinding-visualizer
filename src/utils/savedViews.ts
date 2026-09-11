@@ -115,6 +115,15 @@ export function getSlotById(group: SavedViewGroup, slotId: number) {
   return group.slots.find((slot) => slot.id === slotId);
 }
 
+export function addSavedViewGroup(document: SavedViewsDocument, groupId: string): SavedViewsDocument {
+  if (!groupId || document.groups.some((group) => group.id === groupId)) return document;
+
+  return {
+    ...document,
+    groups: [...document.groups, { id: groupId, slots: [], rawAttributes: { ID: groupId } }],
+  };
+}
+
 const slotToAttributes = (slot: SavedCameraSlot): SavedViewAttributes => {
   const attributes: SavedViewAttributes = { ...slot.rawAttributes };
 

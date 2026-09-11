@@ -1,4 +1,4 @@
-import type { SelectableVehicleModel, SpvVehicleEntry, VehicleFallbackBoxModel, VehicleModelBounds, VehicleModelManifest, VehicleViewportModel } from "../types/vehicleModel";
+import type { SeatVehicleEntry, SelectableVehicleModel, SpvVehicleEntry, VehicleFallbackBoxModel, VehicleModelBounds, VehicleModelManifest, VehicleViewportModel } from "../types/vehicleModel";
 import { getSelectableVehicleModelByClassName } from "./vehicleModelManifest";
 
 const METERS_TO_SOURCE_UNITS = 100;
@@ -29,6 +29,36 @@ export function getAutoSelectedVehicleModel(groupId: string, vehicles: SpvVehicl
   if (!spvVehicle) return null;
 
   return resolveVehicleViewportModelFromSpvVehicle(spvVehicle, manifest);
+}
+
+export type SeatVehicleUsage = {
+  vehicleId: string;
+  displayName: string;
+  model: SelectableVehicleModel | null;
+};
+
+export function getVehicleDisplayName(vehicleId: string, manifest: VehicleModelManifest | null, vehicles: SpvVehicleEntry[] = []) {
+  const model = getSelectableVehicleModelByClassName(manifest, vehicleId);
+  if (model) return model.displayName;
+
+  const spvVehicle = vehicles.find((vehicle) => vehicle.ClassName?.trim() === vehicleId.trim());
+  return spvVehicle?.Name?.trim() || vehicleId;
+}
+
+export function getSeatVehicleUsage(groupId: string, seats: SeatVehicleEntry[], manifest: VehicleModelManifest | null, vehicles: SpvVehicleEntry[] = []): SeatVehicleUsage | null {
+  const seat = seats.find((entry) => entry.groupId?.trim() === groupId.trim());
+  const vehicleIds = seat?.vehicleIds?.filter((vehicleId): vehicleId is string => typeof vehicleId === "string" && Boolean(vehicleId.trim())) || [];
+  if (!vehicleIds.length) return null;
+
+  for (const vehicleId of vehicleIds) {
+    const model = getSelectableVehicleModelByClassName(manifest, vehicleId);
+    if (model) {
+      return { vehicleId, displayName: model.displayName, model };
+    }
+  }
+
+  const firstVehicleId = vehicleIds[0];
+  return { vehicleId: firstVehicleId, displayName: getVehicleDisplayName(firstVehicleId, manifest, vehicles), model: null };
 }
 
 export function resolveVehicleViewportModelFromSpvVehicle(spvVehicle: SpvVehicleEntry, manifest: VehicleModelManifest | null): VehicleViewportModel | null {
