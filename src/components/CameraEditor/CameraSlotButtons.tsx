@@ -1,4 +1,6 @@
+import Icon from "@mdi/react";
 import { SavedViewGroup } from "../../types/savedViews";
+import actionIcon from "../../icons/actionIcon";
 import { getSlotById } from "../../utils/savedViews";
 import styles from "./CameraSlotButtons.module.css";
 
@@ -23,9 +25,10 @@ function CameraSlotButtons({ selectedGroup, selectedSlotId, onSelectSlot }: Came
             className={cx(styles.slotButton, !hasSlot && styles.slotButtonMissing, selectedSlotId === slotId && styles.slotButtonActive, selectedSlotId === slotId && "buttonAccent")}
             key={slotId}
             type="button"
+            aria-label={`Camera slot ${slotId + 1}`}
             onClick={() => onSelectSlot(slotId)}
           >
-            {slotId + 1}
+            <Icon path={actionIcon("view_director_mode", `view_load_view_${slotId + 1}`)} size="2rem" aria-hidden="true" />
           </button>
         );
       })}

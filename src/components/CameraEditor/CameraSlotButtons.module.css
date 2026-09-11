@@ -6,7 +6,11 @@
 
 .slotButton {
   height: 2.5rem;
+  padding: 0;
   border-radius: .5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-geom);
   font-weight: 700;
 }
