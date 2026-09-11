@@ -29,12 +29,16 @@ describe("CameraGroupDrawer", () => {
         seats={[]}
         canAddGroup={true}
         onAddGroups={() => {}}
+        onDeleteGroup={() => {}}
         onSelectGroup={() => {}}
+        onSetAllEmptyToPreset={() => {}}
+        onResetAllGroupsToPreset={() => {}}
       />,
     );
 
     expect(markup).toContain("AEGS Avenger Titan View");
     expect(markup).toContain("title=\"AEGS_Avenger_Titan_View\"");
+    expect(markup).toContain("aria-label=\"Delete AEGS Avenger Titan View\"");
     expect(markup).toContain("placeholder=\"Search by group name\"");
   });
 
@@ -49,7 +53,10 @@ describe("CameraGroupDrawer", () => {
           "Seat (SCItem) - AEGS_Avenger_SCItem_Seat_Pilot": { vehicleId: "AEGS_Avenger_Titan", displayName: "Avenger Titan", model: null },
         }}
         onAddGroups={() => {}}
+        onDeleteGroup={() => {}}
         onSelectGroup={() => {}}
+        onSetAllEmptyToPreset={() => {}}
+        onResetAllGroupsToPreset={() => {}}
       />,
     );
 

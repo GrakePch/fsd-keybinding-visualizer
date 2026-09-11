@@ -110,15 +110,51 @@
   overflow: auto;
 }
 
+.groupCard {
+  position: relative;
+  flex: 0 0 auto;
+}
+
 .groupButton {
   width: 100%;
-  padding: .625rem .75rem;
+  padding: .625rem 2.5rem .625rem .75rem;
   border-radius: .5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: .25rem;
   text-align: left;
+}
+
+.deleteGroupButton {
+  position: absolute;
+  right: .35rem;
+  bottom: .35rem;
+  z-index: 1;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: .25rem;
+  border-radius: .35rem;
+  color: #ff8a8a;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s, color .15s, background-color .15s;
+}
+
+.groupCard:hover .deleteGroupButton,
+.groupCard:focus-within .deleteGroupButton {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.groupCard .deleteGroupButton:hover:not(:disabled),
+.groupCard .deleteGroupButton:focus-visible {
+  color: #ff6b6b;
+  background: #6f3030;
 }
 
 .groupButtonActive {

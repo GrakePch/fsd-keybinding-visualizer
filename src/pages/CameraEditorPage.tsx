@@ -11,6 +11,7 @@ import { isVehicleFallbackBoxModel } from "../types/vehicleModel";
 import { DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, type CameraFrustumAspectRatioId } from "../utils/cameraFrustum";
 import { canEnterCameraView, getCameraViewSlotIdFromSearchParams, setCameraViewSlotIdInSearchParams } from "../utils/cameraView";
 import { getCameraPositionMarkers } from "../utils/cameraViewport";
+import { getVisibleCameraGroups } from "../utils/cameraGroup";
 import { getSeatVehicleUsage, getSelectableVehicleModelWithSpvBounds, getVehicleDisplayName, type SeatVehicleUsage } from "../utils/cameraAutoVehicleModel";
 import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
 import { addSavedViewGroup, copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
@@ -97,6 +98,28 @@ function CameraEditorPage() {
     const nextDocument = groupIdsToAdd.reduce((currentDocument, groupId) => addSavedViewGroup(currentDocument, groupId), document);
     setSavedViews(nextDocument);
     setSelectedGroupId(groupIdsToAdd[0]);
+    setSelectedSlotId(0);
+    setPreviewModel(null);
+    setIsSelectingModel(false);
+    setCameraViewSlotId(null);
+  };
+
+  const deleteGroup = (groupId: string) => {
+    if (!savedViews || !savedViews.groups.some((group) => group.id === groupId)) return;
+
+    const remainingGroups = savedViews.groups.filter((group) => group.id !== groupId);
+    setSavedViews({ ...savedViews, groups: remainingGroups });
+    setGroupModelDrafts((drafts) => {
+      if (!drafts[groupId]) return drafts;
+
+      const nextDrafts = { ...drafts };
+      delete nextDrafts[groupId];
+      return nextDrafts;
+    });
+
+    if (selectedGroupId !== groupId) return;
+
+    setSelectedGroupId(getVisibleCameraGroups(remainingGroups, "")[0]?.id || "");
     setSelectedSlotId(0);
     setPreviewModel(null);
     setIsSelectingModel(false);
@@ -226,6 +249,7 @@ function CameraEditorPage() {
         vehicleNameById={vehicleNameById}
         seatVehicleUsageByGroupId={getSeatVehicleUsageByGroupId(savedViews?.groups || [], seatVehicleIndex, manifest, spvVehicles)}
         onAddGroups={addGroups}
+        onDeleteGroup={deleteGroup}
         selectedGroupId={selectedGroupId}
         onSelectGroup={selectGroup}
         onSetAllEmptyToPreset={setAllEmptySlotsToPreset}

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@mdi/react";
-import { mdiCancel, mdiCheck, mdiCheckboxMarked, mdiDotsVertical, mdiPlus, mdiRestore } from "@mdi/js";
+import { mdiCancel, mdiCheck, mdiCheckboxMarked, mdiDeleteOutline, mdiDotsVertical, mdiPlus, mdiRestore } from "@mdi/js";
 import ConfirmModal from "../ConfirmModal";
 import { SavedViewGroup } from "../../types/savedViews";
 import type { SeatVehicleEntry } from "../../types/vehicleModel";
@@ -17,15 +17,17 @@ interface CameraGroupDrawerProps {
   vehicleNameById?: Record<string, string>;
   seatVehicleUsageByGroupId?: Record<string, SeatVehicleUsage>;
   onAddGroups: (groupIds: string[]) => void;
+  onDeleteGroup: (groupId: string) => void;
   onSelectGroup: (groupId: string) => void;
   onSetAllEmptyToPreset: () => void;
   onResetAllGroupsToPreset: () => void;
 }
 
-function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupDrawerProps) {
+function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onDeleteGroup, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupDrawerProps) {
   const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
   const [isMoreActionsOpen, setIsMoreActionsOpen] = useState(false);
   const [isResetAllGroupsOpen, setIsResetAllGroupsOpen] = useState(false);
+  const [groupToDelete, setGroupToDelete] = useState<string | null>(null);
   const [groupSearch, setGroupSearch] = useState("");
   const moreActionsRef = useRef<HTMLDivElement>(null);
   const visibleGroups = useMemo(() => getVisibleCameraGroups(groups, groupSearch), [groupSearch, groups]);
@@ -137,17 +139,27 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
         ) : (
           <div className={styles.groupList}>
             {visibleGroups.map((group) => (
-              <button
-                className={`${styles.groupButton} ${group.id === selectedGroupId ? `${styles.groupButtonActive} buttonHighlighted` : ""}`}
-                key={group.id}
-                type="button"
-                onClick={() => onSelectGroup(group.id)}
-                title={group.id}
-              >
-                <span className={styles.groupName}>{formatCameraGroupName(group.id)}</span>
-                {seatVehicleUsageByGroupId[group.id] && <span className={styles.usedBy}>@ {seatVehicleUsageByGroupId[group.id].displayName}</span>}
-                <span className={styles.slotCount}>{group.slots.length} slots</span>
-              </button>
+              <div className={styles.groupCard} key={group.id}>
+                <button
+                  className={`${styles.groupButton} ${group.id === selectedGroupId ? `${styles.groupButtonActive} buttonHighlighted` : ""}`}
+                  type="button"
+                  onClick={() => onSelectGroup(group.id)}
+                  title={group.id}
+                >
+                  <span className={styles.groupName}>{formatCameraGroupName(group.id)}</span>
+                  {seatVehicleUsageByGroupId[group.id] && <span className={styles.usedBy}>@ {seatVehicleUsageByGroupId[group.id].displayName}</span>}
+                  <span className={styles.slotCount}>{group.slots.length} slots</span>
+                </button>
+                <button
+                  className={styles.deleteGroupButton}
+                  type="button"
+                  aria-label={`Delete ${formatCameraGroupName(group.id)}`}
+                  title="Delete group"
+                  onClick={() => setGroupToDelete(group.id)}
+                >
+                  <Icon path={mdiDeleteOutline} size="1rem" aria-hidden="true" />
+                </button>
+              </div>
             ))}
           </div>
         )}
@@ -165,6 +177,20 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
             setIsResetAllGroupsOpen(false);
           }}
           onClose={() => setIsResetAllGroupsOpen(false)}
+        />
+      )}
+      {groupToDelete && (
+        <ConfirmModal
+          title={`Delete ${formatCameraGroupName(groupToDelete)}?`}
+          description={`This will remove the group and all ${groups.find((group) => group.id === groupToDelete)?.slots.length || 0} camera slots from savedviews.xml.`}
+          confirmLabel="Delete group"
+          confirmTone="danger"
+          confirmIconPath={mdiDeleteOutline}
+          onConfirm={() => {
+            onDeleteGroup(groupToDelete);
+            setGroupToDelete(null);
+          }}
+          onClose={() => setGroupToDelete(null)}
         />
       )}
     </aside>
