@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { getCameraControlRanges } from "./cameraControlRanges";
-import type { VehicleModelBounds } from "../types/vehicleModel";
+import { getCameraControlRanges } from "../../src/utils/cameraControlRanges";
+import type { VehicleModelBounds } from "../../src/types/vehicleModel";
 
 function bounds(sizeMeters: [number, number, number]): VehicleModelBounds {
   return {

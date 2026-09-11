@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { getAutoSelectedSpvVehicle, getAutoSelectedVehicleModel, getBoundsFromSpvDimensions, getSeatVehicleUsage, getVehicleDisplayName } from "./cameraAutoVehicleModel";
-import type { SpvVehicleEntry, VehicleModelManifest } from "../types/vehicleModel";
+import { getAutoSelectedSpvVehicle, getAutoSelectedVehicleModel, getBoundsFromSpvDimensions, getSeatVehicleUsage, getVehicleDisplayName } from "../../src/utils/cameraAutoVehicleModel";
+import type { SpvVehicleEntry, VehicleModelManifest } from "../../src/types/vehicleModel";
 
 function vehicle(className: string, name = className, dimensions = { Length: 10, Width: 4, Height: 2 }): SpvVehicleEntry {
   return {

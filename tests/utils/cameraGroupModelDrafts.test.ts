@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getDraftModelForGroup, setDraftModelForGroup } from "./cameraGroupModelDrafts";
+import { getDraftModelForGroup, setDraftModelForGroup } from "../../src/utils/cameraGroupModelDrafts";
 
 const aurora = { slug: "aurora", displayName: "Aurora", glb: "aurora.glb", src: "/vehicle-models/aurora.glb" };
 const titan = { slug: "titan", displayName: "Titan", glb: "titan.glb", src: "/vehicle-models/titan.glb" };

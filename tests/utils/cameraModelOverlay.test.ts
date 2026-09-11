@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getModelLoadProgressPercent, shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "./cameraModelOverlay";
+import { getModelLoadProgressPercent, shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "../../src/utils/cameraModelOverlay";
 
 describe("camera model overlay", () => {
   it("hides viewport model info once a renderable model is selected", () => {

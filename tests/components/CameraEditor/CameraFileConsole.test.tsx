@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import CameraFileConsole from "./CameraFileConsole";
+import CameraFileConsole from "../../../src/components/CameraEditor/CameraFileConsole";
 
 describe("CameraFileConsole", () => {
   afterEach(() => {

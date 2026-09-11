@@ -1,8 +1,8 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from "@mdi/js";
-import { getCameraRangeNoteIconPath, isCameraRangeNoteDanger, isCameraRangeNoteWarning } from "./CameraRangeNoteIcon";
-import CameraVector3Editor from "./CameraVector3Editor";
+import { getCameraRangeNoteIconPath, isCameraRangeNoteDanger, isCameraRangeNoteWarning } from "../../../src/components/CameraEditor/CameraRangeNoteIcon";
+import CameraVector3Editor from "../../../src/components/CameraEditor/CameraVector3Editor";
 
 describe("CameraVector3Editor", () => {
   it("can render camera rotation as pitch, roll, and yaw labels", () => {

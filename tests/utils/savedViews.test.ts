@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { addSavedViewGroup } from "./savedViews";
+import { addSavedViewGroup } from "../../src/utils/savedViews";
 
 describe("saved view groups", () => {
   it("adds an empty group without duplicating an existing id", () => {

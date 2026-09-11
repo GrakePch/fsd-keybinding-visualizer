@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CAMERA_GIZMO_AXIS_COLORS, CAMERA_GIZMO_LABEL_COLOR, CAMERA_GIZMO_LAYOUT } from "./cameraGizmo";
+import { CAMERA_GIZMO_AXIS_COLORS, CAMERA_GIZMO_LABEL_COLOR, CAMERA_GIZMO_LAYOUT } from "../../src/utils/cameraGizmo";
 
 describe("camera viewport gizmo configuration", () => {
   it("places the orientation gizmo in the lower-right viewport corner", () => {

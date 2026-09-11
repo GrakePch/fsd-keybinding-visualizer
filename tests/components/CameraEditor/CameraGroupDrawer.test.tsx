@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import CameraGroupDrawer from "./CameraGroupDrawer";
-import { formatCameraGroupName, normalizeGroupSearchText } from "../../utils/cameraGroup";
+import CameraGroupDrawer from "../../../src/components/CameraEditor/CameraGroupDrawer";
+import { formatCameraGroupName, normalizeGroupSearchText } from "../../../src/utils/cameraGroup";
 
 describe("CameraGroupDrawer", () => {
   it("uses the same group display formatting and search normalization", () => {

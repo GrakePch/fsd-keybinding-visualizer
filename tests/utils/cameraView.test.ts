@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { CameraPositionMarker } from "./cameraViewport";
-import { canEnterCameraView, getCameraViewMarker, getCameraViewSlotIdFromSearchParams, setCameraViewSlotIdInSearchParams } from "./cameraView";
+import type { CameraPositionMarker } from "../../src/utils/cameraViewport";
+import { canEnterCameraView, getCameraViewMarker, getCameraViewSlotIdFromSearchParams, setCameraViewSlotIdInSearchParams } from "../../src/utils/cameraView";
 
 const markers: CameraPositionMarker[] = [
   {

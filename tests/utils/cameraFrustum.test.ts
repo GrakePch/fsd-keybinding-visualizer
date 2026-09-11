@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CAMERA_FRUSTUM_ASPECT_RATIOS, CAMERA_LENS_VERTICAL_FOV_DEGREES, DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, DEFAULT_CAMERA_LENS_SIZE, getCameraFrustumAspectRatio, getCameraFrustumLineSegments, getCameraLensVerticalFov, getContainedCameraViewVerticalFov, normalizeCameraLensSize } from "./cameraFrustum";
+import { CAMERA_FRUSTUM_ASPECT_RATIOS, CAMERA_LENS_VERTICAL_FOV_DEGREES, DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, DEFAULT_CAMERA_LENS_SIZE, getCameraFrustumAspectRatio, getCameraFrustumLineSegments, getCameraLensVerticalFov, getContainedCameraViewVerticalFov, normalizeCameraLensSize } from "../../src/utils/cameraFrustum";
 
 describe("camera frustum aspect ratio configuration", () => {
   it("offers common desktop monitor aspect ratios with 16:9 as the default", () => {

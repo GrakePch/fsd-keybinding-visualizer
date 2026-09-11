@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import HomePage from "./HomePage";
+import HomePage from "../../src/pages/HomePage";
 
 describe("HomePage", () => {
   it("renders the centered product title and pre-alpha label", () => {

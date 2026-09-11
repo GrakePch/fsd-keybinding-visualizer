@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { getSelectableVehicleModels } from "./vehicleModelManifest";
-import type { VehicleModelManifest } from "../types/vehicleModel";
+import { getSelectableVehicleModels } from "../../src/utils/vehicleModelManifest";
+import type { VehicleModelManifest } from "../../src/types/vehicleModel";
 
 describe("vehicle model manifest selection", () => {
   it("excludes manifest entries without a renderable GLB", () => {

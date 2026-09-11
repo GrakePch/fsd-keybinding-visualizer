@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, getCameraRotationUpVector, getTargetOffsetBoundingBox, getTargetOffsetBoundingBoxEdgePoints, getVehicleGridFromTargetOffsetBoundingBox, getVehicleGridLineValues, savedViewPositionToViewportPosition } from "./cameraViewport";
+import { getCameraBoomDirection, getCameraFitFromBounds, getCameraPositionMarkers, getCameraRotationUpVector, getTargetOffsetBoundingBox, getTargetOffsetBoundingBoxEdgePoints, getVehicleGridFromTargetOffsetBoundingBox, getVehicleGridLineValues, savedViewPositionToViewportPosition } from "../../src/utils/cameraViewport";
 
 describe("getCameraFitFromBounds", () => {
   it("converts centimeter manifest bounds into meter-space camera fit", () => {
