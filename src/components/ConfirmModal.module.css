@@ -1,0 +1,71 @@
+.backdrop {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #00000088;
+}
+
+.modal {
+  width: min(34rem, 100%);
+  padding: 1rem;
+  border: 1px solid #ffffff20;
+  border-radius: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  background: var(--color-bg-0-5);
+  box-shadow: var(--shadow-3);
+}
+
+.modal h2 {
+  font-family: var(--font-geom);
+  font-size: 1.05rem;
+}
+
+.description {
+  color: var(--color-text-2);
+  font-size: .9rem;
+  line-height: 1.35;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+}
+
+.actionButton {
+  border-radius: .5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+}
+
+.confirmButtonAccent {
+  color: var(--color-bg);
+  background-color: var(--color-lalt);
+}
+
+.confirmButtonAccent:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-lalt) 84%, white 16%);
+}
+
+.confirmButtonDanger {
+  color: #ffd4d4;
+  background-color: #6f3030;
+}
+
+.confirmButtonDanger:hover:not(:disabled) {
+  color: #fff;
+  background-color: #8c3b3b;
+}
+
+.confirmButtonNormal {
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+}

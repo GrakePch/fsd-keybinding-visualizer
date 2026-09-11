@@ -26,11 +26,20 @@
 }
 
 .headingRow {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+.headingActions {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.moreActionsButton,
 .addGroupButton {
   width: 1.8rem;
   height: 1.8rem;
@@ -39,6 +48,34 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.actionsMenu {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + .4rem);
+  right: 0;
+  width: max-content;
+  min-width: 15rem;
+  padding: .35rem;
+  border: 1px solid #ffffff20;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  background: var(--color-bg-1);
+  box-shadow: var(--shadow-2);
+}
+
+.actionsMenu button {
+  width: 100%;
+  padding: .55rem .65rem;
+  border-radius: .35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .emptyState {

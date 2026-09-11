@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import Icon from "@mdi/react";
-import { mdiCamera } from "@mdi/js";
+import { mdiCamera, mdiDeleteOutline, mdiRestore } from "@mdi/js";
+import ConfirmModal from "../ConfirmModal";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
 import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import { getCameraControlRanges, type CameraControlAxisRange, type CameraControlRangeSource } from "../../utils/cameraControlRanges";
+import { SEAT_VIEW_PRESET_SLOT_IDS } from "../../utils/seatViewPreset";
 import CameraLensZoomField from "./CameraLensZoomField";
 import CameraNumberField from "./CameraNumberField";
 import CameraSliderNumberField from "./CameraSliderNumberField";
@@ -28,6 +30,9 @@ interface CameraControlPanelProps {
   onUpdateSlot: (slot: SavedCameraSlot) => void;
   onCreateSlot: () => void;
   onCopySlot: (sourceSlotId: number) => void;
+  onSetEmptyToPreset: () => void;
+  onResetAllToPreset: () => void;
+  onDeleteSelectedSlot: () => void;
 }
 
 function getCameraControlRangeNote(source: CameraControlRangeSource, range: CameraControlAxisRange) {
@@ -38,9 +43,10 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
 const mdiScShip =
   "M16,16.813l-0,0.937l1.688,2.125l-0,2.125l-3.563,-2l0,-3.687l-0.875,-0.75l-0.438,1.687l-1.624,0l-0.438,-1.687l-0.875,0.75l0,3.687l-3.563,2l0.001,-2.125l1.687,-2.125l0,-0.937l-1.313,-0.875l-2.562,2.5l0,-2.875l5.188,-6.75l1.625,-6.813l2.125,-0l1.625,6.813l5.187,6.75l0,2.875l-2.562,-2.5l-1.313,0.875Z";
 
-function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
+  const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
   const selectedCopySource = useMemo(() => copySourceSlots.find((slot) => slot.id === copySourceSlotId) || copySourceSlots[0], [copySourceSlotId, copySourceSlots]);
   const cameraControlRanges = useMemo(
     () =>
@@ -58,6 +64,7 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
     z: getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.targetOffset.z),
   };
   const cameraControlDistanceRangeNote = getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.distance);
+  const hasEmptyPresetSlots = Boolean(selectedGroup && SEAT_VIEW_PRESET_SLOT_IDS.some((slotId) => !selectedGroup.slots.some((slot) => slot.id === slotId)));
 
   const updateSlot = (patch: Partial<SavedCameraSlot>) => {
     if (!selectedSlot) return;
@@ -93,6 +100,15 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
           <Icon className={styles.cameraViewButtonIcon} path={mdiCamera} size="1rem" aria-hidden="true" />
           {isCameraViewActive ? "Exit Camera View" : "Enter Camera View"}
         </button>
+        <div className={styles.presetActions}>
+          <button type="button" disabled={!selectedGroup || !hasEmptyPresetSlots} onClick={onSetEmptyToPreset}>
+            Set Empty to Preset
+          </button>
+          <button type="button" disabled={!selectedGroup} onClick={() => setConfirmation("reset")}>
+            <Icon path={mdiRestore} size="1rem" aria-hidden="true" />
+            Reset All to Preset
+          </button>
+        </div>
       </section>
 
       <section className={styles.editorSection}>
@@ -159,6 +175,29 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
           ))}
         </div>
       </section>
+
+      <section className={styles.deleteSection}>
+        <button className={styles.deleteButton} type="button" disabled={!selectedSlot} onClick={() => setConfirmation("delete")}>
+          <Icon path={mdiDeleteOutline} size="1rem" aria-hidden="true" />
+          Delete Selected Slot
+        </button>
+      </section>
+
+      {confirmation && (
+        <ConfirmModal
+          title={confirmation === "reset" ? "Reset all slots?" : "Delete selected slot?"}
+          description={confirmation === "reset" ? "This will replace every slot in the selected group with the Seat View Preset. Existing camera values will be lost." : `Slot ${selectedSlotId + 1} will be removed from the selected group.`}
+          confirmLabel={confirmation === "reset" ? "Reset all" : "Delete slot"}
+          confirmTone={confirmation === "reset" ? "accent" : "danger"}
+          confirmIconPath={confirmation === "reset" ? mdiRestore : mdiDeleteOutline}
+          onConfirm={() => {
+            if (confirmation === "reset") onResetAllToPreset();
+            else onDeleteSelectedSlot();
+            setConfirmation(null);
+          }}
+          onClose={() => setConfirmation(null)}
+        />
+      )}
     </aside>
   );
 }

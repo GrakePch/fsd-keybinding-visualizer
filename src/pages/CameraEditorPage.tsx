@@ -14,6 +14,7 @@ import { getCameraPositionMarkers } from "../utils/cameraViewport";
 import { getSeatVehicleUsage, getSelectableVehicleModelWithSpvBounds, getVehicleDisplayName, type SeatVehicleUsage } from "../utils/cameraAutoVehicleModel";
 import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
 import { addSavedViewGroup, copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
+import { fillEmptySlotsWithSeatViewPreset, resetSlotsToSeatViewPreset } from "../utils/seatViewPreset";
 import { useSpvVehicleIndex, useSpvVehicles } from "../utils/spvVehicleData";
 import { getSeatVehicleIndex, useSeatsData } from "../utils/seatsData";
 import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
@@ -125,6 +126,66 @@ function CameraEditorPage() {
     updateSlot(copyCameraSlot(sourceSlot, activeSlotId));
   };
 
+  const setEmptySlotsToPreset = () => {
+    if (!savedViews || !selectedGroup) return;
+
+    setSavedViews({
+      ...savedViews,
+      groups: savedViews.groups.map((group) =>
+        group.id === selectedGroup.id ? { ...group, slots: fillEmptySlotsWithSeatViewPreset(group.slots) } : group,
+      ),
+    });
+  };
+
+  const resetSelectedGroupToPreset = () => {
+    if (!savedViews || !selectedGroup) return;
+
+    setSavedViews({
+      ...savedViews,
+      groups: savedViews.groups.map((group) =>
+        group.id === selectedGroup.id ? { ...group, slots: resetSlotsToSeatViewPreset() } : group,
+      ),
+    });
+  };
+
+  const setAllEmptySlotsToPreset = () => {
+    setSavedViews((currentDocument) => {
+      if (!currentDocument) return currentDocument;
+
+      return {
+        ...currentDocument,
+        groups: currentDocument.groups.map((group) => ({ ...group, slots: fillEmptySlotsWithSeatViewPreset(group.slots) })),
+      };
+    });
+  };
+
+  const resetAllGroupsToPreset = () => {
+    setSavedViews((currentDocument) => {
+      if (!currentDocument) return currentDocument;
+
+      return {
+        ...currentDocument,
+        groups: currentDocument.groups.map((group) => ({ ...group, slots: resetSlotsToSeatViewPreset() })),
+      };
+    });
+  };
+
+  const deleteSelectedSlot = () => {
+    if (!savedViews || !selectedGroup || !selectedSlot) return;
+
+    const remainingSlots = selectedGroup.slots.filter((slot) => slot.id !== activeSlotId).sort((left, right) => left.id - right.id);
+    setSavedViews({
+      ...savedViews,
+      groups: savedViews.groups.map((group) =>
+        group.id === selectedGroup.id ? { ...group, slots: remainingSlots } : group,
+      ),
+    });
+
+    const nextSlot = remainingSlots.find((slot) => slot.id > activeSlotId) || remainingSlots.at(-1);
+    setSelectedSlotId(nextSlot?.id ?? 0);
+    if (isCameraViewActive) setCameraViewSlotId(null, { replace: true });
+  };
+
   const openModelSelector = () => {
     setSelectedSlotId(activeSlotId);
     setPreviewModel(loadedModel && !isVehicleFallbackBoxModel(loadedModel) ? loadedModel : null);
@@ -167,6 +228,8 @@ function CameraEditorPage() {
         onAddGroups={addGroups}
         selectedGroupId={selectedGroupId}
         onSelectGroup={selectGroup}
+        onSetAllEmptyToPreset={setAllEmptySlotsToPreset}
+        onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
       <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
       {isSelectingModel ? (
@@ -193,6 +256,9 @@ function CameraEditorPage() {
           onUpdateSlot={updateSlot}
           onCreateSlot={createSelectedSlot}
           onCopySlot={copyIntoSelectedSlot}
+          onSetEmptyToPreset={setEmptySlotsToPreset}
+          onResetAllToPreset={resetSelectedGroupToPreset}
+          onDeleteSelectedSlot={deleteSelectedSlot}
         />
       )}
     </main>

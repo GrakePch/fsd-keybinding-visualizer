@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@mdi/react";
-import { mdiCancel, mdiCheck, mdiCheckboxMarked, mdiPlus } from "@mdi/js";
+import { mdiCancel, mdiCheck, mdiCheckboxMarked, mdiDotsVertical, mdiPlus, mdiRestore } from "@mdi/js";
+import ConfirmModal from "../ConfirmModal";
 import { SavedViewGroup } from "../../types/savedViews";
 import type { SeatVehicleEntry } from "../../types/vehicleModel";
 import type { SeatVehicleUsage } from "../../utils/cameraAutoVehicleModel";
@@ -17,10 +18,15 @@ interface CameraGroupDrawerProps {
   seatVehicleUsageByGroupId?: Record<string, SeatVehicleUsage>;
   onAddGroups: (groupIds: string[]) => void;
   onSelectGroup: (groupId: string) => void;
+  onSetAllEmptyToPreset: () => void;
+  onResetAllGroupsToPreset: () => void;
 }
 
-function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onSelectGroup }: CameraGroupDrawerProps) {
+function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupDrawerProps) {
   const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
+  const [isMoreActionsOpen, setIsMoreActionsOpen] = useState(false);
+  const [isResetAllGroupsOpen, setIsResetAllGroupsOpen] = useState(false);
+  const moreActionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isAddGroupOpen) return;
@@ -33,22 +39,83 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAddGroupOpen]);
 
+  useEffect(() => {
+    if (!isMoreActionsOpen) return;
+
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!moreActionsRef.current?.contains(event.target as Node)) setIsMoreActionsOpen(false);
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, [isMoreActionsOpen]);
+
+  useEffect(() => {
+    if (!isMoreActionsOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMoreActionsOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMoreActionsOpen]);
+
   return (
     <aside className={styles.drawer} aria-label="Camera group manager">
       {fileConsole}
       <section className={styles.groupsSection}>
         <div className={styles.headingRow}>
           <h2 className={styles.heading}>Groups</h2>
-          <button
-            className={styles.addGroupButton}
-            type="button"
-            aria-label="Add group"
-            title={canAddGroup ? "Add group" : "Add group unavailable"}
-            disabled={!canAddGroup}
-            onClick={() => setIsAddGroupOpen(true)}
-          >
-            <Icon path={mdiPlus} size="1rem" aria-hidden="true" />
-          </button>
+          <div className={styles.headingActions} ref={moreActionsRef}>
+            <button
+              className={styles.moreActionsButton}
+              type="button"
+              aria-label="More group actions"
+              aria-haspopup="menu"
+              aria-expanded={isMoreActionsOpen}
+              title={groups.length > 0 ? "More group actions" : "More group actions unavailable"}
+              disabled={groups.length === 0}
+              onClick={() => setIsMoreActionsOpen((isOpen) => !isOpen)}
+            >
+              <Icon path={mdiDotsVertical} size="1rem" aria-hidden="true" />
+            </button>
+            <button
+              className={styles.addGroupButton}
+              type="button"
+              aria-label="Add group"
+              title={canAddGroup ? "Add group" : "Add group unavailable"}
+              disabled={!canAddGroup}
+              onClick={() => setIsAddGroupOpen(true)}
+            >
+              <Icon path={mdiPlus} size="1rem" aria-hidden="true" />
+            </button>
+            {isMoreActionsOpen && (
+              <div className={styles.actionsMenu} role="menu" aria-label="More group actions">
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    onSetAllEmptyToPreset();
+                    setIsMoreActionsOpen(false);
+                  }}
+                >
+                  Set All Empty Slots to Preset
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    setIsMoreActionsOpen(false);
+                    setIsResetAllGroupsOpen(true);
+                  }}
+                >
+                  <Icon path={mdiRestore} size="1rem" aria-hidden="true" />
+                  Reset All Groups to Preset
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         {groups.length === 0 ? (
           <p className={styles.emptyState}>Load savedviews.xml to show groups.</p>
@@ -71,6 +138,20 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
         )}
       </section>
       {isAddGroupOpen && <AddGroupModal groups={groups} seats={seats} vehicleNameById={vehicleNameById} onAddGroups={(groupIds) => { onAddGroups(groupIds); setIsAddGroupOpen(false); }} onClose={() => setIsAddGroupOpen(false)} />}
+      {isResetAllGroupsOpen && (
+        <ConfirmModal
+          title="Reset all groups?"
+          description="This will replace every slot in every group with the Seat View Preset. Existing camera values will be lost."
+          confirmLabel="Reset all groups"
+          confirmTone="accent"
+          confirmIconPath={mdiRestore}
+          onConfirm={() => {
+            onResetAllGroupsToPreset();
+            setIsResetAllGroupsOpen(false);
+          }}
+          onClose={() => setIsResetAllGroupsOpen(false)}
+        />
+      )}
     </aside>
   );
 }

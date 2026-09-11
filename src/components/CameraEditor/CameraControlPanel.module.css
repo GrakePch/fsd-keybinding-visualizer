@@ -69,6 +69,21 @@
   border-color: var(--color-lalt);
 }
 
+.presetActions {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.presetActions button,
+.deleteButton {
+  border-radius: .5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+}
+
 .modelButtonIcon,
 .cameraViewButtonIcon {
   flex: 0 0 auto;
@@ -125,4 +140,23 @@
 
 .aspectRatioButtonActive {
   border-color: color-mix(in srgb, var(--color-text) 80%, transparent);
+}
+
+.deleteSection {
+  margin-top: auto;
+  padding-top: .25rem;
+}
+
+.deleteButton {
+  color: #ffd4d4;
+  background-color: #6f3030;
+}
+
+.deleteSection .deleteButton {
+  width: 100%;
+}
+
+.deleteButton:hover:not(:disabled) {
+  color: #fff;
+  background-color: #8c3b3b;
 }
