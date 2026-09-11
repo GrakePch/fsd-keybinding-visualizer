@@ -5,7 +5,7 @@ import ConfirmModal from "../ConfirmModal";
 import { SavedViewGroup } from "../../types/savedViews";
 import type { SeatVehicleEntry } from "../../types/vehicleModel";
 import type { SeatVehicleUsage } from "../../utils/cameraAutoVehicleModel";
-import { formatCameraGroupName, normalizeGroupSearchText } from "../../utils/cameraGroup";
+import { formatCameraGroupName, getVisibleCameraGroups, normalizeGroupSearchText } from "../../utils/cameraGroup";
 import styles from "./CameraGroupDrawer.module.css";
 
 interface CameraGroupDrawerProps {
@@ -26,7 +26,9 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
   const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
   const [isMoreActionsOpen, setIsMoreActionsOpen] = useState(false);
   const [isResetAllGroupsOpen, setIsResetAllGroupsOpen] = useState(false);
+  const [groupSearch, setGroupSearch] = useState("");
   const moreActionsRef = useRef<HTMLDivElement>(null);
+  const visibleGroups = useMemo(() => getVisibleCameraGroups(groups, groupSearch), [groupSearch, groups]);
 
   useEffect(() => {
     if (!isAddGroupOpen) return;
@@ -117,11 +119,24 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
             )}
           </div>
         </div>
+        <label className={styles.groupSearchLabel}>
+          <span>Search groups</span>
+          <input
+            className={styles.groupSearch}
+            type="search"
+            value={groupSearch}
+            onChange={(event) => setGroupSearch(event.target.value)}
+            placeholder="Search by group name"
+            disabled={groups.length === 0}
+          />
+        </label>
         {groups.length === 0 ? (
           <p className={styles.emptyState}>Load savedviews.xml to show groups.</p>
+        ) : visibleGroups.length === 0 ? (
+          <p className={styles.emptyState}>No matching groups.</p>
         ) : (
           <div className={styles.groupList}>
-            {groups.map((group) => (
+            {visibleGroups.map((group) => (
               <button
                 className={`${styles.groupButton} ${group.id === selectedGroupId ? `${styles.groupButtonActive} buttonHighlighted` : ""}`}
                 key={group.id}

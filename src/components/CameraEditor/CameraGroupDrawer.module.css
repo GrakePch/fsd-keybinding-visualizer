@@ -39,6 +39,24 @@
   gap: .25rem;
 }
 
+.groupSearchLabel {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  color: var(--color-text-2);
+  font-size: .8rem;
+}
+
+.groupSearch {
+  width: 100%;
+  padding: .55rem .65rem;
+  border: 1px solid #ffffff20;
+  border-radius: .4rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+}
+
 .moreActionsButton,
 .addGroupButton {
   width: 1.8rem;
