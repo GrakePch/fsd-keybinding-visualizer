@@ -5,6 +5,7 @@ import ConfirmModal from "../ConfirmModal";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { ThirdPersonCameraBaseConfig } from "../../types/thirdPersonCamera";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
+import type { resolveGroupVehicleContext } from "../../utils/cameraVehicleBinding";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
 import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import { getCameraControlRanges, type CameraControlAxisRange, type CameraControlRangeSource } from "../../utils/cameraControlRanges";
@@ -19,6 +20,10 @@ import styles from "./CameraControlPanel.module.css";
 interface CameraControlPanelProps {
   loadedModel: VehicleViewportModel | null;
   cameraConfig: ThirdPersonCameraBaseConfig | null;
+  referenceContext: ReturnType<typeof resolveGroupVehicleContext> | null;
+  hasManualBinding: boolean;
+  onSelectReferenceVehicle: () => void;
+  onRestoreAutomaticBinding: () => void;
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
@@ -27,7 +32,6 @@ interface CameraControlPanelProps {
   isCameraViewActive: boolean;
   onToggleCameraView: () => void;
   onSelectSlot: (slotId: number) => void;
-  onSelectModel: () => void;
   onSelectFrustumAspectRatio: (aspectRatioId: CameraFrustumAspectRatioId) => void;
   onUpdateSlot: (slot: SavedCameraSlot) => void;
   onCreateSlot: () => void;
@@ -45,7 +49,7 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
 const mdiScShip =
   "M16,16.813l-0,0.937l1.688,2.125l-0,2.125l-3.563,-2l0,-3.687l-0.875,-0.75l-0.438,1.687l-1.624,0l-0.438,-1.687l-0.875,0.75l0,3.687l-3.563,2l0.001,-2.125l1.687,-2.125l0,-0.937l-1.313,-0.875l-2.562,2.5l0,-2.875l5.188,-6.75l1.625,-6.813l2.125,-0l1.625,6.813l5.187,6.75l0,2.875l-2.562,-2.5l-1.313,0.875Z";
 
-function CameraControlPanel({ loadedModel, cameraConfig, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, onRestoreAutomaticBinding, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
@@ -76,18 +80,36 @@ function CameraControlPanel({ loadedModel, cameraConfig, selectedGroup, selected
   return (
     <aside className={styles.panel} aria-label="Camera controls">
       <section className={styles.section}>
-        <h2 className={styles.heading}>Loaded Model</h2>
-        {loadedModel && (
+        <h2 className={styles.heading}>{referenceContext ? "Reference Vehicle" : "Loaded Model"}</h2>
+        {loadedModel && !referenceContext && (
           <div className={styles.loadedModelCard}>
             <strong>{loadedModel.displayName}</strong>
             <span>{loadedModel.className || loadedModel.slug}</span>
             {isVehicleFallbackBoxModel(loadedModel) && <span>SPV dimensions fallback</span>}
           </div>
         )}
-        <button className={styles.modelButton} type="button" onClick={onSelectModel}>
-          <Icon className={styles.modelButtonIcon} path={mdiScShip} size="1rem" aria-hidden="true" />
-          {loadedModel ? "Change model" : "Select model"}
-        </button>
+        {selectedGroup && (
+          <div className={styles.referenceControls}>
+            {referenceContext ? (
+              <div className={styles.loadedModelCard}>
+                <strong>Reference: {referenceContext.displayName}</strong>
+                <span>{referenceContext.vehicleId} · {hasManualBinding ? "Manually assigned" : "Automatically assigned"}</span>
+                {referenceContext.cameraId && <span>{referenceContext.cameraId}</span>}
+                {referenceContext.needsSelection && <span>Camera selection is required. Choose a configuration to restore game ranges.</span>}
+                <span>{isVehicleFallbackBoxModel(referenceContext.model) ? "SPV dimensions fallback" : referenceContext.model ? "3D model" : "No model available"}</span>
+                <span>Ranges: {referenceContext.cameraConfig ? "Game data" : referenceContext.source === "inferred" ? "Estimated from vehicle size" : "Defaults"}</span>
+                <span>Distance: {cameraControlRanges.distance.recommended.min}–{cameraControlRanges.distance.recommended.max}</span>
+              </div>
+            ) : !cameraConfig && (
+              <p className={styles.referenceNote}>This group has no camera configuration. Assign a reference vehicle to use its model and camera ranges.</p>
+            )}
+            <button className={styles.modelButton} type="button" onClick={onSelectReferenceVehicle}>
+              <Icon className={styles.modelButtonIcon} path={mdiScShip} size="1rem" aria-hidden="true" />
+              {referenceContext ? "Change reference vehicle" : "Assign reference vehicle"}
+            </button>
+        {hasManualBinding && <button className={styles.modelButton} type="button" onClick={onRestoreAutomaticBinding}>Restore automatic association</button>}
+          </div>
+        )}
       </section>
 
       <section className={styles.section}>

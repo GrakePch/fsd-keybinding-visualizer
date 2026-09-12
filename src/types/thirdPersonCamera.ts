@@ -21,3 +21,9 @@ export type ThirdPersonCameraEntry = {
   cameraId: string;
   baseConfig: ThirdPersonCameraBaseConfig;
 };
+
+export type ThirdPersonCamerasData = {
+  schemaVersion: 3;
+  cameraIdsByVehicleId: Record<string, string[]>;
+  cameras: ThirdPersonCameraEntry[];
+};

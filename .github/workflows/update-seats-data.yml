@@ -32,65 +32,14 @@ jobs:
           path: .cache/fancy-star-data
           token: ${{ secrets.READ_FANCY_STAR_DATA }}
 
-      - name: Copy and validate final camera data
-        run: |
-          test -f .cache/fancy-star-data/data/datacore/seats.json
-          test -f .cache/fancy-star-data/data/datacore/third_person_cameras.json
-          cp .cache/fancy-star-data/data/datacore/seats.json src/data/seats.json
-          cp .cache/fancy-star-data/data/datacore/third_person_cameras.json src/data/third_person_cameras.json
-          node --input-type=module <<'NODE'
-          import { readFile } from "node:fs/promises";
-
-          const seatsFile = "src/data/seats.json";
-          const camerasFile = "src/data/third_person_cameras.json";
-          const seatsPayload = JSON.parse(await readFile(seatsFile, "utf8"));
-          const camerasPayload = JSON.parse(await readFile(camerasFile, "utf8"));
-          if (seatsPayload.schemaVersion !== 2 || !Array.isArray(seatsPayload.seats)) {
-            throw new Error(`${seatsFile} is not the Fancy-Star-Data seat format`);
-          }
-          if (camerasPayload.schemaVersion !== 2 || !Array.isArray(camerasPayload.cameras)) {
-            throw new Error(`${camerasFile} is not the Fancy-Star-Data third-person camera format`);
-          }
-
-          const finiteNumber = (value) => typeof value === "number" && Number.isFinite(value);
-          const validVector = (value) => value && ["x", "y", "z"].every((axis) => finiteNumber(value[axis]));
-          const cameraIds = new Set();
-          for (const [index, camera] of camerasPayload.cameras.entries()) {
-            const distance = camera?.baseConfig?.distanceConfig;
-            const targetOffset = camera?.baseConfig?.targetOffsetConfig;
-            if (typeof camera?.cameraId !== "string" || !camera.cameraId) {
-              throw new Error(`${camerasFile} has an invalid camera ID at index ${index}`);
-            }
-            if (![distance?.initialDistance, distance?.minDistance, distance?.maxDistance].every(finiteNumber)) {
-              throw new Error(`${camerasFile} has an invalid distance config at index ${index}`);
-            }
-            if (![targetOffset?.targetPositionOffset, targetOffset?.userTargetOffsetMin, targetOffset?.userTargetOffsetMax].every(validVector)) {
-              throw new Error(`${camerasFile} has an invalid target offset config at index ${index}`);
-            }
-            if (cameraIds.has(camera.cameraId)) throw new Error(`${camerasFile} contains duplicate camera ID ${camera.cameraId}`);
-            cameraIds.add(camera.cameraId);
-          }
-
-          for (const [index, seat] of seatsPayload.seats.entries()) {
-            if (typeof seat?.groupId !== "string" || !Array.isArray(seat.vehicleIds) || !Array.isArray(seat.thirdPersonCameraIds)) {
-              throw new Error(`${seatsFile} has an invalid seat entry at index ${index}`);
-            }
-            if ([...seat.vehicleIds, ...seat.thirdPersonCameraIds].some((id) => typeof id !== "string")) {
-              throw new Error(`${seatsFile} has a non-string ID at index ${index}`);
-            }
-            const missingCameraId = seat.thirdPersonCameraIds.find((cameraId) => !cameraIds.has(cameraId));
-            if (missingCameraId) {
-              throw new Error(`${seatsFile} references missing third-person camera ${missingCameraId}`);
-            }
-          }
-          console.log(`Validated ${seatsPayload.seats.length} seats and ${cameraIds.size} third-person cameras from Fancy-Star-Data.`);
-          NODE
+      - name: Sync and validate final camera data
+        run: node scripts/sync-camera-data.mjs --source-dir .cache/fancy-star-data
 
       - name: Commit and push changes
         run: |
-          git add src/data/seats.json src/data/third_person_cameras.json
+          git add src/data/seats.json src/data/third_person_cameras.json src/data/spv_vehicle_main.json
 
-          if git diff --cached --quiet -- src/data/seats.json src/data/third_person_cameras.json; then
+          if git diff --cached --quiet -- src/data/seats.json src/data/third_person_cameras.json src/data/spv_vehicle_main.json; then
             echo "No camera data changes detected."
             exit 0
           fi

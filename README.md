@@ -2,8 +2,8 @@
 
 ## Keybinding i18n
 
-Keybinding action labels are generated from the same 42kit `global.ini` sources used by
-`Fancy-SC-Ship-Info-2`.
+Keybinding action labels are generated from the 42kit `global.ini` sources used by the
+Star Citizen client data tools.
 
 ```bash
 npm run update:keybinding-i18n

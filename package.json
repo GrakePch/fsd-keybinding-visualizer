@@ -8,6 +8,7 @@
     "build": "vite build --mode development",
     "update:data": "node scripts/update-data-json.mjs",
     "update:keybinding-i18n": "node scripts/update-keybinding-i18n.mjs",
+    "sync:camera-data": "node scripts/sync-camera-data.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "preview": "vite preview"

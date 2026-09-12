@@ -3,20 +3,18 @@ import { useSearchParams } from "react-router-dom";
 import CameraControlPanel from "../components/CameraEditor/CameraControlPanel";
 import CameraFileConsole from "../components/CameraEditor/CameraFileConsole";
 import CameraGroupDrawer from "../components/CameraEditor/CameraGroupDrawer";
-import CameraModelSelectorPanel from "../components/CameraEditor/CameraModelSelectorPanel";
+import CameraReferenceVehiclePanel from "../components/CameraEditor/CameraReferenceVehiclePanel";
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
-import type { SelectableVehicleModel, SpvVehicleEntry, VehicleViewportModel } from "../types/vehicleModel";
-import { isVehicleFallbackBoxModel } from "../types/vehicleModel";
 import { DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID, type CameraFrustumAspectRatioId } from "../utils/cameraFrustum";
 import { canEnterCameraView, getCameraViewSlotIdFromSearchParams, setCameraViewSlotIdInSearchParams } from "../utils/cameraView";
 import { getCameraPositionMarkers } from "../utils/cameraViewport";
 import { getVisibleCameraGroups } from "../utils/cameraGroup";
-import { getSeatVehicleUsage, getSelectableVehicleModelWithSpvBounds, getVehicleDisplayName, type SeatVehicleUsage } from "../utils/cameraAutoVehicleModel";
-import { getDraftModelForGroup, setDraftModelForGroup, type GroupModelDrafts } from "../utils/cameraGroupModelDrafts";
+import { getSeatVehicleUsage, getVehicleDisplayName, type SeatVehicleUsage } from "../utils/cameraAutoVehicleModel";
+import { getReferenceVehicles, resolveGroupVehicleContext, setGroupVehicleBinding, type GroupVehicleBinding, type GroupVehicleBindings } from "../utils/cameraVehicleBinding";
 import { addSavedViewGroup, copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
 import { fillEmptySlotsWithSeatViewPreset, resetSlotsToSeatViewPreset } from "../utils/seatViewPreset";
-import { useSpvVehicleIndex, useSpvVehicles } from "../utils/spvVehicleData";
+import { useSpvVehicles } from "../utils/spvVehicleData";
 import { getSeatVehicleIndex, useSeatsData } from "../utils/seatsData";
 import { getThirdPersonCameraConfigForSeat } from "../utils/thirdPersonCameraData";
 import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
@@ -27,16 +25,15 @@ function CameraEditorPage() {
   const [baselineSavedViewsJson, setBaselineSavedViewsJson] = useState("null");
   const [selectedGroupId, setSelectedGroupId] = useState("");
   const [selectedSlotId, setSelectedSlotId] = useState(0);
-  const [standaloneLoadedModel, setStandaloneLoadedModel] = useState<SelectableVehicleModel | null>(null);
-  const [groupModelDrafts, setGroupModelDrafts] = useState<GroupModelDrafts>({});
-  const [previewModel, setPreviewModel] = useState<SelectableVehicleModel | null>(null);
-  const [isSelectingModel, setIsSelectingModel] = useState(false);
+  const [groupBindings, setGroupBindings] = useState<GroupVehicleBindings>({});
+  const [previewBinding, setPreviewBinding] = useState<GroupVehicleBinding | null>(null);
+  const [isSelectingReferenceVehicle, setIsSelectingReferenceVehicle] = useState(false);
   const [frustumAspectRatioId, setFrustumAspectRatioId] = useState<CameraFrustumAspectRatioId>(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { manifest } = useSelectableVehicleModels();
-  const { vehicles: spvVehicles } = useSpvVehicles();
+  const { manifest, loaded: modelsLoaded, error: modelError } = useSelectableVehicleModels();
+  const { vehicles: spvVehicles, loaded: spvLoaded, error: spvError } = useSpvVehicles();
   const { seats } = useSeatsData();
-  const spvVehicleIndex = useSpvVehicleIndex(spvVehicles);
+  const referenceVehicles = useMemo(() => getReferenceVehicles(manifest, spvVehicles), [manifest, spvVehicles]);
   const seatVehicleIndex = useMemo(() => getSeatVehicleIndex(seats), [seats]);
   const vehicleNameById = useMemo(() => {
     const names: Record<string, string> = {};
@@ -53,15 +50,20 @@ function CameraEditorPage() {
   const selectedSlot = selectedGroup ? getSlotById(selectedGroup, activeSlotId) : undefined;
   const currentSavedViewsJson = JSON.stringify(savedViews);
   const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
-  const manualGroupModel = selectedGroupId ? getDraftModelForGroup(groupModelDrafts, selectedGroupId) : null;
+  const binding = selectedGroupId ? groupBindings[selectedGroupId] || null : null;
   const selectedSeatUsage = selectedGroupId && selectedGroup ? getSeatVehicleUsage(selectedGroup.id, Object.values(seatVehicleIndex), manifest, spvVehicles) : null;
-  const autoGroupModel = selectedSeatUsage?.model || null;
-  const loadedModel = selectedGroupId ? getModelWithStableSpvBounds(manualGroupModel, spvVehicleIndex) || autoGroupModel : getModelWithStableSpvBounds(standaloneLoadedModel, spvVehicleIndex);
-  const viewportModel = isSelectingModel ? getModelWithStableSpvBounds(previewModel, spvVehicleIndex) || loadedModel : loadedModel;
-  const selectedThirdPersonCameraConfig = getThirdPersonCameraConfigForSeat(
-    selectedSeat,
-    selectedSeatUsage?.vehicleId || selectedSeat?.vehicleIds[0],
-  );
+  const autoVehicleId = selectedSeatUsage?.vehicleId || selectedSeat?.vehicleIds[0];
+  const seatCameraConfig = getThirdPersonCameraConfigForSeat(selectedSeat, autoVehicleId);
+  const contextInput = {
+    autoModel: selectedSeatUsage?.model || null,
+    autoVehicleId,
+    seatCameraConfig,
+    vehicles: referenceVehicles,
+  };
+  const appliedContext = resolveGroupVehicleContext({ ...contextInput, binding });
+  const previewContext = resolveGroupVehicleContext({ ...contextInput, binding: previewBinding });
+  const viewportContext = isSelectingReferenceVehicle && previewBinding ? previewContext : appliedContext;
+  const loadedModel = appliedContext.model;
   const selectedSlotMarkers = useMemo(() => getCameraPositionMarkers(selectedSlot ? [selectedSlot] : []), [selectedSlot]);
   const canEnterSelectedCameraView = canEnterCameraView(selectedSlotMarkers, activeSlotId);
 
@@ -83,16 +85,16 @@ function CameraEditorPage() {
     setBaselineSavedViewsJson(JSON.stringify(document));
     setSelectedGroupId(document.groups[0]?.id || "");
     setSelectedSlotId(0);
-    setGroupModelDrafts({});
-    setPreviewModel(null);
-    setIsSelectingModel(false);
+    setGroupBindings({});
+    setPreviewBinding(null);
+    setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null, { replace: true });
   };
 
   const selectGroup = (groupId: string) => {
     setSelectedGroupId(groupId);
-    setPreviewModel(null);
-    setIsSelectingModel(false);
+    setPreviewBinding(null);
+    setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null);
   };
 
@@ -105,8 +107,8 @@ function CameraEditorPage() {
     setSavedViews(nextDocument);
     setSelectedGroupId(groupIdsToAdd[0]);
     setSelectedSlotId(0);
-    setPreviewModel(null);
-    setIsSelectingModel(false);
+    setPreviewBinding(null);
+    setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null);
   };
 
@@ -115,20 +117,14 @@ function CameraEditorPage() {
 
     const remainingGroups = savedViews.groups.filter((group) => group.id !== groupId);
     setSavedViews({ ...savedViews, groups: remainingGroups });
-    setGroupModelDrafts((drafts) => {
-      if (!drafts[groupId]) return drafts;
-
-      const nextDrafts = { ...drafts };
-      delete nextDrafts[groupId];
-      return nextDrafts;
-    });
+    setGroupBindings((bindings) => setGroupVehicleBinding(bindings, groupId, null));
 
     if (selectedGroupId !== groupId) return;
 
     setSelectedGroupId(getVisibleCameraGroups(remainingGroups, "")[0]?.id || "");
     setSelectedSlotId(0);
-    setPreviewModel(null);
-    setIsSelectingModel(false);
+    setPreviewBinding(null);
+    setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null);
   };
 
@@ -215,12 +211,6 @@ function CameraEditorPage() {
     if (isCameraViewActive) setCameraViewSlotId(null, { replace: true });
   };
 
-  const openModelSelector = () => {
-    setSelectedSlotId(activeSlotId);
-    setPreviewModel(loadedModel && !isVehicleFallbackBoxModel(loadedModel) ? loadedModel : null);
-    setIsSelectingModel(true);
-  };
-
   const toggleCameraView = () => {
     if (isCameraViewActive) {
       setSelectedSlotId(activeSlotId);
@@ -231,18 +221,26 @@ function CameraEditorPage() {
     setCameraViewSlotId(activeSlotId);
   };
 
-  const confirmPreviewModel = () => {
-    if (previewModel && selectedGroupId) {
-      setGroupModelDrafts((drafts) => setDraftModelForGroup(drafts, selectedGroupId, previewModel));
-    } else if (previewModel) {
-      setStandaloneLoadedModel(previewModel);
-    }
-    setIsSelectingModel(false);
+  const openReferenceVehicleSelector = () => {
+    setSelectedSlotId(activeSlotId);
+    setPreviewBinding(binding?.mode === "vehicle-context" ? binding : autoVehicleId ? { mode: "vehicle-context", vehicleId: autoVehicleId } : null);
+    setIsSelectingReferenceVehicle(true);
   };
 
+  const confirmPreviewModel = () => {
+    if (!previewBinding || previewContext.needsSelection) return;
+    if (selectedGroupId) {
+      setGroupBindings((bindings) => setGroupVehicleBinding(bindings, selectedGroupId, previewBinding));
+    }
+    setPreviewBinding(null);
+    setIsSelectingReferenceVehicle(false);
+  };
+
+  const restoreAutomaticBinding = () => setGroupBindings((bindings) => setGroupVehicleBinding(bindings, selectedGroupId, null));
+
   const cancelModelSelector = () => {
-    setPreviewModel(null);
-    setIsSelectingModel(false);
+    setPreviewBinding(null);
+    setIsSelectingReferenceVehicle(false);
   };
 
   return (
@@ -261,19 +259,25 @@ function CameraEditorPage() {
         onSetAllEmptyToPreset={setAllEmptySlotsToPreset}
         onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
-      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} cameraConfig={selectedThirdPersonCameraConfig} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
-      {isSelectingModel ? (
-        <CameraModelSelectorPanel
-          selectedModel={loadedModel && !isVehicleFallbackBoxModel(loadedModel) ? loadedModel : null}
-          previewModel={previewModel}
-          onPreviewModel={setPreviewModel}
+      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportContext.model} cameraConfig={viewportContext.cameraConfig} isPreviewingModel={isSelectingReferenceVehicle} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
+      {isSelectingReferenceVehicle ? (
+        <CameraReferenceVehiclePanel
+          vehicles={referenceVehicles}
+          selection={previewBinding?.mode === "vehicle-context" ? previewBinding : null}
+          loading={!modelsLoaded || !spvLoaded}
+          errors={[modelError ? `Models unavailable: ${modelError}` : "", spvError ? `Vehicle sizes unavailable: ${spvError}` : ""].filter(Boolean)}
+          onChange={setPreviewBinding}
           onConfirm={confirmPreviewModel}
           onCancel={cancelModelSelector}
         />
       ) : (
         <CameraControlPanel
           loadedModel={loadedModel}
-          cameraConfig={selectedThirdPersonCameraConfig}
+          cameraConfig={appliedContext.cameraConfig}
+          referenceContext={selectedGroup && appliedContext.vehicleId ? appliedContext : null}
+          hasManualBinding={Boolean(binding)}
+          onSelectReferenceVehicle={openReferenceVehicleSelector}
+          onRestoreAutomaticBinding={restoreAutomaticBinding}
           selectedGroup={selectedGroup}
           selectedSlot={selectedSlot}
           selectedSlotId={activeSlotId}
@@ -282,7 +286,6 @@ function CameraEditorPage() {
           isCameraViewActive={isCameraViewActive}
           onToggleCameraView={toggleCameraView}
           onSelectSlot={selectSlot}
-          onSelectModel={openModelSelector}
           onSelectFrustumAspectRatio={setFrustumAspectRatioId}
           onUpdateSlot={updateSlot}
           onCreateSlot={createSelectedSlot}
@@ -302,15 +305,6 @@ function getSeatVehicleUsageByGroupId(groups: SavedViewsDocument["groups"], seat
     if (usage) result[group.id] = usage;
     return result;
   }, {});
-}
-
-function getModelWithStableSpvBounds(model: SelectableVehicleModel | null, spvVehicleIndex: Record<string, SpvVehicleEntry>): VehicleViewportModel | null {
-  if (!model) return null;
-
-  const className = model.className?.trim();
-  const spvVehicle = className ? spvVehicleIndex[className] : null;
-
-  return getSelectableVehicleModelWithSpvBounds(model, spvVehicle);
 }
 
 export default CameraEditorPage;

@@ -69,11 +69,13 @@
 }
 
 .modelName {
+  overflow-wrap: anywhere;
   color: var(--color-text);
   font-weight: 700;
 }
 
 .modelMeta {
+  overflow-wrap: anywhere;
   color: var(--color-text-2);
   font-size: .8rem;
   line-height: 1.25;
@@ -87,4 +89,43 @@
 
 .actions button {
   border-radius: .5rem;
+}
+
+.referencePanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.referencePanel .modelList {
+  flex: 1;
+  min-height: 5rem;
+}
+
+.referenceSummary {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  overflow: auto;
+  max-height: 38vh;
+  flex-shrink: 0;
+  padding: .65rem;
+  border: 1px solid #ffffff22;
+  border-radius: .5rem;
+  font-size: .85rem;
+  overflow-wrap: anywhere;
+}
+
+.cameraChoice {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.cameraChoice select {
+  width: 100%;
+  min-width: 0;
+}
+
+.cameraId {
+  color: var(--color-text-2);
 }

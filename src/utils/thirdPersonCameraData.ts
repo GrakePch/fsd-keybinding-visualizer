@@ -12,6 +12,41 @@ const cameraConfigById = cameras.reduce<Record<string, ThirdPersonCameraBaseConf
   return index;
 }, {});
 
+export function parseVehicleCameraIndex(data: unknown, configs: Record<string, ThirdPersonCameraBaseConfig>) {
+  const payload = data as { schemaVersion?: number; cameraIdsByVehicleId?: unknown } | null;
+  const raw = payload?.cameraIdsByVehicleId;
+  if (payload?.schemaVersion !== 3 || !raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+  const entries = Object.entries(raw);
+  if (entries.some(([id, ids]) => !id.trim() || !Array.isArray(ids) || ids.some((value) => typeof value !== "string"))) return null;
+  return Object.fromEntries(entries.map(([id, ids]) => [id.trim(), [...new Set((ids as string[]).filter((cameraId) => Object.prototype.hasOwnProperty.call(configs, cameraId)))]]));
+}
+
+const vehicleCameraIndex = parseVehicleCameraIndex(thirdPersonCameraData, cameraConfigById);
+
+export function getVehicleCameraIndex() {
+  return vehicleCameraIndex;
+}
+
+export function resolveVehicleCamera(
+  vehicleId: string,
+  selectedCameraId?: string,
+  index: Record<string, string[]> | null = vehicleCameraIndex,
+  configs: Record<string, ThirdPersonCameraBaseConfig> = cameraConfigById,
+) {
+  const cameraIds = [...new Set((index && Object.prototype.hasOwnProperty.call(index, vehicleId) ? index[vehicleId] : []).filter((id) => Object.prototype.hasOwnProperty.call(configs, id)))].sort();
+  // An explicit stale selection must be resolved by the user, even if only one candidate remains.
+  const cameraId = selectedCameraId
+    ? cameraIds.includes(selectedCameraId) ? selectedCameraId : null
+    : cameraIds.length === 1 ? cameraIds[0] : null;
+  return {
+    cameraIds,
+    cameraId,
+    cameraConfig: cameraId ? configs[cameraId] : null,
+    needsSelection: cameraIds.length > 0 && !cameraId,
+    indexAvailable: index !== null,
+  };
+}
+
 export function getThirdPersonCameraConfigForSeat(
   seat: SeatVehicleEntry | null | undefined,
   preferredVehicleId?: string | null,
@@ -72,6 +107,8 @@ function isThirdPersonCameraEntry(value: unknown): value is ThirdPersonCameraEnt
     isVec3(targetOffset?.targetPositionOffset) &&
     isVec3(targetOffset?.userTargetOffsetMin) &&
     isVec3(targetOffset?.userTargetOffsetMax)
+    && distance.minDistance >= 0 && distance.minDistance <= distance.maxDistance
+    && (["x", "y", "z"] as const).every((axis) => targetOffset.userTargetOffsetMin[axis] <= targetOffset.userTargetOffsetMax[axis])
   );
 }
 
