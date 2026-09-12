@@ -7,8 +7,8 @@ import { getCameraLensVerticalFov, getContainedCameraViewVerticalFov } from "../
 import { getCameraRotationUpVector, type CameraFit, type CameraPositionMarker } from "../../../utils/cameraViewport";
 
 function OrbitViewCamera({ cameraFit }: { cameraFit: CameraFit }) {
-  const initialCameraFitRef = useRef(cameraFit);
-  const hasInitializedCameraRef = useRef(false);
+  const initialViewHeightRef = useRef(cameraFit.viewHeight);
+  const appliedCameraFitRef = useRef<CameraFit | null>(null);
   const cameraRef = useRef<THREE.OrthographicCamera | null>(null);
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const { size } = useThree();
@@ -17,36 +17,41 @@ function OrbitViewCamera({ cameraFit }: { cameraFit: CameraFit }) {
     const camera = cameraRef.current;
     if (!camera || !size.height) return;
 
-    const initialCameraFit = initialCameraFitRef.current;
     const aspect = size.width / size.height;
-    camera.left = (-initialCameraFit.viewHeight * aspect) / 2;
-    camera.right = (initialCameraFit.viewHeight * aspect) / 2;
-    camera.top = initialCameraFit.viewHeight / 2;
-    camera.bottom = -initialCameraFit.viewHeight / 2;
-    camera.near = initialCameraFit.near;
-    camera.far = initialCameraFit.far;
+    camera.left = (-initialViewHeightRef.current * aspect) / 2;
+    camera.right = (initialViewHeightRef.current * aspect) / 2;
+    camera.top = initialViewHeightRef.current / 2;
+    camera.bottom = -initialViewHeightRef.current / 2;
+    camera.near = cameraFit.near;
+    camera.far = cameraFit.far;
     camera.up.set(0, 0, 1);
 
-    if (!hasInitializedCameraRef.current) {
-      camera.position.set(...initialCameraFit.cameraPosition);
-      camera.lookAt(...initialCameraFit.target);
-      hasInitializedCameraRef.current = true;
+    if (appliedCameraFitRef.current !== cameraFit) {
+      const target = new THREE.Vector3(...cameraFit.target);
+      const fittedOffset = new THREE.Vector3(...cameraFit.cameraPosition).sub(target);
+      const previousFit = appliedCameraFitRef.current;
+      const offset = previousFit
+        ? camera.position.clone().sub(controlsRef.current?.target ?? new THREE.Vector3(...previousFit.target))
+        : fittedOffset.clone();
+      if (offset.lengthSq() === 0) offset.copy(fittedOffset);
+      // Apply the latest back distance without resetting the user's orbit angle or zoom.
+      camera.position.copy(target).add(offset.setLength(fittedOffset.length()));
+      camera.lookAt(target);
+      appliedCameraFitRef.current = cameraFit;
 
       const controls = controlsRef.current;
       if (controls) {
-        controls.target.set(...initialCameraFit.target);
+        controls.target.copy(target);
         controls.update();
       }
     }
 
     camera.updateProjectionMatrix();
-  }, [size.height, size.width]);
-
-  const initialCameraFit = initialCameraFitRef.current;
+  }, [cameraFit, size.height, size.width]);
 
   return (
     <>
-      <OrthographicCamera ref={cameraRef} makeDefault near={initialCameraFit.near} far={initialCameraFit.far} position={initialCameraFit.cameraPosition} up={[0, 0, 1]} />
+      <OrthographicCamera ref={cameraRef} makeDefault near={cameraFit.near} far={cameraFit.far} up={[0, 0, 1]} />
       <OrbitControls ref={controlsRef} enableDamping enablePan={false} makeDefault />
     </>
   );
@@ -84,5 +89,5 @@ export function ViewCamera({ cameraFit, cameraViewMarker, screenAspectRatio }: {
     return <SavedCameraView cameraFit={cameraFit} marker={cameraViewMarker} screenAspectRatio={screenAspectRatio} />;
   }
 
-  return <OrbitViewCamera cameraFit={cameraFit} />;
+  return <OrbitViewCamera key={cameraFit.target.join(",")} cameraFit={cameraFit} />;
 }

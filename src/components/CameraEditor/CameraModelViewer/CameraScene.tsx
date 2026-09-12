@@ -10,7 +10,7 @@ import { VehicleFallbackBox, VehicleModel } from "./vehicleModel";
 import { ViewCamera } from "./viewCamera";
 
 export function CameraScene({ activeSlotId, cameraViewMarker, frustumAspectRatio, maxCameraMarkerDistance, markers, model, targetOffsetBounds, onSelectSlot, onLoadProgress, onLoadStateChange }: CameraModelViewerProps & { onLoadProgress: (progress: number | null) => void; onLoadStateChange: (state: LoadState) => void }) {
-  const cameraFit = useMemo(() => getCameraFitFromBounds(model?.bounds, { maxCameraMarkerDistance }), [maxCameraMarkerDistance, model?.bounds]);
+  const cameraFit = useMemo(() => getCameraFitFromBounds(model?.bounds, { maxCameraMarkerDistance, targetOffsetBounds }), [maxCameraMarkerDistance, model?.bounds, targetOffsetBounds]);
   const vehicleGrid = useMemo(() => getVehicleGridFromTargetOffsetBoundingBox(targetOffsetBounds), [targetOffsetBounds]);
 
   return (

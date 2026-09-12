@@ -37,6 +37,35 @@ describe("getCameraFitFromBounds", () => {
     expect(fit.near).toBe(0.01);
     expect(fit.far).toBe(2000);
   });
+
+  it("uses the asymmetric pivot bounds for orbit center and back distance", () => {
+    const fit = getCameraFitFromBounds(
+      { center: [1000, 2000, 3000], size: [10000, 20000, 5000], radius: 12000 },
+      { targetOffsetBounds: { min: [200, -50, -10], max: [400, 10, 30] }, maxCameraMarkerDistance: 170 },
+    );
+
+    expect(fit.target).toEqual([300, -20, 10]);
+    const offset = fit.cameraPosition.map((value, axis) => value - fit.target[axis]);
+    const distance = Math.hypot(...offset);
+    expect(distance).toBeCloseTo(Math.sqrt(11300) + 170 + 1.01);
+    const direction = offset.map((value) => value / distance);
+    for (const x of [200, 400]) {
+      for (const y of [-50, 10]) {
+        for (const z of [-10, 30]) {
+          const depth = [x, y, z].reduce((sum, value, axis) => sum + (fit.cameraPosition[axis] - value) * direction[axis], 0);
+          expect(depth).toBeGreaterThan(fit.near + 170);
+        }
+      }
+    }
+  });
+
+  it("uses the pivot bounds center and back distance even without a model", () => {
+    const fit = getCameraFitFromBounds(null, { targetOffsetBounds: { min: [200, -50, -10], max: [400, 10, 30] } });
+
+    expect(fit.target).toEqual([300, -20, 10]);
+    expect(Math.hypot(...fit.cameraPosition.map((value, axis) => value - fit.target[axis]))).toBeCloseTo(Math.sqrt(11300) + 1.01);
+    expect(fit.viewHeight).toBe(240);
+  });
 });
 
 describe("getVehicleGridFromTargetOffsetBoundingBox", () => {

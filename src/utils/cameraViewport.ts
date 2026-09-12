@@ -50,17 +50,24 @@ const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
 type CameraFitOptions = {
   maxCameraMarkerDistance?: number;
+  targetOffsetBounds?: TargetOffsetBoundingBox | null;
 };
 
 export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undefined, options: CameraFitOptions = {}): CameraFit {
-  if (!bounds || !isFinite(bounds.radius) || bounds.radius <= 0) {
-    return DEFAULT_CAMERA_FIT;
-  }
+  const targetOffsetBounds = options.targetOffsetBounds;
+  const targetOffsetCenter = targetOffsetBounds
+    ? targetOffsetBounds.min.map((value, axis) => (value + targetOffsetBounds.max[axis]) / 2) as [number, number, number]
+    : null;
+  const modelBounds = bounds && isFinite(bounds.radius) && bounds.radius > 0 ? bounds : null;
+  if (!modelBounds && !targetOffsetCenter) return DEFAULT_CAMERA_FIT;
 
-  const [centerX, centerY, centerZ] = bounds.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
-  const [sourceSizeX, sourceSizeY, sourceSizeZ] = bounds.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
-  const radius = bounds.radius * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT;
-  const boundsDiagonalHalf = Math.sqrt(sourceSizeX * sourceSizeX + sourceSizeY * sourceSizeY + sourceSizeZ * sourceSizeZ) / 2;
+  const modelCenter = modelBounds?.center.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) ?? DEFAULT_CAMERA_FIT.target;
+  const [centerX, centerY, centerZ] = targetOffsetCenter ?? modelCenter;
+  // Pivot bounds are already in meters; fall back to model bounds when absent.
+  const fitSize = targetOffsetBounds
+    ? targetOffsetBounds.max.map((value, axis) => value - targetOffsetBounds.min[axis])
+    : modelBounds?.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) ?? [0, 0, 0];
+  const boundsDiagonalHalf = Math.hypot(...fitSize) / 2;
   const maxCameraMarkerDistance = isFinite(options.maxCameraMarkerDistance as number) ? Math.max(options.maxCameraMarkerDistance as number, 0) : 0;
   const cameraBackDistance = boundsDiagonalHalf + maxCameraMarkerDistance + CAMERA_NEAR_PLANE_METERS + ORTHOGRAPHIC_CAMERA_BACK_DISTANCE_MARGIN_METERS;
   const offsetDirectionLength = Math.sqrt(
@@ -77,7 +84,7 @@ export function getCameraFitFromBounds(bounds: VehicleModelBounds | null | undef
       centerY + ORTHOGRAPHIC_CAMERA_OFFSET_Y_DIRECTION * cameraOffsetScale,
       centerZ + ORTHOGRAPHIC_CAMERA_OFFSET_Z_DIRECTION * cameraOffsetScale,
     ],
-    viewHeight: radius * 2.8,
+    viewHeight: modelBounds ? modelBounds.radius * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT * 2.8 : DEFAULT_CAMERA_FIT.viewHeight,
     near: CAMERA_NEAR_PLANE_METERS,
     far: 2000,
   };
