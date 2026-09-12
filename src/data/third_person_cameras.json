@@ -1,0 +1,2867 @@
+{
+  "schemaVersion": 2,
+  "cameras": [
+    {
+      "cameraId": "AEGS_Avenger_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 30,
+          "minDistance": 20,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Eclipse_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 15,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Gladius_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 22,
+          "minDistance": 15,
+          "maxDistance": 35
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Idris_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 165,
+          "minDistance": 135,
+          "maxDistance": 275
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 8,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -350,
+            "y": -200,
+            "z": -150
+          },
+          "userTargetOffsetMax": {
+            "x": 350,
+            "y": 290,
+            "z": 210
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Javelin_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 400,
+          "minDistance": 350,
+          "maxDistance": 1000
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Reclaimer_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 135,
+          "minDistance": 95,
+          "maxDistance": 220
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -15,
+            "z": 6
+          },
+          "userTargetOffsetMin": {
+            "x": -250,
+            "y": -150,
+            "z": -120
+          },
+          "userTargetOffsetMax": {
+            "x": 250,
+            "y": 190,
+            "z": 170
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Redeemer_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 40,
+          "minDistance": 30,
+          "maxDistance": 150
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -3,
+            "z": 4
+          },
+          "userTargetOffsetMin": {
+            "x": -120,
+            "y": -90,
+            "z": -70
+          },
+          "userTargetOffsetMax": {
+            "x": 120,
+            "y": 90,
+            "z": 70
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Retaliator_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 60,
+          "minDistance": 40,
+          "maxDistance": 150
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -3,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -120,
+            "y": -90,
+            "z": -70
+          },
+          "userTargetOffsetMax": {
+            "x": 120,
+            "y": 90,
+            "z": 70
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Sabre_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 15,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -35,
+            "y": -30,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 35,
+            "y": 30,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Tiburon_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 85,
+          "minDistance": 70,
+          "maxDistance": 130
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -200,
+            "y": -150,
+            "z": -80
+          },
+          "userTargetOffsetMax": {
+            "x": 200,
+            "y": 150,
+            "z": 100
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "AEGS_Vanguard_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 35,
+          "minDistance": 15,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -70,
+            "y": -50,
+            "z": -30
+          },
+          "userTargetOffsetMax": {
+            "x": 70,
+            "y": 50,
+            "z": 30
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Arrow_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 20,
+          "minDistance": 15,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1.5,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -35,
+            "y": -30,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 35,
+            "y": 30,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Ballista_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 18,
+          "minDistance": 12,
+          "maxDistance": 27
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -1,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -30,
+            "z": -3
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 30,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Carrack_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 150,
+          "minDistance": 85,
+          "maxDistance": 220
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 10
+          },
+          "userTargetOffsetMin": {
+            "x": -180,
+            "y": -150,
+            "z": -110
+          },
+          "userTargetOffsetMax": {
+            "x": 180,
+            "y": 200,
+            "z": 85
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_F8_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 25,
+          "maxDistance": 70
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 4
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Gladiator_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 20,
+          "minDistance": 15,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -0.5,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Hawk_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 24,
+          "minDistance": 18,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Hornet_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 20,
+          "minDistance": 15,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Hurricane_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 20,
+          "minDistance": 12,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Paladin_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 45,
+          "minDistance": 35,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -2.5,
+            "z": 5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -70,
+            "z": -40
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 70,
+            "z": 40
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Pisces_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 14,
+          "minDistance": 8,
+          "maxDistance": 25
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -0.5,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -30,
+            "y": -25,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 30,
+            "y": 25,
+            "z": 15
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Terrapin_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 23,
+          "minDistance": 13,
+          "maxDistance": 70
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -0.5,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ANVL_Valkyrie_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 45,
+          "minDistance": 27,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -2.5,
+            "z": 5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -70,
+            "z": -40
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 70,
+            "z": 40
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ARGO_Mole_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 42,
+          "minDistance": 28,
+          "maxDistance": 120
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -65,
+            "z": -45
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 65,
+            "z": 45
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ARGO_MPUV_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 10,
+          "minDistance": 7,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -20,
+            "y": -20,
+            "z": -12
+          },
+          "userTargetOffsetMax": {
+            "x": 20,
+            "y": 20,
+            "z": 12
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ARGO_RAFT_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 32,
+          "minDistance": 28,
+          "maxDistance": 120
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -65,
+            "z": -45
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 65,
+            "z": 45
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ARGO_SRV_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 42,
+          "minDistance": 28,
+          "maxDistance": 120
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -65,
+            "z": -45
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 65,
+            "z": 45
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "BANU_Defender_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 32,
+          "minDistance": 20,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 2,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -65,
+            "y": -45,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 65,
+            "y": 45,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "CNOU_HoverQuad_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 5,
+          "minDistance": 3,
+          "maxDistance": 20
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 0.3499999940395355
+          },
+          "userTargetOffsetMin": {
+            "x": -15,
+            "y": -10,
+            "z": -8
+          },
+          "userTargetOffsetMax": {
+            "x": 15,
+            "y": 10,
+            "z": 6
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "CNOU_Mustang_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 23,
+          "minDistance": 15,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -30,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 30,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "CRUS_Intrepid_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 35,
+          "minDistance": 25,
+          "maxDistance": 100
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 2,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "CRUS_Spirit_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 50,
+          "minDistance": 30,
+          "maxDistance": 170
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -7,
+            "z": 7
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "CRUS_Star_Runner_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 60,
+          "minDistance": 40,
+          "maxDistance": 85
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -2.5,
+            "z": 5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -70,
+            "z": -40
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 70,
+            "z": 40
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "CRUS_Starlifter_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 85,
+          "minDistance": 55,
+          "maxDistance": 170
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -7,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Buccaneer_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 15,
+          "minDistance": 10,
+          "maxDistance": 55
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -30,
+            "y": -25,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 30,
+            "y": 25,
+            "z": 15
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Caterpillar_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 80,
+          "minDistance": 60,
+          "maxDistance": 200
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -3,
+            "z": -3
+          },
+          "userTargetOffsetMin": {
+            "x": -160,
+            "y": -90,
+            "z": -70
+          },
+          "userTargetOffsetMax": {
+            "x": 160,
+            "y": 130,
+            "z": 100
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Caterpillar_Turret_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 110,
+          "minDistance": 105,
+          "maxDistance": 200
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 40,
+            "z": -3
+          },
+          "userTargetOffsetMin": {
+            "x": -160,
+            "y": -90,
+            "z": -70
+          },
+          "userTargetOffsetMax": {
+            "x": 160,
+            "y": 130,
+            "z": 100
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Clipper_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 45,
+          "minDistance": 35,
+          "maxDistance": 80
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Command_Module_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 30,
+          "minDistance": 27,
+          "maxDistance": 35
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.25
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Corsair_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 45,
+          "minDistance": 25,
+          "maxDistance": 55
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -3,
+            "z": 6
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -80,
+            "z": -50
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 80,
+            "z": 55
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Cutlass_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 40,
+          "minDistance": 25,
+          "maxDistance": 80
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -2,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Cutter_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 20,
+          "minDistance": 15,
+          "maxDistance": 35
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 4
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Dragonfly_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 7,
+          "minDistance": 3,
+          "maxDistance": 20
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 0.44999998807907104
+          },
+          "userTargetOffsetMin": {
+            "x": -15,
+            "y": -10,
+            "z": -8
+          },
+          "userTargetOffsetMax": {
+            "x": 15,
+            "y": 10,
+            "z": 6
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Golem_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 15,
+          "minDistance": 13,
+          "maxDistance": 20
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 0.5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Herald_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 15,
+          "maxDistance": 55
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 2,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Ironclad_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 95,
+          "minDistance": 85,
+          "maxDistance": 130
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -2,
+            "z": -2
+          },
+          "userTargetOffsetMin": {
+            "x": -160,
+            "y": -90,
+            "z": -70
+          },
+          "userTargetOffsetMax": {
+            "x": 160,
+            "y": 130,
+            "z": 100
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Pitbull_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 8,
+          "minDistance": 5,
+          "maxDistance": 15
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.75
+          },
+          "userTargetOffsetMin": {
+            "x": -35,
+            "y": -30,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 35,
+            "y": 30,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "DRAK_Vulture_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 35,
+          "minDistance": 15,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -70,
+            "y": -50,
+            "z": -30
+          },
+          "userTargetOffsetMax": {
+            "x": 70,
+            "y": 50,
+            "z": 30
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ESPR_Prowler_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 32,
+          "minDistance": 22,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -7,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -60,
+            "y": -60,
+            "z": -30
+          },
+          "userTargetOffsetMax": {
+            "x": 60,
+            "y": 60,
+            "z": 30
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ESPR_Talon_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 24,
+          "minDistance": 28,
+          "maxDistance": 43
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -40,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 40,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GAMA_Railen_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 90,
+          "minDistance": 60,
+          "maxDistance": 120
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 16
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GAMA_Syulen_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 30,
+          "minDistance": 25,
+          "maxDistance": 80
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GAMA_Tyilui_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 90,
+          "minDistance": 60,
+          "maxDistance": 120
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 18
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "Global_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 1,
+          "minDistance": 0,
+          "maxDistance": 15
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GLSN_Basher_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 15,
+          "minDistance": 10,
+          "maxDistance": 55
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.299999952316284
+          },
+          "userTargetOffsetMin": {
+            "x": -30,
+            "y": -25,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 30,
+            "y": 25,
+            "z": 15
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GLSN_Shiv_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 37,
+          "minDistance": 25,
+          "maxDistance": 70
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -2,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GRIN_Greycat_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 5,
+          "minDistance": 2,
+          "maxDistance": 23
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1
+          },
+          "userTargetOffsetMin": {
+            "x": -10,
+            "y": -8,
+            "z": -0.5
+          },
+          "userTargetOffsetMax": {
+            "x": 10,
+            "y": 8,
+            "z": 5
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "GRIN_STV_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 6,
+          "minDistance": 5,
+          "maxDistance": 20
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.25
+          },
+          "userTargetOffsetMin": {
+            "x": -20,
+            "y": -10,
+            "z": -1.5
+          },
+          "userTargetOffsetMax": {
+            "x": 20,
+            "y": 10,
+            "z": 10
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "KRIG_L21_wolf_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 18,
+          "minDistance": 8,
+          "maxDistance": 35
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -35,
+            "y": -30,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 35,
+            "y": 30,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "KRIG_P52_Merlin_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 11,
+          "minDistance": 7.5,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0.5,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -22,
+            "y": -17,
+            "z": -14
+          },
+          "userTargetOffsetMax": {
+            "x": 20,
+            "y": 17,
+            "z": 10
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "KRIG_S65_Stingray_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 23,
+          "minDistance": 18,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Freelancer_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 32,
+          "minDistance": 22,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -5,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -60,
+            "y": -60,
+            "z": -30
+          },
+          "userTargetOffsetMax": {
+            "x": 60,
+            "y": 60,
+            "z": 30
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Fury_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 11,
+          "minDistance": 7.5,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0.5,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -22,
+            "y": -17,
+            "z": -14
+          },
+          "userTargetOffsetMax": {
+            "x": 20,
+            "y": 17,
+            "z": 10
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Hull_A_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 24,
+          "minDistance": 28,
+          "maxDistance": 43
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -40,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 40,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Hull_B_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 60,
+          "minDistance": 50,
+          "maxDistance": 85
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Hull_C_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 115,
+          "minDistance": 80,
+          "maxDistance": 200
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 6,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Prospector_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 24,
+          "minDistance": 28,
+          "maxDistance": 43
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -40,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 40,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Razor_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 11,
+          "minDistance": 8,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 1
+          },
+          "userTargetOffsetMin": {
+            "x": -25,
+            "y": -25,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 25,
+            "y": 25,
+            "z": 15
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Reliant_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 30,
+          "minDistance": 4,
+          "maxDistance": 45
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -1,
+            "z": 0.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -30
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 30
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Starfarer_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 85,
+          "minDistance": 55,
+          "maxDistance": 170
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -7,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Starlancer_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 115,
+          "minDistance": 22.5,
+          "maxDistance": 80
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 6,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MISC_Starlite_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 35,
+          "minDistance": 23,
+          "maxDistance": 45
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -80,
+            "y": -50,
+            "z": -35
+          },
+          "userTargetOffsetMax": {
+            "x": 80,
+            "y": 50,
+            "z": 35
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MRAI_Guardian_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 35,
+          "minDistance": 20,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "MRAI_Pulse_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 5.5,
+          "minDistance": 2,
+          "maxDistance": 10
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_100i_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 15,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_300_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 15,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_400i_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 55,
+          "minDistance": 35,
+          "maxDistance": 100
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 3,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -80,
+            "z": -50
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 80,
+            "z": 55
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_600i_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 85,
+          "minDistance": 60,
+          "maxDistance": 150
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 5,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -150,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 150,
+            "y": 150,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_85x_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 15,
+          "minDistance": 8,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0.800000011920929,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -30,
+            "y": -30,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 30,
+            "y": 30,
+            "z": 10
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_890J_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 175,
+          "minDistance": 120,
+          "maxDistance": 250
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -220,
+            "y": -150,
+            "z": -120
+          },
+          "userTargetOffsetMax": {
+            "x": 220,
+            "y": 220,
+            "z": 120
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_M50_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 13,
+          "minDistance": 8,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -35,
+            "y": -30,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 35,
+            "y": 30,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "Orig_m80_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 32,
+          "minDistance": 20,
+          "maxDistance": 44
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -35,
+            "y": -30,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 35,
+            "y": 30,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "ORIG_X1_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 6,
+          "minDistance": 2,
+          "maxDistance": 10
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Apollo_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 65,
+          "minDistance": 40,
+          "maxDistance": 150
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -5,
+            "z": 5
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Aurora_Mk2_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 28,
+          "minDistance": 20,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -30,
+            "y": -25,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 30,
+            "y": 25,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Aurora_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 16,
+          "minDistance": 11,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0.5
+          },
+          "userTargetOffsetMin": {
+            "x": -30,
+            "y": -25,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 30,
+            "y": 25,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Constellation_Phoenix_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 55,
+          "minDistance": 35,
+          "maxDistance": 100
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -3,
+            "z": 6
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -80,
+            "z": -50
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 80,
+            "z": 55
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Constellation_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 55,
+          "minDistance": 35,
+          "maxDistance": 100
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -3,
+            "z": 6
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -80,
+            "z": -50
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 80,
+            "z": 55
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Lynx_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 12,
+          "minDistance": 8,
+          "maxDistance": 23
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -25,
+            "y": -15,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 25,
+            "y": 15,
+            "z": 15
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Mantis_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 18,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -40,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 40,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Meteor_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 18,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -40,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 40,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Perseus_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 80,
+          "minDistance": 60,
+          "maxDistance": 160
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Polaris_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 110,
+          "minDistance": 120,
+          "maxDistance": 200
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -17,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Salvation_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 18,
+          "minDistance": 13,
+          "maxDistance": 25
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0.5,
+            "z": 1.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Scorpius_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 35,
+          "minDistance": 20,
+          "maxDistance": 40
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Ursa_Rover_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 12,
+          "minDistance": 8,
+          "maxDistance": 23
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -25,
+            "y": -15,
+            "z": -15
+          },
+          "userTargetOffsetMax": {
+            "x": 25,
+            "y": 15,
+            "z": 15
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "RSI_Zeus_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 55,
+          "minDistance": 30,
+          "maxDistance": 170
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -1,
+            "z": 7
+          },
+          "userTargetOffsetMin": {
+            "x": -100,
+            "y": -100,
+            "z": -60
+          },
+          "userTargetOffsetMax": {
+            "x": 100,
+            "y": 100,
+            "z": 60
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "TMBL_Nova_Tank_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 14,
+          "minDistance": 12,
+          "maxDistance": 27
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": -1,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -30,
+            "z": -3
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 30,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "TMBL_Storm_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 17,
+          "minDistance": 15,
+          "maxDistance": 35
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "VNCL_Blade_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 18,
+          "minDistance": 10,
+          "maxDistance": 30
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1,
+            "z": 3
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -25,
+            "z": -20
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 25,
+            "z": 20
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "VNCL_Mauler_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 300,
+          "minDistance": 200,
+          "maxDistance": 760
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 6,
+            "z": 0
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "VNCL_Scout_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 25,
+          "minDistance": 10,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1.5,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -40,
+            "y": -30,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 40,
+            "y": 30,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "VNCL_Scythe_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 22,
+          "minDistance": 12,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 3,
+            "z": 1
+          },
+          "userTargetOffsetMin": {
+            "x": -60,
+            "y": -35,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 60,
+            "y": 35,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "VNCL_Stinger_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 33,
+          "minDistance": 5,
+          "maxDistance": 60
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 2,
+            "z": 2.5
+          },
+          "userTargetOffsetMin": {
+            "x": -50,
+            "y": -50,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 50,
+            "y": 50,
+            "z": 25
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "XIAN_Nox_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 4,
+          "minDistance": 3,
+          "maxDistance": 20
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 0,
+            "z": 0.3499999940395355
+          },
+          "userTargetOffsetMin": {
+            "x": -15,
+            "y": -10,
+            "z": -8
+          },
+          "userTargetOffsetMax": {
+            "x": 15,
+            "y": 10,
+            "z": 6
+          }
+        }
+      }
+    },
+    {
+      "cameraId": "XNAA_SanTokYai_ThirdPersonFlight",
+      "baseConfig": {
+        "distanceConfig": {
+          "initialDistance": 30,
+          "minDistance": 10,
+          "maxDistance": 50
+        },
+        "targetOffsetConfig": {
+          "targetPositionOffset": {
+            "x": 0,
+            "y": 1.5,
+            "z": 2
+          },
+          "userTargetOffsetMin": {
+            "x": -40,
+            "y": -30,
+            "z": -25
+          },
+          "userTargetOffsetMax": {
+            "x": 40,
+            "y": 30,
+            "z": 25
+          }
+        }
+      }
+    }
+  ]
+}
