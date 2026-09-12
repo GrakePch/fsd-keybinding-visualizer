@@ -3,6 +3,7 @@ import Icon from "@mdi/react";
 import { mdiCamera, mdiDeleteOutline, mdiRestore } from "@mdi/js";
 import ConfirmModal from "../ConfirmModal";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
+import type { ThirdPersonCameraBaseConfig } from "../../types/thirdPersonCamera";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
 import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
@@ -17,6 +18,7 @@ import styles from "./CameraControlPanel.module.css";
 
 interface CameraControlPanelProps {
   loadedModel: VehicleViewportModel | null;
+  cameraConfig: ThirdPersonCameraBaseConfig | null;
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
@@ -36,14 +38,14 @@ interface CameraControlPanelProps {
 }
 
 function getCameraControlRangeNote(source: CameraControlRangeSource, range: CameraControlAxisRange) {
-  const sourceNote = source === "precise" ? "This range is tested in game." : source === "inferred" ? "This range is estimated from model size." : "This range uses default values.";
+  const sourceNote = source === "datacore" ? "This range comes from game data." : source === "inferred" ? "This range is estimated from model size." : "This range uses default values.";
   return range.isCurrentValueOutsideRecommendedRange ? `${sourceNote}\nCurrent value is outside the range.` : sourceNote;
 }
 
 const mdiScShip =
   "M16,16.813l-0,0.937l1.688,2.125l-0,2.125l-3.563,-2l0,-3.687l-0.875,-0.75l-0.438,1.687l-1.624,0l-0.438,-1.687l-0.875,0.75l0,3.687l-3.563,2l0.001,-2.125l1.687,-2.125l0,-0.937l-1.313,-0.875l-2.562,2.5l0,-2.875l5.188,-6.75l1.625,-6.813l2.125,-0l1.625,6.813l5.187,6.75l0,2.875l-2.562,-2.5l-1.313,0.875Z";
 
-function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, cameraConfig, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectModel, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
@@ -51,12 +53,12 @@ function CameraControlPanel({ loadedModel, selectedGroup, selectedSlot, selected
   const cameraControlRanges = useMemo(
     () =>
       getCameraControlRanges({
-        className: loadedModel?.spvClassName || loadedModel?.className,
+        cameraConfig,
         bounds: loadedModel?.bounds,
         currentTargetOffset: selectedSlot?.targetOffset,
         currentDistance: selectedSlot?.distance,
       }),
-    [loadedModel?.bounds, loadedModel?.className, loadedModel?.spvClassName, selectedSlot?.distance, selectedSlot?.targetOffset],
+    [cameraConfig, loadedModel?.bounds, selectedSlot?.distance, selectedSlot?.targetOffset],
   );
   const cameraControlTargetOffsetRangeNotes = {
     x: getCameraControlRangeNote(cameraControlRanges.source, cameraControlRanges.targetOffset.x),

@@ -24,5 +24,5 @@ export function getSeatVehicleIndex(seats: SeatVehicleEntry[]) {
 function isSeatVehicleEntry(value: unknown): value is SeatVehicleEntry {
   if (!value || typeof value !== "object") return false;
   const entry = value as SeatVehicleEntry;
-  return typeof entry.groupId === "string" && Array.isArray(entry.vehicleIds);
+  return typeof entry.groupId === "string" && Array.isArray(entry.vehicleIds) && Array.isArray(entry.thirdPersonCameraIds);
 }

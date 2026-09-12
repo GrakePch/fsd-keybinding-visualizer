@@ -38,7 +38,7 @@ describe("camera auto vehicle model", () => {
   it("uses the exact seats.json group mapping before resolving a model", () => {
     const usage = getSeatVehicleUsage(
       "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Front",
-      [{ groupId: "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Front", vehicleIds: ["AEGS_Redeemer"] }],
+      [{ groupId: "Seat (SCItem) - AEGS_Redeemer_SCItem_Support_Seat_Front", vehicleIds: ["AEGS_Redeemer"], thirdPersonCameraIds: [] }],
       manifest,
     );
 
@@ -48,13 +48,13 @@ describe("camera auto vehicle model", () => {
   });
 
   it("does not guess a vehicle for a group absent from seats.json", () => {
-    expect(getSeatVehicleUsage("Player On Foot", [{ groupId: "Seat (SCItem) - AEGS_Redeemer", vehicleIds: ["AEGS_Redeemer"] }], manifest)).toBeNull();
+    expect(getSeatVehicleUsage("Player On Foot", [{ groupId: "Seat (SCItem) - AEGS_Redeemer", vehicleIds: ["AEGS_Redeemer"], thirdPersonCameraIds: [] }], manifest)).toBeNull();
   });
 
   it("keeps a vehicle usage label when the model is unavailable", () => {
     const usage = getSeatVehicleUsage(
       "Seat (SCItem) - MISC_Hull_A_Seat_Pilot",
-      [{ groupId: "Seat (SCItem) - MISC_Hull_A_Seat_Pilot", vehicleIds: ["MISC_Hull_A"] }],
+      [{ groupId: "Seat (SCItem) - MISC_Hull_A_Seat_Pilot", vehicleIds: ["MISC_Hull_A"], thirdPersonCameraIds: [] }],
       manifest,
       [vehicle("MISC_Hull_A", "MISC Hull A")],
     );

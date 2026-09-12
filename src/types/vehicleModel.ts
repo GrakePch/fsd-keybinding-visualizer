@@ -50,6 +50,7 @@ export type SpvVehicleEntry = {
 export type SeatVehicleEntry = {
   groupId: string;
   vehicleIds: string[];
+  thirdPersonCameraIds: string[];
 };
 
 export type VehicleFallbackBoxModel = {

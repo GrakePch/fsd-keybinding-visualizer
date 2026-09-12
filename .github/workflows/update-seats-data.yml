@@ -1,4 +1,4 @@
-name: Update Camera Seat Data
+name: Update Camera Data
 
 on:
   workflow_dispatch:
@@ -24,7 +24,7 @@ jobs:
         with:
           ref: main
 
-      - name: Checkout final seat data
+      - name: Checkout final camera data
         uses: actions/checkout@v4
         with:
           repository: GrakePch/Fancy-Star-Data
@@ -32,38 +32,70 @@ jobs:
           path: .cache/fancy-star-data
           token: ${{ secrets.READ_FANCY_STAR_DATA }}
 
-      - name: Copy and validate final seat data
+      - name: Copy and validate final camera data
         run: |
           test -f .cache/fancy-star-data/data/datacore/seats.json
+          test -f .cache/fancy-star-data/data/datacore/third_person_cameras.json
           cp .cache/fancy-star-data/data/datacore/seats.json src/data/seats.json
+          cp .cache/fancy-star-data/data/datacore/third_person_cameras.json src/data/third_person_cameras.json
           node --input-type=module <<'NODE'
           import { readFile } from "node:fs/promises";
 
-          const file = "src/data/seats.json";
-          const payload = JSON.parse(await readFile(file, "utf8"));
-          if (payload.schemaVersion !== 1 || !Array.isArray(payload.seats)) {
-            throw new Error(`${file} is not the Fancy-Star-Data seat format`);
+          const seatsFile = "src/data/seats.json";
+          const camerasFile = "src/data/third_person_cameras.json";
+          const seatsPayload = JSON.parse(await readFile(seatsFile, "utf8"));
+          const camerasPayload = JSON.parse(await readFile(camerasFile, "utf8"));
+          if (seatsPayload.schemaVersion !== 2 || !Array.isArray(seatsPayload.seats)) {
+            throw new Error(`${seatsFile} is not the Fancy-Star-Data seat format`);
           }
-          for (const [index, seat] of payload.seats.entries()) {
-            if (typeof seat?.groupId !== "string" || !Array.isArray(seat.vehicleIds)) {
-              throw new Error(`${file} has an invalid seat entry at index ${index}`);
+          if (camerasPayload.schemaVersion !== 2 || !Array.isArray(camerasPayload.cameras)) {
+            throw new Error(`${camerasFile} is not the Fancy-Star-Data third-person camera format`);
+          }
+
+          const finiteNumber = (value) => typeof value === "number" && Number.isFinite(value);
+          const validVector = (value) => value && ["x", "y", "z"].every((axis) => finiteNumber(value[axis]));
+          const cameraIds = new Set();
+          for (const [index, camera] of camerasPayload.cameras.entries()) {
+            const distance = camera?.baseConfig?.distanceConfig;
+            const targetOffset = camera?.baseConfig?.targetOffsetConfig;
+            if (typeof camera?.cameraId !== "string" || !camera.cameraId) {
+              throw new Error(`${camerasFile} has an invalid camera ID at index ${index}`);
             }
-            if (seat.vehicleIds.some((vehicleId) => typeof vehicleId !== "string")) {
-              throw new Error(`${file} has a non-string vehicle ID at index ${index}`);
+            if (![distance?.initialDistance, distance?.minDistance, distance?.maxDistance].every(finiteNumber)) {
+              throw new Error(`${camerasFile} has an invalid distance config at index ${index}`);
+            }
+            if (![targetOffset?.targetPositionOffset, targetOffset?.userTargetOffsetMin, targetOffset?.userTargetOffsetMax].every(validVector)) {
+              throw new Error(`${camerasFile} has an invalid target offset config at index ${index}`);
+            }
+            if (cameraIds.has(camera.cameraId)) throw new Error(`${camerasFile} contains duplicate camera ID ${camera.cameraId}`);
+            cameraIds.add(camera.cameraId);
+          }
+
+          for (const [index, seat] of seatsPayload.seats.entries()) {
+            if (typeof seat?.groupId !== "string" || !Array.isArray(seat.vehicleIds) || !Array.isArray(seat.thirdPersonCameraIds)) {
+              throw new Error(`${seatsFile} has an invalid seat entry at index ${index}`);
+            }
+            if ([...seat.vehicleIds, ...seat.thirdPersonCameraIds].some((id) => typeof id !== "string")) {
+              throw new Error(`${seatsFile} has a non-string ID at index ${index}`);
+            }
+            const missingCameraId = seat.thirdPersonCameraIds.find((cameraId) => !cameraIds.has(cameraId));
+            if (missingCameraId) {
+              throw new Error(`${seatsFile} references missing third-person camera ${missingCameraId}`);
             }
           }
-          console.log(`Validated ${payload.seats.length} camera seat groups from Fancy-Star-Data.`);
+          console.log(`Validated ${seatsPayload.seats.length} seats and ${cameraIds.size} third-person cameras from Fancy-Star-Data.`);
           NODE
 
       - name: Commit and push changes
         run: |
-          if git diff --quiet -- src/data/seats.json; then
-            echo "No camera seat data changes detected."
+          git add src/data/seats.json src/data/third_person_cameras.json
+
+          if git diff --cached --quiet -- src/data/seats.json src/data/third_person_cameras.json; then
+            echo "No camera data changes detected."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/seats.json
-          git commit -m "chore(camera): sync seat vehicle data from Fancy-Star-Data"
+          git commit -m "chore(camera): sync DataCore camera data from Fancy-Star-Data"
           git push origin main

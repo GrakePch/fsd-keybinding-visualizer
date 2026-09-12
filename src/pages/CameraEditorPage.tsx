@@ -18,6 +18,7 @@ import { addSavedViewGroup, copyCameraSlot, createDefaultCameraSlot, getSlotById
 import { fillEmptySlotsWithSeatViewPreset, resetSlotsToSeatViewPreset } from "../utils/seatViewPreset";
 import { useSpvVehicleIndex, useSpvVehicles } from "../utils/spvVehicleData";
 import { getSeatVehicleIndex, useSeatsData } from "../utils/seatsData";
+import { getThirdPersonCameraConfigForSeat } from "../utils/thirdPersonCameraData";
 import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
 import styles from "./CameraEditorPage.module.css";
 
@@ -48,6 +49,7 @@ function CameraEditorPage() {
   const activeSlotId = cameraViewSlotId ?? selectedSlotId;
 
   const selectedGroup = useMemo(() => savedViews?.groups.find((group) => group.id === selectedGroupId), [savedViews, selectedGroupId]);
+  const selectedSeat = selectedGroup ? seatVehicleIndex[selectedGroup.id] : null;
   const selectedSlot = selectedGroup ? getSlotById(selectedGroup, activeSlotId) : undefined;
   const currentSavedViewsJson = JSON.stringify(savedViews);
   const hasSavedViewsChanges = currentSavedViewsJson !== baselineSavedViewsJson;
@@ -56,6 +58,10 @@ function CameraEditorPage() {
   const autoGroupModel = selectedSeatUsage?.model || null;
   const loadedModel = selectedGroupId ? getModelWithStableSpvBounds(manualGroupModel, spvVehicleIndex) || autoGroupModel : getModelWithStableSpvBounds(standaloneLoadedModel, spvVehicleIndex);
   const viewportModel = isSelectingModel ? getModelWithStableSpvBounds(previewModel, spvVehicleIndex) || loadedModel : loadedModel;
+  const selectedThirdPersonCameraConfig = getThirdPersonCameraConfigForSeat(
+    selectedSeat,
+    selectedSeatUsage?.vehicleId || selectedSeat?.vehicleIds[0],
+  );
   const selectedSlotMarkers = useMemo(() => getCameraPositionMarkers(selectedSlot ? [selectedSlot] : []), [selectedSlot]);
   const canEnterSelectedCameraView = canEnterCameraView(selectedSlotMarkers, activeSlotId);
 
@@ -255,7 +261,7 @@ function CameraEditorPage() {
         onSetAllEmptyToPreset={setAllEmptySlotsToPreset}
         onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
-      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
+      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportModel} cameraConfig={selectedThirdPersonCameraConfig} isPreviewingModel={isSelectingModel} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
       {isSelectingModel ? (
         <CameraModelSelectorPanel
           selectedModel={loadedModel && !isVehicleFallbackBoxModel(loadedModel) ? loadedModel : null}
@@ -267,6 +273,7 @@ function CameraEditorPage() {
       ) : (
         <CameraControlPanel
           loadedModel={loadedModel}
+          cameraConfig={selectedThirdPersonCameraConfig}
           selectedGroup={selectedGroup}
           selectedSlot={selectedSlot}
           selectedSlotId={activeSlotId}

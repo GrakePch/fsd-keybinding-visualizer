@@ -1,9 +1,10 @@
 import type { Vec3 } from "../types/savedViews";
+import type { ThirdPersonCameraBaseConfig } from "../types/thirdPersonCamera";
 import type { VehicleModelBounds } from "../types/vehicleModel";
 
 const VEHICLE_MODEL_METERS_PER_SOURCE_UNIT = 0.01;
 
-export type CameraControlRangeSource = "precise" | "inferred" | "default";
+export type CameraControlRangeSource = "datacore" | "inferred" | "default";
 
 export type NumericRange = {
   min: number;
@@ -25,50 +26,37 @@ export type CameraControlRanges = {
 };
 
 type CameraControlRangeInput = {
-  className?: string | null;
+  cameraConfig?: ThirdPersonCameraBaseConfig | null;
   bounds?: VehicleModelBounds | null;
   currentTargetOffset?: Vec3 | null;
   currentDistance?: number | null;
 };
 
 type CameraControlRangePreset = {
-  x: number;
-  y: number;
-  z: number;
+  targetOffset: Record<keyof Vec3, NumericRange>;
   distance: NumericRange;
 };
 
-type PreciseRangeOverride = CameraControlRangePreset & {
-  className?: string;
-  classPrefix?: string;
-};
-
 const DEFAULT_RANGE_PRESET: CameraControlRangePreset = {
-  x: 100,
-  y: 100,
-  z: 60,
+  targetOffset: {
+    x: { min: -100, max: 100 },
+    y: { min: -100, max: 100 },
+    z: { min: -60, max: 60 },
+  },
   distance: { min: 0, max: 170 },
 };
 
-const PRECISE_RANGE_OVERRIDES: PreciseRangeOverride[] = [
-  { classPrefix: "ANVL_C8", x: 30, y: 25, z: 15, distance: { min: 8, max: 25 } },
-  { classPrefix: "RSI_Zeus", x: 100, y: 100, z: 60, distance: { min: 30, max: 170 } },
-  { classPrefix: "CRUS_Spirit", x: 100, y: 100, z: 60, distance: { min: 30, max: 170 } },
-  { classPrefix: "CRUS_Starlifter", x: 100, y: 100, z: 60, distance: { min: 55, max: 170 } },
-  { className: "ANVL_Carrack", x: 180, y: 150, z: 85, distance: { min: 85, max: 220 } },
-];
-
-export function getCameraControlRanges({ className, bounds, currentTargetOffset, currentDistance }: CameraControlRangeInput): CameraControlRanges {
-  const precisePreset = getPrecisePreset(className);
-  const inferredPreset = precisePreset ? null : getInferredPreset(bounds);
-  const source: CameraControlRangeSource = precisePreset ? "precise" : inferredPreset ? "inferred" : "default";
-  const preset = precisePreset || inferredPreset || DEFAULT_RANGE_PRESET;
-  const inputMultiplier = source === "precise" ? 1.5 : 2;
+export function getCameraControlRanges({ cameraConfig, bounds, currentTargetOffset, currentDistance }: CameraControlRangeInput): CameraControlRanges {
+  const datacorePreset = getDatacorePreset(cameraConfig);
+  const inferredPreset = datacorePreset ? null : getInferredPreset(bounds);
+  const source: CameraControlRangeSource = datacorePreset ? "datacore" : inferredPreset ? "inferred" : "default";
+  const preset = datacorePreset || inferredPreset || DEFAULT_RANGE_PRESET;
+  const inputMultiplier = source === "datacore" ? 1.5 : 2;
 
   const targetOffset = {
-    x: buildSymmetricAxisRange(preset.x, currentTargetOffset?.x, inputMultiplier),
-    y: buildSymmetricAxisRange(preset.y, currentTargetOffset?.y, inputMultiplier),
-    z: buildSymmetricAxisRange(preset.z, currentTargetOffset?.z, inputMultiplier),
+    x: buildAxisRange(preset.targetOffset.x, currentTargetOffset?.x, inputMultiplier),
+    y: buildAxisRange(preset.targetOffset.y, currentTargetOffset?.y, inputMultiplier),
+    z: buildAxisRange(preset.targetOffset.z, currentTargetOffset?.z, inputMultiplier),
   };
   const distance = buildDistanceRange(preset.distance, currentDistance, inputMultiplier);
 
@@ -84,18 +72,30 @@ export function getCameraControlRanges({ className, bounds, currentTargetOffset,
   };
 }
 
-function getPrecisePreset(className: string | null | undefined): CameraControlRangePreset | null {
-  if (!className) return null;
+function getDatacorePreset(cameraConfig: ThirdPersonCameraBaseConfig | null | undefined): CameraControlRangePreset | null {
+  const distance = cameraConfig?.distanceConfig;
+  const minOffset = cameraConfig?.targetOffsetConfig.userTargetOffsetMin;
+  const maxOffset = cameraConfig?.targetOffsetConfig.userTargetOffsetMax;
+  if (
+    !distance ||
+    !minOffset ||
+    !maxOffset ||
+    !isUsableRange({ min: distance?.minDistance, max: distance?.maxDistance }) ||
+    !isUsableRange({ min: minOffset?.x, max: maxOffset?.x }) ||
+    !isUsableRange({ min: minOffset?.y, max: maxOffset?.y }) ||
+    !isUsableRange({ min: minOffset?.z, max: maxOffset?.z })
+  ) {
+    return null;
+  }
 
-  const matches = PRECISE_RANGE_OVERRIDES.filter((override) => override.className === className || (override.classPrefix ? className.startsWith(override.classPrefix) : false));
-  if (!matches.length) return null;
-
-  const [bestMatch] = matches.sort((a, b) => getOverrideScore(b) - getOverrideScore(a));
-  return bestMatch;
-}
-
-function getOverrideScore(override: PreciseRangeOverride) {
-  return override.className ? Number.MAX_SAFE_INTEGER : override.classPrefix?.length || 0;
+  return {
+    targetOffset: {
+      x: { min: minOffset.x, max: maxOffset.x },
+      y: { min: minOffset.y, max: maxOffset.y },
+      z: { min: minOffset.z, max: maxOffset.z },
+    },
+    distance: { min: distance.minDistance, max: distance.maxDistance },
+  };
 }
 
 function getInferredPreset(bounds: VehicleModelBounds | null | undefined): CameraControlRangePreset | null {
@@ -104,16 +104,27 @@ function getInferredPreset(bounds: VehicleModelBounds | null | undefined): Camer
 
   const longest = Math.max(sizeMeters[0], sizeMeters[1]);
   if (longest <= 20) {
-    return { x: 30, y: 25, z: 15, distance: { min: 8, max: 30 } };
+    return symmetricPreset(30, 25, 15, { min: 8, max: 30 });
   }
   if (longest <= 60) {
-    return { x: 100, y: 100, z: 60, distance: { min: 25, max: 170 } };
+    return symmetricPreset(100, 100, 60, { min: 25, max: 170 });
   }
   if (longest <= 110) {
-    return { x: 120, y: 120, z: 70, distance: { min: 45, max: 190 } };
+    return symmetricPreset(120, 120, 70, { min: 45, max: 190 });
   }
 
-  return { x: 180, y: 150, z: 85, distance: { min: 70, max: 240 } };
+  return symmetricPreset(180, 150, 85, { min: 70, max: 240 });
+}
+
+function symmetricPreset(x: number, y: number, z: number, distance: NumericRange): CameraControlRangePreset {
+  return {
+    targetOffset: {
+      x: { min: -x, max: x },
+      y: { min: -y, max: y },
+      z: { min: -z, max: z },
+    },
+    distance,
+  };
 }
 
 function getUsableSizeMeters(bounds: VehicleModelBounds | null | undefined): [number, number, number] | null {
@@ -121,12 +132,11 @@ function getUsableSizeMeters(bounds: VehicleModelBounds | null | undefined): [nu
   return bounds.size.map((value) => value * VEHICLE_MODEL_METERS_PER_SOURCE_UNIT) as [number, number, number];
 }
 
-function buildSymmetricAxisRange(maxMagnitude: number, currentValue: number | null | undefined, inputMultiplier: number): CameraControlAxisRange {
-  const recommended = { min: -maxMagnitude, max: maxMagnitude };
+function buildAxisRange(recommended: NumericRange, currentValue: number | null | undefined, inputMultiplier: number): CameraControlAxisRange {
   return {
     recommended,
     slider: expandRangeToIncludeValue(recommended, currentValue),
-    input: { min: -maxMagnitude * inputMultiplier, max: maxMagnitude * inputMultiplier },
+    input: { min: recommended.min * inputMultiplier, max: recommended.max * inputMultiplier },
     isCurrentValueOutsideRecommendedRange: isOutsideRange(currentValue, recommended),
   };
 }
@@ -151,4 +161,8 @@ function expandRangeToIncludeValue(range: NumericRange, value: number | null | u
 
 function isOutsideRange(value: number | null | undefined, range: NumericRange) {
   return Number.isFinite(value) && ((value as number) < range.min || (value as number) > range.max);
+}
+
+function isUsableRange(range: { min: unknown; max: unknown }): range is NumericRange {
+  return typeof range.min === "number" && Number.isFinite(range.min) && typeof range.max === "number" && Number.isFinite(range.max) && range.min <= range.max;
 }

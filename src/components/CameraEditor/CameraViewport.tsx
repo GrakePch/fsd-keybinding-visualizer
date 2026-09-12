@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
+import type { ThirdPersonCameraBaseConfig } from "../../types/thirdPersonCamera";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
 import { isVehicleFallbackBoxModel, isVehicleViewportModelRenderable } from "../../types/vehicleModel";
 import { shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
@@ -14,22 +15,23 @@ interface CameraViewportProps {
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   model: VehicleViewportModel | null;
+  cameraConfig: ThirdPersonCameraBaseConfig | null;
   isPreviewingModel: boolean;
   isCameraViewActive: boolean;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
   onSelectSlot: (slotId: number) => void;
 }
 
-function CameraViewport({ selectedGroup, selectedSlot, model, isPreviewingModel, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
+function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, isPreviewingModel, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
   const hasRenderableModel = isVehicleViewportModelRenderable(model);
   const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel });
   const cameraControlRanges = useMemo(
     () =>
       getCameraControlRanges({
-        className: model?.spvClassName || model?.className,
+        cameraConfig,
         bounds: model?.bounds,
       }),
-    [model?.bounds, model?.className, model?.spvClassName],
+    [cameraConfig, model?.bounds],
   );
   const cameraPositionMarkers = getCameraPositionMarkers(selectedGroup?.slots || [], { minimumDistance: cameraControlRanges.distance.recommended.min });
   const targetOffsetBounds = useMemo(
