@@ -13,7 +13,7 @@ import { getVisibleCameraGroups } from "../utils/cameraGroup";
 import { getSeatVehicleUsage, getVehicleDisplayName, type SeatVehicleUsage } from "../utils/cameraAutoVehicleModel";
 import { getReferenceVehicles, resolveGroupVehicleContext, setGroupVehicleBinding, type GroupVehicleBinding, type GroupVehicleBindings } from "../utils/cameraVehicleBinding";
 import { addSavedViewGroup, copyCameraSlot, createDefaultCameraSlot, getSlotById, updateSavedCameraSlot } from "../utils/savedViews";
-import { fillEmptySlotsWithSeatViewPreset, resetSlotsToSeatViewPreset } from "../utils/seatViewPreset";
+import { fillEmptySlotsWithSeatViewPreset, resetSlotsToSeatViewPreset, type SeatViewPresetContext } from "../utils/seatViewPreset";
 import { useSpvVehicles } from "../utils/spvVehicleData";
 import { getSeatVehicleIndex, useSeatsData } from "../utils/seatsData";
 import { getThirdPersonCameraConfigForSeat } from "../utils/thirdPersonCameraData";
@@ -64,6 +64,23 @@ function CameraEditorPage() {
   const previewContext = resolveGroupVehicleContext({ ...contextInput, binding: previewBinding });
   const viewportContext = isSelectingReferenceVehicle && previewBinding ? previewContext : appliedContext;
   const loadedModel = appliedContext.model;
+
+  const getPresetContextForGroup = (groupId: string): SeatViewPresetContext => {
+    const seat = seatVehicleIndex[groupId];
+    const usage = getSeatVehicleUsage(groupId, Object.values(seatVehicleIndex), manifest, spvVehicles);
+    const autoVehicleId = usage?.vehicleId || seat?.vehicleIds[0];
+    const context = resolveGroupVehicleContext({
+      autoModel: usage?.model || null,
+      autoVehicleId,
+      seatCameraConfig: getThirdPersonCameraConfigForSeat(seat, autoVehicleId),
+      vehicles: referenceVehicles,
+      binding: groupBindings[groupId] || null,
+    });
+
+    return { cameraConfig: context.cameraConfig, modelBounds: context.model?.bounds };
+  };
+
+  const selectedPresetContext = selectedGroup ? getPresetContextForGroup(selectedGroup.id) : {};
   const selectedSlotMarkers = useMemo(() => getCameraPositionMarkers(selectedSlot ? [selectedSlot] : []), [selectedSlot]);
   const canEnterSelectedCameraView = canEnterCameraView(selectedSlotMarkers, activeSlotId);
 
@@ -157,7 +174,7 @@ function CameraEditorPage() {
     setSavedViews({
       ...savedViews,
       groups: savedViews.groups.map((group) =>
-        group.id === selectedGroup.id ? { ...group, slots: fillEmptySlotsWithSeatViewPreset(group.slots) } : group,
+        group.id === selectedGroup.id ? { ...group, slots: fillEmptySlotsWithSeatViewPreset(group.slots, selectedPresetContext) } : group,
       ),
     });
   };
@@ -168,7 +185,7 @@ function CameraEditorPage() {
     setSavedViews({
       ...savedViews,
       groups: savedViews.groups.map((group) =>
-        group.id === selectedGroup.id ? { ...group, slots: resetSlotsToSeatViewPreset() } : group,
+        group.id === selectedGroup.id ? { ...group, slots: resetSlotsToSeatViewPreset(selectedPresetContext) } : group,
       ),
     });
   };
@@ -179,7 +196,7 @@ function CameraEditorPage() {
 
       return {
         ...currentDocument,
-        groups: currentDocument.groups.map((group) => ({ ...group, slots: fillEmptySlotsWithSeatViewPreset(group.slots) })),
+        groups: currentDocument.groups.map((group) => ({ ...group, slots: fillEmptySlotsWithSeatViewPreset(group.slots, getPresetContextForGroup(group.id)) })),
       };
     });
   };
@@ -190,7 +207,7 @@ function CameraEditorPage() {
 
       return {
         ...currentDocument,
-        groups: currentDocument.groups.map((group) => ({ ...group, slots: resetSlotsToSeatViewPreset() })),
+        groups: currentDocument.groups.map((group) => ({ ...group, slots: resetSlotsToSeatViewPreset(getPresetContextForGroup(group.id)) })),
       };
     });
   };
