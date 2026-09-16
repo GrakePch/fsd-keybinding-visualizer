@@ -11,6 +11,7 @@ import styles from "./CameraGroupDrawer.module.css";
 interface CameraGroupDrawerProps {
   fileConsole?: ReactNode;
   groups: SavedViewGroup[];
+  dirtyGroupIds?: ReadonlySet<string>;
   selectedGroupId: string;
   seats: SeatVehicleEntry[];
   canAddGroup: boolean;
@@ -23,7 +24,7 @@ interface CameraGroupDrawerProps {
   onResetAllGroupsToPreset: () => void;
 }
 
-function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onDeleteGroup, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupDrawerProps) {
+function CameraGroupDrawer({ fileConsole, groups, dirtyGroupIds, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onDeleteGroup, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupDrawerProps) {
   const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
   const [isMoreActionsOpen, setIsMoreActionsOpen] = useState(false);
   const [isResetAllGroupsOpen, setIsResetAllGroupsOpen] = useState(false);
@@ -149,6 +150,7 @@ function CameraGroupDrawer({ fileConsole, groups, selectedGroupId, seats, canAdd
                   <span className={styles.groupName}>{formatCameraGroupName(group.id)}</span>
                   {seatVehicleUsageByGroupId[group.id] && <span className={styles.usedBy}>@ {seatVehicleUsageByGroupId[group.id].displayName}</span>}
                   <span className={styles.slotCount}>{group.slots.length} slots</span>
+                  {dirtyGroupIds?.has(group.id) && <span className={styles.dirtyBadge} aria-label={`Unsaved changes: ${group.id}`}>Unsaved</span>}
                 </button>
                 <button
                   className={styles.deleteGroupButton}

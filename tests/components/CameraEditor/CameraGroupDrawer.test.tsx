@@ -4,6 +4,17 @@ import CameraGroupDrawer from "../../../src/components/CameraEditor/CameraGroupD
 import { formatCameraGroupName, getVisibleCameraGroups, normalizeGroupSearchText } from "../../../src/utils/cameraGroup";
 
 describe("CameraGroupDrawer", () => {
+  it("shows unsaved status only on the corresponding group id", () => {
+    const markup = renderToStaticMarkup(<CameraGroupDrawer
+      groups={["Alpha", "Beta"].map((id) => ({ id, slots: [], rawAttributes: {} }))}
+      dirtyGroupIds={new Set(["Beta"])} selectedGroupId="Alpha" seats={[]} canAddGroup
+      onAddGroups={() => {}} onDeleteGroup={() => {}} onSelectGroup={() => {}}
+      onSetAllEmptyToPreset={() => {}} onResetAllGroupsToPreset={() => {}}
+    />);
+    expect(markup).toContain('aria-label="Unsaved changes: Beta"');
+    expect(markup).not.toContain('aria-label="Unsaved changes: Alpha"');
+  });
+
   it("uses the same group display formatting and search normalization", () => {
     expect(formatCameraGroupName("Seat_AEGS_Avenger")).toBe("Seat AEGS Avenger");
     expect(normalizeGroupSearchText("AEGS_Avenger")).toBe(normalizeGroupSearchText("AEGS Avenger"));

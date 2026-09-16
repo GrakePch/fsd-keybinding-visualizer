@@ -18,7 +18,7 @@ interface CameraFileConsoleProps {
   savedViews: SavedViewsDocument | null;
   hasChanges: boolean;
   onLoad: (document: SavedViewsDocument, source: LoadedSavedViewsSource, loadedFileName: string) => void;
-  onSaved: () => void;
+  onSaved: (document: SavedViewsDocument) => void;
 }
 
 function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFileConsoleProps) {
@@ -27,6 +27,7 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
   const [loadedFileName, setLoadedFileName] = useState("");
   const [isLocalSavedViewsMissing, setIsLocalSavedViewsMissing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const canUseLocalPath = useMemo(() => typeof (window as WindowWithDirectoryPicker).showDirectoryPicker === "function", []);
@@ -115,8 +116,9 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
   };
 
   const overwriteLocalPath = async () => {
-    if (!savedViews || !gameRootDirectory.rootDirectory) return;
+    if (!savedViews || !gameRootDirectory.rootDirectory || isSaving) return;
 
+    setIsSaving(true);
     try {
       const savedViewsHandle = await getNestedFileHandle(gameRootDirectory.rootDirectory, SAVEDVIEWS_PATH_PARTS, true);
       const writable = await savedViewsHandle.createWritable();
@@ -125,9 +127,11 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
       setSource("localPath");
       setIsLocalSavedViewsMissing(false);
       setStatusMessage("savedviews.xml overwritten");
-      onSaved();
+      onSaved(savedViews);
     } catch {
       setStatusMessage("Failed to overwrite savedviews.xml");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -144,24 +148,24 @@ function CameraFileConsole({ savedViews, hasChanges, onLoad, onSaved }: CameraFi
       <div className={styles.controls}>
         <div className={styles.controlRow}>
           <Tooltip className={styles.controlTooltip} tooltip={OPEN_PATH_TOOLTIP} position="bottom-left">
-            <button className={styles.tooltipButton} type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath}>
+            <button className={styles.tooltipButton} type="button" onClick={() => readFromLocalPath(true)} disabled={!canUseLocalPath || isSaving}>
               <Icon className={styles.buttonIcon} path={mdiFolderOpen} size="1rem" aria-hidden="true" />
               Open Path
             </button>
           </Tooltip>
-          <button type="button" onClick={() => readFromLocalPath()} disabled={!canRefreshLocalPath}>
+          <button type="button" onClick={() => readFromLocalPath()} disabled={!canRefreshLocalPath || isSaving}>
             <Icon className={styles.buttonIcon} path={mdiRefresh} size="1rem" aria-hidden="true" />
             Refresh
           </button>
         </div>
-        <button className={`${styles.fullWidthButton} buttonNormal`} type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges}>
+        <button className={`${styles.fullWidthButton} buttonNormal`} type="button" onClick={overwriteLocalPath} disabled={!canOverwrite || !hasChanges || isSaving}>
           <Icon className={styles.buttonIcon} path={mdiContentSave} size="1rem" aria-hidden="true" />
-          Save to Path
+          {isSaving ? "Saving…" : "Save to Path"}
         </button>
         <div className={styles.controlDivider} aria-hidden="true" />
         <div className={styles.controlRow}>
           <Tooltip className={styles.controlTooltip} tooltip={UPLOAD_TOOLTIP} position="bottom-left">
-            <button className={styles.tooltipButton} type="button" onClick={() => fileInputRef.current?.click()}>
+            <button className={styles.tooltipButton} type="button" disabled={isSaving} onClick={() => fileInputRef.current?.click()}>
               <Icon className={styles.buttonIcon} path={mdiTrayArrowUp} size="1rem" aria-hidden="true" />
               Upload
             </button>

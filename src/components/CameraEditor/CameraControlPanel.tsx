@@ -34,6 +34,7 @@ interface CameraControlPanelProps {
   onSelectSlot: (slotId: number) => void;
   onSelectFrustumAspectRatio: (aspectRatioId: CameraFrustumAspectRatioId) => void;
   onUpdateSlot: (slot: SavedCameraSlot) => void;
+  onEditBoundary?: () => void;
   onCreateSlot: () => void;
   onCopySlot: (sourceSlotId: number) => void;
   onSetEmptyToPreset: () => void;
@@ -49,7 +50,7 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
 const mdiScShip =
   "M16,16.813l-0,0.937l1.688,2.125l-0,2.125l-3.563,-2l0,-3.687l-0.875,-0.75l-0.438,1.687l-1.624,0l-0.438,-1.687l-0.875,0.75l0,3.687l-3.563,2l0.001,-2.125l1.687,-2.125l0,-0.937l-1.313,-0.875l-2.562,2.5l0,-2.875l5.188,-6.75l1.625,-6.813l2.125,-0l1.625,6.813l5.187,6.75l0,2.875l-2.562,-2.5l-1.313,0.875Z";
 
-function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, onRestoreAutomaticBinding, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectFrustumAspectRatio, onUpdateSlot, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, onRestoreAutomaticBinding, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectFrustumAspectRatio, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
@@ -162,7 +163,18 @@ function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasMa
         )}
 
         {selectedSlot && (
-          <div className={styles.fields}>
+          <div className={styles.fields}
+            onFocusCapture={(event) => {
+              // Range inputs can emit their first change before focus on pointer-down.
+              // Starting again on focus would split a single drag into two undo steps.
+              if (!(event.target instanceof HTMLInputElement) || event.target.type !== "range") onEditBoundary?.();
+            }}
+            onBlurCapture={onEditBoundary}
+            onPointerDownCapture={onEditBoundary}
+            onPointerUpCapture={(event) => { if (event.target instanceof HTMLInputElement && event.target.type === "range") onEditBoundary?.(); }}
+            onPointerCancelCapture={onEditBoundary}
+            onKeyUpCapture={(event) => { if (event.target instanceof HTMLInputElement && event.target.type === "range") onEditBoundary?.(); }}
+          >
             <CameraVector3Editor label="Target Offset" value={selectedSlot.targetOffset} variant="rangeSlider" ranges={cameraControlRanges.targetOffset} rangeNotes={cameraControlTargetOffsetRangeNotes} onChange={(targetOffset) => updateSlot({ targetOffset })} />
             <CameraVector3Editor
               label="Rotation Angle"
