@@ -5,6 +5,7 @@ import {
   BindingDevice,
   BindingKind,
   InputBinding,
+  KbmActionType,
   KeyWithMod,
   OrderInfo,
   RawAction,
@@ -16,6 +17,24 @@ import {
 import i18n from "../i18n";
 
 export const modifiers = ["lalt", "ralt", "lctrl", "rctrl", "lshift", "rshift"];
+export const maxisInputs = ["maxis_x", "maxis_y", "maxis_z"] as const;
+
+const hasOwn = (value: object, property: string) =>
+  Object.prototype.hasOwnProperty.call(value, property);
+
+const hasDeviceField = (rawAction: RawAction, device: "keyboard" | "mouse" | "gamepad" | "joystick") =>
+  hasOwn(rawAction, `_${device}`) || hasOwn(rawAction, device);
+
+export function isSupportedKbmAction(rawAction: RawAction): boolean {
+  if (!rawAction._UILabel?.trim()) return false;
+  if ([rawAction.keyboard, rawAction.mouse, rawAction.gamepad, rawAction.joystick]
+    .some((binding) => binding?.inputdata !== undefined)) return false;
+
+  const hasKbmField = hasDeviceField(rawAction, "keyboard") || hasDeviceField(rawAction, "mouse");
+  const hasControllerField = hasDeviceField(rawAction, "gamepad") || hasDeviceField(rawAction, "joystick");
+
+  return hasKbmField || !hasControllerField;
+}
 
 export function initDefaultActionGroups(
   rawDefaultProfile: RawDefaultProfile,
@@ -36,7 +55,7 @@ export function initDefaultActionGroups(
       UICategory: rawGroup._UICategory || "",
       actions: {},
     };
-    getListActions(rawGroup).forEach((rawAction) => {
+    getListActions(rawGroup).filter(isSupportedKbmAction).forEach((rawAction) => {
       const action = initActions(rawAction, rawGroup);
       tempInGroupOrder[rawGroup._name].push(action.name);
       tempDefaultActionGroups[rawGroup._name].actions[action.name] = action;
@@ -48,9 +67,9 @@ export function initDefaultActionGroups(
 }
 
 export function initActions(rawAction: RawAction, rawGroup: RawActionGroup): Action {
-  const kbm = createDefaultBinding(rawAction._keyboard, rawAction.keyboard, "keyboard") || createDefaultBinding(rawAction._mouse, rawAction.mouse, "mouse");
+  const kbmBinding = createDefaultBinding(rawAction._keyboard, rawAction.keyboard, "keyboard") || createDefaultBinding(rawAction._mouse, rawAction.mouse, "mouse");
   const bindings = [
-    kbm,
+    kbmBinding,
     createDefaultBinding(rawAction._gamepad, rawAction.gamepad, "gamepad"),
     createDefaultBinding(rawAction._joystick, rawAction.joystick, "joystick"),
   ].filter((binding): binding is InputBinding => binding !== null);
@@ -68,7 +87,8 @@ export function initActions(rawAction: RawAction, rawGroup: RawActionGroup): Act
     always: rawAction._always || "",
     activationMode: rawAction._activationMode || rawAction._ActivationMode || "",
     retriggerable: rawAction._retriggerable || "",
-    kbm: keyWithModFromBinding(keyboard[0]),
+    kbmActionType: getKbmActionType(kbmBinding),
+    kbm: keyWithModFromBinding(kbmBinding || undefined),
     bindings,
     keyboard,
     mouse,
@@ -78,6 +98,10 @@ export function initActions(rawAction: RawAction, rawGroup: RawActionGroup): Act
     UIDescription: rawAction._UIDescription || "",
     category: rawAction._Category || "",
   };
+}
+
+function getKbmActionType(binding: InputBinding | null): KbmActionType {
+  return binding?.kind === "axis" ? "maxis" : "non-maxis";
 }
 
 function createDefaultBinding(input: string | undefined, deviceBinding: RawAction["keyboard"], device: BindingDevice): InputBinding | null {
@@ -131,9 +155,9 @@ export function createInputBinding(input: string, hint?: BindingDevice, extraAtt
   if (!rawInput) return null;
 
   const { prefix, inputName: serializedInputName } = getSerializedParts(rawInput);
-  const device = getBindingDevice(serializedInputName, hint, prefix);
   const parsed = parseInputString(serializedInputName);
   const inputName = parsed.key;
+  const device = getBindingDevice(inputName, hint, prefix);
   const serializationPrefix = prefix || (device === "gamepad" ? "gp1" : device === "joystick" ? "js1" : "kb1");
   const indexMatch = serializationPrefix.match(/\d+$/);
 
@@ -174,6 +198,7 @@ export function keyWithModFromBinding(binding: InputBinding | undefined): KeyWit
 
 export function applyBindingsToAction(action: Action, bindings: InputBinding[]): Action {
   const nextBindings = normalizeBindingList(bindings);
+  const kbmBinding = nextBindings.find((binding) => binding.device === "keyboard" || binding.device === "mouse");
   const keyboard = nextBindings.filter((binding) => binding.device === "keyboard");
   const mouse = nextBindings.filter((binding) => binding.device === "mouse");
 
@@ -182,7 +207,7 @@ export function applyBindingsToAction(action: Action, bindings: InputBinding[]):
     bindings: nextBindings,
     keyboard,
     mouse,
-    kbm: keyWithModFromBinding(keyboard[0]),
+    kbm: keyWithModFromBinding(kbmBinding),
   };
 }
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import defaultProfile from "../../src/data/defaultProfile.json";
-import { buildActionmapsXML, createInputBinding, getActivationModeDefinitions, getUserActionmap, initActions, updateInputBinding } from "../../src/utils/utils";
+import { buildActionmapsXML, createInputBinding, getActivationModeDefinitions, getListActions, getUserActionmap, initActions, isSupportedKbmAction, maxisInputs, updateInputBinding } from "../../src/utils/utils";
 
 describe("keybinding input bindings", () => {
   it("recognizes mouse inputs that use the kb1 serialization prefix", () => {
@@ -23,6 +23,17 @@ describe("keybinding input bindings", () => {
       inputName: "f",
       modifier: "lalt",
       rawInput: "kb1_lalt+f",
+    });
+  });
+
+  it("classifies a modified mouse token by its input instead of the kb1 prefix", () => {
+    const binding = createInputBinding("kb1_lalt+mouse2");
+
+    expect(binding).toMatchObject({
+      device: "mouse",
+      kind: "button",
+      inputName: "mouse2",
+      modifier: "lalt",
     });
   });
 
@@ -49,6 +60,50 @@ describe("keybinding input bindings", () => {
 
     expect(action.bindings.filter((binding) => binding.device === "keyboard" || binding.device === "mouse")).toHaveLength(1);
     expect(action.kbm).toEqual({ key: "f", modifier: "" });
+    expect(action.kbmActionType).toBe("non-maxis");
+  });
+
+  it("derives maxis action type from a default axis token regardless of its XML device attribute", () => {
+    const action = initActions(
+      { _name: "throttle", _keyboard: "lalt+maxis_z" },
+      { _name: "ship", action: { _name: "throttle" } },
+    );
+
+    expect(action.kbmActionType).toBe("maxis");
+    expect(action.kbm).toEqual({ key: "maxis_z", modifier: "lalt" });
+    expect(action.bindings[0]).toMatchObject({ device: "mouse", kind: "axis" });
+  });
+
+  it("limits the supported action scope to UILabel actions without inputdata", () => {
+    expect(isSupportedKbmAction({ _name: "visible", _UILabel: "@visible", _keyboard: "f" })).toBe(true);
+    expect(isSupportedKbmAction({ _name: "unbound", _UILabel: "@unbound" })).toBe(true);
+    expect(isSupportedKbmAction({ _name: "blank-keyboard", _UILabel: "@blank", _keyboard: " ", _gamepad: "a" })).toBe(true);
+    expect(isSupportedKbmAction({ _name: "empty-mouse", _UILabel: "@empty", _mouse: "", _joystick: "x" })).toBe(true);
+    expect(isSupportedKbmAction({ _name: "hidden", _keyboard: "f" })).toBe(false);
+    expect(isSupportedKbmAction({
+      _name: "controller-only",
+      _UILabel: "@controller",
+      _gamepad: "thumbrx",
+      _joystick: "x",
+    })).toBe(false);
+    expect(isSupportedKbmAction({
+      _name: "multi-input",
+      _UILabel: "@multi",
+      keyboard: { inputdata: [{ _input: "enter" }, { _input: "np_enter" }] },
+    })).toBe(false);
+  });
+
+  it("classifies the current supported default profile into the two kbm action types", () => {
+    const actions = defaultProfile.profile.actionmap.flatMap((group) =>
+      getListActions(group).filter(isSupportedKbmAction).map((rawAction) => initActions(rawAction, group))
+    );
+
+    expect(actions).toHaveLength(721);
+    expect(actions.filter((action) => action.kbmActionType === "maxis")).toHaveLength(17);
+    expect(new Set(actions.map((action) => action.kbmActionType))).toEqual(new Set(["maxis", "non-maxis"]));
+    expect(maxisInputs).toEqual(["maxis_x", "maxis_y", "maxis_z"]);
+    expect(actions.filter((action) => action.name === "v_view_yaw")).toHaveLength(0);
+    expect(actions.filter((action) => action.name === "v_view_yaw_mouse")).toHaveLength(2);
   });
 
   it("writes a recorded modifier into the kb1 input", () => {

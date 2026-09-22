@@ -5,9 +5,10 @@ import { CTXDefaultActionGroups, CTXKeysHovering, CTXUserActionmap, type AppLang
 import defaultProfile from "../../data/defaultProfile.json";
 import actionIcon from "../../icons/actionIcon";
 import type { Action, InputBinding } from "../../interfaces";
-import { getActivationModeDefinitions, i18nUI, rebindAction, resetAction } from "../../utils/utils";
+import { getActivationModeDefinitions, i18nUI, rebindAction, resetAction, updateInputBinding } from "../../utils/utils";
 import ActionBindingControls from "./ActionBindingControls";
 import ActionBindingDisplay from "./ActionBindingDisplay";
+import MaxisBindingControls from "./MaxisBindingControls";
 import {
   areBindingListsEqual,
   areBindingsEqual,
@@ -31,12 +32,17 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
   const defaultActionGroups = useContext(CTXDefaultActionGroups);
   const [userActionmap, setUserActionmap] = useContext(CTXUserActionmap);
   const defaultAction = defaultActionGroups[action._group]?.actions[action.name];
+  const isMaxisAction = action.kbmActionType === "maxis";
+  const isActionEditableBinding = useCallback(
+    (binding: InputBinding) => isEditableBinding(binding, action.kbmActionType),
+    [action.kbmActionType]
+  );
 
   const targetIndex = useMemo(
-    () => action.bindings.findIndex(isEditableBinding),
-    [action.bindings]
+    () => action.bindings.findIndex(isActionEditableBinding),
+    [action.bindings, isActionEditableBinding]
   );
-  const currentBinding = targetIndex >= 0 ? action.bindings[targetIndex] : createEmptyBinding("keyboard");
+  const currentBinding = targetIndex >= 0 ? action.bindings[targetIndex] : createEmptyBinding(isMaxisAction ? "mouse" : "keyboard");
   const effectiveMode = currentBinding.activationMode || action.activationMode || "";
   const hasBinding = targetIndex >= 0 && Boolean(currentBinding.inputName);
   const hasUserOverride = Boolean(userActionmap[action._group]?.[action.name]);
@@ -44,7 +50,7 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
   const saveBindings = useCallback(
     (nextBinding: InputBinding, index: number) => {
       const existingOverride = userActionmap[action._group]?.[action.name];
-      const baseBindings = (existingOverride ? action.bindings : action.bindings.filter(isEditableBinding)).map(
+      const baseBindings = action.bindings.filter(isActionEditableBinding).map(
         (binding) => structuredClone(binding)
       );
       const targetBinding = index >= 0 ? action.bindings[index] : undefined;
@@ -60,14 +66,14 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
         baseBindings.push(nextBinding);
       }
 
-      const defaultEditableBindings = defaultAction?.bindings.filter(isEditableBinding) || [];
+      const defaultEditableBindings = defaultAction?.bindings.filter(isActionEditableBinding) || [];
       if (!existingOverride && areBindingListsEqual(baseBindings, defaultEditableBindings)) {
         resetAction(action._group, action.name, userActionmap, setUserActionmap);
       } else {
         rebindAction(action._group, action.name, baseBindings, userActionmap, setUserActionmap);
       }
     },
-    [action.bindings, action._group, action.name, defaultAction, setUserActionmap, userActionmap]
+    [action.bindings, action._group, action.name, defaultAction, isActionEditableBinding, setUserActionmap, userActionmap]
   );
 
   const { recording, startRecording } = useActionBindingRecording({
@@ -87,9 +93,23 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
     saveBindings({ ...currentBinding, activationMode: mode || undefined }, targetIndex);
   };
 
+  const handleMaxisChange = (maxisInput: string) => {
+    if (!maxisInput) {
+      handleClearBinding();
+      return;
+    }
+    const baseBinding = { ...currentBinding, device: "mouse" as const, serializationPrefix: "kb1" };
+    saveBindings(updateInputBinding(baseBinding, maxisInput, currentBinding.modifier), targetIndex);
+  };
+
+  const handleMaxisModifierChange = (modifier: string) => {
+    if (!currentBinding.inputName) return;
+    saveBindings(updateInputBinding(currentBinding, currentBinding.inputName, modifier), targetIndex);
+  };
+
   const displayBinding = recording ? recording.binding : currentBinding;
   const hoveredKeys = displayBinding.device === "keyboard" ? [displayBinding.modifier, displayBinding.inputName] : [];
-  const displayedBindings = recording ? [recording.binding] : action.bindings.filter(isEditableBinding);
+  const displayedBindings = recording ? [recording.binding] : action.bindings.filter(isActionEditableBinding);
 
   return (
     <div
@@ -101,6 +121,17 @@ const ActionItem = ({ action, language }: ActionItemProps) => {
       <p className={styles.name}>{i18nUI(action.UILabel, language) || action.name}</p>
       {recording ? (
         <div className={styles.recordingHint}>{t("actionRebinding.recordingHint")}</div>
+      ) : isMaxisAction ? (
+        <MaxisBindingControls
+          hasBinding={hasBinding}
+          hasUserOverride={hasUserOverride}
+          modifier={currentBinding.modifier}
+          maxisInput={currentBinding.inputName}
+          onClear={handleClearBinding}
+          onReset={() => resetAction(action._group, action.name, userActionmap, setUserActionmap)}
+          onModifierChange={handleMaxisModifierChange}
+          onMaxisChange={handleMaxisChange}
+        />
       ) : (
         <ActionBindingControls
           hasBinding={hasBinding}

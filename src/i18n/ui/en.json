@@ -53,9 +53,13 @@
     "clear": "Unbind",
     "doubleTap": "Double tap",
     "inheritMode": "Inherit mode",
+    "modifier": "Modifier",
+    "mouseAxis": "Mouse axis",
+    "noModifier": "None",
     "record": "Record",
     "recordingHint": "Press Esc to cancel recording",
     "reset": "Default",
+    "selectMouseAxis": "Unbound",
     "singleTap": "Single tap"
   },
   "language": {

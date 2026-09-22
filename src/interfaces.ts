@@ -10,6 +10,8 @@ export type BindingDevice = "keyboard" | "mouse" | "gamepad" | "joystick" | "unk
 
 export type BindingKind = "button" | "wheel" | "axis" | "unknown";
 
+export type KbmActionType = "maxis" | "non-maxis";
+
 export interface InputBinding {
   rawInput: string;
   device: BindingDevice;
@@ -39,6 +41,7 @@ export interface Action {
   multiTap?: string;
   activationMode: string;
   retriggerable: string;
+  kbmActionType: KbmActionType;
   kbm: KeyWithMod;
   bindings: InputBinding[];
   keyboard: InputBinding[];
@@ -87,6 +90,12 @@ export interface RawAction {
 export interface RawDeviceBinding {
   _activationMode?: string;
   _input?: string;
+  inputdata?: RawInputData | RawInputData[];
+}
+
+export interface RawInputData {
+  _input?: string;
+  _activationMode?: string;
 }
 
 export interface RawActionGroup {

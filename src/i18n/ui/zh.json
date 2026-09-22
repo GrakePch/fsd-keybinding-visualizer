@@ -53,9 +53,13 @@
     "clear": "解绑",
     "doubleTap": "双击",
     "inheritMode": "继承默认模式",
+    "modifier": "修饰键",
+    "mouseAxis": "鼠标轴",
+    "noModifier": "无",
     "record": "录入",
     "recordingHint": "按下 Esc 取消录入",
     "reset": "默认",
+    "selectMouseAxis": "未绑定",
     "singleTap": "单击"
   },
   "language": {

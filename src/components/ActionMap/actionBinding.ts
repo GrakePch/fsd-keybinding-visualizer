@@ -1,4 +1,4 @@
-import type { BindingDevice, InputBinding } from "../../interfaces";
+import type { BindingDevice, InputBinding, KbmActionType } from "../../interfaces";
 import { formatKeyLabel } from "../../utils/keyCodes";
 
 export const createEmptyBinding = (device: BindingDevice): InputBinding => ({
@@ -12,8 +12,11 @@ export const createEmptyBinding = (device: BindingDevice): InputBinding => ({
   extraAttributes: {},
 });
 
-export const isEditableBinding = (binding: InputBinding) =>
-  (binding.device === "keyboard" || binding.device === "mouse") && binding.kind !== "axis";
+export const isKbmBinding = (binding: InputBinding) =>
+  binding.device === "keyboard" || binding.device === "mouse";
+
+export const isEditableBinding = (binding: InputBinding, actionType: KbmActionType = "non-maxis") =>
+  isKbmBinding(binding) && (actionType === "maxis" ? binding.kind === "axis" : binding.kind !== "axis");
 
 export const areBindingsEqual = (a: InputBinding, b: InputBinding) =>
   a.rawInput === b.rawInput &&
