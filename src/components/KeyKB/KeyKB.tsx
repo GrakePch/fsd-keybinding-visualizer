@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./KeyKB.css";
 import { CTXOrderInfo, CTXKeysHovering, CTXCombinedActionGroups, CTXActionRebinding, CTXActionBindingDraft, CTXLanguage } from "../../contexts";
 import { useSearchParams } from "react-router-dom";
-import { getModifier, i18nUI, modifiers } from "../../utils/utils";
+import { getModifier, i18nUI, modifiers, updateInputBinding } from "../../utils/utils";
 import Icon from "@mdi/react";
 import actionIcon from "../../icons/actionIcon";
 import { actionMapCategoriesMap, filterOurHidden } from "../../utils/actionMapCategories";
@@ -49,10 +49,7 @@ const KeyKB = ({ keyId, widthX, heightX }: { keyId: string; widthX?: number; hei
                       ...draft,
                       current: {
                         ...draft.current,
-                        kbm: {
-                          ...draft.current.kbm,
-                          key: keyId,
-                        },
+                        binding: updateInputBinding({ ...draft.current.binding, device: "keyboard", serializationPrefix: "kb1" }, keyId, draft.current.binding.modifier),
                       },
                     }
                   : draft

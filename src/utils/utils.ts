@@ -1,4 +1,18 @@
-import { Action, ActionGroup, KeyWithMod, OrderInfo, RawAction, RawActionGroup, RawDefaultProfile, UserActionmap } from "../interfaces";
+import {
+  Action,
+  ActionGroup,
+  ActivationModeDefinition,
+  BindingDevice,
+  BindingKind,
+  InputBinding,
+  KeyWithMod,
+  OrderInfo,
+  RawAction,
+  RawActionGroup,
+  RawDefaultProfile,
+  UserActionOverride,
+  UserActionmap,
+} from "../interfaces";
 import i18n from "../i18n";
 
 export const modifiers = ["lalt", "ralt", "lctrl", "rctrl", "lshift", "rshift"];
@@ -34,6 +48,17 @@ export function initDefaultActionGroups(
 }
 
 export function initActions(rawAction: RawAction, rawGroup: RawActionGroup): Action {
+  const kbm = createDefaultBinding(rawAction._keyboard, rawAction.keyboard, "keyboard") || createDefaultBinding(rawAction._mouse, rawAction.mouse, "mouse");
+  const bindings = [
+    kbm,
+    createDefaultBinding(rawAction._gamepad, rawAction.gamepad, "gamepad"),
+    createDefaultBinding(rawAction._joystick, rawAction.joystick, "joystick"),
+  ].filter((binding): binding is InputBinding => binding !== null);
+  const keyboard = bindings.filter((binding) => binding.device === "keyboard");
+  const mouse = bindings.filter((binding) => binding.device === "mouse");
+  const gamepad = bindings.find((binding) => binding.device === "gamepad");
+  const joystick = bindings.find((binding) => binding.device === "joystick");
+
   return {
     _group: rawGroup._name,
     name: rawAction._name,
@@ -43,13 +68,132 @@ export function initActions(rawAction: RawAction, rawGroup: RawActionGroup): Act
     always: rawAction._always || "",
     activationMode: rawAction._activationMode || rawAction._ActivationMode || "",
     retriggerable: rawAction._retriggerable || "",
-    kbm: parseInputString(rawAction._keyboard || rawAction._mouse || ""),
-    gamepad: parseInputString(rawAction._gamepad || ""),
-    joystick: parseInputString(rawAction._joystick || ""),
+    kbm: keyWithModFromBinding(keyboard[0]),
+    bindings,
+    keyboard,
+    mouse,
+    gamepad: keyWithModFromBinding(gamepad),
+    joystick: keyWithModFromBinding(joystick),
     UILabel: rawAction._UILabel || "",
     UIDescription: rawAction._UIDescription || "",
     category: rawAction._Category || "",
   };
+}
+
+function createDefaultBinding(input: string | undefined, deviceBinding: RawAction["keyboard"], device: BindingDevice): InputBinding | null {
+  const binding = createInputBinding(deviceBinding?._input ?? input ?? "", device);
+  if (!binding) return null;
+  binding.activationMode = deviceBinding?._activationMode;
+  return binding;
+}
+
+const mouseButtonPattern = /^mouse\d+$/i;
+const mouseAxisPattern = /^maxis_/i;
+const mouseWheelPattern = /^mwheel_(up|down)$/i;
+const serializedPrefixPattern = /^(kb|ms|gp|js)(\d*)_(.+)$/i;
+
+const getSerializedParts = (rawInput: string) => {
+  const normalized = rawInput.trim().toLowerCase();
+  const match = normalized.match(serializedPrefixPattern);
+  if (!match) return { prefix: "", inputName: normalized };
+
+  return { prefix: `${match[1]}${match[2]}`, inputName: match[3] };
+};
+
+const getDeviceFromPrefix = (prefix: string): BindingDevice | null => {
+  const normalized = prefix.toLowerCase();
+  if (normalized.startsWith("gp")) return "gamepad";
+  if (normalized.startsWith("js")) return "joystick";
+  if (normalized.startsWith("ms")) return "mouse";
+  if (normalized.startsWith("kb")) return "keyboard";
+  return null;
+};
+
+const getBindingDevice = (inputName: string, hint: BindingDevice | undefined, prefix: string): BindingDevice => {
+  if (mouseButtonPattern.test(inputName) || mouseWheelPattern.test(inputName) || mouseAxisPattern.test(inputName)) return "mouse";
+
+  const prefixedDevice = getDeviceFromPrefix(prefix);
+  if (prefixedDevice && prefixedDevice !== "keyboard") return prefixedDevice;
+  if (hint) return hint;
+  if (prefixedDevice) return prefixedDevice;
+  return "unknown";
+};
+
+const getBindingKind = (inputName: string, device: BindingDevice): BindingKind => {
+  if (device === "mouse" && mouseWheelPattern.test(inputName)) return "wheel";
+  if (device === "mouse" && mouseAxisPattern.test(inputName)) return "axis";
+  if (device === "keyboard" || device === "mouse" || device === "gamepad" || device === "joystick") return "button";
+  return "unknown";
+};
+
+export function createInputBinding(input: string, hint?: BindingDevice, extraAttributes: Record<string, string> = {}): InputBinding | null {
+  const rawInput = input.trim();
+  if (!rawInput) return null;
+
+  const { prefix, inputName: serializedInputName } = getSerializedParts(rawInput);
+  const device = getBindingDevice(serializedInputName, hint, prefix);
+  const parsed = parseInputString(serializedInputName);
+  const inputName = parsed.key;
+  const serializationPrefix = prefix || (device === "gamepad" ? "gp1" : device === "joystick" ? "js1" : "kb1");
+  const indexMatch = serializationPrefix.match(/\d+$/);
+
+  return {
+    rawInput,
+    device,
+    kind: getBindingKind(inputName, device),
+    inputName,
+    modifier: parsed.modifier,
+    serializationPrefix,
+    rawInputIsSerialized: Boolean(prefix) || hint === undefined,
+    ...(indexMatch ? { deviceIndex: Number(indexMatch[0]) } : {}),
+    extraAttributes: { ...extraAttributes },
+  };
+}
+
+export function updateInputBinding(binding: InputBinding, inputName: string, modifier = binding.modifier): InputBinding {
+  const normalizedInputName = inputName.trim().toLowerCase();
+  const normalizedModifier = modifier.trim().toLowerCase();
+  const nextInputName = normalizedInputName;
+  const prefix = binding.serializationPrefix || (binding.device === "gamepad" ? "gp1" : binding.device === "joystick" ? "js1" : "kb1");
+  const serializedInput = normalizedModifier ? `${normalizedModifier}+${nextInputName}` : nextInputName;
+
+  return {
+    ...binding,
+    rawInput: `${prefix}_${serializedInput}`,
+    inputName: nextInputName,
+    modifier: normalizedModifier,
+    rawInputIsSerialized: true,
+    kind: getBindingKind(normalizedInputName, binding.device),
+  };
+}
+
+export function keyWithModFromBinding(binding: InputBinding | undefined): KeyWithMod {
+  if (!binding) return { key: "", modifier: "" };
+  return { key: binding.inputName, modifier: binding.modifier };
+}
+
+export function applyBindingsToAction(action: Action, bindings: InputBinding[]): Action {
+  const nextBindings = normalizeBindingList(bindings);
+  const keyboard = nextBindings.filter((binding) => binding.device === "keyboard");
+  const mouse = nextBindings.filter((binding) => binding.device === "mouse");
+
+  return {
+    ...action,
+    bindings: nextBindings,
+    keyboard,
+    mouse,
+    kbm: keyWithModFromBinding(keyboard[0]),
+  };
+}
+
+export function normalizeBindingList(bindings: InputBinding[]): InputBinding[] {
+  let hasKbmBinding = false;
+  return bindings.filter((binding) => {
+    if (binding.device !== "keyboard" && binding.device !== "mouse") return true;
+    if (hasKbmBinding) return false;
+    hasKbmBinding = true;
+    return true;
+  }).map((binding) => structuredClone(binding));
 }
 
 export function getListActions(rawActionGroup: RawActionGroup): RawAction[] {
@@ -65,6 +209,36 @@ export function parseInputString(input: string): KeyWithMod {
   if (res.length == 1) return { key: res[0], modifier: "" };
   if (modifiers.includes(res[1])) return { key: res[0], modifier: res[1] };
   return { key: res[1], modifier: res[0] };
+}
+
+export function getActivationModeDefinitions(rawDefaultProfile: RawDefaultProfile): ActivationModeDefinition[] {
+  const rawModes = rawDefaultProfile.profile.ActivationModes?.ActivationMode;
+  const modes = Array.isArray(rawModes) ? rawModes : rawModes ? [rawModes] : [];
+  const usedByDefault = new Set<string>();
+
+  rawDefaultProfile.profile.actionmap?.forEach((group) => {
+    getListActions(group).forEach((action) => {
+      const mode = action._activationMode || action._ActivationMode;
+      if (mode) usedByDefault.add(mode);
+      [action.keyboard, action.mouse, action.gamepad, action.joystick].forEach((deviceBinding) => {
+        if (deviceBinding?._activationMode) usedByDefault.add(deviceBinding._activationMode);
+      });
+    });
+  });
+
+  return modes.map((mode) => ({
+    name: mode._name,
+    onPress: mode._onPress || "",
+    onHold: mode._onHold || "",
+    onRelease: mode._onRelease || "",
+    multiTap: mode._multiTap || "",
+    multiTapBlock: mode._multiTapBlock || "",
+    pressTriggerThreshold: mode._pressTriggerThreshold || "",
+    releaseTriggerThreshold: mode._releaseTriggerThreshold || "",
+    releaseTriggerDelay: mode._releaseTriggerDelay || "",
+    retriggerable: mode._retriggerable || "",
+    usedByDefault: usedByDefault.has(mode._name),
+  }));
 }
 
 function normalizeLocale(lang?: string): "en" | "zh" {
@@ -98,36 +272,56 @@ export function getModifier(actionGroups: Record<string, ActionGroup>, groupName
 
 export function getUserActionmap(userActionmapParsed: object): UserActionmap {
   try {
-    const res: Record<string, Record<string, { kbm: KeyWithMod; multiTap: string }> | null> = {};
-    const userActionmap = userActionmapParsed._c.ActionMaps[0]._c.ActionProfiles[0]._c.actionmap;
-    if (!userActionmap) return {};
-    userActionmap.forEach((group) => {
-      res[group._a.name] = {};
-      group._c.action.forEach((action) => {
-        const input = action._c.rebind[0]._a.input.split("_").at(-1);
-        res[group._a.name][action._a.name] = {
-          kbm: parseInputString(input || ""),
-          multiTap: action._c.rebind[0]._a.multiTap || "",
-        };
+    const root = userActionmapParsed as JsonXmlNode;
+    const actionMaps = root._c?.ActionMaps || [root];
+    const profiles = actionMaps.flatMap((map) => map._c?.ActionProfiles || []);
+    const actionmaps = profiles.flatMap((profile) => profile._c?.actionmap || []);
+    const res: UserActionmap = {};
+
+    actionmaps.forEach((group) => {
+      const groupName = group._a?.name;
+      if (!groupName) return;
+      const actions: Record<string, UserActionOverride> = {};
+      (group._c?.action || []).forEach((action) => {
+        const actionName = action._a?.name;
+        if (!actionName) return;
+        const bindings = normalizeBindingList((action._c?.rebind || []).flatMap((rebind) => {
+          const attributes = rebind._a || {};
+          const input = attributes.input || "";
+          if (!input) return [];
+          const extraAttributes = Object.fromEntries(Object.entries(attributes).filter(([name]) => !["input", "activationMode", "multiTap"].includes(name)));
+          const binding = createInputBinding(input, undefined, extraAttributes);
+          if (!binding) return [];
+          binding.activationMode = attributes.activationMode;
+          binding.multiTap = attributes.multiTap;
+          return [binding];
+        }));
+        const extraAttributes = Object.fromEntries(Object.entries(action._a || {}).filter(([name]) => name !== "name"));
+        actions[actionName] = { bindings, extraAttributes };
       });
+      res[groupName] = actions;
     });
+
     return res;
   } catch {
     return {};
   }
 }
 
-export function rebindAction(groupName: string, actionName: string, key: string, mod: string, multiTap: string | null, userActionmap: UserActionmap, setUserActionmap: React.Dispatch<React.SetStateAction<UserActionmap>>): void {
+interface JsonXmlNode {
+  _a?: Record<string, string>;
+  _c?: Record<string, JsonXmlNode[]>;
+}
+
+export function rebindAction(groupName: string, actionName: string, bindings: InputBinding[], userActionmap: UserActionmap, setUserActionmap: React.Dispatch<React.SetStateAction<UserActionmap>>): void {
   const actionGroup = userActionmap[groupName] || {};
-  const previousBinding = actionGroup[actionName] || { kbm: { key: "", modifier: "" }, multiTap: "" };
 
   setUserActionmap({
     ...userActionmap,
     [groupName]: {
       ...actionGroup,
       [actionName]: {
-        kbm: { key, modifier: mod },
-        multiTap: multiTap ?? previousBinding.multiTap,
+        bindings: normalizeBindingList(bindings),
       },
     },
   });
@@ -148,7 +342,6 @@ export function resetAction(groupName: string, actionName: string, userActionmap
 }
 
 export function buildActionmapsXML(userImportXMLStr: string, userActionmap: UserActionmap): string {
-  console.log(userImportXMLStr);
   const injectIdxStart = userImportXMLStr.indexOf("<actionmap");
   const injectIdxEnd = userImportXMLStr.indexOf("</ActionProfiles>");
   if (injectIdxStart === -1 || injectIdxEnd === -1)
@@ -168,12 +361,47 @@ function userActionmapToXML(userActionmap: UserActionmap): string {
       const head = `<actionmap name="${groupName}">\n`;
       const tail = `</actionmap>\n`;
       if (!actions) return "";
-      const children = Object.entries(actions).map(
-        ([actionName, { kbm, multiTap }]) => `  <action name="${actionName}">
-    ${kbm.key ? `<rebind input="kb1_${kbm.modifier ? kbm.modifier + "+" + kbm.key : kbm.key}" ${multiTap ? `multiTap="${multiTap}"` : ""}/>` : ""}
-  </action>\n`
-      );
+      const children = Object.entries(actions).map(([actionName, { bindings, extraAttributes }]) => {
+        const actionAttributes = Object.entries(extraAttributes || {}).map(([name, value]) => `${name}="${escapeXml(value)}"`);
+        const rebinds = normalizeBindingList(bindings).map((binding) => {
+          const attributes = [
+            `input="${escapeXml(serializedInputForBinding(binding))}"`,
+            binding.activationMode ? `activationMode="${escapeXml(binding.activationMode)}"` : "",
+            binding.multiTap ? `multiTap="${escapeXml(binding.multiTap)}"` : "",
+            ...Object.entries(binding.extraAttributes).map(([name, value]) => `${name}="${escapeXml(value)}"`),
+          ].filter(Boolean);
+          return `    <rebind ${attributes.join(" ")}/>`;
+        });
+        return `  <action name="${escapeXml(actionName)}"${actionAttributes.length ? ` ${actionAttributes.join(" ")}` : ""}>\n${rebinds.join("\n")}\n  </action>\n`;
+      });
       return head + children.join("") + tail;
     })
     .join("");
+}
+
+function buildInputString(binding: InputBinding): string {
+  const prefix = binding.serializationPrefix || (binding.device === "gamepad" ? "gp1" : binding.device === "joystick" ? "js1" : "kb1");
+  const input = binding.modifier ? `${binding.modifier}+${binding.inputName}` : binding.inputName;
+  return `${prefix}_${input}`;
+}
+
+function serializedInputForBinding(binding: InputBinding): string {
+  return binding.rawInputIsSerialized ? binding.rawInput : buildInputString(binding);
+}
+
+function escapeXml(value: string): string {
+  return value.replace(/[<>&'"]/g, (character) => {
+    switch (character) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "&":
+        return "&amp;";
+      case "'":
+        return "&apos;";
+      default:
+        return "&quot;";
+    }
+  });
 }

@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { actionMapCategories } from "../utils/actionMapCategories";
 import defaultProfile from "../data/defaultProfile.json";
-import { initDefaultActionGroups } from "../utils/utils";
+import { applyBindingsToAction, initDefaultActionGroups, updateInputBinding } from "../utils/utils";
 import { codesNonBindable, keyCodeToCigInput } from "../utils/keyCodes";
 
 const getActionMapWidthBounds = () => {
@@ -95,10 +95,7 @@ function BindingsPage() {
               ...draft,
               current: {
                 ...draft.current,
-                kbm: {
-                  ...draft.current.kbm,
-                  key: keyCodeToCigInput[event.code],
-                },
+                binding: updateInputBinding(draft.current.binding, keyCodeToCigInput[event.code], draft.current.binding.modifier),
               },
             }
           : draft
@@ -117,11 +114,9 @@ function BindingsPage() {
 
     for (const [groupName, actions] of Object.entries(userActionmap)) {
       if (!actions) continue;
-      for (const [actionName, { kbm, multiTap }] of Object.entries(actions)) {
-        if (!kbm) continue;
+      for (const [actionName, { bindings }] of Object.entries(actions)) {
         if (groupName in combined && actionName in combined[groupName].actions) {
-          combined[groupName].actions[actionName].kbm = { ...kbm };
-          combined[groupName].actions[actionName].multiTap = multiTap;
+          combined[groupName].actions[actionName] = applyBindingsToAction(combined[groupName].actions[actionName], bindings);
         }
       }
     }

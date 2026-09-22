@@ -112,11 +112,65 @@
 
 .kbms {
   flex: 0 0 auto;
-  min-width: 6rem;
+  min-width: 8rem;
+  max-width: 42%;
   overflow: hidden;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.modeControl select {
+  min-width: 0;
+  max-width: 8rem;
+  height: 1.5rem;
+  border: 1px solid var(--color-bg-2);
+  border-radius: .25rem;
+  background: var(--color-bg-0-5);
+  color: var(--color-text);
+  font-size: .7rem;
+}
+
+.modeControl {
+  display: inline-flex;
+  align-items: center;
+  gap: .125rem;
+  min-width: 0;
+}
+
+.modeControl select {
+  width: 8rem;
+}
+
+.bindingBadge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: .25rem;
+  padding: 0 .25rem;
+  border-radius: .2rem;
+  background: #80808040;
+  font-size: .7rem;
+}
+
+.bindingPair {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.activationModeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 .25rem;
+  border-radius: .2rem;
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  color: var(--color-text);
+  font-size: .65rem;
+}
+
+.activationModeBadge small {
+  color: var(--color-text-2);
+  font-size: .6rem;
 }
 
 .kbm {

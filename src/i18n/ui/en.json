@@ -49,8 +49,10 @@
     "resizeHandle": "Resize ActionMap width"
   },
   "actionRebinding": {
+    "activationMode": "Activation mode",
     "clear": "Unbind",
     "doubleTap": "Double tap",
+    "inheritMode": "Inherit mode",
     "record": "Record",
     "recordingHint": "Press Esc to cancel recording",
     "reset": "Default",

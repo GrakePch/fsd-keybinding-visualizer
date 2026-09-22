@@ -49,8 +49,10 @@
     "resizeHandle": "调整 ActionMap 宽度"
   },
   "actionRebinding": {
+    "activationMode": "触发模式",
     "clear": "解绑",
     "doubleTap": "双击",
+    "inheritMode": "继承默认模式",
     "record": "录入",
     "recordingHint": "按下 Esc 取消录入",
     "reset": "默认",

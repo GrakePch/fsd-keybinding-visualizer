@@ -1,12 +1,11 @@
 import React, { createContext } from "react";
-import { ActionGroup, KeyWithMod, OrderInfo, UserActionmap } from "./interfaces";
+import { ActionGroup, InputBinding, OrderInfo, UserActionmap } from "./interfaces";
 import { GameRootDirectoryState } from "./utils/fileSystemAccess";
 
 export type AppLanguage = "en" | "zh";
 
 export interface ActionBindingValue {
-  kbm: KeyWithMod;
-  multiTap: string;
+  binding: InputBinding;
 }
 
 export interface ActionBindingDraft {
