@@ -58,6 +58,9 @@ export const keyCodeLabels: Record<string, string> = {
   mouse5: "Mouse 5",
   mouse6: "Mouse 6",
   mouse7: "Mouse 7",
+  maxis_x: "Mouse X",
+  maxis_y: "Mouse Y",
+  maxis_z: "Mouse Z",
   mwheel_up: "Wheel Up",
   mwheel_down: "Wheel Down",
 };

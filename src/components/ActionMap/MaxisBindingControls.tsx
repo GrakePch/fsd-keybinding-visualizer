@@ -69,7 +69,7 @@ const MaxisBindingControls = ({
           <option value="">{t("actionRebinding.selectMouseAxis")}</option>
           {hasUnknownMaxis && <option value={maxisInput}>{maxisInput} *</option>}
           {maxisInputs.map((option) => (
-            <option key={option} value={option}>{option}</option>
+            <option key={option} value={option}>{formatKeyLabel(option)}</option>
           ))}
         </select>
       </label>
