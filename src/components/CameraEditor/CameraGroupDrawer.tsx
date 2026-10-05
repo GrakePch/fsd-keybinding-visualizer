@@ -123,7 +123,6 @@ function CameraGroupDrawer({ fileConsole, groups, dirtyGroupIds, selectedGroupId
           </div>
         </div>
         <label className={styles.groupSearchLabel}>
-          <span>Search groups</span>
           <input
             className={styles.groupSearch}
             type="search"

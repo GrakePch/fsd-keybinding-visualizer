@@ -3,6 +3,9 @@
   min-width: 0;
   min-height: 0;
   overflow: hidden;
+  border-left: 1px solid #ffffff18;
+  border-top: 1px solid #ffffff18;
+  border-top-left-radius: .75rem;
   background: var(--color-bg);
 }
 

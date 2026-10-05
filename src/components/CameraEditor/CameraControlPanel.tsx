@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiCamera, mdiDeleteOutline, mdiRestore } from "@mdi/js";
+import { mdiScShip } from "../../icons/interfaceIcon";
 import ConfirmModal from "../ConfirmModal";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { ThirdPersonCameraBaseConfig } from "../../types/thirdPersonCamera";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
 import type { resolveGroupVehicleContext } from "../../utils/cameraVehicleBinding";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
-import { CAMERA_FRUSTUM_ASPECT_RATIOS, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import { getCameraControlRanges, type CameraControlAxisRange, type CameraControlRangeSource } from "../../utils/cameraControlRanges";
 import { SEAT_VIEW_PRESET_SLOT_IDS } from "../../utils/seatViewPreset";
 import CameraLensZoomField from "./CameraLensZoomField";
@@ -27,12 +27,10 @@ interface CameraControlPanelProps {
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
-  frustumAspectRatioId: CameraFrustumAspectRatioId;
   canEnterCameraView: boolean;
   isCameraViewActive: boolean;
   onToggleCameraView: () => void;
   onSelectSlot: (slotId: number) => void;
-  onSelectFrustumAspectRatio: (aspectRatioId: CameraFrustumAspectRatioId) => void;
   onUpdateSlot: (slot: SavedCameraSlot) => void;
   onEditBoundary?: () => void;
   onCreateSlot: () => void;
@@ -47,10 +45,7 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
   return range.isCurrentValueOutsideRecommendedRange ? `${sourceNote}\nCurrent value is outside the range.` : sourceNote;
 }
 
-const mdiScShip =
-  "M16,16.813l-0,0.937l1.688,2.125l-0,2.125l-3.563,-2l0,-3.687l-0.875,-0.75l-0.438,1.687l-1.624,0l-0.438,-1.687l-0.875,0.75l0,3.687l-3.563,2l0.001,-2.125l1.687,-2.125l0,-0.937l-1.313,-0.875l-2.562,2.5l0,-2.875l5.188,-6.75l1.625,-6.813l2.125,-0l1.625,6.813l5.187,6.75l0,2.875l-2.562,-2.5l-1.313,0.875Z";
-
-function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, onRestoreAutomaticBinding, selectedGroup, selectedSlot, selectedSlotId, frustumAspectRatioId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onSelectFrustumAspectRatio, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, onRestoreAutomaticBinding, selectedGroup, selectedSlot, selectedSlotId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
@@ -192,24 +187,6 @@ function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasMa
             <CameraNumberField label="F-Stop" value={selectedSlot.fStop} onChange={(fStop) => updateSlot({ fStop })} />
           </div>
         )}
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.heading}>Screen Aspect</h2>
-        <div className={styles.aspectRatioOptions} role="radiogroup" aria-label="Screen aspect ratio">
-          {CAMERA_FRUSTUM_ASPECT_RATIOS.map((option) => (
-            <button
-              key={option.id}
-              className={`${styles.aspectRatioButton} ${frustumAspectRatioId === option.id ? `${styles.aspectRatioButtonActive} buttonHighlighted` : ""}`}
-              type="button"
-              role="radio"
-              aria-checked={frustumAspectRatioId === option.id}
-              onClick={() => onSelectFrustumAspectRatio(option.id)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
       </section>
 
       <section className={styles.deleteSection}>

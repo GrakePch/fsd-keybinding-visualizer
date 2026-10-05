@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CameraControlPanel from "../components/CameraEditor/CameraControlPanel";
-import CameraFileConsole from "../components/CameraEditor/CameraFileConsole";
+import CameraToolbar from "../components/CameraEditor/CameraToolbar";
 import CameraGroupDrawer from "../components/CameraEditor/CameraGroupDrawer";
-import CameraHistoryControls from "../components/CameraEditor/CameraHistoryControls";
 import CameraReferenceVehiclePanel from "../components/CameraEditor/CameraReferenceVehiclePanel";
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
@@ -31,6 +30,8 @@ function CameraEditorPage() {
   const [previewBinding, setPreviewBinding] = useState<GroupVehicleBinding | null>(null);
   const [isSelectingReferenceVehicle, setIsSelectingReferenceVehicle] = useState(false);
   const [frustumAspectRatioId, setFrustumAspectRatioId] = useState<CameraFrustumAspectRatioId>(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
+  const [groupDrawerOpen, setGroupDrawerOpen] = useState(true);
+  const [controlPanelOpen, setControlPanelOpen] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const { manifest, loaded: modelsLoaded, error: modelError } = useSelectableVehicleModels();
   const { vehicles: spvVehicles, loaded: spvLoaded, error: spvError } = useSpvVehicles();
@@ -51,7 +52,6 @@ function CameraEditorPage() {
   const selectedSeat = selectedGroup ? seatVehicleIndex[selectedGroup.id] : null;
   const selectedSlot = selectedGroup ? getSlotById(selectedGroup, activeSlotId) : undefined;
   const dirtyGroupIds = useMemo(() => getChangedCameraGroupIds(savedViews, history.baseline), [savedViews, history.baseline]);
-  const hasSavedViewsChanges = dirtyGroupIds.size > 0;
   const binding = selectedGroupId ? groupBindings[selectedGroupId] || null : null;
   const selectedSeatUsage = selectedGroupId && selectedGroup ? getSeatVehicleUsage(selectedGroup.id, Object.values(seatVehicleIndex), manifest, spvVehicles) : null;
   const autoVehicleId = selectedSeatUsage?.vehicleId || selectedSeat?.vehicleIds[0];
@@ -284,11 +284,19 @@ function CameraEditorPage() {
 
   return (
     <main className={styles.page}>
+      <CameraToolbar
+        savedViews={savedViews} history={history} dirtyGroupIds={dirtyGroupIds}
+        onLoad={loadSavedViews}
+        onSaved={(document) => dispatchHistory({ type: "saved", document, session: history.session })}
+        onTravel={travelHistory}
+        groupDrawerOpen={groupDrawerOpen} controlPanelOpen={controlPanelOpen}
+        onToggleGroupDrawer={() => setGroupDrawerOpen(open => !open)}
+        onToggleControlPanel={() => setControlPanelOpen(open => !open)}
+        aspectRatioId={frustumAspectRatioId} onSelectAspectRatio={setFrustumAspectRatioId}
+      />
+      <div className={styles.content} data-group-drawer-open={groupDrawerOpen} data-control-panel-open={controlPanelOpen}>
+      <div id="camera-group-drawer" className={styles.sidePanel} aria-hidden={!groupDrawerOpen} ref={panel => { if (panel) panel.inert = !groupDrawerOpen; }}>
       <CameraGroupDrawer
-        fileConsole={<>
-          <CameraFileConsole savedViews={savedViews} hasChanges={hasSavedViewsChanges} onLoad={(document) => loadSavedViews(document)} onSaved={(document) => dispatchHistory({ type: "saved", document, session: history.session })} />
-          <CameraHistoryControls history={history} dirtyGroupIds={dirtyGroupIds} onTravel={travelHistory} />
-        </>}
         groups={savedViews?.groups || []}
         dirtyGroupIds={dirtyGroupIds}
         seats={seats}
@@ -302,7 +310,9 @@ function CameraEditorPage() {
         onSetAllEmptyToPreset={setAllEmptySlotsToPreset}
         onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
+      </div>
       <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportContext.model} cameraConfig={viewportContext.cameraConfig} isPreviewingModel={isSelectingReferenceVehicle} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
+      <div id="camera-control-panel" className={styles.sidePanel} aria-hidden={!controlPanelOpen} ref={panel => { if (panel) panel.inert = !controlPanelOpen; }}>
       {isSelectingReferenceVehicle ? (
         <CameraReferenceVehiclePanel
           vehicles={referenceVehicles}
@@ -326,12 +336,10 @@ function CameraEditorPage() {
           selectedGroup={selectedGroup}
           selectedSlot={selectedSlot}
           selectedSlotId={activeSlotId}
-          frustumAspectRatioId={frustumAspectRatioId}
           canEnterCameraView={canEnterSelectedCameraView}
           isCameraViewActive={isCameraViewActive}
           onToggleCameraView={toggleCameraView}
           onSelectSlot={selectSlot}
-          onSelectFrustumAspectRatio={setFrustumAspectRatioId}
           onUpdateSlot={updateSlot}
           onCreateSlot={createSelectedSlot}
           onCopySlot={copyIntoSelectedSlot}
@@ -340,6 +348,8 @@ function CameraEditorPage() {
           onDeleteSelectedSlot={deleteSelectedSlot}
         />
       )}
+      </div>
+      </div>
     </main>
   );
 }
