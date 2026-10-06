@@ -9,35 +9,37 @@
   background: var(--color-bg);
 }
 
-.modelInfo {
+.referenceModel {
   position: absolute;
   z-index: 3;
   top: 1rem;
-  left: 1rem;
-  max-width: min(32rem, calc(100% - 2rem));
-  border: 1px solid #ffffff1f;
+  right: 1rem;
+  max-width: calc(100% - 2rem);
   border-radius: .75rem;
   display: flex;
-  flex-direction: column;
-  gap: .35rem;
-  padding: .75rem .9rem;
-  color: var(--color-text-1);
-  background-color: color-mix(in srgb, var(--color-bg-0-5) 82%, transparent);
-  box-shadow: var(--shadow-2);
-  pointer-events: none;
+  align-items: center;
+  gap: .75rem;
+  padding: .5rem .5rem;
+  color: #fff;
+  background-color: rgb(0 0 0 / 50%);
+  font-size: .85rem;
+  backdrop-filter: blur(5px);
 }
 
-.modelInfo strong {
-  color: var(--color-text);
-  font-family: var(--font-geom);
-  font-size: 1.1rem;
-  line-height: 1.1;
+.referenceModel span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-.previewLabel {
-  color: var(--color-lalt);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+.referenceModel button {
+  flex: 0 0 auto;
+  padding: .25em .75em;
+  line-height: 1.2;
+  border-radius: .375rem;
+  border: 1px solid #ffffff18;
+  background-color: transparent;
+}
+
+.referenceModel button:hover {
+  background-color: rgb(255 255 255 / 10%);
 }

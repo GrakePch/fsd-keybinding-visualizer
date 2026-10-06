@@ -2,8 +2,7 @@ import { useMemo } from "react";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { ThirdPersonCameraBaseConfig } from "../../types/thirdPersonCamera";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
-import { isVehicleFallbackBoxModel, isVehicleViewportModelRenderable } from "../../types/vehicleModel";
-import { shouldRenderCameraModelViewer, shouldShowViewportModelInfo } from "../../utils/cameraModelOverlay";
+import { shouldRenderCameraModelViewer } from "../../utils/cameraModelOverlay";
 import { getCameraFrustumAspectRatio, type CameraFrustumAspectRatioId } from "../../utils/cameraFrustum";
 import { getCameraControlRanges } from "../../utils/cameraControlRanges";
 import { getCameraViewMarker } from "../../utils/cameraView";
@@ -16,14 +15,14 @@ interface CameraViewportProps {
   selectedSlot?: SavedCameraSlot;
   model: VehicleViewportModel | null;
   cameraConfig: ThirdPersonCameraBaseConfig | null;
+  referenceModelName: string | null;
+  onSelectReferenceVehicle: () => void;
   isCameraViewActive: boolean;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
   onSelectSlot: (slotId: number) => void;
 }
 
-function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
-  const hasRenderableModel = isVehicleViewportModelRenderable(model);
-  const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel });
+function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, referenceModelName, onSelectReferenceVehicle, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
   const cameraControlRanges = useMemo(
     () =>
       getCameraControlRanges({
@@ -49,15 +48,12 @@ function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, isCa
   return (
     <section className={styles.viewport} aria-label="Camera 3D viewport">
       {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} maxCameraMarkerDistance={cameraControlRanges.distance.recommended.max} markers={cameraPositionMarkers} model={model} targetOffsetBounds={targetOffsetBounds} onSelectSlot={onSelectSlot} />}
-      {model && showModelInfo && (
-        <div className={styles.modelInfo}>
-          <span className={styles.previewLabel}>{isVehicleFallbackBoxModel(model) ? "SPV Dimensions Fallback" : "Loaded Model"}</span>
-          <strong>{model.displayName}</strong>
-          <span>{model.className || model.slug}</span>
-          {selectedGroup && <span>Group: {selectedGroup.id}</span>}
-          {selectedSlot && <span>Slot: {selectedSlot.id + 1}</span>}
-        </div>
-      )}
+      <div className={styles.referenceModel}>
+        <span>{referenceModelName ? `Reference model: ${referenceModelName}` : "No reference model detected"}</span>
+        <button type="button" aria-haspopup="dialog" disabled={!selectedGroup} onClick={onSelectReferenceVehicle}>
+          {referenceModelName ? "Change" : "Select"}
+        </button>
+      </div>
     </section>
   );
 }

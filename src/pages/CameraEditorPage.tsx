@@ -310,16 +310,13 @@ function CameraEditorPage() {
         onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
       </div>
-      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={appliedContext.model} cameraConfig={appliedContext.cameraConfig} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
+      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={appliedContext.model} cameraConfig={appliedContext.cameraConfig} referenceModelName={selectedGroup && appliedContext.vehicleId ? appliedContext.displayName : null} onSelectReferenceVehicle={openReferenceVehicleSelector} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
       <div id="camera-control-panel" className={styles.sidePanel} aria-hidden={!controlPanelOpen} ref={panel => { if (panel) panel.inert = !controlPanelOpen; }}>
         <CameraControlPanel
           key={`${selectedGroupId}:${activeSlotId}`}
           onEditBoundary={() => { editGesture.current += 1; }}
           loadedModel={loadedModel}
           cameraConfig={appliedContext.cameraConfig}
-          referenceContext={selectedGroup && appliedContext.vehicleId ? appliedContext : null}
-          hasManualBinding={Boolean(binding)}
-          onSelectReferenceVehicle={openReferenceVehicleSelector}
           selectedGroup={selectedGroup}
           selectedSlot={selectedSlot}
           selectedSlotId={activeSlotId}

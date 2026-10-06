@@ -26,28 +26,6 @@
   text-transform: uppercase;
 }
 
-.loadedModelCard {
-  border: 1px solid #ffffff18;
-  border-radius: .5rem;
-  display: flex;
-  flex-direction: column;
-  gap: .25rem;
-  padding: .625rem .75rem;
-  background-color: var(--color-bg);
-}
-
-.loadedModelCard strong {
-  color: var(--color-text);
-  line-height: 1.2;
-}
-
-.loadedModelCard span {
-  color: var(--color-text-2);
-  font-size: .85rem;
-  line-height: 1.2;
-}
-
-.modelButton,
 .cameraViewButton {
   border-radius: .5rem;
   display: inline-flex;
@@ -85,7 +63,6 @@
   gap: .4rem;
 }
 
-.modelButtonIcon,
 .cameraViewButtonIcon {
   flex: 0 0 auto;
 }
@@ -140,17 +117,4 @@
 .deleteButton:hover:not(:disabled) {
   color: #fff;
   background-color: #8c3b3b;
-}
-.referenceControls {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  overflow-wrap: anywhere;
-}
-
-.referenceNote {
-  margin: 0;
-  color: var(--color-text-2);
-  font-size: .85rem;
-  line-height: 1.4;
 }

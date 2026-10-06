@@ -1,13 +1,10 @@
 import { useMemo, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiCamera, mdiDeleteOutline, mdiRestore } from "@mdi/js";
-import { mdiScShip } from "../../icons/interfaceIcon";
 import ConfirmModal from "../ConfirmModal";
 import { SavedCameraSlot, SavedViewGroup } from "../../types/savedViews";
 import type { ThirdPersonCameraBaseConfig } from "../../types/thirdPersonCamera";
 import type { VehicleViewportModel } from "../../types/vehicleModel";
-import type { resolveGroupVehicleContext } from "../../utils/cameraVehicleBinding";
-import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
 import { getCameraControlRanges, type CameraControlAxisRange, type CameraControlRangeSource } from "../../utils/cameraControlRanges";
 import { SEAT_VIEW_PRESET_SLOT_IDS } from "../../utils/seatViewPreset";
 import CameraLensZoomField from "./CameraLensZoomField";
@@ -20,9 +17,6 @@ import styles from "./CameraControlPanel.module.css";
 interface CameraControlPanelProps {
   loadedModel: VehicleViewportModel | null;
   cameraConfig: ThirdPersonCameraBaseConfig | null;
-  referenceContext: ReturnType<typeof resolveGroupVehicleContext> | null;
-  hasManualBinding: boolean;
-  onSelectReferenceVehicle: () => void;
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
@@ -44,7 +38,7 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
   return range.isCurrentValueOutsideRecommendedRange ? `${sourceNote}\nCurrent value is outside the range.` : sourceNote;
 }
 
-function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, selectedGroup, selectedSlot, selectedSlotId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, cameraConfig, selectedGroup, selectedSlot, selectedSlotId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
@@ -74,38 +68,6 @@ function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasMa
 
   return (
     <aside className={styles.panel} aria-label="Camera controls">
-      <section className={styles.section}>
-        <h2 className={styles.heading}>{referenceContext ? "Reference Vehicle" : "Loaded Model"}</h2>
-        {loadedModel && !referenceContext && (
-          <div className={styles.loadedModelCard}>
-            <strong>{loadedModel.displayName}</strong>
-            <span>{loadedModel.className || loadedModel.slug}</span>
-            {isVehicleFallbackBoxModel(loadedModel) && <span>SPV dimensions fallback</span>}
-          </div>
-        )}
-        {selectedGroup && (
-          <div className={styles.referenceControls}>
-            {referenceContext ? (
-              <div className={styles.loadedModelCard}>
-                <strong>Reference: {referenceContext.displayName}</strong>
-                <span>{referenceContext.vehicleId} · {hasManualBinding ? "Manually assigned" : "Automatically assigned"}</span>
-                {referenceContext.cameraId && <span>{referenceContext.cameraId}</span>}
-                {referenceContext.needsSelection && <span>Camera selection is required. Choose a configuration to restore game ranges.</span>}
-                <span>{isVehicleFallbackBoxModel(referenceContext.model) ? "SPV dimensions fallback" : referenceContext.model ? "3D model" : "No model available"}</span>
-                <span>Ranges: {referenceContext.cameraConfig ? "Game data" : referenceContext.source === "inferred" ? "Estimated from vehicle size" : "Defaults"}</span>
-                <span>Distance: {cameraControlRanges.distance.recommended.min}–{cameraControlRanges.distance.recommended.max}</span>
-              </div>
-            ) : !cameraConfig && (
-              <p className={styles.referenceNote}>This group has no camera configuration. Assign a reference vehicle to use its model and camera ranges.</p>
-            )}
-            <button className={styles.modelButton} type="button" aria-haspopup="dialog" onClick={onSelectReferenceVehicle}>
-              <Icon className={styles.modelButtonIcon} path={mdiScShip} size="1rem" aria-hidden="true" />
-              {referenceContext ? "Change reference vehicle" : "Assign reference vehicle"}
-            </button>
-          </div>
-        )}
-      </section>
-
       <section className={styles.section}>
         <h2 className={styles.heading}>Camera Slots</h2>
         <CameraSlotButtons selectedGroup={selectedGroup} selectedSlotId={selectedSlotId} onSelectSlot={onSelectSlot} />
