@@ -20,15 +20,15 @@ interface Props {
   onLoad: (document: SavedViewsDocument) => void;
   onSaved: (document: SavedViewsDocument) => void;
   onTravel: (cursor: number) => void;
-  groupDrawerOpen: boolean;
+  groupsPanelOpen: boolean;
   controlPanelOpen: boolean;
-  onToggleGroupDrawer: () => void;
+  onToggleGroupsPanel: () => void;
   onToggleControlPanel: () => void;
   aspectRatioId: CameraFrustumAspectRatioId;
   onSelectAspectRatio: (id: CameraFrustumAspectRatioId) => void;
 }
 
-export default function CameraToolbar({ savedViews, history, dirtyGroupIds, onLoad, onSaved, onTravel, groupDrawerOpen, controlPanelOpen, onToggleGroupDrawer, onToggleControlPanel, aspectRatioId, onSelectAspectRatio }: Props) {
+export default function CameraToolbar({ savedViews, history, dirtyGroupIds, onLoad, onSaved, onTravel, groupsPanelOpen, controlPanelOpen, onToggleGroupsPanel, onToggleControlPanel, aspectRatioId, onSelectAspectRatio }: Props) {
   const files = useCameraFileActions({ savedViews, hasChanges: dirtyGroupIds.size > 0, onLoad, onSaved });
   const commands = useCameraHistoryCommands(history, onTravel);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -41,14 +41,14 @@ export default function CameraToolbar({ savedViews, history, dirtyGroupIds, onLo
   const closeHistory = useCallback(() => setHistoryOpen(false), []);
   const feedback = [files.statusMessage, dirtyGroupIds.size ? `${dirtyGroupIds.size} unsaved group${dirtyGroupIds.size === 1 ? "" : "s"}` : savedViews ? "No unsaved changes" : ""].filter(Boolean).join(" · ");
   const status = [files.loadedLabel, feedback].filter(Boolean).join(" · ");
-  const groupToggleLabel = `${groupDrawerOpen ? "Collapse" : "Expand"} groups panel`;
+  const groupsToggleLabel = `${groupsPanelOpen ? "Collapse" : "Expand"} groups panel`;
   const controlToggleLabel = `${controlPanelOpen ? "Collapse" : "Expand"} camera control panel`;
 
   return <header className={styles.toolbar} aria-label="Camera toolbar">
     <input hidden ref={files.fileInputRef} type="file" accept=".xml" aria-label="Upload savedviews XML" onChange={files.handleUploadFileSelect} />
-    <Tooltip tooltip={groupToggleLabel} position="bottom-left">
-      <button className={styles.iconButton} type="button" aria-label={groupToggleLabel} aria-expanded={groupDrawerOpen} aria-controls="camera-group-drawer" onClick={onToggleGroupDrawer}>
-        <Icon path={groupDrawerOpen ? leftPanelClose : dockToRight} size="18px" color="#e3e3e3" aria-hidden="true" />
+    <Tooltip tooltip={groupsToggleLabel} position="bottom-left">
+      <button className={styles.iconButton} type="button" aria-label={groupsToggleLabel} aria-expanded={groupsPanelOpen} aria-controls="camera-groups-panel" onClick={onToggleGroupsPanel}>
+        <Icon path={groupsPanelOpen ? leftPanelClose : dockToRight} size="18px" color="#e3e3e3" aria-hidden="true" />
       </button>
     </Tooltip>
     <Tooltip tooltip={commands.undoTooltip} position="bottom-left">

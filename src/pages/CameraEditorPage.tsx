@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 import CameraControlPanel from "../components/CameraEditor/CameraControlPanel";
 import CameraToolbar from "../components/CameraEditor/CameraToolbar";
-import CameraGroupDrawer from "../components/CameraEditor/CameraGroupDrawer";
+import CameraGroupsPanel from "../components/CameraEditor/CameraGroupsPanel";
 import CameraReferenceVehiclePanel from "../components/CameraEditor/CameraReferenceVehiclePanel";
 import CameraViewport from "../components/CameraEditor/CameraViewport";
 import { SavedCameraSlot, SavedViewsDocument } from "../types/savedViews";
@@ -21,6 +21,9 @@ import { getThirdPersonCameraConfigForSeat } from "../utils/thirdPersonCameraDat
 import { useSelectableVehicleModels } from "../utils/vehicleModelManifest";
 import styles from "./CameraEditorPage.module.css";
 
+const GROUPS_PANEL_WIDTH_STORAGE_KEY = "fsd-keybinding-visualizer.camera-groups-panel-width";
+const LEGACY_GROUPS_PANEL_WIDTH_STORAGE_KEY = "fsd-keybinding-visualizer.camera-group-drawer-width";
+
 function CameraEditorPage() {
   const [history, dispatchHistory] = useReducer(cameraHistoryReducer, undefined, () => createCameraHistory());
   const { document: savedViews, bindings: groupBindings } = getCameraHistorySnapshot(history);
@@ -30,12 +33,107 @@ function CameraEditorPage() {
   const [pendingBinding, setPendingBinding] = useState<GroupVehicleBinding | null>(null);
   const [isSelectingReferenceVehicle, setIsSelectingReferenceVehicle] = useState(false);
   const [frustumAspectRatioId, setFrustumAspectRatioId] = useState<CameraFrustumAspectRatioId>(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
-  const [groupDrawerOpen, setGroupDrawerOpen] = useState(true);
+  const [groupsPanelOpen, setGroupsPanelOpen] = useState(true);
   const [controlPanelOpen, setControlPanelOpen] = useState(true);
+  const [groupsPanelWidth, setGroupsPanelWidth] = useState(() => {
+    if (typeof window === "undefined") return 288;
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    try {
+      for (const key of [GROUPS_PANEL_WIDTH_STORAGE_KEY, LEGACY_GROUPS_PANEL_WIDTH_STORAGE_KEY]) {
+        const storedWidth = Number(window.localStorage.getItem(key));
+        if (Number.isFinite(storedWidth) && storedWidth > 0) {
+          return Math.min(40 * rem, Math.max(15 * rem, storedWidth));
+        }
+      }
+    } catch {
+      // Keep resizing available when browser storage is disabled.
+    }
+    return (window.innerWidth <= 900 ? 15 : 18) * rem;
+  });
+  const [groupsPanelWidthBounds, setGroupsPanelWidthBounds] = useState({ min: 240, max: 640 });
+  const effectiveGroupsPanelWidth = Math.min(groupsPanelWidthBounds.max, Math.max(groupsPanelWidthBounds.min, groupsPanelWidth));
+  const [isGroupsPanelResizing, setIsGroupsPanelResizing] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const controlPanelRef = useRef<HTMLDivElement | null>(null);
+  const groupsResizeGesture = useRef<{ pointerId: number; startX: number; startWidth: number } | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const { manifest, loaded: modelsLoaded, error: modelError } = useSelectableVehicleModels();
   const { vehicles: spvVehicles, loaded: spvLoaded, error: spvError } = useSpvVehicles();
   const { seats } = useSeatsData();
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(GROUPS_PANEL_WIDTH_STORAGE_KEY, String(groupsPanelWidth));
+      window.localStorage.removeItem(LEGACY_GROUPS_PANEL_WIDTH_STORAGE_KEY);
+    } catch {
+      // Storage failures should not interrupt panel interaction.
+    }
+  }, [groupsPanelWidth]);
+
+  const getGroupsPanelWidthBounds = useCallback(() => {
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const min = 15 * rem;
+    const availableWidth = contentRef.current?.clientWidth ?? window.innerWidth;
+    const controlWidth = controlPanelOpen ? controlPanelRef.current?.getBoundingClientRect().width ?? 0 : 0;
+    const max = Math.max(min, Math.min(40 * rem, availableWidth - controlWidth - 16 * rem));
+    return { min, max };
+  }, [controlPanelOpen]);
+
+  const clampGroupsPanelWidth = useCallback((width: number) => {
+    const { min, max } = getGroupsPanelWidthBounds();
+    return Math.min(max, Math.max(min, width));
+  }, [getGroupsPanelWidthBounds]);
+
+  useEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+    const observer = new ResizeObserver(() => {
+      const bounds = getGroupsPanelWidthBounds();
+      setGroupsPanelWidthBounds(current => current.min === bounds.min && current.max === bounds.max ? current : bounds);
+    });
+    observer.observe(content);
+    if (controlPanelRef.current) observer.observe(controlPanelRef.current);
+    return () => observer.disconnect();
+  }, [getGroupsPanelWidthBounds]);
+
+  const endGroupsPanelResize = useCallback(() => {
+    groupsResizeGesture.current = null;
+    setIsGroupsPanelResizing(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isGroupsPanelResizing) return;
+    const previousCursor = document.body.style.cursor;
+    const previousUserSelect = document.body.style.userSelect;
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    window.addEventListener("blur", endGroupsPanelResize);
+    return () => {
+      document.body.style.cursor = previousCursor;
+      document.body.style.userSelect = previousUserSelect;
+      window.removeEventListener("blur", endGroupsPanelResize);
+    };
+  }, [endGroupsPanelResize, isGroupsPanelResizing]);
+
+  const startGroupsPanelResize = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0 || groupsResizeGesture.current) return;
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    groupsResizeGesture.current = { pointerId: event.pointerId, startX: event.clientX, startWidth: effectiveGroupsPanelWidth };
+    setIsGroupsPanelResizing(true);
+  };
+
+  const moveGroupsPanelResize = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = groupsResizeGesture.current;
+    if (!gesture || event.pointerId !== gesture.pointerId) return;
+    setGroupsPanelWidth(clampGroupsPanelWidth(gesture.startWidth + event.clientX - gesture.startX));
+  };
+
+  const finishGroupsPanelResize = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerId !== groupsResizeGesture.current?.pointerId) return;
+    endGroupsPanelResize();
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  };
   const referenceVehicles = useMemo(() => getReferenceVehicles(manifest, spvVehicles), [manifest, spvVehicles]);
   const seatVehicleIndex = useMemo(() => getSeatVehicleIndex(seats), [seats]);
   const vehicleNameById = useMemo(() => {
@@ -288,14 +386,14 @@ function CameraEditorPage() {
         onLoad={loadSavedViews}
         onSaved={(document) => dispatchHistory({ type: "saved", document, session: history.session })}
         onTravel={travelHistory}
-        groupDrawerOpen={groupDrawerOpen} controlPanelOpen={controlPanelOpen}
-        onToggleGroupDrawer={() => setGroupDrawerOpen(open => !open)}
+        groupsPanelOpen={groupsPanelOpen} controlPanelOpen={controlPanelOpen}
+        onToggleGroupsPanel={() => { endGroupsPanelResize(); setGroupsPanelOpen(open => !open); }}
         onToggleControlPanel={() => setControlPanelOpen(open => !open)}
         aspectRatioId={frustumAspectRatioId} onSelectAspectRatio={setFrustumAspectRatioId}
       />
-      <div className={styles.content} data-group-drawer-open={groupDrawerOpen} data-control-panel-open={controlPanelOpen}>
-      <div id="camera-group-drawer" className={styles.sidePanel} aria-hidden={!groupDrawerOpen} ref={panel => { if (panel) panel.inert = !groupDrawerOpen; }}>
-      <CameraGroupDrawer
+      <div ref={contentRef} className={styles.content} data-groups-panel-open={groupsPanelOpen} data-control-panel-open={controlPanelOpen} data-groups-panel-resizing={isGroupsPanelResizing} style={{ "--group-width": `${effectiveGroupsPanelWidth}px` } as CSSProperties}>
+      <div id="camera-groups-panel" className={styles.sidePanel} aria-hidden={!groupsPanelOpen} ref={panel => { if (panel) panel.inert = !groupsPanelOpen; }}>
+      <CameraGroupsPanel
         groups={savedViews?.groups || []}
         dirtyGroupIds={dirtyGroupIds}
         seats={seats}
@@ -309,9 +407,33 @@ function CameraEditorPage() {
         onSetAllEmptyToPreset={setAllEmptySlotsToPreset}
         onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
+      <div
+        className={styles.groupsResizeHandle}
+        role="separator"
+        aria-label="Resize groups panel"
+        aria-orientation="vertical"
+        aria-controls="camera-groups-panel"
+        aria-valuemin={Math.round(groupsPanelWidthBounds.min)}
+        aria-valuemax={Math.round(groupsPanelWidthBounds.max)}
+        aria-valuenow={Math.round(effectiveGroupsPanelWidth)}
+        aria-valuetext={`${Math.round(effectiveGroupsPanelWidth)} pixels`}
+        tabIndex={groupsPanelOpen ? 0 : -1}
+        onPointerDown={startGroupsPanelResize}
+        onPointerMove={moveGroupsPanelResize}
+        onPointerUp={finishGroupsPanelResize}
+        onPointerCancel={finishGroupsPanelResize}
+        onLostPointerCapture={finishGroupsPanelResize}
+        onKeyDown={event => {
+          const { min, max } = getGroupsPanelWidthBounds();
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          const step = event.shiftKey ? 40 : 10;
+          setGroupsPanelWidth(clampGroupsPanelWidth(event.key === "Home" ? min : event.key === "End" ? max : effectiveGroupsPanelWidth + (event.key === "ArrowLeft" ? -step : step)));
+        }}
+      />
       </div>
       <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={appliedContext.model} cameraConfig={appliedContext.cameraConfig} referenceModelName={selectedGroup && appliedContext.vehicleId ? appliedContext.displayName : null} onSelectReferenceVehicle={openReferenceVehicleSelector} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
-      <div id="camera-control-panel" className={styles.sidePanel} aria-hidden={!controlPanelOpen} ref={panel => { if (panel) panel.inert = !controlPanelOpen; }}>
+      <div id="camera-control-panel" className={styles.sidePanel} aria-hidden={!controlPanelOpen} ref={panel => { controlPanelRef.current = panel; if (panel) panel.inert = !controlPanelOpen; }}>
         <CameraControlPanel
           key={`${selectedGroupId}:${activeSlotId}`}
           onEditBoundary={() => { editGesture.current += 1; }}

@@ -7,9 +7,9 @@ import type { SeatVehicleEntry } from "../../types/vehicleModel";
 import type { SeatVehicleUsage } from "../../utils/cameraAutoVehicleModel";
 import { formatCameraGroupName, getVisibleCameraGroups, normalizeGroupSearchText } from "../../utils/cameraGroup";
 import CameraSlotGrid from "./CameraSlotGrid";
-import styles from "./CameraGroupDrawer.module.css";
+import styles from "./CameraGroupsPanel.module.css";
 
-interface CameraGroupDrawerProps {
+interface CameraGroupsPanelProps {
   fileConsole?: ReactNode;
   groups: SavedViewGroup[];
   dirtyGroupIds?: ReadonlySet<string>;
@@ -25,7 +25,7 @@ interface CameraGroupDrawerProps {
   onResetAllGroupsToPreset: () => void;
 }
 
-function CameraGroupDrawer({ fileConsole, groups, dirtyGroupIds, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onDeleteGroup, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupDrawerProps) {
+function CameraGroupsPanel({ fileConsole, groups, dirtyGroupIds, selectedGroupId, seats, canAddGroup, vehicleNameById = {}, seatVehicleUsageByGroupId = {}, onAddGroups, onDeleteGroup, onSelectGroup, onSetAllEmptyToPreset, onResetAllGroupsToPreset }: CameraGroupsPanelProps) {
   const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
   const [isMoreActionsOpen, setIsMoreActionsOpen] = useState(false);
   const [isResetAllGroupsOpen, setIsResetAllGroupsOpen] = useState(false);
@@ -68,7 +68,7 @@ function CameraGroupDrawer({ fileConsole, groups, dirtyGroupIds, selectedGroupId
   }, [isMoreActionsOpen]);
 
   return (
-    <aside className={styles.drawer} aria-label="Camera group manager">
+    <aside className={styles.panel} aria-label="Camera groups panel">
       {fileConsole}
       <section className={styles.groupsSection}>
         <div className={styles.headingRow}>
@@ -313,4 +313,4 @@ function AddGroupModal({ groups, seats, vehicleNameById, onAddGroups, onClose }:
   );
 }
 
-export default CameraGroupDrawer;
+export default CameraGroupsPanel;

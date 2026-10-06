@@ -16,8 +16,41 @@
   grid-template-columns: var(--group-track, var(--group-width)) minmax(0, 1fr) var(--control-track, var(--control-width));
   transition: grid-template-columns .24s ease;
 }
-.content[data-group-drawer-open="false"] { --group-track: 0rem; }
+.content[data-groups-panel-open="false"] { --group-track: 0rem; }
 .content[data-control-panel-open="false"] { --control-track: 0rem; }
+.content[data-groups-panel-resizing="true"] { transition: none; }
+
+.groupsResizeHandle {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  touch-action: none;
+  user-select: none;
+}
+
+.groupsResizeHandle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-text-2);
+  opacity: 0;
+  transition: opacity .15s;
+}
+
+.groupsResizeHandle:hover::after,
+.groupsResizeHandle:focus-visible::after,
+.content[data-groups-panel-resizing="true"] .groupsResizeHandle::after {
+  opacity: 1;
+}
+
+.groupsResizeHandle:focus-visible { outline: none; }
 .sidePanel { position: relative; min-width: 0; min-height: 0; overflow: clip; }
 .sidePanel > aside {
   position: absolute;

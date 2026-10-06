@@ -1,11 +1,11 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import CameraGroupDrawer from "../../../src/components/CameraEditor/CameraGroupDrawer";
+import CameraGroupsPanel from "../../../src/components/CameraEditor/CameraGroupsPanel";
 import { formatCameraGroupName, getVisibleCameraGroups, normalizeGroupSearchText } from "../../../src/utils/cameraGroup";
 
-describe("CameraGroupDrawer", () => {
+describe("CameraGroupsPanel", () => {
   it("shows unsaved status only on the corresponding group id", () => {
-    const markup = renderToStaticMarkup(<CameraGroupDrawer
+    const markup = renderToStaticMarkup(<CameraGroupsPanel
       groups={["Alpha", "Beta"].map((id) => ({ id, slots: [], rawAttributes: {} }))}
       dirtyGroupIds={new Set(["Beta"])} selectedGroupId="Alpha" seats={[]} canAddGroup
       onAddGroups={() => {}} onDeleteGroup={() => {}} onSelectGroup={() => {}}
@@ -34,7 +34,7 @@ describe("CameraGroupDrawer", () => {
 
   it("renders group names with spaces while preserving the original id as the button title", () => {
     const markup = renderToStaticMarkup(
-      <CameraGroupDrawer
+      <CameraGroupsPanel
         groups={[{ id: "AEGS_Avenger_Titan_View", slots: [], rawAttributes: {} }]}
         selectedGroupId="AEGS_Avenger_Titan_View"
         seats={[]}
@@ -55,7 +55,7 @@ describe("CameraGroupDrawer", () => {
 
   it("marks groups that are linked to a vehicle", () => {
     const markup = renderToStaticMarkup(
-      <CameraGroupDrawer
+      <CameraGroupsPanel
         groups={[{ id: "Seat (SCItem) - AEGS_Avenger_SCItem_Seat_Pilot", slots: [], rawAttributes: {} }]}
         selectedGroupId="Seat (SCItem) - AEGS_Avenger_SCItem_Seat_Pilot"
         seats={[]}
