@@ -23,7 +23,6 @@ interface CameraControlPanelProps {
   referenceContext: ReturnType<typeof resolveGroupVehicleContext> | null;
   hasManualBinding: boolean;
   onSelectReferenceVehicle: () => void;
-  onRestoreAutomaticBinding: () => void;
   selectedGroup?: SavedViewGroup;
   selectedSlot?: SavedCameraSlot;
   selectedSlotId: number;
@@ -45,7 +44,7 @@ function getCameraControlRangeNote(source: CameraControlRangeSource, range: Came
   return range.isCurrentValueOutsideRecommendedRange ? `${sourceNote}\nCurrent value is outside the range.` : sourceNote;
 }
 
-function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, onRestoreAutomaticBinding, selectedGroup, selectedSlot, selectedSlotId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
+function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasManualBinding, onSelectReferenceVehicle, selectedGroup, selectedSlot, selectedSlotId, canEnterCameraView, isCameraViewActive, onToggleCameraView, onSelectSlot, onUpdateSlot, onEditBoundary, onCreateSlot, onCopySlot, onSetEmptyToPreset, onResetAllToPreset, onDeleteSelectedSlot }: CameraControlPanelProps) {
   const copySourceSlots = useMemo(() => selectedGroup?.slots.filter((slot) => slot.id !== selectedSlotId) || [], [selectedGroup, selectedSlotId]);
   const [copySourceSlotId, setCopySourceSlotId] = useState(0);
   const [confirmation, setConfirmation] = useState<"reset" | "delete" | null>(null);
@@ -99,11 +98,10 @@ function CameraControlPanel({ loadedModel, cameraConfig, referenceContext, hasMa
             ) : !cameraConfig && (
               <p className={styles.referenceNote}>This group has no camera configuration. Assign a reference vehicle to use its model and camera ranges.</p>
             )}
-            <button className={styles.modelButton} type="button" onClick={onSelectReferenceVehicle}>
+            <button className={styles.modelButton} type="button" aria-haspopup="dialog" onClick={onSelectReferenceVehicle}>
               <Icon className={styles.modelButtonIcon} path={mdiScShip} size="1rem" aria-hidden="true" />
               {referenceContext ? "Change reference vehicle" : "Assign reference vehicle"}
             </button>
-        {hasManualBinding && <button className={styles.modelButton} type="button" onClick={onRestoreAutomaticBinding}>Restore automatic association</button>}
           </div>
         )}
       </section>

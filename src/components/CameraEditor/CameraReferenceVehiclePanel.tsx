@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
-import type { GroupVehicleBinding, ReferenceVehicle } from "../../utils/cameraVehicleBinding";
+import { useMemo, useRef, useState } from "react";
+import ConfirmModal from "../ConfirmModal";
+import type { GroupVehicleBinding, ReferenceVehicle, resolveGroupVehicleContext } from "../../utils/cameraVehicleBinding";
 import { getCameraControlRanges } from "../../utils/cameraControlRanges";
 import { getVehicleCameraIndex, resolveVehicleCamera } from "../../utils/thirdPersonCameraData";
 import { isVehicleFallbackBoxModel } from "../../types/vehicleModel";
@@ -10,29 +11,41 @@ type Props = {
   selection: Extract<GroupVehicleBinding, { mode: "vehicle-context" }> | null;
   loading: boolean;
   errors: string[];
+  hasManualBinding: boolean;
+  isAutomaticSelection: boolean;
+  automaticContext: ReturnType<typeof resolveGroupVehicleContext>;
+  onRestoreAutomaticBinding: () => void;
   onChange: (binding: Extract<GroupVehicleBinding, { mode: "vehicle-context" }>) => void;
   onConfirm: () => void;
   onCancel: () => void;
 };
 
-export default function CameraReferenceVehiclePanel({ vehicles, selection, loading, errors, onChange, onConfirm, onCancel }: Props) {
+export default function CameraReferenceVehiclePanel({ vehicles, selection, loading, errors, hasManualBinding, isAutomaticSelection, automaticContext, onRestoreAutomaticBinding, onChange, onConfirm, onCancel }: Props) {
   const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
   const filteredVehicles = useMemo(() => {
     const search = query.trim().toLowerCase().replace(/_/g, " ");
     return vehicles.filter((vehicle) => !search || `${vehicle.displayName} ${vehicle.vehicleId}`.toLowerCase().replace(/_/g, " ").includes(search));
   }, [vehicles, query]);
   const vehicle = vehicles.find((entry) => entry.vehicleId === selection?.vehicleId);
-  const camera = resolveVehicleCamera(selection?.vehicleId || "", selection?.cameraId);
-  const ranges = getCameraControlRanges({ cameraConfig: camera.cameraConfig, bounds: vehicle?.model?.bounds });
+  const camera = isAutomaticSelection
+    ? { cameraConfig: automaticContext.cameraConfig, cameraId: automaticContext.cameraId, cameraIds: [], needsSelection: automaticContext.needsSelection }
+    : resolveVehicleCamera(selection?.vehicleId || "", selection?.cameraId);
+  const ranges = getCameraControlRanges({ cameraConfig: camera.cameraConfig, bounds: isAutomaticSelection ? automaticContext.model?.bounds : vehicle?.model?.bounds });
 
   return (
-    <aside className={`${styles.panel} ${styles.referencePanel}`} aria-label="Reference vehicle selector">
-      <div>
-        <label className={styles.searchLabel}>
-          <span>Reference vehicle</span>
-          <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search vehicle name or variant" />
-        </label>
-      </div>
+    <ConfirmModal
+      title="Reference vehicle"
+      size="large"
+      contentClassName={styles.referencePanel}
+      initialFocusRef={searchRef}
+      confirmLabel="Apply vehicle"
+      confirmDisabled={(!isAutomaticSelection && !selection) || camera.needsSelection}
+      onConfirm={onConfirm}
+      onClose={onCancel}
+      additionalActions={hasManualBinding && <button className={styles.restoreButton} type="button" aria-pressed={isAutomaticSelection} onClick={onRestoreAutomaticBinding}>Restore automatic association</button>}
+      description={<>
+      <input className={styles.searchInput} ref={searchRef} aria-label="Search vehicles" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search vehicle name or variant" />
       <div className={styles.statusRow} role="status">
         <span>{filteredVehicles.length} / {vehicles.length} vehicles{loading ? " · Loading model and size data…" : ""}</span>
         {errors.map((error) => <p key={error}>{error}</p>)}
@@ -45,16 +58,17 @@ export default function CameraReferenceVehiclePanel({ vehicles, selection, loadi
             onClick={() => onChange({ mode: "vehicle-context", vehicleId: entry.vehicleId })}>
             <span className={styles.modelName}>{entry.displayName}</span>
             <span className={styles.modelMeta}>{entry.vehicleId}</span>
-            <span className={styles.modelMeta}>{getModelStatus(entry)} · {entry.cameraIds.length === 1 ? "Camera available" : entry.cameraIds.length > 1 ? `${entry.cameraIds.length} camera candidates` : "No camera config"}</span>
+            <span className={styles.modelMeta}>{getModelStatus(entry.model)} · {entry.cameraIds.length === 1 ? "Camera available" : entry.cameraIds.length > 1 ? `${entry.cameraIds.length} camera candidates` : "No camera config"}</span>
           </button>
         ))}
         {!filteredVehicles.length && <p>No matching vehicles.</p>}
       </div>
-      {selection && (
+      {(selection || isAutomaticSelection) && (
         <div className={styles.referenceSummary} aria-label="Reference vehicle preview">
-          <strong>{vehicle?.displayName || selection.vehicleId}</strong>
-          <span>{vehicle ? getModelStatus(vehicle) : "No model available"}</span>
-          {(camera.cameraIds.length > 1 || camera.needsSelection) && (
+          <strong>{vehicle?.displayName || selection?.vehicleId || "Automatic association"}</strong>
+          {isAutomaticSelection && <span role="status">Automatic association selected. Click Apply vehicle to apply.</span>}
+          <span>{getModelStatus(isAutomaticSelection ? automaticContext.model : vehicle?.model || null)}</span>
+          {selection && (camera.cameraIds.length > 1 || camera.needsSelection) && (
             <label className={styles.cameraChoice}>Camera configuration
               <select value={camera.cameraId || ""} onChange={(event) => onChange({ ...selection, cameraId: event.target.value || undefined })}>
                 <option value="">Choose a camera configuration</option>
@@ -70,14 +84,11 @@ export default function CameraReferenceVehiclePanel({ vehicles, selection, loadi
           <span>Applies model and camera ranges to this group. Existing camera values stay unchanged.</span>
         </div>
       )}
-      <div className={styles.actions}>
-        <button type="button" onClick={onCancel}>Cancel</button>
-        <button type="button" className="buttonAccent" onClick={onConfirm} disabled={!selection || camera.needsSelection}>Apply vehicle</button>
-      </div>
-    </aside>
+      </>}
+    />
   );
 }
 
-function getModelStatus(vehicle: ReferenceVehicle) {
-  return isVehicleFallbackBoxModel(vehicle.model) ? "Dimensions fallback" : vehicle.model ? "3D model" : "No model available";
+function getModelStatus(model: ReferenceVehicle["model"]) {
+  return isVehicleFallbackBoxModel(model) ? "Dimensions fallback" : model ? "3D model" : "No model available";
 }

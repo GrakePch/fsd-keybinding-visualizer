@@ -27,7 +27,7 @@ function CameraEditorPage() {
   const editGesture = useRef(0);
   const [selectedGroupId, setSelectedGroupId] = useState("");
   const [selectedSlotId, setSelectedSlotId] = useState(0);
-  const [previewBinding, setPreviewBinding] = useState<GroupVehicleBinding | null>(null);
+  const [pendingBinding, setPendingBinding] = useState<GroupVehicleBinding | null>(null);
   const [isSelectingReferenceVehicle, setIsSelectingReferenceVehicle] = useState(false);
   const [frustumAspectRatioId, setFrustumAspectRatioId] = useState<CameraFrustumAspectRatioId>(DEFAULT_CAMERA_FRUSTUM_ASPECT_RATIO_ID);
   const [groupDrawerOpen, setGroupDrawerOpen] = useState(true);
@@ -63,8 +63,7 @@ function CameraEditorPage() {
     vehicles: referenceVehicles,
   };
   const appliedContext = resolveGroupVehicleContext({ ...contextInput, binding });
-  const previewContext = resolveGroupVehicleContext({ ...contextInput, binding: previewBinding });
-  const viewportContext = isSelectingReferenceVehicle && previewBinding ? previewContext : appliedContext;
+  const pendingContext = resolveGroupVehicleContext({ ...contextInput, binding: pendingBinding });
   const loadedModel = appliedContext.model;
 
   const getPresetContextForGroup = (groupId: string): SeatViewPresetContext => {
@@ -104,7 +103,7 @@ function CameraEditorPage() {
     editGesture.current += 1;
     setSelectedGroupId(document.groups[0]?.id || "");
     setSelectedSlotId(0);
-    setPreviewBinding(null);
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null, { replace: true });
   };
@@ -112,7 +111,7 @@ function CameraEditorPage() {
   const selectGroup = (groupId: string) => {
     editGesture.current += 1;
     setSelectedGroupId(groupId);
-    setPreviewBinding(null);
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null);
   };
@@ -136,7 +135,7 @@ function CameraEditorPage() {
     editGesture.current += 1;
     setSelectedGroupId(selection.groupId);
     setSelectedSlotId(selection.slotId);
-    setPreviewBinding(null);
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null, { replace: true });
   }, [history.cursor, history.entries, setCameraViewSlotId]);
@@ -150,7 +149,7 @@ function CameraEditorPage() {
     recordEdit(`Add ${groupIdsToAdd.length} group${groupIdsToAdd.length === 1 ? "" : "s"}`, { document: nextDocument, bindings: groupBindings }, { groupId: groupIdsToAdd[0], slotId: 0 });
     setSelectedGroupId(groupIdsToAdd[0]);
     setSelectedSlotId(0);
-    setPreviewBinding(null);
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null);
   };
@@ -166,7 +165,7 @@ function CameraEditorPage() {
 
     setSelectedGroupId(nextGroupId);
     setSelectedSlotId(0);
-    setPreviewBinding(null);
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
     setCameraViewSlotId(null);
   };
@@ -262,23 +261,23 @@ function CameraEditorPage() {
 
   const openReferenceVehicleSelector = () => {
     setSelectedSlotId(activeSlotId);
-    setPreviewBinding(binding?.mode === "vehicle-context" ? binding : autoVehicleId ? { mode: "vehicle-context", vehicleId: autoVehicleId } : null);
+    setPendingBinding(binding);
     setIsSelectingReferenceVehicle(true);
   };
 
-  const confirmPreviewModel = () => {
-    if (!previewBinding || previewContext.needsSelection) return;
-    if (selectedGroupId) {
-      recordEdit("Change reference vehicle (preview only)", { document: savedViews, bindings: setGroupVehicleBinding(groupBindings, selectedGroupId, previewBinding) });
-    }
-    setPreviewBinding(null);
+  const applyReferenceVehicle = () => {
+    if (!selectedGroupId || pendingContext.needsSelection) return;
+    recordEdit(pendingBinding ? "Change reference vehicle (preview only)" : "Restore automatic association (preview only)", { document: savedViews, bindings: setGroupVehicleBinding(groupBindings, selectedGroupId, pendingBinding) });
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
   };
 
-  const restoreAutomaticBinding = () => recordEdit("Restore automatic association (preview only)", { document: savedViews, bindings: setGroupVehicleBinding(groupBindings, selectedGroupId, null) });
+  const restoreAutomaticBinding = () => {
+    setPendingBinding(null);
+  };
 
   const cancelModelSelector = () => {
-    setPreviewBinding(null);
+    setPendingBinding(null);
     setIsSelectingReferenceVehicle(false);
   };
 
@@ -311,19 +310,8 @@ function CameraEditorPage() {
         onResetAllGroupsToPreset={resetAllGroupsToPreset}
       />
       </div>
-      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={viewportContext.model} cameraConfig={viewportContext.cameraConfig} isPreviewingModel={isSelectingReferenceVehicle} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
+      <CameraViewport selectedGroup={selectedGroup} selectedSlot={selectedSlot} model={appliedContext.model} cameraConfig={appliedContext.cameraConfig} isCameraViewActive={isCameraViewActive} frustumAspectRatioId={frustumAspectRatioId} onSelectSlot={selectSlot} />
       <div id="camera-control-panel" className={styles.sidePanel} aria-hidden={!controlPanelOpen} ref={panel => { if (panel) panel.inert = !controlPanelOpen; }}>
-      {isSelectingReferenceVehicle ? (
-        <CameraReferenceVehiclePanel
-          vehicles={referenceVehicles}
-          selection={previewBinding?.mode === "vehicle-context" ? previewBinding : null}
-          loading={!modelsLoaded || !spvLoaded}
-          errors={[modelError ? `Models unavailable: ${modelError}` : "", spvError ? `Vehicle sizes unavailable: ${spvError}` : ""].filter(Boolean)}
-          onChange={setPreviewBinding}
-          onConfirm={confirmPreviewModel}
-          onCancel={cancelModelSelector}
-        />
-      ) : (
         <CameraControlPanel
           key={`${selectedGroupId}:${activeSlotId}`}
           onEditBoundary={() => { editGesture.current += 1; }}
@@ -332,7 +320,6 @@ function CameraEditorPage() {
           referenceContext={selectedGroup && appliedContext.vehicleId ? appliedContext : null}
           hasManualBinding={Boolean(binding)}
           onSelectReferenceVehicle={openReferenceVehicleSelector}
-          onRestoreAutomaticBinding={restoreAutomaticBinding}
           selectedGroup={selectedGroup}
           selectedSlot={selectedSlot}
           selectedSlotId={activeSlotId}
@@ -347,9 +334,23 @@ function CameraEditorPage() {
           onResetAllToPreset={resetSelectedGroupToPreset}
           onDeleteSelectedSlot={deleteSelectedSlot}
         />
+      </div>
+      </div>
+      {isSelectingReferenceVehicle && (
+        <CameraReferenceVehiclePanel
+          vehicles={referenceVehicles}
+          hasManualBinding={Boolean(binding)}
+          onRestoreAutomaticBinding={restoreAutomaticBinding}
+          isAutomaticSelection={pendingBinding === null}
+          automaticContext={resolveGroupVehicleContext({ ...contextInput, binding: null })}
+          selection={pendingBinding || (autoVehicleId ? { mode: "vehicle-context", vehicleId: autoVehicleId } : null)}
+          loading={!modelsLoaded || !spvLoaded}
+          errors={[modelError ? `Models unavailable: ${modelError}` : "", spvError ? `Vehicle sizes unavailable: ${spvError}` : ""].filter(Boolean)}
+          onChange={setPendingBinding}
+          onConfirm={applyReferenceVehicle}
+          onCancel={cancelModelSelector}
+        />
       )}
-      </div>
-      </div>
     </main>
   );
 }

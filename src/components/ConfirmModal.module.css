@@ -11,6 +11,8 @@
 
 .modal {
   width: min(34rem, 100%);
+  max-height: calc(100dvh - 3rem);
+  min-height: 0;
   padding: 1rem;
   border: 1px solid #ffffff20;
   border-radius: .75rem;
@@ -21,21 +23,34 @@
   box-shadow: var(--shadow-3);
 }
 
+.modal[data-size="large"] {
+  width: min(52rem, 100%);
+}
+
 .modal h2 {
+  flex-shrink: 0;
   font-family: var(--font-geom);
   font-size: 1.05rem;
 }
 
 .description {
+  min-height: 0;
+  overflow: auto;
   color: var(--color-text-2);
   font-size: .9rem;
   line-height: 1.35;
 }
 
 .actions {
+  flex-shrink: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: .5rem;
+}
+
+.additionalActions {
+  margin-right: auto;
 }
 
 .actionButton {

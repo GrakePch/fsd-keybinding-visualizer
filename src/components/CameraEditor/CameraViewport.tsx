@@ -16,13 +16,12 @@ interface CameraViewportProps {
   selectedSlot?: SavedCameraSlot;
   model: VehicleViewportModel | null;
   cameraConfig: ThirdPersonCameraBaseConfig | null;
-  isPreviewingModel: boolean;
   isCameraViewActive: boolean;
   frustumAspectRatioId: CameraFrustumAspectRatioId;
   onSelectSlot: (slotId: number) => void;
 }
 
-function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, isPreviewingModel, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
+function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, isCameraViewActive, frustumAspectRatioId, onSelectSlot }: CameraViewportProps) {
   const hasRenderableModel = isVehicleViewportModelRenderable(model);
   const showModelInfo = shouldShowViewportModelInfo({ hasModel: Boolean(model), hasRenderableModel });
   const cameraControlRanges = useMemo(
@@ -52,7 +51,7 @@ function CameraViewport({ selectedGroup, selectedSlot, model, cameraConfig, isPr
       {shouldRenderViewer && <CameraModelViewer activeSlotId={selectedSlot?.id} cameraViewMarker={cameraViewMarker} frustumAspectRatio={frustumAspectRatio} maxCameraMarkerDistance={cameraControlRanges.distance.recommended.max} markers={cameraPositionMarkers} model={model} targetOffsetBounds={targetOffsetBounds} onSelectSlot={onSelectSlot} />}
       {model && showModelInfo && (
         <div className={styles.modelInfo}>
-          <span className={styles.previewLabel}>{isPreviewingModel ? "Preview Model" : isVehicleFallbackBoxModel(model) ? "SPV Dimensions Fallback" : "Loaded Model"}</span>
+          <span className={styles.previewLabel}>{isVehicleFallbackBoxModel(model) ? "SPV Dimensions Fallback" : "Loaded Model"}</span>
           <strong>{model.displayName}</strong>
           <span>{model.className || model.slug}</span>
           {selectedGroup && <span>Group: {selectedGroup.id}</span>}
