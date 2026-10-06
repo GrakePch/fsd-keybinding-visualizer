@@ -6,6 +6,7 @@ import { SavedViewGroup } from "../../types/savedViews";
 import type { SeatVehicleEntry } from "../../types/vehicleModel";
 import type { SeatVehicleUsage } from "../../utils/cameraAutoVehicleModel";
 import { formatCameraGroupName, getVisibleCameraGroups, normalizeGroupSearchText } from "../../utils/cameraGroup";
+import CameraSlotGrid from "./CameraSlotGrid";
 import styles from "./CameraGroupDrawer.module.css";
 
 interface CameraGroupDrawerProps {
@@ -147,8 +148,10 @@ function CameraGroupDrawer({ fileConsole, groups, dirtyGroupIds, selectedGroupId
                   title={group.id}
                 >
                   <span className={styles.groupName}>{formatCameraGroupName(group.id)}</span>
-                  {seatVehicleUsageByGroupId[group.id] && <span className={styles.usedBy}>@ {seatVehicleUsageByGroupId[group.id].displayName}</span>}
-                  <span className={styles.slotCount}>{group.slots.length} slots</span>
+                  <span className={styles.groupDetails}>
+                    <CameraSlotGrid occupiedSlotIds={group.slots.map((slot) => slot.id)} />
+                    {seatVehicleUsageByGroupId[group.id] && <span className={styles.usedBy}>@ {seatVehicleUsageByGroupId[group.id].displayName}</span>}
+                  </span>
                   {dirtyGroupIds?.has(group.id) && <span className={styles.dirtyBadge} aria-label={`Unsaved changes: ${group.id}`}>Unsaved</span>}
                 </button>
                 <button

@@ -1,0 +1,21 @@
+.grid {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  shape-rendering: crispEdges;
+}
+
+.cell {
+  fill: none;
+}
+
+.cellFilled {
+  fill: currentColor;
+}
+
+.lines {
+  fill: none;
+  stroke: #808080;
+  stroke-width: 1;
+}
